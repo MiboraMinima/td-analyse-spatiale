@@ -1,0 +1,43 @@
+# Statistiques
+
+## Statistiques univariées
+
+### Variable quantitative {#sec-stat-quanti}
+
+Le tableau ci-dessous récapitule les indicateurs statistiques les plus
+courrament employés en analyse de données.
+
+| Statistique                  | Formule mathématique                                      | Fonction R                     |
+| ---------------------------- | --------------------------------------------------------- | ------------------------------ |
+| **Moyenne**                  | $\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$                 | `mean(x)`                      |
+| **Médiane**                  | Valeur centrale de l’échantillon trié                     | `median(x)`                    |
+| **Variance**                 | $\sigma^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2$ | `var(x)`                       |
+| **Écart-type**               | $\sigma = \sqrt{\sigma^2}$                                | `sd(x)`                        |
+| **Minimum**                  | $\min(x_1, \dots, x_n)$                                   | `min(x)`                       |
+| **Maximum**                  | $\max(x_1, \dots, x_n)$                                   | `max(x)`                       |
+| **Amplitude (étendue)**      | $\max(x) - \min(x)$                                       | `range(x)` ou `diff(range(x))` |
+| **Somme**                    | $\sum_{i=1}^{n} x_i$                                      | `sum(x)`                       |
+| **Nombre d’observations**    | $n$                                                       | `length(x)`                    |
+| **Quantiles**                | $Q_p$ tel que $P(X \le Q_p) = p$                          | `quantile(x, probs = p)`       |
+| **Coefficient de variation** | $CV = \frac{\sigma}{\bar{x}}$                             | `sd(x) / mean(x)`              |
+
+On peut récupérer un résumé statistiques basique d'un vecteur numérique avec la
+fonction `summary()`.
+
+```{r}
+x <- rnorm(n = 1e3, mean = 10, sd = 2)
+summary(x)
+```
+
+### Variable qualitative {#sec-stat-quali}
+
+Dans le cas des variables qualitatives, on ne peut pas réaliser de statistiques.
+On décrira la variable par les opération listées dans le tableau ci-dessous :
+
+| Opération                          | Fonction R                                  |
+| ----------------------------       | ------------------------------              |
+| **Lister les modalités**           | `unique(x)`                                 |
+| **Nombre de modalités**            | `length(unique(x))`                         |
+| **Nombre de valeurs par modalité** | `table(x)` (`(table(x) / length(x)) * 100`) |
+| **Nombre d’observations**          | `length(x)`                                 |
+

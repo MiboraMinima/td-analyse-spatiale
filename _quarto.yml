@@ -1,0 +1,49 @@
+project:
+  type: book
+
+book:
+  title: "TD analyse spatiale"
+  author:
+    - name: Antoine Le Doeuff
+  date: "2026-01-07"
+  chapters:
+    - index.qmd
+    - part: "Travaux dirigés"
+      chapters:
+        - 00_intro_r/intro_r.qmd
+    - part: "Algorithmique"
+      chapters:
+      - ressources/algorithmique/structure_donnees.qmd
+      - ressources/algorithmique/structure_controle.qmd
+    - part: "Traitements et analyse de données"
+      chapters:
+        - ressources/data_process/data_basic.qmd
+        - ressources/stats/stats.qmd
+    - part: "Visualisation"
+      chapters:
+        - ressources/viz/graph.qmd
+        - ressources/viz/map.qmd
+    - part: "Sources de données"
+      chapters:
+        - ressources/where_data/where_data.qmd
+
+bibliography: ./analyse_spatiale.bib
+
+execute:
+  cache: true
+
+format:
+  html:
+    theme: cosmo
+    toc-depth: 4
+    cap-location: margin
+    reference-location: margin
+    citation-location: margin
+  pdf:
+    documentclass: scrreprt
+
+crossref:
+  custom:
+    - kind: float
+      reference-prefix: Video
+      key: vid

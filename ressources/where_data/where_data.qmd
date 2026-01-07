@@ -1,0 +1,312 @@
+# Où trouver des données
+
+Il existe des listes de données en ligne. Elles sont plutôt exhaustives pour les
+données mondiales, c'est moins vrai pour les données à l'échelle des pays :
+
+- [Free GIS Data](https://freegisdata.rtwilson.com) : liste de données spatiales
+- [Awesome Public Datasets](https://github.com/awesomedata/awesome-public-datasets) : liste très conséquentes de données publiques (pas que spatiales)
+
+## Sources de données par thématique
+
+::: {.callout collapse="true" title="Démographie et population"}
+| Source                                                      | Emprise                 |
+| -------------------------------                             | ----------------------- |
+| [**IPUMS**](https://www.ipums.org/) (International / USA)   | Monde                   |
+| [**World Bank Open Data**](https://data.worldbank.org/)     | Monde                   |
+| [**UNData**](http://data.un.org/Explorer.aspx)              | Monde                   |
+| [**Eurostat**](https://ec.europa.eu/eurostat/web/main/data) | Europe                  |
+| [**INSEE**](https://www.insee.fr/fr/statistiques)           | France                  |
+| [**INED**](https://data.ined.fr/index.php/home)             | France                  |
+:::
+
+::: {.callout collapse="true" title="Transports"}
+| Source                                                                | Emprise       |
+| --------------------------                                            | ------------- |
+| [**GTFS**](https://gtfs.org/fr/) (opérateurs)                         | Monde         |
+| [**World Bank Open Data**](https://data.worldbank.org/)               | Monde         |
+| [**Eurostat**](https://ec.europa.eu/eurostat/web/main/data)           | Europe        |
+| [**SNCF Open Data**](https://ressources.data.sncf.com/pages/accueil/) | France        |
+
+Certaines métropololes proposent des données de transports en commun en temps réels
+(par-ex. [Rennes](https://data.rennesmetropole.fr/explore/dataset/position-des-bus-en-circulation-sur-le-reseau-star-en-temps-reel/information/?disjunctive.nomcourtligne&disjunctive.numerobus)).
+
+:::
+
+::: {.callout collapse="true" title="Agriculture et alimentation"}
+
+| Source                                                                                               | Emprise        |
+| ----------------------------------------                                                             | -------        |
+| [**FAO (FAOSTAT)**](https://www.fao.org/faostat/en/#data)                                            | Monde          |
+| [**World Bank Open Data**](https://data.worldbank.org/)                                              | Monde          |
+| [**Eurostat**](https://ec.europa.eu/eurostat/web/main/data)                                          | Europe         |
+| [**Agreste**](https://agreste.agriculture.gouv.fr/agreste-web/disaron/!searchurl/searchUiid/search/) | France         |
+| [**RPG (Registre Parcellaire Graphique) (IGN)**](https://geoservices.ign.fr/rpg)                     | France         |
+| [**INRAE Open Data**](https://entrepot.recherche.data.gouv.fr/dataverse/inrae)                       | Surtout France |
+
+:::
+
+
+::: {.callout collapse="true" title="Santé"}
+
+| Source                                                                                                                                                                                                             | Emprise |
+| --------------------------                                                                                                                                                                                         | ------- |
+| [**WHO**](https://data.who.int/indicators)                                                                                                                                                                         | Monde   |
+| [**World Bank Open Data**](https://data.worldbank.org/)                                                                                                                                                            | Monde   |
+| [**IPUMS**](https://www.ipums.org/)                                                                                                                                                                                | Monde   |
+| [**DREES**](https://data.drees.solidarites-sante.gouv.fr/pages/accueil/)                                                                                                                                           | France  |
+| [**Santé publique France**](https://odisse.santepubliquefrance.fr/explore/?disjunctive.theme&disjunctive.standard-insee.source&disjunctive.standard-insee.mailles-geographiques&disjunctive.keyword&sort=modified) | France  |
+
+:::
+
+::: {.callout collapse="true" title="Urbanisme, habitat et aménagement"}
+
+| Source                                                                                                    | Emprise |
+| --------------------------------------                                                                    | ------- |
+| [**UN-Habitat**](https://data.unhabitat.org/pages/datasets)                                               | Monde   |
+| [**World Bank Open Data**](https://data.worldbank.org/)                                                   | Monde   |
+| [**Eurostat**](https://ec.europa.eu/eurostat/web/main/data)                                               | Europe  |
+| [**INSEE**](https://www.insee.fr/fr/statistiques)                                                         | France  |
+| [**CEREMA**](https://www.data.gouv.fr/organizations/cerema)  (aménagement)                                | France  |
+| [**DVF**](https://www.data.gouv.fr/datasets/demandes-de-valeurs-foncieres) (Demande de Valeurs Foncières) | France  |
+
+:::
+
+::: {.callout collapse="true" title="Économie, emploi et inégalités"}
+
+| Source                                                                | Emprise |
+| ------------------------                                              | ------- |
+| [**World Bank Open Data**](https://data.worldbank.org/)               | Monde   |
+| [**IMF Data**](https://data.imf.org/en/Datasets)                      | Monde   |
+| [**OECD Data**](https://www.oecd.org/en/data.html)                    | Monde   |
+| [**Eurostat**](https://ec.europa.eu/eurostat/web/main/data)           | Europe  |
+| [**INSEE**](https://www.insee.fr/fr/statistiques)                     | France  |
+| [**URSSAF Open Data**](https://open.urssaf.fr/explore/?sort=modified) | France  |
+
+:::
+
+::: {.callout collapse="true" title="Éducation"}
+
+| Source                                                                            | Emprise |
+| -----------------------------------                                               | ------- |
+| [**UNESCO Institute for Statistics**](https://databrowser.uis.unesco.org/browser) | Monde   |
+| [**World Bank Open Data**](https://data.worldbank.org/)                           | Monde   |
+| [**OECD Data**](https://www.oecd.org/en/data.html)                                | Monde   |
+| [**DEPP (MEN)**](https://catalogue.depp.education.fr/index.php/home)              | France  |
+| [**INSEE**](https://www.insee.fr/fr/statistiques)                                 | France  |
+
+:::
+
+::: {.callout collapse="true" title="Migrations et mobilités humaines"}
+
+| Source                                                      | Emprise |
+| ----------------------------------------                    | ------- |
+| [**UNData**](http://data.un.org/Explorer.aspx)              | Monde   |
+| [**World Bank Open Data**](https://data.worldbank.org/)     | Monde   |
+| [**OECD Data**](https://www.oecd.org/en/data.html)          | Monde   |
+| [**Eurostat**](https://ec.europa.eu/eurostat/web/main/data) | Europe  |
+| [**INSEE**](https://www.insee.fr/fr/statistiques)           | France  |
+
+:::
+
+::: {.callout collapse="true" title="Politique et conflits"}
+
+| Thème       | Source                                                                               | Emprise |
+| ----------- | ----------------------------                                                         | ------- |
+| Conflits    | [**ACLED**](https://acleddata.com/conflict-data)                                     | Monde   |
+| Politique   | [**V-Dem**](https://www.v-dem.net/data/) (démocratie)                                | Monde   |
+| Politique   | [**data.gouv.fr – élections**](https://www.data.gouv.fr/pages/donnees-des-elections) | France  |
+
+:::
+
+::: {.callout collapse="true" title="Occupation/utilisation du sol"}
+
+| Source                                                                                                             | Emprise                 |
+| -------------------------------                                                                                    | ----------------------- |
+| [**Copernicus Land Monitoring Service**](https://land.copernicus.eu/en/products?tab=full_coverage_land_cover__use) | Monde                   |
+| [**Corine Land Cover**](https://land.copernicus.eu/en/products/corine-land-cover)                                  | Europe                  |
+| [**Theia Land**](https://www.theia-land.fr/blog/product/carte-doccupation-des-sols-de-la-france-metropolitaine/)   | France métropolitaine   |
+| [**OCS GE (IGN)**](https://geoservices.ign.fr/ocsge)                                                               | France                  |
+
+:::
+
+
+::: {.callout collapse="true" title="Élévation"}
+
+| Source                                                                                 | Résolution              | Emprise                 |
+| -------------------------------                                                        | ----------------------- | ----------------------- |
+| [**ASTER**](https://asterweb.jpl.nasa.gov/gdem.asp)                                    | 30 m                    | Monde                   |
+| [**SRTM**](https://dwtkns.com/srtm/)                                                   | $\approx$ 90 m          | Monde                   |
+| [**BD ALTI (IGN)**](https://geoservices.ign.fr/bdalti)                                 | 25 m                    | France                  |
+| [**RGE ALTI (IGN)**](https://geoservices.ign.fr/rgealti)                               | 1 m                     | France                  |
+| [**Litto 3D (IGN/SHOM)**](https://diffusion.shom.fr/donnees/altimetrie-littorale.html) | 20 à 50 cm              | France (littoral)       |
+
+:::
+
+::: {.callout collapse="true" title="Climat et météo"}
+
+| Source                                                                                            | Type                    | Emprise                 |
+| -------------------------------                                                                   | ----------------------- | ----------------------- |
+| [**WorldClim**](https://www.worldclim.org/)                                                       | Observation / Modèle    | Monde                   |
+| [**ERA5**](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=download) | Modèle                  | Monde                   |
+| [**Météo-France**](https://meteo.data.gouv.fr/)                                                   | Observation / Modèle    | France                  |
+| [**SAFRAN**](https://geosas.fr/edr-viewer/)                                                       | Modèle                  | France                  |
+
+:::
+
+::: {.callout collapse="true" title="Hydrologie"}
+
+| Source                                                 | Emprise                 |
+| -------------------------------                        | ----------------------- |
+| [**Hydro SHEDS**](https://www.hydrosheds.org/products) | Monde                   |
+| [**Hydro Portail**](https://hydro.eaufrance.fr/)       | France                  |
+
+:::
+
+::: {.callout collapse="true" title="Niveau d'eau et état de mer"}
+
+| Thème        | Source                                                                                                               | Type                    | Emprise                      |
+| -----------  | -------------------------------                                                                                      | ----------------------- | -----------------------      |
+| États de mer | [**Copernicus Marine Service**](https://marineinsitu.eu/dashboard/)                                                  | Observation             | Monde                        |
+| États de mer | [**Candhis**](https://candhis.cerema.fr/_public_/cartes.php) (CEREMA)                                                | Observation             | France                       |
+| États de mer | [**ERA5**](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=download)                    | Modèle                  | Monde                        |
+| États de mer | [**Ressource Code**](https://resourcecode.ifremer.fr/explore)                                                        | Modèle                  | Façade Atlantique Européenne |
+| Niveau d'eau | [**PSML**](https://psmsl.org/)                                                                                       | Observation             | Monde                        |
+| Niveau d'eau | [**FES2022**](https://www.aviso.altimetry.fr/en/data/products/auxiliary-products/global-tide-fes/release-fes22.html) | Modèle                  | Monde                        |
+| Niveau d'eau | [**SHOM**](https://refmar.shom.fr/donnees-refmar-sur-data.shom.fr/telechargement-des-donnees)                        | Observation / Modèle    | France                       |
+
+:::
+
+::: {.callout collapse="true" title="Écologie, biologie"}
+
+| Thème        | Source                                                                           | Emprise                 |
+| -----------  | -------------------------------                                                  | ----------------------- |
+| Biodiversité | [**Global Biodiversity Information Facility**](https://www.gbif.org/)            | Monde                   |
+| Biodiversité | [**Ocean Biodiversity Information System**](https://obis.org/)                   | Monde                   |
+| Biodiversité | [**UICN red list**](https://www.iucnredlist.org/resources/spatial-data-download) | Monde                   |
+| Sol          | [**ISRIC**](https://isric.org/explore/soilgrids)                                 | Monde                   |
+| Sol          | [**Gis Sol**](https://www.gissol.fr/donnees)                                     | France                  |
+
+:::
+
+
+## Fond de cartes
+
+### France
+
+Pour obtenir des fonds de cartes du territoire français, on se tournera vers
+l'IGN. Tout ce que vous voyez sur une carte topographique IGN, vous pouvez le
+récupérer. L'IGN organise ses données par base, vous trouverez ci-dessous une
+description des bases les plus courrament utilisées :
+
+| Base                                                       | type            | Description                                         |
+| ---------------                                            | --------------- | ---------------                                     |
+| [Admin Express](https://geoservices.ign.fr/adminexpress)   | Vectoriel       | Base de données du découpage administratif français |
+| [BDCarto](https://geoservices.ign.fr/bdcarto)              | Vectoriel       | Base de données moyenne échelle                     |
+| [BDTopo](https://geoservices.ign.fr/bdcarto)               | Vectoriel       | Base de données détaillées                          |
+| [Contours...IRIS](https://geoservices.ign.fr/contoursiris) | Vectoriel       | Le contour des IRIS                                 |
+| [BDALTI](https://geoservices.ign.fr/bdalti)                | Raster          | Modèle Numérique de Terrain (MNT). Résolution 25 m  |
+| [BDOrtho](https://geoservices.ign.fr/bdortho)              | Raster          | Base d'orthophotos de l'IGN. Résolution 20 cm       |
+
+Une liste des bases plus détaillée est disponible sur le
+[site](https://geoservices.ign.fr/catalogue) de l'IGN. Les métadonnées sont
+disponibles sur la page web dédiée.
+
+Pou récupérer ces données, vous pouvez vous rendre sur le site de l'IGN et
+les télécharger. Il est également possible de les télécharger directement sur `R`
+avec le package [`happign`](https://paul-carteron.github.io/happign/). En
+utilisant ce package vous vous assurez de ne télécharger que les données dont
+vous avez besoin[^ign-dl].
+
+[^ign-dl]: En effet, sur le site de l'IGN vous ne pouvez que télécharger les
+bases par départements sans possibilité de choisir les données que vous
+souhaitez en particulier ; pas très écolo cette affaire.
+
+Mettons que l'on souhaite récupérer les bâtiments de Guissény (29) ainsi que
+l'emprise administrative de la commune. Si l'on a aucune idée d'où l'on peut
+trouver les bâtiments, on peut chercher dans les métadonnées des couches
+vectorielles.
+
+```{r}
+library(happign)
+
+# Récupération des métadonnées
+meta <- get_layers_metadata(data_type = "wfs")
+
+# Récupération du nom des couches
+name <- meta$Name
+
+# On cherche les couches qui contiennent la chaîne de caractère "bati"
+com_name <- name[grep(x = name, "commune")]
+head(com_name)
+
+bati <- name[grep(x = name, "bati")]
+head(bati)
+```
+
+On obtient toute les données disponibles. Nous utiliserons les données de la
+BDTOPO `BDTOPO_V3:batiment`. L'étape suivant consiste à filtrer la couche pour
+ne retenir que les informations qui nous intéresse. On peut filtrer par
+attributs ou par opération spatiale. Le filtre sera réalisé sur les serveurs de
+l'IGN et vous récupérez le résultat.
+
+Pour filtrer par attribut, on utilise un filtre ECQL. Il s'agit d'un langage de
+requête très proche du SQL (ce qui vous utilisez sous QGIS pur filtrer vos
+données). Pour savoir comment filtrer vos données, il vous faut d'abord savoir
+quels sont les attributs de votre couche. Pour cela, on utilise la fonction
+`get_wfs_attributes()`.
+
+```{r}
+get_wfs_attributes("BDTOPO_V3:commune")
+
+# On récupère guissény
+com <- get_wfs(layer = "BDTOPO_V3:commune", ecql_filter = "code_insee = '29077'")
+```
+
+Un fois que l'on a récupéré la commune, on peut récupérer les batiments qui
+intersectent la commune :
+
+```{r}
+batiments <- get_wfs(
+  x = com,
+  layer = "BDTOPO_V3:batiment",
+  spatial_filter = "intersects"
+)
+```
+
+```{r}
+#| code-fold: true
+
+library(ggspatial)
+library(ggplot2)
+library(sf)
+
+ggplot() +
+  geom_sf(data = com) +
+  geom_sf(data = batiments, fill = "red") +
+  annotation_scale(location = "br") +
+  annotation_north_arrow(
+      location = "tr", which_north = "true",
+      style = north_arrow_fancy_orienteering
+  ) +
+  theme_minimal()
+```
+
+### Fond de cartes à petite faible
+
+Pour des fond de cartes à petites échelles, se tournera vers [Natural
+Earth](https://www.naturalearthdata.com/). Ce jeu de données enregistre les
+données élémentaires pour créer des fonds de cartes : frontières des pays,
+routes, cours d'eau, toponymie, zones urbaines, lacs, etc.
+
+Le package [`rnaturalearth`](https://ropensci.github.io/rnaturalearth/) permet
+de récupérer directement ces données sous `R`. Pour une carte du continent
+européen :
+
+```{r}
+europe <- rnaturalearth::ne_countries(continent = "Europe", scale = "large")
+
+ggplot() +
+  geom_sf(data = europe) +
+  theme_minimal()
+```
+

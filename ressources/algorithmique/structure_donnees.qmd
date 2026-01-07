@@ -1,0 +1,331 @@
+# Les structures de données {#sec-structure-data}
+
+```{r}
+pacman::p_load(
+  dplyr
+)
+```
+
+Les structures de données de base sous R sont décrites dans la figure
+@fig-data-struc.
+
+![Les structure de données de base sous R ([source](https://r.qcbs.ca/workshop01/book-fr/manipuler-les-objets-dans-r.html))](./figures/type_of_data_structure_in_r.png){#fig-data-struc width="85%"}
+
+Quand on fait de l'analyse de données sous R, on est surtout confronté aux :
+
+1. Variables (structure finie)
+2. Vecteurs (structure indexée)
+3. Data frame (structure indexée)
+4. Matrice (structure indexée) et liste (structure récursive)
+
+Les arrays sont beaucoup moins courants.
+
+## Les variables {#sec-variables}
+
+En `R`, et dans les langages de programmation en générale, on stock des
+informations dans des **objets** sur lesquels on effectue des opérations. En
+`R`, l'objet de base est la **variable**[^var]. Cette dernière peut être de
+différentes **classes**[^class]. Les classes associées aux variables sont : `numeric`,
+`character` et `logical`.
+
+[^var]: Dans les faits, il s'agit d'un abus de langage. En `R`, tout est objet,
+donc une variable n'existe pas vraiment techniquement parlant. On utilise ce
+mot pour désigner les objets ne contenant qu'une seule valeur.
+[^class]: Si vous avez déjà fait de la programmation Orientée Objet (OO), vous
+devez trouver cela étrange. En `R`, une classe n'est pas un objet au sens
+classique où on l'entend en OO mais une étiquette attachée à un un objet.
+
+Une variable de classe `numeric` correspond à nombre ou un chiffre :
+
+```{r}
+# Définition de variables numeric
+n1 <- 1
+n2 <- 0.6
+n3 <- -5.097
+n4 <- 1e6 # Écriture scientifique
+```
+
+On **assigne** une valeur en utilisant `<-` ou `=` (on utilisera le `<-` de
+préférence car il est idiomatique). Les lignes commençant par `#` sont **des
+commentaires**. Ils sont extrêmements importants car ils vous permettent
+d'écrire librement du texte dans un script sans qu'il soit interprété comme du
+code. Vous pouvez ainsi **documenter** votre code pour faciliter sa lecture par
+ceux qui le liront.
+
+Pour afficher le contenue d'un objet, on l'écrit dans la console ou on peut
+utiliser la fonction `print()` (imprimer) :
+
+```{r}
+n1
+print(n1)
+```
+
+Pour vérifier la classe d'un objet, on utilise la fonction `class()` :
+
+```{r}
+class(n1)
+```
+
+Les variables de classe `character` enregistre une **chaîne de caractères**
+(comme un mot ou un code). Pour la définir, on encadre la valeur par des
+guillemets simples `''` ou doubles `""` (utilisez plutôt les guillemets
+doubles).
+
+```{r}
+# Définition de variables character
+c1 <- "a"
+c2 <- "arbre"
+c3 <- "Une chaîne de caractères plus longue"
+c4 <- "LKJHNA2000"
+c5 <- "1"
+```
+
+Vous voyez qu'un chiffre peut être défini comme un caractère s'il est encadré de
+guillemets.
+
+Enfin, la classe `logical` correspond à des
+[booléens](https://fr.wikipedia.org/wiki/Bool%C3%A9en) : `TRUE` et `FALSE`.
+
+```{r}
+b1 <- TRUE
+b2 <- FALSE
+```
+
+:::{.callout-tip title="Bien nommer ses objets"}
+
+Comme pour l'écriture des noms de ses fichiers, il convient d'adopter une
+convention d'écriture que vous utiliserez dans tous vos scripts.
+
+En R, il n'y a pas concenssus sur la convention à utiliser. Cependant, la
+majorité des personnes utilisent la *snake case* correspondant à : "tout en
+miniscule et espace en underscore". C'est la convention que je vous conseil
+d'utiliser :
+
+:::{.columns}
+
+:::{.column width=50%}
+**Bien**
+
+- `ma_variable`
+- `data_1`
+- `data_merged`
+:::
+
+:::{.column width=50%}
+**Naze**
+
+- `MaVariable`
+- `Data.1`
+- `dataMerged`
+:::
+:::
+
+Personnelement, j'enfreint cette convention pour les constantes que j'écrit en
+majuscule comme en python.
+
+:::
+
+## Les vecteurs {#sec-vector}
+
+Un vecteur est un ensemble de variables de même classe. On le défini
+manuellement via la fonction `c()` (*combine*). Leur classe est similaire aux
+classes des variables.
+
+```{r}
+# Vecteur de type numeric
+vector_num <- c(1, 2, 4, 5, 6)
+vector_num
+class(vector_num)
+
+# Vecteur de type character
+vector_str <- c("pluie", "orage", "beau-temps", "pluie", "pluie")
+vector_str
+class(vector_str)
+```
+
+En R, on a un type particulier de vecteur : les facteurs (*factor*). Il s'agit
+de vecteur de chaîne de caractère dont les modalités labelisées. Par défaut, les
+labels correspondent au nom des modalités elles-mêmes.
+
+```{r}
+vector_str <- c("peu", "moyen", "beaucoup", "peu", "peu")
+(factor_vector <- factor(vector_str))
+```
+
+Un des intérêts des facteurs est que l'on peut leur donner des labels différents
+:
+
+```{r}
+(factor_vector_labelled <- factor(
+    vector_str,
+    levels = c("peu", "moyen", "beaucoup"),
+    labels = c("Pluiviosité faible", "Pluviosité moyenne", "Pluviosité forte")
+))
+```
+
+On peut traiter les facteurs de la même façon que les vecteurs de chaîne de
+caractères.
+
+### Conversion de vecteurs
+
+On peut convertir des vecteurs de la même façon que l'on convertie des
+variables avec les fonctions `as.<class>` (par-ex. `as.numeric()`).
+
+```{r}
+# Conversion d'un vecteur numérique vecteur de chaîne de caractères
+(vector_num_str <- as.character(vector_num))
+class(vector_num_str)
+
+(factor_vector <- as.factor(vector_num_str))
+class(factor_vector)
+```
+
+
+## Les Data frame et dérivées {#sec-structure-df}
+
+Un Data Frame (DF) est un tableau de données où chaque colonne correspond à un
+vecteur. Cela correspond à ce que vous traitez d'ordinaire sous excel.
+
+On crée un Data frame avec la fonction `data.frame` :
+
+```{r}
+(df <- data.frame(
+  taille = c(185, 166, 180, 164, 173),
+  prenom = c("Franz", "Richard", "Johan Sebastian", "Ella", "Maria"),
+  nom = c("Litz", "Wagner", "Bach", "Fitzgerald", "Callas")
+))
+```
+
+### Accès aux colonnes et aux lignes
+
+Pour accéder à un vecteur (une colonne) dans un DF, plusieurs possibilités :
+
+```{r}
+#| output: false
+df$taille # Avec le $
+df[["taille"]] # avec [[]]
+df[, "taille"] # avec la position
+df[, 1] # avec l'index de la colonne
+```
+
+On utilise l'une ou l'autre des méthodes en fonction de la procédure que
+l'on est entrain d'employer. La méthode `$` demeure la plus courante.
+
+Pour accéder aux lignes, on utilise l'index de la ligne. Si le DF a des
+noms de lignes, on peut également utiliser ces noms.
+
+```{r}
+# Passer une colonne en nom de ligne
+(df <- tibble::column_to_rownames(df, "nom"))
+
+# Extraire la ligne par nom de ligne
+df["Litz", ]
+```
+
+### Description d'un DF
+
+Vous pouvez obtenir une description rapide de votre DF avec la fonction `str()`.
+Sur `RStudio` vous avez ces infos directement dans le panneau `Environnement`.
+
+```{r}
+str(df)
+```
+
+Dans le tableau ci-dessous, vous trouverez d'autres fonction qui permettent de
+décrire un DF.
+
+| Fonction          | Package      | Description
+| ----------------- | ------------ | --------------------------                                 |
+| `str()`           | base         | Structure générale, types des colonnes, aperçu des valeurs |
+| `glimpse()`       | dplyr        | Équivalent de `str()` avec `dplyr`
+| `head()`          | base         | Premières lignes (aperçu des données, pas structurel)      |
+| `tail()`          | base         | Dernières lignes                                           |
+| `names()`         | base         | Noms des colonnes                                          |
+| `dim()`           | base         | Dimensions (lignes, colonnes)                              |
+| `nrow()`          | base         | Nombre de lignes                                           |
+| `ncol()`          | base         | Nombre de colonnes                                         |
+
+
+### Les data frame spatiaux
+
+Quand on travail avec des données spatiales vectorielles, ce qui est le cas dans
+ce cours, on utilise une variante spatiale du Data frame qui est un objet `sf`
+issu du package [`sf`](https://r-spatial.github.io/sf/).
+
+```{r}
+# Lecture d'un geopackage
+path <- "data/src/iris_29.gpkg"
+iris <- sf::read_sf(path)
+class(iris)
+```
+
+Il s'agit d'un `data.frame` auquel une colonne qui enregistre la géométrie a été
+ajoutée. Cette colonne est souvent nommée `geom` ou `geometry`. L'objet `sf`
+enregistre également le système de coordonnées. Il est donc possible de réaliser
+des traitements spatiaux comme on le ferait sous QGIS.
+
+::: {.callout-note title="Quid des rasters"}
+
+Il est tout à fait possible de traiter des rasters sous `R`, notamment avec le
+package
+[`terra`](https://rspatial.github.io/terra/reference/terra-package.html). Comme
+nous n'en utilisons pas dans ce cours, je ne m'étend pas sur le sujet.
+
+:::
+
+### Données massives
+
+Dans le cas de **données massives**, on pourra se tourner vers le package
+[`data.table`](https://r-datatable.com/) qui possède sa propre syntaxe. Notez
+qu'on peut maintenant utilisez la syntaxe `dplyr` avec `data.table` en utilisant
+[`dtplyr`](https://dtplyr.tidyverse.org/) ce qui est un très gros poulet.
+
+```{r}
+#| warning: false
+
+library(data.table)
+library(dtplyr)
+
+# Créer un objet
+ldt <- lazy_dt(mtcars)
+
+ldt |>
+  group_by(cyl) |>
+  summarise(mpg = sum(mpg))
+```
+
+## Les matrices
+
+Les matrices sont notamment utilisées dans les fonctions orientées statistiques.
+C'est tout naturel car l'algèbre linéaire et les probabilités sont basées sur
+des tels objets mathématiques.
+
+Par exemple, dans le cas d'une régression linéaire dont les $\beta$ sont estimés
+par la méthode des moindres carrés ordinaires (OLS), les données sont stockées
+dans une matrice :
+
+```{r}
+# Génération de y
+y <- mtcars$mpg
+X <- model.matrix(mpg ~ ., data = mtcars)
+
+# Estimations des betas
+XtX_inv <- solve(t(X) %*% X) # (X^T X)^(-1)
+XtY <- t(X) %*% y            # (X^T y)
+beta_hat <- XtX_inv %*% XtY  # beta = (X^T X)^(-1) X^T y
+
+```
+
+## Les listes
+
+Voilà une liste imbriquées (*nested list*) :
+
+```{r}
+gaziers <- list(
+  "Taylor Swift" = list("argent" = 30, "niveau_de_poulet"=1),
+  "Bach" = list("argent" = 5, "niveau_de_poulet"=Inf),
+  "Charlie Parker" = list("argent" = 1, "niveau_de_poulet"=1e6)
+)
+```
+
+

@@ -1,0 +1,301 @@
+# Introduction à R et RStudio
+
+Comme dans la majorité des langages interprétés, quand on installe `R`, une
+[console
+interactive](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
+est installée en même temps. Vous pouvez y accéder en cherchant R dans vos
+programmes ou en effectuant les opérations `ctrl+R` (ouvrir l'exécuteur de
+commmande) > `R` > `enter`. C'est comme quand vous ouvrez un terminal
+`powershell` sous Windows, sauf qu'au lieu d'écrire du `powershell`, vous
+écrivez du `R`.
+
+Dans l'absolu, on pourrait écrire nos scripts dans la console directement mais
+ce serait très peu pratique. Aussi, quand on code, on utilise un **Environnement
+de Développement** (*IDE* en Anglais), et ce, quelque soit le langage que l'on
+utilise. Ces derniers intègrent des tas de fonctionnalités pour vous simplifier
+la vie (colorisation du code, diagnostique automatique des erreurs de syntaxe,
+outils intégrés de visualisation, etc.). Il y en a beaucoup. Certains sont
+génériques (ils supportent de nombreux langages) comme [Visual Studio
+Code](https://code.visualstudio.com/) ou spécifique, destiné à un seul langage,
+comme c'est le cas de [RStudio](https://posit.co/download/rstudio-desktop/) pour
+`R`.
+
+## RStudio
+
+Il s'agit de l'IDE le plus utilisé pour faire du `R`, et de très très loin. Il
+est *open-source* et fréquemment mis à jour.
+
+### Création d'un projet
+
+#### Organiser son dossier de travail {#sec-orga-files}
+
+La première chose à faire quand on commence un projet, quelqu'il soit, c'est de
+se **créer un espace de travail cohérent** ou vous vous retrouverez facilement.
+Ce dernier doit être le plus généralisable possible, de telle sorte à ce que
+vous puissier le réemployer pour d'autres projets. De cette façon, vous ne serez
+plus jamais perdus dans vos fichiers et vous **gagnerez un temps considérable**.
+Pour de l'analyse/traitement de données, je vous conseil la configuration
+suivante :
+
+- 📁 `./data/`: là où vous stockerez vos données
+    - 📁 `./data/src/`: Les données sources
+    - 📁 `./data/res/`: Les données créées par vos scripts
+- 📁 `./docs/`: là où vous enregistrerez vos documents words par exemple.
+- 📁 `./figures/`: là où vous enregistrerez vos graphs, cartes, ect.
+- 📁 `./scripts/`: vos scripts R
+
+Le `./` fait référence à la **racine** du dossier : le chemin du dossier dans
+lequel les dossiers ci-dessus sont enregistrés. Cette racine peut être située où
+vous le souhaitez sur votre machine.
+
+:::{.callout-important title="Bien nommer ses fichiers"}
+
+Pourquoi est-ce important ?
+
+- Pour ne pas vous demander à chaque fois pendant trois plombes à comment vous
+allez écrire un nom de fichier ou de dossier.
+- Encore une fois pour avoir une organisation nickel.
+- Pour éviter de vous retrouver avec des erreurs liés à des espaces ou des
+caractères spéciaux.
+
+Aussi, je vous conseil d'adopter une **convention d'écriture**. Il y en a plein,
+vous pouvez inventer la votre tant qu'elle est cohérente. Il est notamment
+important de proscrire tous les signes diacritiques (é, è, ç, à, etc.), les
+espaces et les signes (/, %, $, etc.). Je vous conseil la convention qui
+consiste à n'écrire qu'en miniscule, sans caractères spéciaux et en replaçant les
+espaces par des underscores (`_`).
+
+Par exemple :
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+**Bien**
+```
+td0_introduction_r.R
+rendu_20250506_analyse_spatiale.R
+graph_epervier.png
+```
+:::
+
+::: {.column width="50%"}
+**Naze**
+```
+TD 0 Introduction à R .R
+Rendu_2025/05/06_AnalyseSpatiale.R
+Graphique épervier.png
+```
+:::
+::::::::::::::
+:::
+
+#### Créer un projet RStudio
+
+Une fois que vous avez créé votre espace de travail dans votre explorateur de
+fichier, procédez aux opérations suivantes pour créer un projet RStudio.
+
+::: {.callout-tip title="Instructions"}
+1. Ouvrez RStudio
+2. Créez un nouveau projet: `Fichier` > `Nouveau projet` > `Répertoire existant`.
+Indiquez le dossier que vous avez créé précédemment.
+3. Créez un nouveau script `R` : `Fichier` > `Nouveau fichier` > `Script R`.
+   Enregistrez le (`ctrl+s`).
+:::
+
+### L'interface
+
+![Interface de RStudio](figures/rstud_interface.png){#fig-rstud_inter}
+
+L'interface fonctionne avec des panneaux que l'on peut changer au besoin dans
+les préférences du logiciel[^0_rstud_panes]. Par défaut, on a l'organisation de la
+@fig-rstud_inter.
+
+[^0_rstud_panes]: `Affichage`>`Volet`>`Options de mise en page des volets`
+
+- **A)**:
+    - Dans ce panneau, vous avez vos scripts `R`. **C'est ici que vous
+    écrirez.**
+- **B)**:
+    - `Console`: La console `R`. La même console intéractive que quand on ouvre
+    `R` sans RStudio.
+    - `Terminal`: Le terminal de votre machine. Sous Windows du `???`.
+    - `Travaux`: Des *jobs* que vous faites tourner en arrière-plan.
+- **C)**:
+    - `Environnement`: La liste des objets de la session courante.
+    - `Historique`: L'historique des commandes introduites dans la console `R`.
+    - `Connexions`: Connexions à des bases de données externes.
+    - `Tutoriel`: tutos
+- **D)**:
+    - `Fichiers`: Un explorateur de fichier (comme l'explorateur de fichier windows)
+    - `Graphiques`: Un espace où les graphs seront affichés.
+    - `Paquets`: Liste de packages, vous pouvez les installer depuis cet
+    onglet.
+    - `Aide`: Onglet où sont affichés les documentations des fonctions que vous
+    utilisez.
+    - `Visualisateur`: Onglet d'affichage des graphs 3D, des pages webs, etc.
+    - `Présentation`: Onglet dédié aux présentations.
+
+Il existe d'autres panneaux que l'on peut rajouter à l'interface au besoin. Vous
+aurez surtout besoin de la console, de l'environnement, de l'onglet graphique et
+aide.
+
+## Les bases de R pour le traitement de données
+
+:::{.callout-tip title="Organiser son script R"}
+
+Pour ne pas se perdre dans son code et garantir sa reproductibilité, il convient
+de l'organiser soigneusement.
+
+Un exemple typique de script en analyse de données et le suivant :
+
+1. Chargement des packages. C'est toujours la première chose à faire.
+2. Écriture des constantes (si nécessaire)
+3. Chargement des données
+4. Pré-traitement des données (nettoyage, merge, etc.)
+5. L'analyse que l'on souhaite effectuer (le cœur du script)
+6. Analyse des résultats (graphs, résumés, etc.)
+
+Pour bien se retrouver dans le script, on peut tirer parti des commentaires et
+créer des titres et des sous-titres. Par exemple :
+
+```{r}
+################################################################################
+# Titre 1 ----
+################################################################################
+## Sous titre 1.1 --------------------------------------------------------------
+# Commentaire classique
+
+### Sous titre 1.1.1 -----------------------------------------------------------
+# Commentaire classique
+
+################################################################################
+# Titre 2 ----
+################################################################################
+## Sous titre 2.1 --------------------------------------------------------------
+# code etc.
+```
+
+Notez que RStudio identifie automatiquement les commentaires suivis d'un minimum
+de quatre caractères similaire (`-` ou `#`) comme des niveaux de titre. Pour
+définir le niveau, il faut ajuster le nombre de `#` avant le titre (`#` h1, `##`
+h2, etc.). Pour vous rendre d'une section à une autre dans votre script, vous
+pouvez utiliser le navigateur situé en bas à gauche de l'onglet script.
+
+:::
+
+::: {.callout-note title="Instruction"}
+
+Lisez l'introduction du @sec-structure-data.
+
+:::
+
+### Les variables
+
+::: {.callout-note title="Instruction: variable"}
+
+Lisez la @sec-variables.
+
+1. Créez des variables de classe différentes
+2. Essayez d'effectuer des opérations mathématiques entre des variables de
+   différentes classes. Qu'observez vous ?
+
+:::
+
+### Les vecteurs
+
+::: {.callout-note title="Instructions: vecteurs"}
+
+Lisez la @sec-vector.
+
+**Vecteur numérique :**
+
+1. Effectuer des opérations entre deux vecteurs numériques : que constatez vous
+   ? Est-ce que vos opérations marchent avec des vecteurs de longueur différente ?
+2. Effectuer des opérations entre une variable numérique et un vecteur numérique : que constatez vous ?
+3. Calculer des statistiques élémentaires sur ces vecteurs (*cf.* @sec-stat-quanti).
+
+**Vecteur de chaîne de caractères :** (aidez vous de la @sec-stat-quali)
+
+```{r}
+vector_str <- c("A", "a", "b", "b", "B", "C", "C")
+```
+
+1. Quels sont les modalités du vecteur `vector_str` ?
+2. Combien il y a t il de valeurs associées à chacune de ces modalités ?
+
+:::
+
+### Les tableaux de données : les Data Frames
+
+
+::: {.callout-note title="Instruction: création de Data Frame"}
+
+Lisez la @sec-structure-df.
+
+Créez un DF de à partir de quatre vecteurs de longueur 5 (2 numériques, 2 de
+chaîne cararactères).
+
+:::
+
+
+::: {.callout-note title="Instructions: manipulation de Data Frame"}
+
+Vous apprendrez avec un jeu de de données d'entraînement issu du package
+[`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/).
+
+```{r}
+data(package = 'palmerpenguins')
+head(penguins)
+```
+
+Commencez par décrire brièvement le tableau de données :
+
+- Nombre d'observations
+- Nombre de variables (leur classe)
+
+Pour les opérations suivantes, appuyez-vous sur la @sec-manip-df.
+
+1. **Sélection des variables : `select()`**
+
+    1. Sélectionner les variables `island` et `bill_len`.
+    2. Sélectionner uniquement les variables numériques
+    3. Sélectionner toutes les variables qualitatives sauf `island`
+
+2. **Filtrer les observations : `filter()`**
+
+    1. Ne conserver que les pingouins Adélie de l'île de Biscoe qui sont des mâles.
+    2. Pour l'année 2007, ne conserver que les pingouins dont la masse est
+       supérieure à la moyenne.
+    3. Retirez les lignes contenant des valeurs manquantes.
+
+3. **Créer et modifier des variables : `mutate()`**
+
+    1. Convertissez l'unité des nageoires '`flipper_len`' en cm.
+    2. Créer un indicateur correspondant à la longueur du bec (`bill_len`) divisé
+       par sa profondeur (`bill_dep`).
+
+4. **Résumé de DF :** `summarise()/group_by()`
+
+    1. Calculer la médiane et l'amplitude de `bill_len`.
+    2. Calculer la médiane de chaque variable numérique.
+    3. Calculer la médiane de la longueur du bec par espèce
+    3. Calculer la médiane de la longueur du bec par espèce et par sexe.
+
+5. **Jointure de données :** 
+
+    1. Chargez les données : (*cf.* @sec-io-df)
+        - Données géographique : `iris_29.gpkg`
+        - Données INSEE : `iris_brest.csv`
+    2. Joignez la donnée spatiale aux données INSEE (*cf.* @sec-join).
+
+:::
+
+
+### Références
+
+Cheat sheet :
+
+- [RStudio](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){target="_blank"}
+- [Base R](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf){target="_blank"}
+- [dplyr](https://thinkr.fr/pdf/dplyr-french-cheatsheet.pdf){target="_blank"}
+
+

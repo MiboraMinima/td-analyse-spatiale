@@ -1,0 +1,12 @@
+figures/
+data/
+logs/
+*.log
+*_cache/
+*_files/
+.gitignore_local
+/.quarto/
+
+# Keep all in book
+!_book/**
+

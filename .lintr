@@ -1,0 +1,10 @@
+linters: linters_with_defaults(
+    # lintr defaults: https://lintr.r-lib.org/reference/default_linters.html
+    line_length_linter = line_length_linter(180L),
+    object_name_linter = NULL,
+    cyclocomp_linter = NULL, # do not check function complexity
+    commented_code_linter = NULL, # allow code in comments
+    indentation_linter(indent = 2L, hanging_indent_style = "never")
+    brace_linter(allow_single_line = TRUE),
+    library_call_linter
+)

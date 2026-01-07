@@ -1,0 +1,271 @@
+# Les structures de contrôle
+
+## Les alternatives
+
+Les alternatives permettent d'effectuer une opération uniquement si une
+condition logique est remplie. L'alternative la plus couramment utilisée dans
+les langages de haut-niveau est le `if-else`.
+
+```
+SI Test
+   Instruction 1
+SINON
+   Instruction 2
+FIN SI
+```
+
+En `R`, on utilise la syntaxe suivante :
+
+```{r}
+x <- "bleu"
+if (x %in% c("bleu", "rouge", "jaune")) {
+  cat(x, "est une couleur primaire\n")
+} else {
+  cat(x, "n'est pas une couleur primaire\n")
+}
+```
+
+Le `if-else` peut être étendu à plusieurs tests.
+
+```
+SI Test 1
+   Instruction 1
+SINONSI Test 2
+   Instruction 2
+SINON
+   Instruction 3
+FIN SI
+```
+
+Ce qui en R donne :
+
+```{r}
+x <- "violet"
+if (x %in% c("bleu", "rouge", "jaune")) {
+  cat(x, "est une couleur primaire\n")
+} else if (x %in% c("violet", "vert", "orange")) {
+  cat(x, "est une couleur secondaire\n")
+} else {
+  cat(x, "n'est ni une couleur primaire, ni une couleur secondaire\n")
+}
+```
+
+En R, il existe une fonction pour le `if-else` :
+
+```{r}
+x <- 1
+res <- ifelse(
+  x > 0,     # La condition
+  "positif", # Si vrai
+  "négatif"  # Sinon
+)
+print(res)
+```
+
+## Les boucles
+
+Les boucles permettent d'effectuer des opérations plusieurs de fois de suite de
+manière controlée. Il y en a plusieurs sortes. Dans le cas de traitements de
+données sous R, vous serez surtout intéressé par la *boucle de parcours* qui
+est éxécutée sur chacun des éléments d'une liste.
+
+```
+POURCHAQUE valeur DANS collection
+   Instruction 1
+FIN POURCHAQUE
+```
+
+En `R`, cela se traduit par :
+
+```{r}
+couleur_primaire <- c("bleu", "rouge", "jaune")
+for (couleur in couleur_primaire) {
+  cat(couleur, "\n")
+}
+```
+
+On peut réaliser des boucles imbriquées :
+
+```{r}
+sequence <- 2:4
+for (i in sequence) {
+  for (j in sequence) {
+    cat(i, "/", j, "= ")
+    cat(i / j, "\n")
+  }
+}
+```
+
+Il arrive que l'on veuille stopper la boucle au cours de son exécution ou tout
+simplement passer à l'élément suivant de la liste. Pour cela, on utilise les
+mots-clés `break` et `next`.
+
+```{r}
+couleur_primaire <- c("bleu", "rouge", "jaune")
+for (couleur in couleur_primaire) {
+  if (couleur == "bleu") {
+    cat("J'aime pas le", couleur, "je passe...\n")
+    next # passer à l'élément suivant
+  } else if (couleur == "rouge") {
+    cat("Du", couleur, "je panique !!! j'me tire...\n")
+    break # briser la boucle
+  }
+  cat(couleur, "\n")
+}
+```
+
+On voit que jaune n'est jamais affiché car la boucle est brisée avant que le
+jaune puisse être affiché.
+
+### `purrr` et la programmation fonctionnelle
+
+```{r}
+pacman::p_load(purrr, dplyr)
+```
+
+Les boucles `for` sont :
+
+- Verbeuses (longues à écrire)
+- Sujettes à pas mal d'erreurs (*error-prone*)
+- Peu performantes
+
+Dans ce cadre, le package [`purrr`](https://purrr.tidyverse.org) a été conçu
+pour optimiser l'écriture de boucle dans un paradigme de [programmation
+fonctionnelle](https://fr.wikipedia.org/wiki/Programmation_fonctionnelle). Pour
+faire simple, l'idée est que chaque étape du code est réalisée par l'appele
+d'une fonction qui ne retourne qu'un seul résultat.
+
+Pour illustrer le principe, prenant un example de boucle qui, pour chaque valeur
+d'un vecteur numérique, calcul son carré et ajoute le résultat dans un vecteur
+préalablement instantié :
+
+```{r}
+# Définition de la donnée
+seq <- 1:5
+
+# Instantiation d'un vecteur pour stocker les résultat
+res <- vector()
+
+# La boucle
+for (i in seq) {
+  # Calcul du carré
+  square <- i ^ 2
+
+  # Stockage du résultat
+  res <- c(res, square)
+}
+
+print(res)
+```
+
+Avec `purrr`, l'opération est considérée comme l'application d'une fonction qui
+retourne une **liste** de valeurs. Cette liste est ensuite convertie en vecteur
+via `list_c()`.
+
+```{r}
+# Définition de la donnée
+seq <- 1:5
+
+# Application de la fonction
+res <- map(seq, \(i) i ^ 2) |>
+    list_c() # conversion de la liste en vecteur
+
+print(res)
+```
+
+Pour rendre la chose encore plus claire, on pourrait écrire la fonction du carré
+et la passer directement à la fonction `map()` :
+
+```{r}
+# Fonction du carré
+square <- function(x) {
+  return(x ^ 2)
+}
+
+# Définition de la donnée
+seq <- 1:5
+
+# Application de la fonction
+res <- map(seq, square) |>
+    list_c() # conversion de la liste en vecteur
+
+print(res)
+```
+
+Au final, le code est plus structuré, lisible et cohérent.
+
+Prenons un exemple plus parlant pour du traitement des données. Imaginons que
+l'on dispose de plusieurs `data.frame` dans une liste et que l'on souhaite
+réaliser une régression linéaire sur ces différentes sources de données et
+récupérer le $R^2$ pour chacune.
+
+```{r}
+# Données d'entraînement de dplyr, séparée par CYL (4, 6 et 8)
+data_list <- split(mtcars, mtcars$cyl)
+
+r_squared <-
+  # Application de la régression linéaire
+  map(data_list, \(df) lm(mpg ~ wt, data = df)) |>
+  # Application du résumé sur les objets lm
+  map(summary) |>
+  # Récupérer les R2 sous forme de vecteur numérique nommée par valeur du CYL
+  map_dbl("r.squared")
+
+print(r_squared)
+```
+
+Vous me direz qu'une fonction peut prendre plusieurs arguments en entrée.
+Effectivement, c'est pourquoi `purrr` dispose d'une fonction `map2()` qui itère
+sur 2 listes d'arguments simultanément. À plus de 2 listes d'arguments, on
+utilise la fonction `pmap()`.
+
+```{r}
+# Ajusté des modèles linéaires
+mods <- map(data_list, \(df) lm(mpg ~ wt, data = df))
+
+# Faire une prédiction (predict()) avec les modèles préalablement ajustés (mods)
+# sur les données séparées (data_list)
+map2(mods, data_list, predict)
+```
+
+Et avec `pmap()` :
+
+```{r}
+x <- list(1, 1, 1)
+y <- list(10, 20, 30)
+z <- list(100, 200, 300)
+
+pmap(list(x, y, z), \(first, second, third) (first + third) * second)
+```
+
+::: {.callout-important}
+
+Même si la programmation fonctionnelle proposée par `purrr` est très attrayante,
+il demeure indispensable de savoir écrire une boucle classique. Il s'agit d'une
+des briques de base en programmation.
+
+:::
+
+::: {.callout-note title="Quid de `lapply()`, `sapply()`, etc."}
+
+Quand vous ferez vos recherches sur internet, vous verrez souvent passer les
+fonctions `lapply`, `sapply()`, `tapply()` et autres `apply()`. Ces fonctions
+fonctionnent de manière assez similaires aux fonctions proposées par `purrr`
+mais viennent par défaut sous `R`.
+
+Je vous encourage à utiliser `purrr` car ses fonctions sont plus cohérentes
+entre elles. De plus, le package vient avec de nombreux "petits plus" très
+agréables au quotidien.
+
+Si vous êtes intéressés par la question, vous pouvez lire ce biais sur
+[stackoverflow](https://stackoverflow.com/questions/45101045/why-use-purrrmap-instead-of-lapply).
+
+:::
+
+**Ressources :**
+
+- [blogpost](https://perso.ens-lyon.fr/lise.vaudor/iterer-des-fonctions-avec-purrr/)
+pas mal sur `purrr` 
+- [Cheat sheet](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf) de
+`purrr`
+

@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Traitement de données sous R – TD analyse spatiale</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../ressources/stats/stats.html" rel="next">
+<link href="../../ressources/algorithmique/structure_controle.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c0f8282d1904867bd677e0497fc46e93.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating slimcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/data_process/data_basic.html">Traitements et analyse de données</a></li><li class="breadcrumb-item"><a href="../../ressources/data_process/data_basic.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">TD analyse spatiale</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Informations</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Travaux dirigés</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../00_intro_r/intro_r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à R et RStudio</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Algorithmique</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/algorithmique/structure_donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/algorithmique/structure_controle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Traitements et analyse de données</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/data_process/data_basic.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/stats/stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Visualisation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/viz/graph.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/viz/map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Sources de données</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../ressources/where_data/where_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-manip-df" id="toc-sec-manip-df" class="nav-link active" data-scroll-target="#sec-manip-df"><span class="header-section-number">4.1</span> Manipulation de Data Frames</a>
+  <ul>
+  <li><a href="#sec-io-df" id="toc-sec-io-df" class="nav-link" data-scroll-target="#sec-io-df"><span class="header-section-number">4.1.1</span> Lire et écrire des Data Frames</a></li>
+  <li><a href="#un-framework-pour-la-manipulation-de-données-dplyr" id="toc-un-framework-pour-la-manipulation-de-données-dplyr" class="nav-link" data-scroll-target="#un-framework-pour-la-manipulation-de-données-dplyr"><span class="header-section-number">4.1.2</span> Un framework pour la manipulation de données : <code>dplyr</code></a></li>
+  <li><a href="#sélectionner-filtrer-modifier-et-trier" id="toc-sélectionner-filtrer-modifier-et-trier" class="nav-link" data-scroll-target="#sélectionner-filtrer-modifier-et-trier"><span class="header-section-number">4.1.3</span> Sélectionner, filtrer, modifier et trier</a>
+  <ul class="collapse">
+  <li><a href="#sélectionner-des-données" id="toc-sélectionner-des-données" class="nav-link" data-scroll-target="#sélectionner-des-données"><span class="header-section-number">4.1.3.1</span> Sélectionner des données</a></li>
+  <li><a href="#filtrer-des-données" id="toc-filtrer-des-données" class="nav-link" data-scroll-target="#filtrer-des-données"><span class="header-section-number">4.1.3.2</span> filtrer des données</a></li>
+  <li><a href="#modifier-des-données" id="toc-modifier-des-données" class="nav-link" data-scroll-target="#modifier-des-données"><span class="header-section-number">4.1.3.3</span> Modifier des données</a></li>
+  <li><a href="#trier-les-données" id="toc-trier-les-données" class="nav-link" data-scroll-target="#trier-les-données"><span class="header-section-number">4.1.3.4</span> Trier les données</a></li>
+  </ul></li>
+  <li><a href="#sec-agg" id="toc-sec-agg" class="nav-link" data-scroll-target="#sec-agg"><span class="header-section-number">4.1.4</span> Aggrégation de données</a>
+  <ul class="collapse">
+  <li><a href="#aggrégation-de-lensemble-dun-jeu-de-données" id="toc-aggrégation-de-lensemble-dun-jeu-de-données" class="nav-link" data-scroll-target="#aggrégation-de-lensemble-dun-jeu-de-données"><span class="header-section-number">4.1.4.1</span> Aggrégation de l’ensemble d’un jeu de données</a></li>
+  <li><a href="#aggrégation-par-groupe" id="toc-aggrégation-par-groupe" class="nav-link" data-scroll-target="#aggrégation-par-groupe"><span class="header-section-number">4.1.4.2</span> Aggrégation par groupe</a></li>
+  </ul></li>
+  <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="header-section-number">4.1.5</span> Jointure de données</a></li>
+  </ul></li>
+  <li><a href="#manipulation-de-matrice" id="toc-manipulation-de-matrice" class="nav-link" data-scroll-target="#manipulation-de-matrice"><span class="header-section-number">4.2</span> Manipulation de matrice</a>
+  <ul>
+  <li><a href="#les-bases-des-matrices-sous-r" id="toc-les-bases-des-matrices-sous-r" class="nav-link" data-scroll-target="#les-bases-des-matrices-sous-r"><span class="header-section-number">4.2.1</span> Les bases des matrices sous R</a>
+  <ul class="collapse">
+  <li><a href="#création-de-matrices" id="toc-création-de-matrices" class="nav-link" data-scroll-target="#création-de-matrices"><span class="header-section-number">4.2.1.1</span> Création de matrices</a></li>
+  <li><a href="#accès-aux-éléments" id="toc-accès-aux-éléments" class="nav-link" data-scroll-target="#accès-aux-éléments"><span class="header-section-number">4.2.1.2</span> Accès aux éléments</a></li>
+  <li><a href="#opérations-sur-les-matrices" id="toc-opérations-sur-les-matrices" class="nav-link" data-scroll-target="#opérations-sur-les-matrices"><span class="header-section-number">4.2.1.3</span> Opérations sur les matrices</a></li>
+  <li><a href="#autres-opérations" id="toc-autres-opérations" class="nav-link" data-scroll-target="#autres-opérations"><span class="header-section-number">4.2.1.4</span> Autres opérations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#traitement-de-chaîne-de-caractères" id="toc-traitement-de-chaîne-de-caractères" class="nav-link" data-scroll-target="#traitement-de-chaîne-de-caractères"><span class="header-section-number">4.3</span> Traitement de chaîne de caractères</a>
+  <ul>
+  <li><a href="#sec-concat" id="toc-sec-concat" class="nav-link" data-scroll-target="#sec-concat"><span class="header-section-number">4.3.1</span> Chercher/remplacer</a></li>
+  <li><a href="#sec-concat" id="toc-sec-concat" class="nav-link" data-scroll-target="#sec-concat"><span class="header-section-number">4.3.2</span> Concaténation</a></li>
+  <li><a href="#tableau-de-contingence" id="toc-tableau-de-contingence" class="nav-link" data-scroll-target="#tableau-de-contingence"><span class="header-section-number">4.3.3</span> Tableau de contingence</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/data_process/data_basic.html">Traitements et analyse de données</a></li><li class="breadcrumb-item"><a href="../../ressources/data_process/data_basic.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>On fera surtout du <code>dplyr</code> dans la mesure où la syntaxe est plus simple à appréhender que le base R.</p>
+<p>Prenons un example avec le jeu de données <code>palmerpenguins</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">'palmerpenguins'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3  Adelie Torgersen     40.3     18.0         195      3250 female 2007
+4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5  Adelie Torgersen     36.7     19.3         193      3450 female 2007
+6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</code></pre>
+</div>
+</div>
+<p>Il contient des informations sur trois espèces de manchots observées dans l’archipel de Palmer en Antarctique : Adelie, Chinstrap et Gentoo.</p>
+<section id="sec-manip-df" class="level2 page-columns page-full" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-manip-df"><span class="header-section-number">4.1</span> Manipulation de Data Frames</h2>
+<p>Assurez-vous de bien comprendre la structure de données d’un Data Frame avant de lire cette section (<em>cf.</em> <a href="../algorithmique/structure_donnees.html#sec-structure-df" class="quarto-xref"><span>Section 2.3</span></a>).</p>
+<section id="sec-io-df" class="level3 page-columns page-full" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="sec-io-df"><span class="header-section-number">4.1.1</span> Lire et écrire des Data Frames</h3>
+<p>Pour lire des DF à partir de fichiers <code>csv</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, on utilise la fonction de <code>R</code> base <code>read.csv()</code> dont l’équivalent en <code>tydiverse</code> est la fonction <code>read_csv()</code> du package <a href="https://readr.tidyverse.org/"><code>readr</code></a>. Je vous conseil d’utiliser la fonction <code>readr::read_csv()</code> car elle plus optimiser que la première.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;On peut obtenir des DF à partir de fichiers autre que <code>csv</code>. Je me concentre sur ce format car il s’agit du plus courant. Si vous voulez lire des données à partir d’un fichier <code>xls</code>/<code>xlsw</code> vous pouvez utiliser le package <a href="https://readxl.tidyverse.org/"><code>read_excel</code></a>. Je ne vous le conseil pas car les fichiers excel sont souvent très mal mis en forme en plus de contenir des feuilles. Il vaut mieux en extraire des <code>csv</code> propres.</p></div></div><div class="callout callout-style-default callout-note callout-titled" title="Le format `csv`">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Le format <code>csv</code>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le format <code>csv</code> est un des formats les plus utilisé pour stocker des données tabulaires en data science. <code>csv</code> signifie <em>Comma Separated Values</em> (<em>comma</em> signifie virgule). Donc, dans la majorité des cas, un fichier <code>csv</code> sera de la forme :</p>
+<pre><code>var_1,var_2
+12,0.9
+2,0.25
+4,0.78</code></pre>
+<p>En Europe, on utilise souvent la virgule pour représenter le séparateur décimal. Le séparateur de valeurs du fichier <code>csv</code> devient alors le <code>;</code>. Le fichier devient alors :</p>
+<pre><code>var_1;var_2
+12;0,9
+2;0,25
+4;0,78</code></pre>
+<p>Vous trouvez aussi des fichiers <code>csv</code> séparé par des tabulations (on parle de <code>tsv</code>. C’est surtout le cas pour les fichiers contenants du texte long car la virgule et le point virgule peuvent se rencontrer dans le texte.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Attention">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Attention
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un fichier <code>csv</code> ne doit jamais avoir des informations avant la première ligne qui indique le nom des colonnes. Par exemple, le fichier suivant ne sera pas lu correctement.</p>
+<pre><code>Fichier écrit le 2025/05/02.
+vars_1 : longueur (cm)
+vars_2 : poid (g)
+var_1;var_2
+12;0,9
+2;0,25
+4;0,78</code></pre>
+<p>Cela veut dire qu’<strong>un fichier <code>csv</code> ne doit contenir que les données</strong> et jamais les métadonnées ou autres informations. Bien évidemment, si vous écrivez des données et que vous voulez les partager il faut toujours écrire les métadonnées, mais vous les écrirez dans un fichier séparé.</p>
+</div>
+</div>
+<p>Avant de charger un fichier <code>csv</code>, il faut connaître le format employé : quel séparateur de valeur et quel séparateur de décimal est employé. Pour cela, il suffit d’ouvrir d’inspecter le fichier. Vous pouvez tout simplement essayer de l’ouvrir sous <code>R</code> et regarder le résultat. Sinon, vous pouvez ouvrir le fichier dans un logiciel externe (par exemple avec le notepad comme les <code>csv</code> sont des fichiers textuelles brutes).</p>
+<table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 31%">
+<col style="width: 25%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type de fichier</th>
+<th>Séparateur de colonnes</th>
+<th>Séparateur décimal</th>
+<th>Fonction readr</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CSV standard</td>
+<td><code>,</code></td>
+<td><code>.</code></td>
+<td><code>read_csv()</code></td>
+</tr>
+<tr class="even">
+<td>CSV2 (Europe)</td>
+<td><code>;</code></td>
+<td><code>,</code></td>
+<td><code>read_csv2()</code></td>
+</tr>
+<tr class="odd">
+<td>TSV</td>
+<td><code>\t</code> (tabulation)</td>
+<td><code>.</code></td>
+<td><code>read_tsv()</code></td>
+</tr>
+<tr class="even">
+<td>ALL</td>
+<td>argument <code>delim</code></td>
+<td>argument <code>locale</code> (<code>decimal_mark</code>)</td>
+<td><code>read_delim()</code></td>
+</tr>
+</tbody>
+</table>
+<p>Par exemple :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"data/src/iris_brest.csv"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 90 Columns: 115
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr   (4): Libellé commune ou ARM, TRIRIS, Libellé de l'IRIS, Type d'IRIS
+dbl (111): IRIS, Région, Département, Unité urbaine, Commune ou ARM, Grand q...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>La fonction <code>readr::read_csv()</code> renvoie directement des informations sur la classe des colonnes. Cela vous permet de voir rapidement si elles sont bien interprétées.</p>
+<p><strong>Pour écrire un fichier</strong> <code>csv</code>, vous pouvez utisez la fonction <code>readr::write_csv()</code>. Elle prend un <code>data.frame</code> en entrée et le chemin vers le fichier de destination. Je vous conseil d’utiliser la fonction avec les arguments par défaut, donc avec un séparateur virgule et un séparateur de décimale point. De cette façon, vous aurez toujours le format de <code>csv</code> et vous vous y retrouverez plus facilement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>output_path <span class="ot">&lt;-</span> <span class="st">"data/res/output.csv"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv</span>(df_res, output_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Lire et écrire des données spatiales vectorielles">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lire et écrire des données spatiales vectorielles
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Quand on travail avec des données spatiales vectorielles, ce qui est le cas dans ce cours, on utilise une variante spatiale du Data frame qui est un objet <code>sf</code> issu du package <a href="https://r-spatial.github.io/sf/"><code>sf</code></a>.</p>
+<p>Avec <code>sf</code>, on peut lire tous les types de fichiers spatiaux vectoriels (par-ex, shapefile, geopackage, etc.). On utilise la fonction <code>read_sf()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lecture d'un geopackage</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"data/src/iris_29.gpkg"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(path)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sf"         "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+<p>Si vous voulez lire un shapefile, vous indiquerez le chemin du fichier <code>.shp</code>, <code>sf</code> fera le lien avec les autres fichiers.</p>
+<p>On écrit des données spatiales à partir d’un objet <code>sf</code> avec la fonction <code>write_sf()</code>. La fonction “devine” le format attendu à partir de l’extension que vous donnez au fichier :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Écriture d'un fichier geopackage</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"data/res/output.gpkg"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">write_sf</span>(sf_res, path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="un-framework-pour-la-manipulation-de-données-dplyr" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="un-framework-pour-la-manipulation-de-données-dplyr"><span class="header-section-number">4.1.2</span> Un framework pour la manipulation de données : <code>dplyr</code></h3>
+<p><code>dplyr</code> est un framework du tidyverse en R conçu pour faciliter la manipulation de données de manière claire, cohérente et efficace. Il repose sur une syntaxe intuitive et un petit ensemble de verbes cohérents qui correspondent aux opérations les plus courantes en analyse de données, comme :</p>
+<ul>
+<li><code>select()</code> pour choisir des colonnes,</li>
+<li><code>filter()</code> pour filtrer les lignes,</li>
+<li><code>mutate()</code> pour créer ou modifier des variables,</li>
+<li><code>summarise()</code> pour résumer les données,</li>
+<li><code>arrange()</code> pour trier les observations,</li>
+<li>et <code>group_by()</code> pour travailler par groupes.</li>
+</ul>
+<p>Ces verbes peuvent être reliés les uns aux autres par un <strong>pipe</strong> (<code>|&gt;</code> ou <code>%&gt;%</code>). Ce dernier prend le résultat de la fonction précédente comme tableau d’enttrée. Par exemple :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(island, species, bill_len, year) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(year <span class="sc">&gt;</span> <span class="dv">2007</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(island, species) <span class="sc">|&gt;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_bill_len =</span> <span class="fu">mean</span>(bill_len, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'island'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+# Groups:   island [3]
+  island    species   mean_bill_len
+  &lt;fct&gt;     &lt;fct&gt;             &lt;dbl&gt;
+1 Biscoe    Adelie             39.2
+2 Biscoe    Gentoo             47.7
+3 Dream     Adelie             38.2
+4 Dream     Chinstrap          48.9
+5 Torgersen Adelie             39.0</code></pre>
+</div>
+</div>
+</section>
+<section id="sélectionner-filtrer-modifier-et-trier" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="sélectionner-filtrer-modifier-et-trier"><span class="header-section-number">4.1.3</span> Sélectionner, filtrer, modifier et trier</h3>
+<section id="sélectionner-des-données" class="level4" data-number="4.1.3.1">
+<h4 data-number="4.1.3.1" class="anchored" data-anchor-id="sélectionner-des-données"><span class="header-section-number">4.1.3.1</span> Sélectionner des données</h4>
+<p>Pour sélectionner une variable spécifique, on utilise la fonction homonime <code>select()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, species, island, body_mass)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island body_mass
+1  Adelie Torgersen      3750
+2  Adelie Torgersen      3800
+3  Adelie Torgersen      3250
+4  Adelie Torgersen        NA
+5  Adelie Torgersen      3450
+6  Adelie Torgersen      3650</code></pre>
+</div>
+</div>
+<p>À l’inverse, pour supprimer des variables, on place un <code>-</code> devant la variable :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, <span class="sc">-</span>species, <span class="sc">-</span>island, <span class="sc">-</span>body_mass)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  bill_len bill_dep flipper_len    sex year
+1     39.1     18.7         181   male 2007
+2     39.5     17.4         186 female 2007
+3     40.3     18.0         195 female 2007
+4       NA       NA          NA   &lt;NA&gt; 2007
+5     36.7     19.3         193 female 2007
+6     39.3     20.6         190   male 2007</code></pre>
+</div>
+</div>
+<p>On peut employer une <strong>expression de sélection</strong> pour choisir des variables par rapport à une condition. Par exemple, si on veut sélectionner toutes les variables dont le nom se termine par une chaine de caractère précise, on peut utiliser la fonction <code>ends_with()</code> dans la fonction <code>select()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, <span class="fu">ends_with</span>(<span class="st">"len"</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  bill_len flipper_len
+1     39.1         181
+2     39.5         186
+3     40.3         195
+4       NA          NA
+5     36.7         193
+6     39.3         190</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Plus d'examples">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plus d’examples
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Si on a une idée précise des variables que l’on veut sélectionner, on peut utiliser un vecteur de contenant les noms des variables et utiliser la fonction <code>all_of()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>to_select <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"island"</span>, <span class="st">"species"</span>, <span class="st">"body_mass"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, <span class="fu">all_of</span>(to_select))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     island species body_mass
+1 Torgersen  Adelie      3750
+2 Torgersen  Adelie      3800
+3 Torgersen  Adelie      3250
+4 Torgersen  Adelie        NA
+5 Torgersen  Adelie      3450
+6 Torgersen  Adelie      3650</code></pre>
+</div>
+</div>
+<p>Bien sûr, on peut les combiner :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>selected <span class="ot">&lt;-</span> <span class="fu">select</span>(penguins, <span class="fu">starts_with</span>(<span class="st">"bill"</span>), <span class="fu">where</span>(is.factor))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  bill_len bill_dep species    island    sex
+1     39.1     18.7  Adelie Torgersen   male
+2     39.5     17.4  Adelie Torgersen female
+3     40.3     18.0  Adelie Torgersen female
+4       NA       NA  Adelie Torgersen   &lt;NA&gt;
+5     36.7     19.3  Adelie Torgersen female
+6     39.3     20.6  Adelie Torgersen   male</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Voilà un tableau récapitulatif des expressions les plus communes que l’on peut utiliser pour sélectionner des variables.</p>
+<table class="table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 53%">
+<col style="width: 30%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fonction</th>
+<th>Description</th>
+<th>Exemple</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>starts_with("x")</code></td>
+<td>Sélectionne les variables dont le nom <strong>commence</strong> par <code>"x"</code></td>
+<td><code>select(starts_with("Sepal"))</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>ends_with("x")</code></td>
+<td>Sélectionne les variables dont le nom <strong>se termine</strong> par <code>"x"</code></td>
+<td><code>select(ends_with("Width"))</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>contains("x")</code></td>
+<td>Sélectionne les variables dont le nom <strong>contient</strong> <code>"x"</code></td>
+<td><code>select(contains("Petal"))</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>all_of(vars)</code></td>
+<td>Sélectionne <strong>toutes</strong> les colonnes listées dans un vecteur <code>vars</code> (et renvoie une erreur si une manque)</td>
+<td><code>select(all_of(c("Species", "Sepal.Length")))</code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>everything()</code></td>
+<td>Sélectionne <strong>toutes les colonnes</strong> (utile pour repositionner)</td>
+<td><code>select(Species, everything())</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>where(predicate)</code></td>
+<td>Sélectionne selon un <strong>type</strong> ou une condition logique sur les colonnes</td>
+<td><code>select(where(is.numeric))</code>, <code>select(where(~mean(.) &gt; 0))</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filtrer-des-données" class="level4" data-number="4.1.3.2">
+<h4 data-number="4.1.3.2" class="anchored" data-anchor-id="filtrer-des-données"><span class="header-section-number">4.1.3.2</span> filtrer des données</h4>
+<p>Pour filtrer les données avec <code>dplyr</code> on utilise la fonction homonyme <code>filter()</code>. Cette dernière filtre les lignes par vérification de conditions.</p>
+<p>Par exemple, si on veut récupérer uniquement les donnnées pour l’espèce <code>Adelie</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3  Adelie Torgersen     40.3     18.0         195      3250 female 2007
+4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5  Adelie Torgersen     36.7     19.3         193      3450 female 2007
+6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</code></pre>
+</div>
+</div>
+<p>Ou si on souhaite récupérer les observations pour les années postérieur à 2007.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, year <span class="sc">&gt;</span> <span class="dv">2007</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Biscoe     39.6     17.7         186      3500 female 2008
+2  Adelie Biscoe     40.1     18.9         188      4300   male 2008
+3  Adelie Biscoe     35.0     17.9         190      3450 female 2008
+4  Adelie Biscoe     42.0     19.5         200      4050   male 2008
+5  Adelie Biscoe     34.5     18.1         187      2900 female 2008
+6  Adelie Biscoe     41.4     18.6         191      3700   male 2008</code></pre>
+</div>
+</div>
+<p>On peut combiner les filtres :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, year <span class="sc">&gt;</span> <span class="dv">2007</span>, species <span class="sc">==</span> <span class="st">"Adelie"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Biscoe     39.6     17.7         186      3500 female 2008
+2  Adelie Biscoe     40.1     18.9         188      4300   male 2008
+3  Adelie Biscoe     35.0     17.9         190      3450 female 2008
+4  Adelie Biscoe     42.0     19.5         200      4050   male 2008
+5  Adelie Biscoe     34.5     18.1         187      2900 female 2008
+6  Adelie Biscoe     41.4     18.6         191      3700   male 2008</code></pre>
+</div>
+</div>
+<p>Souvent, on faire sélectionner des données dans une gamme de valeurs, il suffit de faire :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, bill_len <span class="sc">&gt;</span> <span class="dv">35</span>, bill_len <span class="sc">&lt;</span> <span class="dv">40</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3  Adelie Torgersen     36.7     19.3         193      3450 female 2007
+4  Adelie Torgersen     39.3     20.6         190      3650   male 2007
+5  Adelie Torgersen     38.9     17.8         181      3625 female 2007
+6  Adelie Torgersen     39.2     19.6         195      4675   male 2007</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Plus d'examples">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Plus d’examples
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Plutôt que d’utiliser des virgules pour séparer les filtres on peut utiliser une syntaxe booléenne (je ne vous le conseil pour débuter) :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    penguins,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    (</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        (species <span class="sc">==</span> <span class="st">"Gentoo"</span> <span class="sc">|</span> species <span class="sc">==</span> <span class="st">"Adelie"</span>) <span class="sc">&amp;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        body_mass <span class="sc">&gt;</span> <span class="fu">mean</span>(body_mass, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass  sex year
+1  Adelie Torgersen     39.2     19.6         195      4675 male 2007
+2  Adelie Torgersen     42.0     20.2         190      4250 &lt;NA&gt; 2007
+3  Adelie Torgersen     34.6     21.1         198      4400 male 2007
+4  Adelie Torgersen     42.5     20.7         197      4500 male 2007
+5  Adelie     Dream     39.8     19.1         184      4650 male 2007
+6  Adelie     Dream     44.1     19.7         196      4400 male 2007</code></pre>
+</div>
+</div>
+<p>Pour filter les modalités de facteurs ou de chaines de caractères, on peut utiliser l’opérateur <code>%in%</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Gentoo"</span>, <span class="st">"Adelie"</span>))</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3  Adelie Torgersen     40.3     18.0         195      3250 female 2007
+4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5  Adelie Torgersen     36.7     19.3         193      3450 female 2007
+6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</code></pre>
+</div>
+</div>
+<p>Pour récupérer l’inverse d’une condition, on utilise le point d’exclamation <code>!</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, <span class="sc">!</span>species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Gentoo"</span>, <span class="st">"Adelie"</span>))</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    species island bill_len bill_dep flipper_len body_mass    sex year
+1 Chinstrap  Dream     46.5     17.9         192      3500 female 2007
+2 Chinstrap  Dream     50.0     19.5         196      3900   male 2007
+3 Chinstrap  Dream     51.3     19.2         193      3650   male 2007
+4 Chinstrap  Dream     45.4     18.7         188      3525 female 2007
+5 Chinstrap  Dream     52.7     19.8         197      3725   male 2007
+6 Chinstrap  Dream     45.2     17.8         198      3950 female 2007</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Tableau récapitulatif</p>
+<div class="table-responsive">
+<table class="table-striped table-hover table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 20%">
+<col style="width: 23%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Catégorie</th>
+<th>Fonction / opérateur</th>
+<th>Description</th>
+<th>Exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Comparaison numérique</strong></td>
+<td><code>==</code>, <code>!=</code></td>
+<td>Égal / différent</td>
+<td><code>filter(Species == "setosa")</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td>
+<td>Supérieur, inférieur, etc.</td>
+<td><code>filter(Sepal.Length &gt; 6)</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Appartenance</strong></td>
+<td><code>%in%</code></td>
+<td>Appartient à un ensemble de valeurs</td>
+<td><code>filter(Species %in% c("setosa", "virginica"))</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>!x %in% ...</code></td>
+<td>N’appartient pas à…</td>
+<td><code>filter(!Species %in% "setosa")</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Texte / chaînes</strong></td>
+<td><code>str_detect(x, "mot")</code></td>
+<td>Contient un motif (nécessite <code>stringr</code>)</td>
+<td><code>filter(str_detect(Species, "osa"))</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>startsWith(x, "mot")</code></td>
+<td>Commence par…</td>
+<td><code>filter(startsWith(Species, "set"))</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>endsWith(x, "mot")</code></td>
+<td>Se termine par…</td>
+<td><code>filter(endsWith(Species, "ica"))</code></td>
+</tr>
+<tr class="even">
+<td><strong>Valeurs manquantes</strong></td>
+<td><code>is.na(x)</code></td>
+<td>Est manquant</td>
+<td><code>filter(is.na(Sepal.Length))</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>!is.na(x)</code></td>
+<td>N’est pas manquant</td>
+<td><code>filter(!is.na(Sepal.Length))</code></td>
+</tr>
+<tr class="even">
+<td><strong>Intervalles</strong></td>
+<td><code>between(x, a, b)</code></td>
+<td>Valeur comprise entre <code>a</code> et <code>b</code> (inclusif)</td>
+<td><code>filter(between(Sepal.Length, 5, 6))</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Conditions complexes</strong></td>
+<td><code>if_else()</code> ou logique combinée</td>
+<td>Choix conditionnels</td>
+<td><code>filter(if_else(Sepal.Width &gt; 3, TRUE, FALSE))</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="modifier-des-données" class="level4" data-number="4.1.3.3">
+<h4 data-number="4.1.3.3" class="anchored" data-anchor-id="modifier-des-données"><span class="header-section-number">4.1.3.3</span> Modifier des données</h4>
+<p>Pour modifier des données ou en rajouter, on utilise la fonction <code>mutate()</code>.</p>
+<p>Par exemple, si on veut faire un arrondi de la variable <code>bill_len</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> <span class="fu">mutate</span>(penguins, <span class="at">bill_len =</span> <span class="fu">round</span>(bill_len))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mutated<span class="sc">$</span>bill_len)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 39 40 40 NA 37 39</code></pre>
+</div>
+</div>
+<p>Plutôt que d’écrire par-dessus la variable <code>bill_len</code>, on peut vouloir créer une autre variable pour enregistrer la modification. On écrit simplement le nom de la nouvelle variable à gauche du <code>=</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> <span class="fu">mutate</span>(penguins, <span class="at">bill_len_round =</span> <span class="fu">round</span>(bill_len))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mutated<span class="sc">$</span>bill_len_round)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 39 40 40 NA 37 39</code></pre>
+</div>
+</div>
+<p>On peut faire des opérations qui utilisent plusieurs variables :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> <span class="fu">mutate</span>(penguins, <span class="at">bill_len_norm_mass =</span> bill_len <span class="sc">/</span> body_mass)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mutated<span class="sc">$</span>bill_len_norm_mass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01042667 0.01039474 0.01240000         NA 0.01063768 0.01076712</code></pre>
+</div>
+</div>
+<p>On peut modifier de façon conditionnelle nos variables. Par exemple, si on veut arrondir uniquement la variable <code>bill_len</code> pour les espèces <code>Adelie</code> alors, on peut utiliser la fonction <code>ifelse()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    penguins,</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_len_round =</span> <span class="fu">ifelse</span>(species <span class="sc">==</span> <span class="st">"Adelie"</span>, <span class="fu">round</span>(bill_len), bill_len)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Quand on a plus d’une condition à vérifier, on privilégiera la fonction <code>case_when()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> <span class="fu">mutate</span>(</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    penguins,</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geo_code =</span> <span class="fu">case_when</span>(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>        island <span class="sc">==</span> <span class="st">"Biscoe"</span> <span class="sc">~</span> <span class="st">"North"</span>,</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        island <span class="sc">==</span> <span class="st">"Torgersen"</span> <span class="sc">~</span> <span class="st">"Midlle"</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>        <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"South"</span> <span class="co"># quand les deux premières ne sont pas vérifiées</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Si on souhaite modifier un ensemble de variables répondant à un ou des caractères communs, on peut utiliser la fonction <code>across()</code>. Par exemple, si on veut arrondir toutes les variables numériques, on écrira :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> <span class="fu">mutate</span>(penguins, <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">round</span>(.x)))</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mutated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen       39       19         181      3750   male 2007
+2  Adelie Torgersen       40       17         186      3800 female 2007
+3  Adelie Torgersen       40       18         195      3250 female 2007
+4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5  Adelie Torgersen       37       19         193      3450 female 2007
+6  Adelie Torgersen       39       21         190      3650   male 2007</code></pre>
+</div>
+</div>
+<p>Il arrive que l’on souhaite modifier des variables ou en créer de nouvelles par groupe. Par exemple, on peut vouloir normaliser <code>bill_len</code> par la moyenne de <code>body_mass</code> par espèce. Dans ce cadre, on utilisera la fonction <code>group_by()</code> qui permet d’effectuer des opérations par groupe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>mutated <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">norm_bill_len =</span> bill_len <span class="sc">/</span> <span class="fu">mean</span>(body_mass))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="trier-les-données" class="level4" data-number="4.1.3.4">
+<h4 data-number="4.1.3.4" class="anchored" data-anchor-id="trier-les-données"><span class="header-section-number">4.1.3.4</span> Trier les données</h4>
+<p>Pour trier les données, on utilise la fonction <code>arrange()</code>. Par exemple, si on veut ordonner le tableau par <code>bill_len</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(penguins, bill_len)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arranged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie     Dream     32.1     15.5         188      3050 female 2009
+2  Adelie     Dream     33.1     16.1         178      2900 female 2008
+3  Adelie Torgersen     33.5     19.0         190      3600 female 2008
+4  Adelie     Dream     34.0     17.1         185      3400 female 2008
+5  Adelie Torgersen     34.1     18.1         193      3475   &lt;NA&gt; 2007
+6  Adelie Torgersen     34.4     18.4         184      3325 female 2007</code></pre>
+</div>
+</div>
+<p>Par défaut l’ordre est croissant. Pour trier de façon décroissante, on utilise place la fonction <code>desc()</code> sur la variable :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(penguins, <span class="fu">desc</span>(bill_len))</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arranged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    species island bill_len bill_dep flipper_len body_mass    sex year
+1    Gentoo Biscoe     59.6     17.0         230      6050   male 2007
+2 Chinstrap  Dream     58.0     17.8         181      3700 female 2007
+3    Gentoo Biscoe     55.9     17.0         228      5600   male 2009
+4 Chinstrap  Dream     55.8     19.8         207      4000   male 2009
+5    Gentoo Biscoe     55.1     16.0         230      5850   male 2009
+6    Gentoo Biscoe     54.3     15.7         231      5650   male 2008</code></pre>
+</div>
+</div>
+<p>On peut bien sûr trier par plusieurs variables :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(penguins, <span class="fu">desc</span>(year), <span class="fu">desc</span>(body_mass))</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arranged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species island bill_len bill_dep flipper_len body_mass  sex year
+1  Gentoo Biscoe     48.8     16.2         222      6000 male 2009
+2  Gentoo Biscoe     49.8     15.9         229      5950 male 2009
+3  Gentoo Biscoe     55.1     16.0         230      5850 male 2009
+4  Gentoo Biscoe     50.4     15.7         222      5750 male 2009
+5  Gentoo Biscoe     49.5     16.1         224      5650 male 2009
+6  Gentoo Biscoe     50.8     17.3         228      5600 male 2009</code></pre>
+</div>
+</div>
+<p>Les données qualitatives sont triées par ordre alphabétique de la première lettre de la chaîne de caractères :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(penguins, <span class="fu">desc</span>(island))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(arranged)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3  Adelie Torgersen     40.3     18.0         195      3250 female 2007
+4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5  Adelie Torgersen     36.7     19.3         193      3450 female 2007
+6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-agg" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="sec-agg"><span class="header-section-number">4.1.4</span> Aggrégation de données</h3>
+<p>L’agrégation consiste à regrouper des observations selon une ou plusieurs variables (catégories, dates, régions, etc.) afin de calculer des indicateurs synthétiques (moyenne, total, écart-type, etc.) pour chaque groupe. C’est ce qui vous faites sur excel quand vous créez un tableau croisé dynamique.</p>
+<p>En traitement et analyse de données, il s’agit d’une des opérations les plus courantes.</p>
+<section id="aggrégation-de-lensemble-dun-jeu-de-données" class="level4" data-number="4.1.4.1">
+<h4 data-number="4.1.4.1" class="anchored" data-anchor-id="aggrégation-de-lensemble-dun-jeu-de-données"><span class="header-section-number">4.1.4.1</span> Aggrégation de l’ensemble d’un jeu de données</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On utilise le jeu de données palmerpenguins</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">'palmerpenguins'</span>)</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
+1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
+2  Adelie Torgersen     39.5     17.4         186      3800 female 2007
+3  Adelie Torgersen     40.3     18.0         195      3250 female 2007
+4  Adelie Torgersen       NA       NA          NA        NA   &lt;NA&gt; 2007
+5  Adelie Torgersen     36.7     19.3         193      3450 female 2007
+6  Adelie Torgersen     39.3     20.6         190      3650   male 2007</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">drop_na</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Imaginons que l’on souhaite calculer la moyenne pour la variable <code>bill_len</code> et la variable <code>flipper_len</code> et conserver le résultat dans un <code>data.frame</code>. La solution de base serait :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_bill_len =</span> <span class="fu">mean</span>(penguins<span class="sc">$</span>bill_len),</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_flipper_len =</span> <span class="fu">mean</span>(penguins<span class="sc">$</span>flipper_len)</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean_bill_len mean_flipper_len
+1      43.99279          200.967</code></pre>
+</div>
+</div>
+<p>Maintenant, si on voulait calculer la moyenne pour tous les variables numériques, il faudrait réécrire quatre fois la même ligne. Ce n’est pas efficient. En R base, on utiliserait une boucle pour pallier ces redondances. <code>dplyr</code> a été conçu pour faciliter l’écriture dans ces cas là. Pour résumer un jeu de données on utilise la fonction <code>summarise()</code>. Pour obtenir le même résultat que précédemment, on écrira :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>    penguins,</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_bill_len =</span> <span class="fu">mean</span>(bill_len),</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_flipper_len =</span> <span class="fu">mean</span>(flipper_len)</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean_bill_len mean_flipper_len
+1      43.99279          200.967</code></pre>
+</div>
+</div>
+<p>Jusque là, ça ne nous avance pas à grand chose, si ce n’est que l’on plus obligé d’utiliser les <code>$</code> pour accéder aux variables. Là où ça devient intéressant, c’est bien quand on a beaucoup de variables à résumer. Dans ce cas, on peut sélectionner les variables à résumer en utilisant la fonction <code>across()</code> qui permet prend une condition à vérifier et une opération à effectuer sur les variables retenues. Par exemple, si comme précédemment on souhaite calculer la moyenne pour tous les variables numériques, on écrira :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(penguins, <span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">mean</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  bill_len bill_dep flipper_len body_mass     year
+1 43.99279 17.16486     200.967  4207.057 2008.042</code></pre>
+</div>
+</div>
+<p>Une seul ligne de code permet de faire cela. Et si on souhaite également calculer d’autres statistiques ? C’est aussi possible ! Par exemple, si on souhaite également calculer la médiane et l’écart-type :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(penguins, <span class="fu">across</span>(</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Uniquement sur les variables numériques sauf la variable year</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">where</span>(is.numeric) <span class="sc">&amp;</span> <span class="sc">!</span>year,</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Quelles fonctions appliquer</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.fn =</span> <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">median =</span> median, <span class="at">sd =</span> sd),</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Quelles noms de variables renvoyer</span></span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span> <span class="co"># .col est le nom de la var. et .fn le nom de la function</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  bill_len_mean bill_len_median bill_len_sd bill_dep_mean bill_dep_median
+1      43.99279            44.5    5.468668      17.16486            17.3
+  bill_dep_sd flipper_len_mean flipper_len_median flipper_len_sd body_mass_mean
+1    1.969235          200.967                197       14.01577       4207.057
+  body_mass_median body_mass_sd
+1             4050     805.2158</code></pre>
+</div>
+</div>
+<p>Très bien, mais cela ne s’applique que pour un jeu de données entier. Comment faire si l’on souhaite calculer ces statistiques pour des groupes ?</p>
+</section>
+<section id="aggrégation-par-groupe" class="level4" data-number="4.1.4.2">
+<h4 data-number="4.1.4.2" class="anchored" data-anchor-id="aggrégation-par-groupe"><span class="header-section-number">4.1.4.2</span> Aggrégation par groupe</h4>
+<p>Pour aggréger des données par groupe en utilisant <code>dplyr</code> il suffit d’employer la fonction <code>group_by()</code> avec <code>summarise()</code>. Le reste du code ne change pas. Dans <code>group_by()</code>, on indique la ou les variables de regroupement. Par exemple, pour calculer la moyenne pour toutes les variables numériques sauf <code>year</code> par espèces et par îles :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(species, island) <span class="sc">|&gt;</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric) <span class="sc">&amp;</span> <span class="sc">!</span>year, <span class="sc">~</span><span class="fu">mean</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'species'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 6
+# Groups:   species [3]
+  species   island    bill_len bill_dep flipper_len body_mass
+  &lt;fct&gt;     &lt;fct&gt;        &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1 Adelie    Biscoe        39.0     18.4        189.     3710.
+2 Adelie    Dream         38.5     18.2        190.     3701.
+3 Adelie    Torgersen     39.0     18.5        192.     3709.
+4 Chinstrap Dream         48.8     18.4        196.     3733.
+5 Gentoo    Biscoe        47.6     15.0        217.     5092.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="base R">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+base R
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>En R base, pour effectuer une aggrégation par groupe on utilisera la fonction <code>aggregate()</code>. Par exemple, pour calculer la moyenne de toutes les variables numériques dans iris</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>    penguins[, <span class="fu">sapply</span>(penguins, is.numeric)], <span class="co"># seule les variables numeriques</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">list</span>(<span class="at">Species =</span> penguins<span class="sc">$</span>species), <span class="co"># la variable qui contient les groupes</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">FUN =</span> mean <span class="co"># La fonction</span></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Species bill_len bill_dep flipper_len body_mass     year
+1    Adelie 38.82397 18.34726    190.1027  3706.164 2008.055
+2 Chinstrap 48.83382 18.42059    195.8235  3733.088 2007.971
+3    Gentoo 47.56807 14.99664    217.2353  5092.437 2008.067</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-join" class="level3 page-columns page-full" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="sec-join"><span class="header-section-number">4.1.5</span> Jointure de données</h3>
+<p>Pour faire des jointures, on s’appuira sur le package <code>dplyr</code> et ses fonctions <code>*_join()</code> (c.f. <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">doc</a>). Ces dernières permettent une approche intuitive des jointures, mimant le comportement des jointures en SQL.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="./figures/join_tbl.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption class="margin-caption">Join in <code>dplyr</code></figcaption>
+</figure>
+</div>
+<p>Imaginons que nous disposons de deux jeux de données. Le premier contient le code postal et le nom de commune française. Le deuxième recèle la population et le code postal. On souhaite joindre les deux données pour disposer au sein d’un même tableau le code postal, le nom des communes et leur population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">code =</span> <span class="fu">c</span>(<span class="dv">29120</span>, <span class="dv">29200</span>, <span class="dv">29600</span>, <span class="dv">29160</span>),</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">commune =</span> <span class="fu">c</span>(<span class="st">"Pont-L'abbé"</span>, <span class="st">"Brest"</span>, <span class="st">"Morlaix"</span>, <span class="st">"Crozon"</span>)</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb74-5"><a href="#cb74-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dt1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune
+1 29120 Pont-L'abbé
+2 29200       Brest
+3 29600     Morlaix
+4 29160      Crozon</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">code =</span> <span class="fu">c</span>(<span class="dv">29120</span>, <span class="dv">29200</span>, <span class="dv">29600</span>, <span class="dv">29880</span>),</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">pop =</span> <span class="fu">c</span>(<span class="dv">140993</span>, <span class="dv">8403</span>, <span class="dv">15220</span>, <span class="dv">6719</span>)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dt2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code    pop
+1 29120 140993
+2 29200   8403
+3 29600  15220
+4 29880   6719</code></pre>
+</div>
+</div>
+<p>Pour effectuer une jointure, il faut disposer d’une variable commune entre les deux tableaux. Dans notre cas, il s’agit de la variable <code>code</code>. On peut alors effectuer quatre jointure différentes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>) <span class="co"># garde toutes les lignes de dt1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29200       Brest   8403
+3 29600     Morlaix  15220
+4 29160      Crozon     NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>) <span class="co"># garde toutes les lignes de dt2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29200       Brest   8403
+3 29600     Morlaix  15220
+4 29880        &lt;NA&gt;   6719</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>) <span class="co"># garde uniquement les codes communs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29200       Brest   8403
+3 29600     Morlaix  15220</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>) <span class="co"># garde toutes les lignes des deux</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29200       Brest   8403
+3 29600     Morlaix  15220
+4 29160      Crozon     NA
+5 29880        &lt;NA&gt;   6719</code></pre>
+</div>
+</div>
+<p>Au quotidien, on emploie le plus souvent le <code>left_join()</code>.</p>
+<p>Souvent, on <strong>dispose de la même variable dans deux jeux de données mais nommée différemment</strong>. Dans ce cas soit :</p>
+<ol type="1">
+<li>On renomme la variable dans un des tableaux puis on joint normalement ;</li>
+<li>On change l’argument <code>by</code> par <code>by = c("var_dt1" = "var_dt2")</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="base R">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+base R
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>En base R, on utilise <code>merge()</code> avec différents paramètres pour obtenir le même résultat :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="co"># left join</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29160      Crozon     NA
+3 29200       Brest   8403
+4 29600     Morlaix  15220</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>) <span class="co"># right join</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29200       Brest   8403
+3 29600     Morlaix  15220
+4 29880        &lt;NA&gt;   6719</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>) <span class="co"># inner join (par défaut)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29200       Brest   8403
+3 29600     Morlaix  15220</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(dt1, dt2, <span class="at">by =</span> <span class="st">"code"</span>, <span class="at">all =</span> <span class="cn">TRUE</span>) <span class="co"># full join</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   code     commune    pop
+1 29120 Pont-L'abbé 140993
+2 29160      Crozon     NA
+3 29200       Brest   8403
+4 29600     Morlaix  15220
+5 29880        &lt;NA&gt;   6719</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="manipulation-de-matrice" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="manipulation-de-matrice"><span class="header-section-number">4.2</span> Manipulation de matrice</h2>
+<p>Bien que les <code>data.frame</code> (et objets associés) soit les objets les plus courants que vous aurez à traiter, il arrive que l’on se retrouve à traiter des matrices (<code>matrix</code>). Ces objets, plus simples dans leur structure que les Dataframe, sont souvent utilisés pour optimiser des traitements.</p>
+<section id="les-bases-des-matrices-sous-r" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="les-bases-des-matrices-sous-r"><span class="header-section-number">4.2.1</span> Les bases des matrices sous R</h3>
+<section id="création-de-matrices" class="level4" data-number="4.2.1.1">
+<h4 data-number="4.2.1.1" class="anchored" data-anchor-id="création-de-matrices"><span class="header-section-number">4.2.1.1</span> Création de matrices</h4>
+<p>On peut créer une matrice avec la fonction <code>matrix()</code> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d'une matrice 3x3 remplie par colonnes</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut aussi remplir par lignes</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9</code></pre>
+</div>
+</div>
+</section>
+<section id="accès-aux-éléments" class="level4" data-number="4.2.1.2">
+<h4 data-number="4.2.1.2" class="anchored" data-anchor-id="accès-aux-éléments"><span class="header-section-number">4.2.1.2</span> Accès aux éléments</h4>
+<p>On peut accéder aux éléments de la matrice de la même façon que dans un <code>dataframe</code> en utilisant l’indice des lignes et des colonnes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># Élément de la 2e ligne, 3e colonne</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">1</span>, ] <span class="co"># 1ère ligne complète</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>m1[, <span class="dv">2</span>] <span class="co"># 2e colonne complète</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5 6</code></pre>
+</div>
+</div>
+<p>Si les lignes et/ou les colonnes sont nommées, on peut également utiliser les noms pour retrouver les valeurs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m1) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"c"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(m1) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"r"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>m1[<span class="st">"r1"</span>, <span class="st">"c3"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
+<section id="opérations-sur-les-matrices" class="level4" data-number="4.2.1.3">
+<h4 data-number="4.2.1.3" class="anchored" data-anchor-id="opérations-sur-les-matrices"><span class="header-section-number">4.2.1.3</span> Opérations sur les matrices</h4>
+<p>Les opérations arithmétiques sont vectorisées.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">+</span> <span class="dv">10</span> <span class="co"># Ajout d'une constante</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   c1 c2 c3
+r1 11 14 17
+r2 12 15 18
+r3 13 16 19</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">*</span> <span class="dv">2</span>  <span class="co"># Multiplication élément par élément</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   c1 c2 c3
+r1  2  8 14
+r2  4 10 16
+r3  6 12 18</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">^</span> <span class="dv">2</span>  <span class="co"># Carré de chaque élément</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   c1 c2 c3
+r1  1 16 49
+r2  4 25 64
+r3  9 36 81</code></pre>
+</div>
+</div>
+<p>Pour les multiplications matricielles</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">*</span> m2 <span class="co"># produit de hadamard (élément par élément)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   c1 c2 c3
+r1  1  8 21
+r2  8 25 48
+r3 21 48 81</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">%*%</span> m2 <span class="co"># produit scalaire (dot product)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   [,1] [,2] [,3]
+r1   66   78   90
+r2   78   93  108
+r3   90  108  126</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">1</span>, ] <span class="sc">%o%</span> m1[<span class="dv">2</span>, ] <span class="co"># produit extérieur (outer product)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   c1 c2 c3
+c1  2  5  8
+c2  8 20 32
+c3 14 35 56</code></pre>
+</div>
+</div>
+<p>Il est également possible de calculer des statistiques pour les lignes et les colonnes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>r1 r2 r3 
+12 15 18 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>r1 r2 r3 
+ 4  5  6 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c1 c2 c3 
+ 6 15 24 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c1 c2 c3 
+ 2  5  8 </code></pre>
+</div>
+</div>
+</section>
+<section id="autres-opérations" class="level4" data-number="4.2.1.4">
+<h4 data-number="4.2.1.4" class="anchored" data-anchor-id="autres-opérations"><span class="header-section-number">4.2.1.4</span> Autres opérations</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(m1) <span class="co"># Transposée</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   r1 r2 r3
+c1  1  2  3
+c2  4  5  6
+c3  7  8  9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(m1) <span class="co"># Déterminant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(m1) <span class="co"># Diagonale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 5 9</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="traitement-de-chaîne-de-caractères" class="level2 page-columns page-full" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="traitement-de-chaîne-de-caractères"><span class="header-section-number">4.3</span> Traitement de chaîne de caractères</h2>
+<p>Références :</p>
+<ul>
+<li><a href="https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html">Le chapitre</a> les chaînes de caractères de guide-R (Larmarange, 2025)</li>
+</ul>
+<section id="sec-concat" class="level3 page-columns page-full" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="sec-concat"><span class="header-section-number">4.3.1</span> Chercher/remplacer</h3>
+<p>Pour chercher remplacer dans une chaîne de caractère (variable ou vecteur), on utiliser la fonction de base <code>gsub()</code> ou la fonction <code>stringr::str_replace()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avec une chaîne de caractère</span></span>
+<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"Une phras mal orthographié"</span></span>
+<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"phras"</span>, <span class="st">"phrase"</span>)</span>
+<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"orthographié"</span>, <span class="st">"orthographiée"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Une phrase mal orthographiée"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avec un vecteur</span></span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Puie"</span>, <span class="st">"pluie"</span>, <span class="st">"ORag_"</span>, <span class="st">"Orage"</span>)</span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"Puie"</span>, <span class="st">"pluie"</span>)</span>
+<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"ORag_"</span>, <span class="st">"orage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "pluie" "pluie" "orage" "Orage"</code></pre>
+</div>
+</div>
+<p>Tout l’intérêt de passer par un langage de programmation est de pouvoir automatiser au maximum le remplacement des chaînes de caractère. Pour cela, on utilise les <a href="https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re">expressions régulières</a> (on dira plutôt regex). Ces dernières permettent d’identifier efficacement des schémas dans des chaînes de caractères. Imaginons que l’on souhaite supprimer tous les espaces qui sont placés au début d’une chaîne de caractère dans un vecteur :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>, <span class="st">" Michel Legrand"</span>, <span class="st">" Glenn Gould"</span>)</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Quatre valeur unique alors qu'on souhaite en avoir 2.</span></span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Michel Legrand"  "Glenn Gould"     " Michel Legrand" " Glenn Gould"   </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer les espaces situés au début de la chaîne de caractère</span></span>
+<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"^ "</span>, <span class="st">""</span>)</span>
+<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Michel Legrand" "Glenn Gould"   </code></pre>
+</div>
+</div>
+<p>On peut également mouvoir des bouts de chaînes en utilisant des groupes. Supposons que l’on veuille passer les noms avant les prénoms :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>, <span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>)</span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"^(.*(?= )) (.*$)"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">2 </span><span class="sc">\\</span><span class="st">1"</span>, <span class="at">perl =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Legrand Michel" "Gould Glenn"    "Legrand Michel" "Gould Glenn"   </code></pre>
+</div>
+</div>
+<p>Les expressions régulières ne sont pas forcément facile à manipuler mais quand on commence à les prendre en main on gagne un temps fou. Vous pouvez vous renseigner ici.</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="./figures/regex-meme.jpg" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">Quand vous commencez à maitriser un peu les regex</figcaption>
+</figure>
+</div>
+</section>
+<section id="sec-concat" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="sec-concat"><span class="header-section-number">4.3.2</span> Concaténation</h3>
+<p>Pour concaténer deux chaînes de caractères :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>str1 <span class="ot">&lt;-</span> <span class="st">"un chêne"</span></span>
+<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a>str2 <span class="ot">&lt;-</span> <span class="st">"vouvre"</span></span>
+<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-6"><a href="#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 1: paste() et paste0()</span></span>
+<span id="cb142-7"><a href="#cb142-7" aria-hidden="true" tabindex="-1"></a>conc1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(str1, str2) <span class="co"># espace par défaut entre les deux chaînes</span></span>
+<span id="cb142-8"><a href="#cb142-8" aria-hidden="true" tabindex="-1"></a>conc2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(str1, <span class="st">" "</span>, str2)</span>
+<span id="cb142-9"><a href="#cb142-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-10"><a href="#cb142-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 2: sprintf()</span></span>
+<span id="cb142-11"><a href="#cb142-11" aria-hidden="true" tabindex="-1"></a>conc3 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%s %s"</span>, str1, str2)</span>
+<span id="cb142-12"><a href="#cb142-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-13"><a href="#cb142-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 3: glue()</span></span>
+<span id="cb142-14"><a href="#cb142-14" aria-hidden="true" tabindex="-1"></a>conc4 <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">"{str1} {str2}"</span>)</span>
+<span id="cb142-15"><a href="#cb142-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-16"><a href="#cb142-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(conc4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>un chêne vouvre</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">c</span>(conc1, conc2, conc3) <span class="sc">==</span> conc4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><code>glue()</code> est la méthode la plus moderne, elle est à privilégier.</p>
+</section>
+<section id="tableau-de-contingence" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="tableau-de-contingence"><span class="header-section-number">4.3.3</span> Tableau de contingence</h3>
+<p>Pour calculer un tableau de contingence sous <code>R</code>, on utilise la fonction <code>table()</code> avec les deux vecteurs que l’on souhaite analyser.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(penguins<span class="sc">$</span>species, penguins<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           
+            Biscoe Dream Torgersen
+  Adelie        44    55        47
+  Chinstrap      0    68         0
+  Gentoo       119     0         0</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../ressources/algorithmique/structure_controle.html" class="pagination-link" aria-label="Les structures de contrôle">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../ressources/stats/stats.html" class="pagination-link" aria-label="Statistiques">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Statistiques</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

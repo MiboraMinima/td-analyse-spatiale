@@ -1,0 +1,739 @@
+# Introduction à R et RStudio
+
+Comme dans la majorité des langages interprétés, quand on installe `R`, une
+[console
+interactive](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
+est installée en même temps. Vous pouvez y accéder en cherchant R dans vos
+programmes ou en effectuant les opérations `ctrl+R` (ouvrir l'exécuteur de
+commmande) > `R` > `enter`. C'est comme quand vous ouvrez un terminal
+`powershell` sous Windows, sauf qu'au lieu d'écrire du `powershell`, vous
+écrivez du `R`.
+
+Dans l'absolu, on pourrait écrire nos scripts dans la console directement mais
+ce serait très peu pratique. Aussi, quand on code, on utilise un **Environnement
+de Développement** (*IDE* en Anglais), et ce, quelque soit le langage que l'on
+utilise. Ces derniers intègrent des tas de fonctionnalités pour vous simplifier
+la vie (colorisation du code, diagnostique automatique des erreurs de syntaxe,
+outils intégrés de visualisation, etc.). Il y en a beaucoup. Certains sont
+génériques (ils supportent de nombreux langages) comme [Visual Studio
+Code](https://code.visualstudio.com/) ou spécifique, destiné à un seul langage,
+comme c'est le cas de [RStudio](https://posit.co/download/rstudio-desktop/) pour
+`R`.
+
+## RStudio
+
+Il s'agit de l'IDE le plus utilisé pour faire du `R`, et de très très loin. Il
+est *open-source* et fréquemment mis à jour.
+
+### Création d'un projet
+
+#### Organiser son dossier de travail {#sec-orga-files}
+
+La première chose à faire quand on commence un projet, quelqu'il soit, c'est de
+se **créer un espace de travail cohérent** ou vous vous retrouverez facilement.
+Ce dernier doit être le plus généralisable possible, de telle sorte à ce que
+vous puissier le réemployer pour d'autres projets. De cette façon, vous ne serez
+plus jamais perdus dans vos fichiers et vous **gagnerez un temps considérable**.
+Pour de l'analyse/traitement de données, je vous conseil la configuration
+suivante :
+
+- 📁 `./data/`: là où vous stockerez vos données
+    - 📁 `./data/src/`: Les données sources
+    - 📁 `./data/res/`: Les données créées par vos scripts
+- 📁 `./docs/`: là où vous enregistrerez vos documents words par exemple.
+- 📁 `./figures/`: là où vous enregistrerez vos graphs, cartes, ect.
+- 📁 `./scripts/`: vos scripts R
+
+Le `./` fait référence à la **racine** du dossier : le chemin du dossier dans
+lequel les dossiers ci-dessus sont enregistrés. Cette racine peut être située où
+vous le souhaitez sur votre machine.
+
+:::{.callout-important title="Bien nommer ses fichiers"}
+
+Pourquoi est-ce important ?
+
+- Pour ne pas vous demander à chaque fois pendant trois plombes à comment vous
+allez écrire un nom de fichier ou de dossier.
+- Encore une fois pour avoir une organisation nickel.
+- Pour éviter de vous retrouver avec des erreurs liés à des espaces ou des
+caractères spéciaux.
+
+Aussi, je vous conseil d'adopter une **convention d'écriture**. Il y en a plein,
+vous pouvez inventer la votre tant qu'elle est cohérente. Il est notamment
+important de proscrire tous les signes diacritiques (é, è, ç, à, etc.), les
+espaces et les signes (/, %, $, etc.). Je vous conseil la convention qui
+consiste à n'écrire qu'en miniscule, sans caractères spéciaux et en replaçant les
+espaces par des underscores (`_`).
+
+Par exemple :
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+**Bien**
+```
+td0_introduction_r.R
+rendu_20250506_analyse_spatiale.R
+graph_epervier.png
+```
+:::
+
+::: {.column width="50%"}
+**Naze**
+```
+TD 0 Introduction à R .R
+Rendu_2025/05/06_AnalyseSpatiale.R
+Graphique épervier.png
+```
+:::
+::::::::::::::
+:::
+
+#### Créer un projet RStudio
+
+Une fois que vous avez créé votre espace de travail dans votre explorateur de
+fichier, procédez aux opérations suivantes pour créer un projet RStudio.
+
+::: {.callout-tip title="Instructions"}
+1. Ouvrez RStudio
+2. Créez un nouveau projet: `Fichier` > `Nouveau projet` > `Répertoire existant`.
+Indiquez le dossier que vous avez créé précédemment.
+3. Créez un nouveau script `R` : `Fichier` > `Nouveau fichier` > `Script R`.
+   Enregistrez le (`ctrl+s`).
+:::
+
+### L'interface
+
+![Interface de RStudio](figures/rstud_interface.png){#fig-rstud_inter}
+
+L'interface fonctionne avec des panneaux que l'on peut changer au besoin dans
+les préférences du logiciel[^0_rstud_panes]. Par défaut, on a l'organisation de la
+@fig-rstud_inter.
+
+[^0_rstud_panes]: `Affichage`>`Volet`>`Options de mise en page des volets`
+
+- **A)**:
+    - Dans ce panneau, vous avez vos scripts `R`. **C'est ici que vous
+    écrirez.**
+- **B)**:
+    - `Console`: La console `R`. La même console intéractive que quand on ouvre
+    `R` sans RStudio.
+    - `Terminal`: Le terminal de votre machine. Sous Windows du `???`.
+    - `Travaux`: Des *jobs* que vous faites tourner en arrière-plan.
+- **C)**:
+    - `Environnement`: La liste des objets de la session courante.
+    - `Historique`: L'historique des commandes introduites dans la console `R`.
+    - `Connexions`: Connexions à des bases de données externes.
+    - `Tutoriel`: tutos
+- **D)**:
+    - `Fichiers`: Un explorateur de fichier (comme l'explorateur de fichier windows)
+    - `Graphiques`: Un espace où les graphs seront affichés.
+    - `Paquets`: Liste de packages, vous pouvez les installer depuis cet
+    onglet.
+    - `Aide`: Onglet où sont affichés les documentations des fonctions que vous
+    utilisez.
+    - `Visualisateur`: Onglet d'affichage des graphs 3D, des pages webs, etc.
+    - `Présentation`: Onglet dédié aux présentations.
+
+Il existe d'autres panneaux que l'on peut rajouter à l'interface au besoin. Vous
+aurez surtout besoin de la console, de l'environnement, de l'onglet graphique et
+aide.
+
+## Qu'est-ce qu'y fait ? Y relance de 5 ?
+
+Pour comprendre les bases de R et la programmation de manière générale, simulons
+une bonne grosse partie de roulette française des famllies entre Bach, Taylor
+Swift et Charlie Parker.
+
+### Création des joueurs
+
+Pour qu'il y ait jeu, il faut qu'il y ai des joueurs. Donc on commence par créer
+nos béligérants. Pour cela, on crée un objet de type `list` pour chacun d'eux en
+leur attribuant un pécule également sous forme de `list`.
+
+```{r}
+gaziers <- list(
+    "Taylor Swift" = list("argent" = 30),
+    "Bach" = list("argent" = 10),
+    "Charlie Parker" = list("argent" = 5)
+)
+```
+
+:::{.callout-note appearance="simple" title="Explications"}
+Pour assigner une valeur sous `R`, on utilise `<-` (ou `=`, mais ce n'est pas la
+convention).
+
+On peut afficher la liste avec la fonction `print()` ou simplement en entrant le
+nom de la liste.
+
+```{r}
+print(gaziers)
+```
+
+La liste créée est dite "nommée" car chaque item possède un nom (par-ex. "Taylor
+Swift" ou "argent"). On peut retrouver les noms en utilisant la fonction
+`names()`.
+
+```{r}
+names(gaziers)
+```
+
+Pour accéder aux différents items de la liste, on peut utiliser soit le `$` soit
+les `[[]]` avec le nom des joueurs.
+
+```{r}
+gaziers$Bach
+gaziers$Bach$argent
+
+gaziers[["Bach"]]
+gaziers[["Bach"]][["argent"]]
+```
+:::
+
+### Un tour en roulette française
+
+Ensuite, on définit les règles du jeu. On utilise une version simplifiée de la
+roulette française où, à chaque tour, chacun des joueurs mise sur un chiffre
+entre 0 et 36 et si le numéro qui sort est de la même parité (pair ou impair)
+que le numéro sur lequel ils ont misé, alors leur mise est doublée, sinon ils
+perdent leur mise.
+
+Pour commencer, fixons la mise minimale et maximale.
+
+```{r}
+# mise minimale
+MISE_MIN <- 1
+# mise maximale
+MISE_MAX <- 10
+```
+
+:::{.callout-note appearance="simple" title="Explications"}
+De nouveau, on utilise le `<-` pour assigner des valeurs à des objets. Les
+lignes commençant par `#` sont **des commentaires**. Ils sont extrêments
+importants car ils vous permettent d'écrire librement du texte dans un script
+sans qu'il soit interprété comme du code. Vous pouvez ainsi **documenter** votre
+code pour faciliter sa lecture par ceux qui le liront.
+:::
+
+Il nous faut maintenant définir en quoi consiste un tour de notre roulette
+française. Dans un premier temps, les joueurs misent et parient en fonction de
+l'argent disponible. Par exemple, pour "Bach" :
+
+```{r}
+# On récupère l'argent que possède Bach
+nom <- "Bach"
+argent <- gaziers[[nom]][["argent"]]
+
+# Sauter le joueur s’il n’a plus d’argent
+if (argent < MISE_MIN) {
+    # On indique à l'utilisateur que le joueur `nom` n'a plus d'argent
+    cat(nom, "n’a plus d’argent et ne peut pas jouer.\n")
+} else {
+    # Le joueur choisit un pari et une mise
+    pari <- sample(c("pair", "impair"), 1)
+    mise <- min(sample(MISE_MIN:MISE_MAX, 1), argent)
+
+    # On print le pari et la mise pour le joueur courant
+    cat(nom, "parie", mise, "€ sur", pari, "\n")
+}
+```
+
+:::{.callout-note appearance="simple" title="Explications"}
+Beaucoup de nouvelles choses de ce code. Les deux premières lignes exploitent la
+liste `gaziers` pour récupérer l'argent dont Bach dispose comme vu précédemment.
+Ensuite, on test si le joueur dispose d'une quantité d'argent suffisante pour
+jouer. Pour cela, on utilise une **structure de contrôle** de type alternative
+en `IF/ELSE` (SI/SINON). Il s'agit d'une des opérations les plus courante en
+**algorithmique**. Il s'agit d'effectuer une opération si (IF) une condition est
+satisfaite ou d'en faire une autre sinon (ELSE). En l'occurence, si la somme
+d'argent est strictement inférieure à la mise minimum définie plus haut
+(`MISE_MIN`), alors on indique à l'utilisateur que le joueur `nom` (Bach ici)
+n'a plus assez d'argent pour jouer et on ne fait rien. Sinon, on choisit
+aléatoirement le pari (pair ou impair) au moyen de la **fonction** `sample()`.
+La mise est également choisie aléatoirement dans un interval défini par la mise
+minimale et la mise maximale (`MISE_MIN:MISE_MAX`) ; on utilise une combinaison
+de la fonction `sample()` et `min()`. Les fonctions sont omniprésentes en
+programmation. À partir d'**arguments** (ce qui se trouve entre parenthèse)
+elles exécutent du code "pré-enregistré". On peut utiliser des fonctions
+pré-construites comme c'est le cas de la fonction `sample()` ou des fonctions
+que l'on aura définie soit-même. Vous pouvez trouver une description des
+fonctions sous `R` en rentrant un point d'interogation devant le nom de la
+fonction dans la console : `?sample`.
+
+Regardons dans le détail ce qui se passe pour la ligne qui définie la mise. Pour
+définir l'interval dans lequel on choisira la mise, on utilise l'opérateur de
+séquence `:`. À partir de deux valeurs numériques, il construit une séquence
+allant du premier au deuxième de un en un.
+
+```{r}
+print(2:5)
+print(MISE_MIN:MISE_MAX)
+```
+
+L'objet qui est retourné est un **vecteur** : un ensemble de valeurs du même
+type. Un vecteur est défini manuellement via la fonction `c()` (*combine*).
+
+```{r}
+# Vecteur de type numeric
+vector_num <- c(1, 2, 4, 5, 6)
+print(vector_num)
+print(class(vector_num))
+
+# Vecteur de type character
+vector_str <- c("Pair", "Impair")
+print(vector_str)
+print(class(vector_str))
+```
+
+Une à partir de l'interval, la fonction `sample()` choisi une valeur
+aléatoirement dans le vecteur. Le problème c'est que la somme choisie peut être
+supérieure à l'argent dont le joueur dispose. Dans ce cadre, on utilise une la
+fonction `min()` (pour *minimum*) pour retenir l'argent total dont dispose le
+joueur si la mise aléatoirement choisie lui est supérieure.
+
+```{r}
+# Exemple pour une mise supérieure à l'argent dont dispose le joueur
+mise_aleatoire <- sample(3:10, 1)
+argent_test <- 2
+min(mise_aleatoire, argent_test)
+```
+
+Notez que l'on peut mettre une fonction à l'intérieur d'une autre. Cela permet
+de simplifier l'écriture.
+
+```{r}
+# Cela revient au même que de faire
+min(sample(3:10, 1), argent_test)
+```
+:::
+
+Il nous effectuer cette opération de mise et pari pour nos trois joueurs. On
+pourrait réécrire le code trois fois en changeant le nom des variables pour
+chaque joueur mais ce serait très fastidieux. Aussi, on va tirer parti d'une
+autre **structure de contrôle** qui permet de répéter des opérations : une
+**boucle** (*loop*). Une boucle dit : POUR CHAQUE élément DANS un ensemble :
+FAIT une opération impliquant l'élément. On écrit, en pseudo code :
+
+```
+POUR CHAQUE element DANS emsemble:
+FAIT
+    operation(element)
+FIN
+```
+
+Par exemple :
+
+```
+fruits = (pomme, banane, mandarine)
+POUR CHAQUE fruit DANS fruits:
+FAIT
+    affiche(fruit)
+FIN
+```
+
+Sous `R`, on écrira :
+
+```{r}
+fruits <- c("pomme", "banane", "mandarine")
+for (fruit in fruits) {
+    cat(fruit, "\n")
+}
+```
+
+Dans notre exemple, on a :
+
+```
+POUR CHAQUE joueur DANS gaziers:
+FAIT
+    mise et pari
+FIN
+```
+
+Aussi, on réécrit notre de code de mise et pari de la façon suivante :
+
+```{r}
+# Chaque joueur joue
+pari_mise <- list()
+for (joueur in names(gaziers)) {
+    # On récupère l'argent dont dispose le joueur
+    argent <- gaziers[[joueur]][["argent"]]
+
+    # Sauter le joueur s’il n’a plus d’argent
+    if (argent < MISE_MIN) {
+        cat(joueur, "n’a plus d’argent et ne peut pas jouer.\n")
+        next
+    }
+
+    # Le joueur choisit un pari et une mise
+    pari <- sample(c("pair", "impair"), 1)
+    mise <- min(sample(MISE_MIN:MISE_MAX, 1), argent)
+
+    # On print le pari et la mise pour le joueur courant
+    cat(joueur, "parie", mise, "€ sur", pari, "\n")
+
+    # On enregistre le pari et la mise dans la liste
+    pari_mise[[joueur]][["pari"]] <- pari
+    pari_mise[[joueur]][["mise"]] <- mise
+}
+```
+
+:::{.callout-note appearance="simple" title="Explications"}
+Dans un premier temps, on a **instantie** une liste vide `pari_mise` qui
+permettra d'enregistrer les mises et paries et de chaque joueur.
+
+Ensuite, on construit la boucle. Pour chaque joueur, on récupère l'argent
+correspondant et on réécrit le code précédent. On change le IF/ELSE en disant
+que si la le joueur n'as pas assez d'argent pour jouer, alors, on arrête la
+boucle à cet endroit pour ce joueur et on passe directement au prochain. Pour
+cela on utilise le mot clé `next`. À la fin de la boucle, on enregistre les
+paris et les mises dans la liste instantiée avant la boucle.
+:::
+
+On peut simplifier l'écriture en construisant une **fonction** pour notre
+opération de mise et parie. Cela va nous permettre d'épurer le code et
+d'augmenter sa **modularité**. En `R`, pour constuire une fonction, on utilise
+la syntaxe suivante :
+
+```{r}
+my_fun <- function(arg1, arg2, type = "somme") {
+    # Corps de la fonction
+    if (type == "somme") {
+        resultat <- arg1 + arg2
+    } else if (type == "difference") {
+        resultat <- arg1 - arg2
+    } else {
+        stop(type, " est une opération inconnue")
+    }
+    return(resultat)
+}
+my_fun(1, 2, type = "difference")
+```
+
+Les arguments que prendrons la fonction sont données entre parenthèses. Si on
+assigne une valeur à un des arguments alors il n'est pas obligatoire et possède
+une valeur par défaut.
+
+Pour notre fonction de mise et pari on peut écrire :
+
+```{r}
+mise_pari <- function(argent, mise_min, mise_max, nom) {
+    # Retourner une valeur NULL si le joueur n'a pas assez d'argent pour jouer
+    if (argent < mise_min) {
+        cat(nom, "n’a plus d’argent et ne peut pas jouer.\n")
+        return(NULL)
+    } else {
+        # Le joueur choisit un pari et une mise
+        pari <- sample(c("pair", "impair"), 1)
+        mise <- min(sample(mise_min:mise_max, 1), argent)
+
+        # On print le pari et la mise pour le joueur courant
+        cat(nom, "parie", mise, "€ sur", pari, "\n")
+    }
+    return(list(pari = pari, mise = mise))
+}
+```
+
+On peut alors réécrire notre boucle comme suit :
+
+```{r}
+pari_mise <- list()
+for (nom in names(gaziers)) {
+    argent <- gaziers[[nom]][["argent"]]
+
+    # Effectuer la mise et le parie
+    mise_pari_vec <- mise_pari(argent, MISE_MIN, MISE_MAX, nom)
+
+    # Sauter le joueur s’il n’a plus d’argent
+    if (is.null(mise_pari_vec)) next
+
+    # Enregistrer les mises et paris
+    pari_mise[[nom]][["pari"]] <- mise_pari_vec[["pari"]]
+    pari_mise[[nom]][["mise"]] <- mise_pari_vec[["mise"]]
+}
+```
+
+À ce stade, vous avez tous les éléments de la programmation basique.
+
+Reprenons le fil de notre simulation. Une fois que les joueurs on pariés et
+misés, le croupier dit "Rien de va plus !" et la bille s'arrête sur le résultat
+:
+
+```{r}
+# Tirage du numéro
+cat("\n🎡 Rien ne vas plus !")
+
+numero <- sample(0:36, 1)
+cat("\n🎡 Le numéro tiré est :", numero, "\n")
+
+# Déterminer la couleur du résultat
+if (numero == 0) {
+    resultat <- "zero"
+} else if (numero %% 2 == 0) {
+    resultat <- "pair"
+} else {
+    resultat <- "impair"
+}
+```
+
+:::{.callout-note appearance="simple" title="Explications"}
+Le numero tiré est sélectionné aléatoirement. À partir de ce numéro, on défini
+le résultat comme "zero", "pair" ou "impair" au moyen d'un IF/ELSE. L'opérateur
+`%%` est un [modulo](https://fr.wikipedia.org/wiki/Modulo_(op%C3%A9ration)){target="_blank"}.
+:::
+
+Ensuite, on compart les paris des joueurs au résultat et on met à jour la solde
+des joueurs au regard des mises. On peut écrire une fonction pour cela :
+
+```{r}
+verif_pari_mise <- function(pari, mise, resultat, argent, nom) {
+    if (resultat == pari) {
+      argent_nouv <- argent + mise
+      cat("✅", nom, "gagne", mise, "€ ! Nouveau solde :", argent_nouv, "€\n")
+    } else if (resultat == "zero") {
+      # si le zéro sort, tout le monde perd sa mise
+      argent_nouv <- argent - mise
+      cat("💀 Zéro sorti !", nom, "perd", mise, "€ (reste :", argent_nouv, "€)\n")
+    } else {
+      argent_nouv <- argent - mise
+      cat("❌", nom, "perd", mise, "€ (reste :", argent_nouv, "€)\n")
+    }
+    return(argent_nouv)
+}
+```
+
+:::{.callout-note appearance="simple" title="Explications"}
+La fonction vérifie si le resultat correspond au pari. Si c'est le cas, alors la
+mise est ajoutée au solde existant, si le résultat est zéro ou que le résultat
+ne correspond pas au pari alors le joueur perd sa mise.
+:::
+
+De nouveau, on effectue cette opération chaque joueur, on utilise donc une
+boucle :
+
+```{r}
+for (nom in names(pari_mise)) {
+    # On récupère le pari, la mise et l'argent
+    pari <- pari_mise[[nom]][["pari"]]
+    mise <- pari_mise[[nom]][["mise"]]
+    argent <- gaziers[[nom]][["argent"]]
+
+    # On calcule le nouveau solde en affichant le résulat avec la fonction
+    # définie plus haut
+    nouveau_solde <- verif_pari_mise(pari, mise, resultat, argent, nom)
+
+    # On met à jour le solde
+    gaziers[[nom]][["argent"]] <- nouveau_solde
+}
+```
+
+Voilà, nous avons fini d'écrire notre script pour un tour de roulette française
+avec nos trois joueurs. Écrivons une fonction qui encapsule l'ensemble de ce
+tour :
+
+```{r}
+tour_roulette <- function(joueurs, mise_min, mise_max) {
+    cat("\n🎡 Faites vos jeux !\n")
+
+    # Chaque joueur joue
+    pari_mise <- list()
+    for (nom in names(gaziers)) {
+        argent <- gaziers[[nom]][["argent"]]
+
+        # Effectuer la mise et le parie
+        mise_pari_vec <- mise_pari(argent, mise_min, mise_max, nom)
+
+        # Sauter le joueur s’il n’a plus d’argent
+        if (is.null(mise_pari_vec)) next
+
+        pari_mise[[nom]][["pari"]] <- mise_pari_vec[["pari"]]
+        pari_mise[[nom]][["mise"]] <- mise_pari_vec[["mise"]]
+    }
+
+    # Tirage du numéro
+    cat("\n🎡 Rien ne vas plus !")
+
+    numero <- sample(0:36, 1)
+    cat("\n🎡 Le numéro tiré est :", numero, "\n")
+
+    # Déterminer la couleur du résultat
+    if (numero == 0) {
+        resultat <- "zero"
+    } else if (numero %% 2 == 0) {
+        resultat <- "pair"
+    } else {
+        resultat <- "impair"
+    }
+
+    for (nom in names(pari_mise)) {
+        # On récupère le pari, la mise et l'argent
+        pari <- pari_mise[[nom]][["pari"]]
+        mise <- pari_mise[[nom]][["mise"]]
+        argent <- gaziers[[nom]][["argent"]]
+
+        # On calcule le nouveau solde en affichant le résulat avec la fonction
+        # définie plus haut
+        nouveau_solde <- verif_pari_mise(pari, mise, resultat, argent, nom)
+
+        # On met à jour le nouveau solde
+        gaziers[[nom]][["argent"]] <- nouveau_solde
+    }
+
+    return(gaziers)
+}
+```
+
+### Simuler la partie
+
+Il s'agit maintenant de faire tourner l'ensemble du code pour le nombre de tout
+défini au début de notre script (`NB_TOURS`) :
+
+```{r}
+NB_TOURS <- 5
+for (tour in 1:NB_TOURS) {
+  cat("\n================== TOUR", tour, "==================\n")
+  gaziers <- tour_roulette(gaziers, MISE_MIN, MISE_MAX)
+}
+```
+
+On peut alors donner le solde des difféntes joueurs à la fin de la partie :
+
+```{r}
+cat("\n💰 Résultats finaux :\n")
+for (nom in names(gaziers)) {
+  cat(nom, ":", gaziers[[nom]][["argent"]], "€\n")
+}
+```
+
+### Le script complet
+
+Voilà le script complet
+
+```{r}
+#| code-fold: true
+#| eval: false
+
+# Initialisation des joueurs
+gaziers <- list(
+    "Taylor Swift" = list("argent" = 30),
+    "Bach" = list("argent" = 10),
+    "Charlie Parker" = list("argent" = 5)
+)
+
+##############################################################
+# FONCTIONS
+##############################################################
+mise_pari <- function(argent, mise_min, mise_max, nom) {
+    # Sauter le joueur s’il n’a plus d’argent
+    if (argent < mise_min) {
+        cat(nom, "n’a plus d’argent et ne peut pas jouer.\n")
+        return(NULL)
+    } else {
+        # Le joueur choisit un pari et une mise
+        pari <- sample(c("pair", "impair"), 1)
+        mise <- min(sample(mise_min:mise_max, 1), argent)
+
+        # On print le pari et la mise pour le joueur courant
+        cat(nom, "parie", mise, "€ sur", pari, "\n")
+    }
+    return(list(pari = pari, mise = mise))
+}
+
+verif_pari_mise <- function(pari, mise, resultat, argent, nom) {
+    if (resultat == pari) {
+      argent_nouv <- argent + mise
+      cat("✅", nom, "gagne", mise, "€ ! Nouveau solde :", argent_nouv, "€\n")
+    } else if (resultat == "zero") {
+      # si le zéro sort, tout le monde perd sa mise
+      argent_nouv <- argent - mise
+      cat("💀 Zéro sorti !", nom, "perd", mise, "€ (reste :", argent_nouv, "€)\n")
+    } else {
+      argent_nouv <- argent - mise
+      cat("❌", nom, "perd", mise, "€ (reste :", argent_nouv, "€)\n")
+    }
+    return(argent_nouv)
+}
+
+tour_roulette <- function(joueurs, mise_min, mise_max) {
+    cat("\n🎡 Faites vos jeux !\n")
+
+    # Chaque joueur joue
+    pari_mise <- list()
+    for (nom in names(gaziers)) {
+        argent <- gaziers[[nom]][["argent"]]
+
+        # Effectuer la mise et le parie
+        mise_pari_vec <- mise_pari(argent, mise_min, mise_max, nom)
+
+        # Sauter le joueur s’il n’a plus d’argent
+        if (is.null(mise_pari_vec)) next
+
+        pari_mise[[nom]][["pari"]] <- mise_pari_vec[["pari"]]
+        pari_mise[[nom]][["mise"]] <- mise_pari_vec[["mise"]]
+    }
+
+    # Tirage du numéro
+    cat("\n🎡 Rien ne vas plus !")
+
+    numero <- sample(0:36, 1)
+    cat("\n🎡 Le numéro tiré est :", numero, "\n")
+
+    # Déterminer la couleur du résultat
+    if (numero == 0) {
+        resultat <- "zero"
+    } else if (numero %% 2 == 0) {
+        resultat <- "pair"
+    } else {
+        resultat <- "impair"
+    }
+
+    for (nom in names(pari_mise)) {
+        # On récupère le pari, la mise et l'argent
+        pari <- pari_mise[[nom]][["pari"]]
+        mise <- pari_mise[[nom]][["mise"]]
+        argent <- gaziers[[nom]][["argent"]]
+
+        # On calcule le nouveau solde en affichant le résulat avec la fonction
+        # définie plus haut
+        nouveau_solde <- verif_pari_mise(pari, mise, resultat, argent, nom)
+
+        # On met à jour le nouveau solde
+        gaziers[[nom]][["argent"]] <- nouveau_solde
+    }
+
+    return(gaziers)
+}
+
+##############################################################
+# PARAMÈTRES DE LA PARTIE
+##############################################################
+NB_TOURS <- 5        # nombre de tours à jouer
+MISE_MIN <- 1        # mise minimale
+MISE_MAX <- 10       # mise maximale
+set.seed(42)         # pour des résultats reproductibles
+
+##############################################################
+# SIMULATION
+##############################################################
+for (tour in 1:NB_TOURS) {
+  cat("\n================== TOUR", tour, "==================\n")
+  gaziers <- tour_roulette(gaziers, MISE_MIN, MISE_MAX)
+}
+
+##############################################################
+# RÉSULTATS FINAUX
+##############################################################
+cat("\n💰 Résultats finaux :\n")
+for (nom in names(gaziers)) {
+  cat(nom, ":", gaziers[[nom]][["argent"]], "€\n")
+}
+```
+
+
+### Références
+
+Cheat sheet :
+
+- [RStudio](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){target="_blank"}
+- [Base R](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf){target="_blank"}
+- [dplyr](https://thinkr.fr/pdf/dplyr-french-cheatsheet.pdf){target="_blank"}
+
+

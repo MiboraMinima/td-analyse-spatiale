@@ -1,0 +1,779 @@
+# Traitement de données sous R
+
+On fera surtout du `dplyr` dans la mesure où la syntaxe est plus simple à
+appréhender que le base R.
+
+Prenons un example avec le jeu de données `palmerpenguins`.
+
+```{r}
+data(package = 'palmerpenguins')
+head(penguins)
+```
+
+Il contient des informations sur trois espèces de manchots observées dans
+l’archipel de Palmer en Antarctique : Adelie, Chinstrap et Gentoo.
+
+## Manipulation de Data Frames {#sec-manip-df}
+
+Assurez-vous de bien comprendre la structure de données d'un Data Frame avant de
+lire cette section (*cf.* @sec-structure-df).
+
+### Lire et écrire des Data Frames {#sec-io-df}
+
+Pour lire des DF à partir de fichiers `csv`[^csv-nota], on utilise la fonction de `R` base
+`read.csv()` dont l'équivalent en `tydiverse` est la fonction `read_csv()` du
+package [`readr`](https://readr.tidyverse.org/). Je vous conseil d'utiliser la
+fonction `readr::read_csv()` car elle plus optimiser que la première.
+
+[^csv-nota]: On peut obtenir des DF à partir de fichiers autre que `csv`. Je me
+concentre sur ce format car il s'agit du plus courant. Si vous voulez lire des
+données à partir d'un fichier `xls`/`xlsw` vous pouvez utiliser le package
+[`read_excel`](https://readxl.tidyverse.org/). Je ne vous le conseil pas car les
+fichiers excel sont souvent très mal mis en forme en plus de contenir des
+feuilles. Il vaut mieux en extraire des `csv` propres.
+
+::: {.callout-note title="Le format `csv`"}
+
+Le format `csv` est un des formats les plus utilisé pour stocker des données
+tabulaires en data science. `csv` signifie *Comma Separated Values* (*comma*
+signifie virgule). Donc, dans la majorité des cas, un fichier `csv` sera de la
+forme :
+
+```
+var_1,var_2
+12,0.9
+2,0.25
+4,0.78
+```
+
+En Europe, on utilise souvent la virgule pour représenter le séparateur décimal.
+Le séparateur de valeurs du fichier `csv` devient alors le `;`. Le fichier
+devient alors :
+
+```
+var_1;var_2
+12;0,9
+2;0,25
+4;0,78
+```
+
+Vous trouvez aussi des fichiers `csv` séparé par des tabulations (on parle de
+`tsv`. C'est surtout le cas pour les fichiers contenants du texte long car la
+virgule et le point virgule peuvent se rencontrer dans le texte.
+
+:::
+
+::: {.callout-warning title="Attention"}
+
+Un fichier `csv` ne doit jamais avoir des informations avant la première
+ligne qui indique le nom des colonnes. Par exemple, le fichier suivant ne sera
+pas lu correctement.
+
+```
+Fichier écrit le 2025/05/02.
+vars_1 : longueur (cm)
+vars_2 : poid (g)
+var_1;var_2
+12;0,9
+2;0,25
+4;0,78
+```
+
+Cela veut dire qu'**un fichier `csv` ne doit contenir que les données** et
+jamais les métadonnées ou autres informations. Bien évidemment, si vous
+écrivez des données et que vous voulez les partager il faut toujours écrire les
+métadonnées, mais vous les écrirez dans un fichier séparé.
+
+:::
+
+Avant de charger un fichier `csv`, il faut connaître le format employé : quel
+séparateur de valeur et quel séparateur de décimal est employé. Pour cela, il
+suffit d'ouvrir d'inspecter le fichier. Vous pouvez tout simplement essayer de
+l'ouvrir sous `R` et regarder le résultat. Sinon, vous pouvez ouvrir le fichier
+dans un logiciel externe (par exemple avec le notepad comme les `csv` sont des
+fichiers textuelles brutes).
+
+| Type de fichier | Séparateur de colonnes | Séparateur décimal | Fonction readr |
+|-----------------|------------------------|--------------------|----------------|
+| CSV standard    | `,`                    | `.`                | `read_csv()`  |
+| CSV2 (Europe)   | `;`                    | `,`                | `read_csv2()` |
+| TSV             | `\t` (tabulation)      | `.`                | `read_tsv()`  |
+| ALL             | argument `delim`       | argument `locale` (`decimal_mark`)    | `read_delim()`|
+
+Par exemple :
+
+```{r}
+path <- "data/src/iris_brest.csv"
+df <- readr::read_csv(path)
+```
+
+La fonction `readr::read_csv()` renvoie directement des informations sur la
+classe des colonnes. Cela vous permet de voir rapidement si elles sont bien
+interprétées.
+
+**Pour écrire un fichier** `csv`, vous pouvez utisez la fonction
+`readr::write_csv()`. Elle prend un `data.frame` en entrée et le chemin vers le
+fichier de destination. Je vous conseil d'utiliser la fonction avec les
+arguments par défaut, donc avec un séparateur virgule et un séparateur de
+décimale point. De cette façon, vous aurez toujours le format de `csv` et vous
+vous y retrouverez plus facilement.
+
+```{r}
+#| eval: false
+
+output_path <- "data/res/output.csv"
+readr::write_csv(df_res, output_path)
+```
+
+::: {.callout-note title="Lire et écrire des données spatiales vectorielles"}
+
+Quand on travail avec des données spatiales vectorielles, ce qui est le cas dans
+ce cours, on utilise une variante spatiale du Data frame qui est un objet `sf`
+issu du package [`sf`](https://r-spatial.github.io/sf/).
+
+Avec `sf`, on peut lire tous les types de fichiers spatiaux vectoriels (par-ex,
+shapefile, geopackage, etc.). On utilise la fonction `read_sf()`.
+
+```{r}
+#| warning: false
+
+# Lecture d'un geopackage
+path <- "data/src/iris_29.gpkg"
+iris <- sf::read_sf(path)
+class(iris)
+```
+
+Si vous voulez lire un shapefile, vous indiquerez le chemin du fichier `.shp`,
+`sf` fera le lien avec les autres fichiers.
+
+On écrit des données spatiales à partir d'un objet `sf` avec la fonction
+`write_sf()`. La fonction "devine" le format attendu à partir de l'extension que
+vous donnez au fichier :
+
+```{r}
+#| eval: false
+
+# Écriture d'un fichier geopackage
+path <- "data/res/output.gpkg"
+sf::write_sf(sf_res, path)
+```
+
+:::
+
+### Un framework pour la manipulation de données : `dplyr`
+
+`dplyr` est un framework du tidyverse en R conçu pour faciliter la manipulation de
+données de manière claire, cohérente et efficace. Il repose sur une syntaxe
+intuitive et un petit ensemble de verbes cohérents qui correspondent aux
+opérations les plus courantes en analyse de données, comme :
+
+- `select()` pour choisir des colonnes,
+- `filter()` pour filtrer les lignes,
+- `mutate()` pour créer ou modifier des variables,
+- `summarise()` pour résumer les données,
+- `arrange()` pour trier les observations,
+- et `group_by()` pour travailler par groupes.
+
+Ces verbes peuvent être reliés les uns aux autres par un **pipe** (`|>` ou
+`%>%`). Ce dernier prend le résultat de la fonction précédente comme tableau
+d'enttrée. Par exemple :
+
+```{r}
+penguins |>
+    select(island, species, bill_len, year) |>
+    filter(year > 2007) |>
+    group_by(island, species) |>
+    summarise(mean_bill_len = mean(bill_len, na.rm = TRUE))
+```
+
+### Sélectionner, filtrer, modifier et trier
+
+#### Sélectionner des données
+
+Pour sélectionner une variable spécifique, on utilise la fonction homonime
+`select()`.
+
+```{r}
+selected <- select(penguins, species, island, body_mass)
+head(selected)
+```
+
+À l'inverse, pour supprimer des variables, on place un `-` devant la variable :
+
+```{r}
+selected <- select(penguins, -species, -island, -body_mass)
+head(selected)
+```
+
+On peut employer une **expression de sélection** pour choisir des variables par
+rapport à une condition. Par exemple, si on veut sélectionner toutes les
+variables dont le nom se termine par une chaine de caractère précise, on peut
+utiliser la fonction `ends_with()` dans la fonction `select()` :
+
+```{r}
+selected <- select(penguins, ends_with("len"))
+head(selected)
+```
+
+:::{.callout-note title="Plus d'examples" collapse="true"}
+Si on a une idée précise des variables que l'on veut sélectionner, on peut
+utiliser un vecteur de contenant les noms des variables et utiliser la fonction
+`all_of()` :
+
+```{r}
+to_select <- c("island", "species", "body_mass")
+selected <- select(penguins, all_of(to_select))
+head(selected)
+```
+
+Bien sûr, on peut les combiner :
+
+```{r}
+selected <- select(penguins, starts_with("bill"), where(is.factor))
+head(selected)
+```
+:::
+
+
+Voilà un tableau récapitulatif des expressions les plus communes que l'on peut
+utiliser pour sélectionner des variables.
+
+| Fonction              | Description                                                                                              | Exemple                                                    |            |
+| --------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ---------- |
+| `starts_with("x")`    | Sélectionne les variables dont le nom **commence** par `"x"`                                             | `select(starts_with("Sepal"))`                             |            |
+| `ends_with("x")`      | Sélectionne les variables dont le nom **se termine** par `"x"`                                           | `select(ends_with("Width"))`                               |            |
+| `contains("x")`       | Sélectionne les variables dont le nom **contient** `"x"`                                                 | `select(contains("Petal"))`                                |            |
+| `all_of(vars)`        | Sélectionne **toutes** les colonnes listées dans un vecteur `vars` (et renvoie une erreur si une manque) | `select(all_of(c("Species", "Sepal.Length")))`             |            |
+| `everything()`        | Sélectionne **toutes les colonnes** (utile pour repositionner)                                           | `select(Species, everything())`                            |            |
+| `where(predicate)`    | Sélectionne selon un **type** ou une condition logique sur les colonnes                                  | `select(where(is.numeric))`, `select(where(~mean(.) > 0))` |            |
+
+#### filtrer des données
+
+Pour filtrer les données avec `dplyr` on utilise la fonction homonyme
+`filter()`. Cette dernière filtre les lignes par vérification de conditions.
+
+Par exemple, si on veut récupérer uniquement les donnnées pour l'espèce
+`Adelie` :
+
+```{r}
+filtered <- filter(penguins, species == "Adelie")
+head(filtered)
+```
+
+Ou si on souhaite récupérer les observations pour les années postérieur à 2007.
+
+```{r}
+filtered <- filter(penguins, year > 2007)
+head(filtered)
+```
+
+On peut combiner les filtres :
+
+```{r}
+filtered <- filter(penguins, year > 2007, species == "Adelie")
+head(filtered)
+```
+
+Souvent, on faire sélectionner des données dans une gamme de valeurs, il suffit
+de faire :
+
+```{r}
+filtered <- filter(penguins, bill_len > 35, bill_len < 40)
+head(filtered)
+```
+
+:::{.callout-note title="Plus d'examples" collapse="true"}
+Plutôt que d'utiliser des virgules pour séparer les filtres on peut utiliser une
+syntaxe booléenne (je ne vous le conseil pour débuter) :
+
+```{r}
+filtered <- filter(
+    penguins,
+    (
+        (species == "Gentoo" | species == "Adelie") &
+        body_mass > mean(body_mass, na.rm = TRUE)
+    )
+)
+head(filtered)
+```
+
+Pour filter les modalités de facteurs ou de chaines de caractères, on peut
+utiliser l'opérateur `%in%`.
+
+```{r}
+filtered <- filter(penguins, species %in% c("Gentoo", "Adelie"))
+head(filtered)
+```
+
+Pour récupérer l'inverse d'une condition, on utilise le point d'exclamation `!`.
+
+```{r}
+filtered <- filter(penguins, !species %in% c("Gentoo", "Adelie"))
+head(filtered)
+```
+:::
+
+Tableau récapitulatif
+
+| Catégorie                                      | Fonction / opérateur                  | Description                                 | Exemple                                                  |
+| ---------------------------------------------- | ------------------------------------- | ------------------------------------------- | -------------------------------------------------------- |
+| **Comparaison numérique**                      | `==`, `!=`                            | Égal / différent                            | `filter(Species == "setosa")`                            |
+|                                                | `>`, `<`, `>=`, `<=`                  | Supérieur, inférieur, etc.                  | `filter(Sepal.Length > 6)`                               |
+| **Appartenance**                               | `%in%`                                | Appartient à un ensemble de valeurs         | `filter(Species %in% c("setosa", "virginica"))`          |
+|                                                | `!x %in% ...`                         | N’appartient pas à…                         | `filter(!Species %in% "setosa")`                         |
+| **Texte / chaînes**                            | `str_detect(x, "mot")`                | Contient un motif (nécessite `stringr`)     | `filter(str_detect(Species, "osa"))`                     |
+|                                                | `startsWith(x, "mot")`                | Commence par...                             | `filter(startsWith(Species, "set"))`                     |
+|                                                | `endsWith(x, "mot")`                  | Se termine par...                           | `filter(endsWith(Species, "ica"))`                       |
+| **Valeurs manquantes**                         | `is.na(x)`                            | Est manquant                                | `filter(is.na(Sepal.Length))`                            |
+|                                                | `!is.na(x)`                           | N’est pas manquant                          | `filter(!is.na(Sepal.Length))`                           |
+| **Intervalles**                                | `between(x, a, b)`                    | Valeur comprise entre `a` et `b` (inclusif) | `filter(between(Sepal.Length, 5, 6))`                    |
+| **Conditions complexes**                       | `if_else()` ou logique combinée       | Choix conditionnels                         | `filter(if_else(Sepal.Width > 3, TRUE, FALSE))`          |
+
+: {.striped .hover .responsive}
+
+#### Modifier des données
+
+Pour modifier des données ou en rajouter, on utilise la fonction `mutate()`.
+
+Par exemple, si on veut faire un arrondi de la variable `bill_len`.
+
+```{r}
+mutated <- mutate(penguins, bill_len = round(bill_len))
+head(mutated$bill_len)
+```
+
+Plutôt que d'écrire par-dessus la variable `bill_len`, on peut vouloir créer une
+autre variable pour enregistrer la modification. On écrit simplement le nom de
+la nouvelle variable à gauche du `=` :
+
+```{r}
+mutated <- mutate(penguins, bill_len_round = round(bill_len))
+head(mutated$bill_len_round)
+```
+
+On peut faire des opérations qui utilisent plusieurs variables :
+
+```{r}
+mutated <- mutate(penguins, bill_len_norm_mass = bill_len / body_mass)
+head(mutated$bill_len_norm_mass)
+```
+
+On peut modifier de façon conditionnelle nos variables. Par exemple, si on veut
+arrondir uniquement la variable `bill_len` pour les espèces `Adelie` alors, on
+peut utiliser la fonction `ifelse()` :
+
+```{r}
+mutated <- mutate(
+    penguins,
+    bill_len_round = ifelse(species == "Adelie", round(bill_len), bill_len)
+)
+```
+
+Quand on a plus d'une condition à vérifier, on privilégiera la fonction
+`case_when()` :
+
+```{r}
+mutated <- mutate(
+    penguins,
+    geo_code = case_when(
+        island == "Biscoe" ~ "North",
+        island == "Torgersen" ~ "Midlle",
+        TRUE ~ "South" # quand les deux premières ne sont pas vérifiées
+    )
+)
+```
+
+Si on souhaite modifier un ensemble de variables répondant à un ou des
+caractères communs, on peut utiliser la fonction `across()`. Par exemple, si on
+veut arrondir toutes les variables numériques, on écrira :
+
+```{r}
+mutated <- mutate(penguins, across(where(is.numeric), ~round(.x)))
+head(mutated)
+```
+
+Il arrive que l'on souhaite modifier des variables ou en créer de nouvelles par
+groupe. Par exemple, on peut vouloir normaliser `bill_len` par la moyenne de
+`body_mass` par espèce. Dans ce cadre, on utilisera la fonction `group_by()` qui
+permet d'effectuer des opérations par groupe.
+
+```{r}
+mutated <- penguins |>
+    group_by(species) |>
+    mutate(norm_bill_len = bill_len / mean(body_mass))
+```
+
+#### Trier les données
+
+Pour trier les données, on utilise la fonction `arrange()`. Par exemple, si on
+veut ordonner le tableau par `bill_len` :
+
+```{r}
+arranged <- arrange(penguins, bill_len)
+head(arranged)
+```
+
+Par défaut l'ordre est croissant. Pour trier de façon décroissante, on utilise
+place la fonction `desc()` sur la variable :
+
+```{r}
+arranged <- arrange(penguins, desc(bill_len))
+head(arranged)
+```
+
+On peut bien sûr trier par plusieurs variables :
+
+```{r}
+arranged <- arrange(penguins, desc(year), desc(body_mass))
+head(arranged)
+```
+
+Les données qualitatives sont triées par ordre alphabétique de la première
+lettre de la chaîne de caractères :
+
+```{r}
+arranged <- arrange(penguins, desc(island))
+head(arranged)
+```
+
+### Aggrégation de données {#sec-agg}
+
+L'agrégation consiste à regrouper des observations selon une ou plusieurs
+variables (catégories, dates, régions, etc.) afin de calculer des indicateurs
+synthétiques (moyenne, total, écart-type, etc.) pour chaque groupe. C'est ce qui
+vous faites sur excel quand vous créez un tableau croisé dynamique.
+
+En traitement et analyse de données, il s'agit d'une des opérations les plus
+courantes.
+
+#### Aggrégation de l'ensemble d'un jeu de données
+
+```{r}
+# On utilise le jeu de données palmerpenguins
+data(package = 'palmerpenguins')
+head(penguins)
+penguins <- tidyr::drop_na(penguins)
+```
+
+Imaginons que l'on souhaite calculer la moyenne pour la variable `bill_len`
+et la variable `flipper_len` et conserver le résultat dans un `data.frame`. La
+solution de base serait :
+
+```{r}
+data.frame(
+    mean_bill_len = mean(penguins$bill_len),
+    mean_flipper_len = mean(penguins$flipper_len)
+)
+```
+
+Maintenant, si on voulait calculer la moyenne pour tous les variables
+numériques, il faudrait réécrire quatre fois la même ligne. Ce n'est pas
+efficient. En R base, on utiliserait une boucle pour pallier ces redondances.
+`dplyr` a été conçu pour faciliter l'écriture dans ces cas là. Pour résumer un
+jeu de données on utilise la fonction `summarise()`. Pour obtenir le même
+résultat que précédemment, on écrira :
+
+```{r}
+summarise(
+    penguins,
+    mean_bill_len = mean(bill_len),
+    mean_flipper_len = mean(flipper_len)
+)
+```
+
+Jusque là, ça ne nous avance pas à grand chose, si ce n'est que l'on plus obligé
+d'utiliser les `$` pour accéder aux variables. Là où ça devient intéressant,
+c'est bien quand on a beaucoup de variables à résumer. Dans ce cas, on peut
+sélectionner les variables à résumer en utilisant la fonction `across()` qui
+permet prend une condition à vérifier et une opération à effectuer sur les
+variables retenues. Par exemple, si comme précédemment on souhaite calculer la
+moyenne pour tous les variables numériques, on écrira :
+
+```{r}
+summarise(penguins, across(where(is.numeric), ~mean(.x)))
+```
+
+Une seul ligne de code permet de faire cela. Et si on souhaite également
+calculer d'autres statistiques ? C'est aussi possible ! Par exemple, si on
+souhaite également calculer la médiane et l'écart-type :
+
+```{r}
+summarise(penguins, across(
+    # Uniquement sur les variables numériques sauf la variable year
+    where(is.numeric) & !year,
+    # Quelles fonctions appliquer
+    .fn = list(mean = mean, median = median, sd = sd),
+    # Quelles noms de variables renvoyer
+    .names = "{.col}_{.fn}" # .col est le nom de la var. et .fn le nom de la function
+))
+```
+
+Très bien, mais cela ne s'applique que pour un jeu de données entier. Comment
+faire si l'on souhaite calculer ces statistiques pour des groupes ?
+
+#### Aggrégation par groupe
+
+Pour aggréger des données par groupe en utilisant `dplyr` il suffit d'employer
+la fonction `group_by()` avec `summarise()`. Le reste du code ne change pas.
+Dans `group_by()`, on indique la ou les variables de regroupement. Par exemple,
+pour calculer la moyenne pour toutes les variables numériques sauf `year` par
+espèces et par îles :
+
+```{r}
+penguins |>
+    group_by(species, island) |>
+    summarise(across(where(is.numeric) & !year, ~mean(.x)))
+```
+
+:::{.callout-note title="base R" collapse="true"}
+En R base, pour effectuer une aggrégation par groupe on utilisera la fonction
+`aggregate()`. Par exemple, pour calculer la moyenne de toutes les variables
+numériques dans iris
+
+
+```{r}
+aggregate(
+    penguins[, sapply(penguins, is.numeric)], # seule les variables numeriques
+    by = list(Species = penguins$species), # la variable qui contient les groupes
+    FUN = mean # La fonction
+)
+```
+:::
+
+### Jointure de données {#sec-join}
+
+Pour faire des jointures, on s'appuira sur le package `dplyr` et ses fonctions
+`*_join()` (c.f.
+[doc](https://dplyr.tidyverse.org/reference/mutate-joins.html)). Ces dernières
+permettent une approche intuitive des jointures, mimant le comportement des
+jointures en SQL.
+
+![Join in `dplyr`](./figures/join_tbl.png){width=70%}
+
+Imaginons que nous disposons de deux jeux de données. Le premier contient le
+code postal et le nom de commune française. Le deuxième recèle la population et
+le code postal. On souhaite joindre les deux données pour disposer au sein d'un
+même tableau le code postal, le nom des communes et leur population.
+
+```{r}
+dt1 <- data.frame(
+    code = c(29120, 29200, 29600, 29160),
+    commune = c("Pont-L'abbé", "Brest", "Morlaix", "Crozon")
+)
+print(dt1)
+dt2 <- data.frame(
+    code = c(29120, 29200, 29600, 29880),
+    pop = c(140993, 8403, 15220, 6719)
+)
+print(dt2)
+```
+
+Pour effectuer une jointure, il faut disposer d'une variable commune entre les
+deux tableaux. Dans notre cas, il s'agit de la variable `code`. On peut alors
+effectuer quatre jointure différentes :
+
+```{r}
+library(dplyr)
+
+left_join(dt1, dt2, by = "code") # garde toutes les lignes de dt1
+right_join(dt1, dt2, by = "code") # garde toutes les lignes de dt2
+inner_join(dt1, dt2, by = "code") # garde uniquement les codes communs
+full_join(dt1, dt2, by = "code") # garde toutes les lignes des deux
+```
+
+Au quotidien, on emploie le plus souvent le `left_join()`.
+
+Souvent, on **dispose de la même variable dans deux jeux de données mais nommée
+différemment**. Dans ce cas soit :
+
+1. On renomme la variable dans un des tableaux puis on joint normalement ;
+2. On change l'argument `by` par `by = c("var_dt1" = "var_dt2")`.
+
+:::{.callout-note title="base R" collapse="true"}
+En base R, on utilise `merge()` avec différents paramètres pour obtenir le même
+résultat :
+
+```{r}
+merge(dt1, dt2, by = "code", all.x = TRUE) # left join
+merge(dt1, dt2, by = "code", all.y = TRUE) # right join
+merge(dt1, dt2, by = "code") # inner join (par défaut)
+merge(dt1, dt2, by = "code", all = TRUE) # full join
+```
+:::
+
+## Manipulation de matrice
+
+Bien que les `data.frame` (et objets associés) soit les objets les plus courants
+que vous aurez à traiter, il arrive que l'on se retrouve à traiter des matrices
+(`matrix`). Ces objets, plus simples dans leur structure que les Dataframe, sont
+souvent utilisés pour optimiser des traitements.
+
+### Les bases des matrices sous R
+
+#### Création de matrices
+
+On peut créer une matrice avec la fonction `matrix()` :
+
+```{r}
+# Création d'une matrice 3x3 remplie par colonnes
+m1 <- matrix(1:9, nrow = 3, ncol = 3)
+m1
+
+# On peut aussi remplir par lignes
+m2 <- matrix(1:9, nrow = 3, byrow = TRUE)
+m2
+```
+
+#### Accès aux éléments
+
+On peut accéder aux éléments de la matrice de la même façon que dans un
+`dataframe` en utilisant l'indice des lignes et des colonnes.
+
+```{r}
+m1[2, 3] # Élément de la 2e ligne, 3e colonne
+m1[1, ] # 1ère ligne complète
+m1[, 2] # 2e colonne complète
+```
+
+Si les lignes et/ou les colonnes sont nommées, on peut également utiliser les
+noms pour retrouver les valeurs.
+
+```{r}
+colnames(m1) <- paste0("c", 1:3)
+rownames(m1) <- paste0("r", 1:3)
+m1["r1", "c3"]
+```
+
+#### Opérations sur les matrices
+
+Les opérations arithmétiques sont vectorisées.
+
+```{r}
+m1 + 10 # Ajout d'une constante
+m1 * 2  # Multiplication élément par élément
+m1 ^ 2  # Carré de chaque élément
+```
+
+Pour les multiplications matricielles
+
+```{r}
+m1 * m2 # produit de hadamard (élément par élément)
+m1 %*% m2 # produit scalaire (dot product)
+m1[1, ] %o% m1[2, ] # produit extérieur (outer product)
+```
+
+Il est également possible de calculer des statistiques pour les lignes et les
+colonnes :
+
+```{r}
+rowSums(m1)
+rowMeans(m1)
+colSums(m1)
+colMeans(m1)
+```
+
+
+#### Autres opérations
+
+```{r}
+t(m1) # Transposée
+det(m1) # Déterminant
+diag(m1) # Diagonale
+```
+
+## Traitement de chaîne de caractères
+
+Références :
+
+- [Le
+chapitre](https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html)
+les chaînes de caractères de guide-R (Larmarange, 2025)
+
+### Chercher/remplacer {#sec-concat}
+
+Pour chercher remplacer dans une chaîne de caractère (variable ou vecteur), on
+utiliser la fonction de base `gsub()` ou la fonction `stringr::str_replace()`.
+
+```{r}
+# Avec une chaîne de caractère
+x <- "Une phras mal orthographié"
+x <- gsub(x = x, "phras", "phrase")
+gsub(x = x, "orthographié", "orthographiée")
+
+# Avec un vecteur
+x <- c("Puie", "pluie", "ORag_", "Orage")
+x <- gsub(x = x, "Puie", "pluie")
+gsub(x = x, "ORag_", "orage")
+```
+
+Tout l'intérêt de passer par un langage de programmation est de pouvoir
+automatiser au maximum le remplacement des chaînes de caractère. Pour cela, on
+utilise les [expressions
+régulières](https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re) (on
+dira plutôt regex). Ces dernières permettent d'identifier efficacement des
+schémas dans des chaînes de caractères. Imaginons que l'on souhaite supprimer
+tous les espaces qui sont placés au début d'une chaîne de caractère dans un
+vecteur :
+
+```{r}
+x <- c("Michel Legrand", "Glenn Gould", " Michel Legrand", " Glenn Gould")
+# Quatre valeur unique alors qu'on souhaite en avoir 2.
+unique(x)
+
+# Supprimer les espaces situés au début de la chaîne de caractère
+x <- gsub(x = x, "^ ", "")
+unique(x)
+```
+
+On peut également mouvoir des bouts de chaînes en utilisant des groupes.
+Supposons que l'on veuille passer les noms avant les prénoms :
+
+```{r}
+x <- c("Michel Legrand", "Glenn Gould", "Michel Legrand", "Glenn Gould")
+gsub(x = x, "^(.*(?= )) (.*$)", "\\2 \\1", perl = TRUE)
+```
+
+Les expressions régulières ne sont pas forcément facile à manipuler mais quand
+on commence à les prendre en main on gagne un temps fou. Vous pouvez vous
+renseigner ici.
+
+![Quand vous commencez à maitriser un peu les regex](./figures/regex-meme.jpg)
+
+### Concaténation {#sec-concat}
+
+Pour concaténer deux chaînes de caractères :
+
+```{r}
+library(glue)
+
+str1 <- "un chêne"
+str2 <- "vouvre"
+
+# Méthode 1: paste() et paste0()
+conc1 <- paste(str1, str2) # espace par défaut entre les deux chaînes
+conc2 <- paste0(str1, " ", str2)
+
+# Méthode 2: sprintf()
+conc3 <- sprintf("%s %s", str1, str2)
+
+# Méthode 3: glue()
+conc4 <- glue("{str1} {str2}")
+
+print(conc4)
+all(c(conc1, conc2, conc3) == conc4)
+```
+
+`glue()` est la méthode la plus moderne, elle est à privilégier.
+
+### Tableau de contingence
+
+Pour calculer un tableau de contingence sous `R`, on utilise la fonction
+`table()` avec les deux vecteurs que l'on souhaite analyser.
+
+```{r}
+table(penguins$species, penguins$island)
+```
+
+
+
+

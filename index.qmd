@@ -1,0 +1,15 @@
+# Informations {.unnumbered}
+
+En TD :
+
+- TD1 : Introduction à R
+- TD2 : Analyse centrographique
+- TD3 : Ségrégation spatiale
+- TD4 : Réseaux, graphe et accessibilité
+- TD5 : Mobilités et flux
+
+En DM :
+
+- DM1 : Analyse centrographique populations, logements, pauvreté
+- DM2 : Modèle gravitaire sur flux de pop inter-régions
+
