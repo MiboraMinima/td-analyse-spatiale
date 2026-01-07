@@ -11,7 +11,7 @@ commmande) > `R` > `enter`. C'est comme quand vous ouvrez un terminal
 
 Dans l'absolu, on pourrait écrire nos scripts dans la console directement mais
 ce serait très peu pratique. Aussi, quand on code, on utilise un **Environnement
-de Développement** (*IDE* en Anglais), et ce, quelque soit le langage que l'on
+de Développement** (*IDE* en anglais), et ce, quelque soit le langage que l'on
 utilise. Ces derniers intègrent des tas de fonctionnalités pour vous simplifier
 la vie (colorisation du code, diagnostique automatique des erreurs de syntaxe,
 outils intégrés de visualisation, etc.). Il y en a beaucoup. Certains sont
@@ -32,7 +32,7 @@ est *open-source* et fréquemment mis à jour.
 La première chose à faire quand on commence un projet, quelqu'il soit, c'est de
 se **créer un espace de travail cohérent** ou vous vous retrouverez facilement.
 Ce dernier doit être le plus généralisable possible, de telle sorte à ce que
-vous puissier le réemployer pour d'autres projets. De cette façon, vous ne serez
+vous puissiez le réemployer pour d'autres projets. De cette façon, vous ne serez
 plus jamais perdus dans vos fichiers et vous **gagnerez un temps considérable**.
 Pour de l'analyse/traitement de données, je vous conseil la configuration
 suivante :
@@ -52,17 +52,17 @@ vous le souhaitez sur votre machine.
 
 Pourquoi est-ce important ?
 
-- Pour ne pas vous demander à chaque fois pendant trois plombes à comment vous
+- Pour ne pas vous demander à chaque fois pendant trois plombes comment vous
 allez écrire un nom de fichier ou de dossier.
 - Encore une fois pour avoir une organisation nickel.
-- Pour éviter de vous retrouver avec des erreurs liés à des espaces ou des
+- Pour éviter de vous retrouver avec des erreurs liées à des espaces ou des
 caractères spéciaux.
 
 Aussi, je vous conseil d'adopter une **convention d'écriture**. Il y en a plein,
-vous pouvez inventer la votre tant qu'elle est cohérente. Il est notamment
+vous pouvez inventer la vôtre tant qu'elle est cohérente. Il est notamment
 important de proscrire tous les signes diacritiques (é, è, ç, à, etc.), les
 espaces et les signes (/, %, $, etc.). Je vous conseil la convention qui
-consiste à n'écrire qu'en miniscule, sans caractères spéciaux et en replaçant les
+consiste à n'écrire qu'en minuscule, sans caractères spéciaux et en replaçant les
 espaces par des underscores (`_`).
 
 Par exemple :
@@ -95,10 +95,10 @@ fichier, procédez aux opérations suivantes pour créer un projet RStudio.
 
 ::: {.callout-tip title="Instructions"}
 1. Ouvrez RStudio
-2. Créez un nouveau projet: `Fichier` > `Nouveau projet` > `Répertoire existant`.
+2. Créez un nouveau projet : `Fichier` > `Nouveau projet` > `Répertoire existant`.
 Indiquez le dossier que vous avez créé précédemment.
 3. Créez un nouveau script `R` : `Fichier` > `Nouveau fichier` > `Script R`.
-   Enregistrez le (`ctrl+s`).
+   Enregistrez-le (`ctrl+s`).
 :::
 
 ### L'interface
@@ -115,7 +115,7 @@ les préférences du logiciel[^0_rstud_panes]. Par défaut, on a l'organisation 
     - Dans ce panneau, vous avez vos scripts `R`. **C'est ici que vous
     écrirez.**
 - **B)**:
-    - `Console`: La console `R`. La même console intéractive que quand on ouvre
+    - `Console`: La console `R`. La même console interactive que quand on ouvre
     `R` sans RStudio.
     - `Terminal`: Le terminal de votre machine. Sous Windows du `???`.
     - `Travaux`: Des *jobs* que vous faites tourner en arrière-plan.
@@ -145,7 +145,7 @@ aide.
 Pour ne pas se perdre dans son code et garantir sa reproductibilité, il convient
 de l'organiser soigneusement.
 
-Un exemple typique de script en analyse de données et le suivant :
+Un exemple typique de script en analyse de données est le suivant :
 
 1. Chargement des packages. C'est toujours la première chose à faire.
 2. Écriture des constantes (si nécessaire)
@@ -194,23 +194,24 @@ Lisez l'introduction du @sec-structure-data.
 
 Lisez la @sec-variables.
 
-1. Créez des variables de classe différentes
+1. Créez des variables de classe différente
 2. Essayez d'effectuer des opérations mathématiques entre des variables de
-   différentes classes. Qu'observez vous ?
+   différentes classes. Qu'observez-vous ?
 
 :::
 
 ### Les vecteurs
 
-::: {.callout-note title="Instructions: vecteurs"}
+::: {.callout-note title="Instructions : vecteurs"}
 
 Lisez la @sec-vector.
 
 **Vecteur numérique :**
 
-1. Effectuer des opérations entre deux vecteurs numériques : que constatez vous
+1. Effectuer des opérations entre deux vecteurs numériques : que constatez-vous
    ? Est-ce que vos opérations marchent avec des vecteurs de longueur différente ?
-2. Effectuer des opérations entre une variable numérique et un vecteur numérique : que constatez vous ?
+2. Effectuer des opérations entre une variable numérique et un vecteur numérique
+   : que constatez-vous ?
 3. Calculer des statistiques élémentaires sur ces vecteurs (*cf.* @sec-stat-quanti).
 
 **Vecteur de chaîne de caractères :** (aidez vous de la @sec-stat-quali)
@@ -220,30 +221,71 @@ vector_str <- c("A", "a", "b", "b", "B", "C", "C")
 ```
 
 1. Quels sont les modalités du vecteur `vector_str` ?
-2. Combien il y a t il de valeurs associées à chacune de ces modalités ?
+2. Combien il y a-t-il de valeurs associées à chacune de ces modalités ?
 
 :::
 
 ### Les tableaux de données : les Data Frames
 
 
-::: {.callout-note title="Instruction: création de Data Frame"}
+::: {.callout-note title="Instruction : création de Data Frame"}
 
 Lisez la @sec-structure-df.
 
 Créez un DF de à partir de quatre vecteurs de longueur 5 (2 numériques, 2 de
-chaîne cararactères).
+chaîne caractères).
 
 :::
 
 
-::: {.callout-note title="Instructions: manipulation de Data Frame"}
+::: {.callout-tip title="Les packages"}
 
-Vous apprendrez avec un jeu de de données d'entraînement issu du package
-[`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/).
+Un package est un ensemble de code prêt à l'emploi que vous pouvez charger
+dans votre session `R`. Vous pouvez les voir comme des "extensions".
+
+La première chose à faire est d'installer le package sur votre machine. Pour
+cela, on emploie la fonction de base `install.packages("<le nom du package>")`.
+Par exemple :
 
 ```{r}
-data(package = 'palmerpenguins')
+#| eval: false
+
+# Pour installer le package palmerpenguins
+install.packages("palmerpenguins")
+```
+
+Cette opération télécharge le package et l'installe sur votre PC. Une fois le
+package installé, il faut le charger dans la session `R` courante. Pour cela, on
+emploie la fonction `library(<nom du package>)`.
+
+```{r}
+#| eval: false
+
+# On charge palmerpenguins
+library(palmerpenguins)
+```
+
+Il n'est pas nécessaire d'installer le package plusieurs fois, une seule suffit.
+En revanche, il vous faudra charger le package à chaque nouvelle session `R` si
+vous voulez l'utiliser.
+
+:::
+
+
+::: {.callout-note title="Instructions : manipulation de Data Frame"}
+
+Vous apprendrez avec un jeu de données d'entraînement issu du package
+[`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/)[^package-data].
+
+[^package-data]: Certains packages possèdent des données d'exemple qui sont
+téléchargées sur votre PC au moment de l'installation du package. On peut les
+charger dans la session `R` courant avec la fonction `data()`.
+
+- Installer et charger le package `palmerpenguins`
+
+```{r}
+# Charge un DF nommé penguins dans la session courante
+data(package = "palmerpenguins")
 head(penguins)
 ```
 
@@ -252,7 +294,8 @@ Commencez par décrire brièvement le tableau de données :
 - Nombre d'observations
 - Nombre de variables (leur classe)
 
-Pour les opérations suivantes, appuyez-vous sur la @sec-manip-df.
+Pour les opérations suivantes, appuyez-vous sur la @sec-manip-df. Vous vous
+appuierez sur le package `dplyr`.
 
 1. **Sélection des variables : `select()`**
 
@@ -282,8 +325,8 @@ Pour les opérations suivantes, appuyez-vous sur la @sec-manip-df.
 
 5. **Jointure de données :** 
 
-    1. Chargez les données : (*cf.* @sec-io-df)
-        - Données géographique : `iris_29.gpkg`
+    1. Téléchargez et chargez les données : (*cf.* @sec-io-df)
+        - Données géographiques : `iris_29.gpkg`
         - Données INSEE : `iris_brest.csv`
     2. Joignez la donnée spatiale aux données INSEE (*cf.* @sec-join).
 

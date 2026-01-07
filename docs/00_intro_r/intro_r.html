@@ -303,7 +303,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Comme dans la majorité des langages interprétés, quand on installe <code>R</code>, une <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">console interactive</a> est installée en même temps. Vous pouvez y accéder en cherchant R dans vos programmes ou en effectuant les opérations <code>ctrl+R</code> (ouvrir l’exécuteur de commmande) &gt; <code>R</code> &gt; <code>enter</code>. C’est comme quand vous ouvrez un terminal <code>powershell</code> sous Windows, sauf qu’au lieu d’écrire du <code>powershell</code>, vous écrivez du <code>R</code>.</p>
-<p>Dans l’absolu, on pourrait écrire nos scripts dans la console directement mais ce serait très peu pratique. Aussi, quand on code, on utilise un <strong>Environnement de Développement</strong> (<em>IDE</em> en Anglais), et ce, quelque soit le langage que l’on utilise. Ces derniers intègrent des tas de fonctionnalités pour vous simplifier la vie (colorisation du code, diagnostique automatique des erreurs de syntaxe, outils intégrés de visualisation, etc.). Il y en a beaucoup. Certains sont génériques (ils supportent de nombreux langages) comme <a href="https://code.visualstudio.com/">Visual Studio Code</a> ou spécifique, destiné à un seul langage, comme c’est le cas de <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> pour <code>R</code>.</p>
+<p>Dans l’absolu, on pourrait écrire nos scripts dans la console directement mais ce serait très peu pratique. Aussi, quand on code, on utilise un <strong>Environnement de Développement</strong> (<em>IDE</em> en anglais), et ce, quelque soit le langage que l’on utilise. Ces derniers intègrent des tas de fonctionnalités pour vous simplifier la vie (colorisation du code, diagnostique automatique des erreurs de syntaxe, outils intégrés de visualisation, etc.). Il y en a beaucoup. Certains sont génériques (ils supportent de nombreux langages) comme <a href="https://code.visualstudio.com/">Visual Studio Code</a> ou spécifique, destiné à un seul langage, comme c’est le cas de <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> pour <code>R</code>.</p>
 <section id="rstudio" class="level2 page-columns page-full" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="rstudio"><span class="header-section-number">1.1</span> RStudio</h2>
 <p>Il s’agit de l’IDE le plus utilisé pour faire du <code>R</code>, et de très très loin. Il est <em>open-source</em> et fréquemment mis à jour.</p>
@@ -311,7 +311,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="création-dun-projet"><span class="header-section-number">1.1.1</span> Création d’un projet</h3>
 <section id="sec-orga-files" class="level4" data-number="1.1.1.1">
 <h4 data-number="1.1.1.1" class="anchored" data-anchor-id="sec-orga-files"><span class="header-section-number">1.1.1.1</span> Organiser son dossier de travail</h4>
-<p>La première chose à faire quand on commence un projet, quelqu’il soit, c’est de se <strong>créer un espace de travail cohérent</strong> ou vous vous retrouverez facilement. Ce dernier doit être le plus généralisable possible, de telle sorte à ce que vous puissier le réemployer pour d’autres projets. De cette façon, vous ne serez plus jamais perdus dans vos fichiers et vous <strong>gagnerez un temps considérable</strong>. Pour de l’analyse/traitement de données, je vous conseil la configuration suivante :</p>
+<p>La première chose à faire quand on commence un projet, quelqu’il soit, c’est de se <strong>créer un espace de travail cohérent</strong> ou vous vous retrouverez facilement. Ce dernier doit être le plus généralisable possible, de telle sorte à ce que vous puissiez le réemployer pour d’autres projets. De cette façon, vous ne serez plus jamais perdus dans vos fichiers et vous <strong>gagnerez un temps considérable</strong>. Pour de l’analyse/traitement de données, je vous conseil la configuration suivante :</p>
 <ul>
 <li>📁 <code>./data/</code>: là où vous stockerez vos données
 <ul>
@@ -335,11 +335,11 @@ Bien nommer ses fichiers
 <div class="callout-body-container callout-body">
 <p>Pourquoi est-ce important ?</p>
 <ul>
-<li>Pour ne pas vous demander à chaque fois pendant trois plombes à comment vous allez écrire un nom de fichier ou de dossier.</li>
+<li>Pour ne pas vous demander à chaque fois pendant trois plombes comment vous allez écrire un nom de fichier ou de dossier.</li>
 <li>Encore une fois pour avoir une organisation nickel.</li>
-<li>Pour éviter de vous retrouver avec des erreurs liés à des espaces ou des caractères spéciaux.</li>
+<li>Pour éviter de vous retrouver avec des erreurs liées à des espaces ou des caractères spéciaux.</li>
 </ul>
-<p>Aussi, je vous conseil d’adopter une <strong>convention d’écriture</strong>. Il y en a plein, vous pouvez inventer la votre tant qu’elle est cohérente. Il est notamment important de proscrire tous les signes diacritiques (é, è, ç, à, etc.), les espaces et les signes (/, %, $, etc.). Je vous conseil la convention qui consiste à n’écrire qu’en miniscule, sans caractères spéciaux et en replaçant les espaces par des underscores (<code>_</code>).</p>
+<p>Aussi, je vous conseil d’adopter une <strong>convention d’écriture</strong>. Il y en a plein, vous pouvez inventer la vôtre tant qu’elle est cohérente. Il est notamment important de proscrire tous les signes diacritiques (é, è, ç, à, etc.), les espaces et les signes (/, %, $, etc.). Je vous conseil la convention qui consiste à n’écrire qu’en minuscule, sans caractères spéciaux et en replaçant les espaces par des underscores (<code>_</code>).</p>
 <p>Par exemple :</p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -372,8 +372,8 @@ Instructions
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Ouvrez RStudio</li>
-<li>Créez un nouveau projet: <code>Fichier</code> &gt; <code>Nouveau projet</code> &gt; <code>Répertoire existant</code>. Indiquez le dossier que vous avez créé précédemment.</li>
-<li>Créez un nouveau script <code>R</code> : <code>Fichier</code> &gt; <code>Nouveau fichier</code> &gt; <code>Script R</code>. Enregistrez le (<code>ctrl+s</code>).</li>
+<li>Créez un nouveau projet : <code>Fichier</code> &gt; <code>Nouveau projet</code> &gt; <code>Répertoire existant</code>. Indiquez le dossier que vous avez créé précédemment.</li>
+<li>Créez un nouveau script <code>R</code> : <code>Fichier</code> &gt; <code>Nouveau fichier</code> &gt; <code>Script R</code>. Enregistrez-le (<code>ctrl+s</code>).</li>
 </ol>
 </div>
 </div>
@@ -399,7 +399,7 @@ Figure&nbsp;1.1: Interface de RStudio
 </ul></li>
 <li><strong>B)</strong>:
 <ul>
-<li><code>Console</code>: La console <code>R</code>. La même console intéractive que quand on ouvre <code>R</code> sans RStudio.</li>
+<li><code>Console</code>: La console <code>R</code>. La même console interactive que quand on ouvre <code>R</code> sans RStudio.</li>
 <li><code>Terminal</code>: Le terminal de votre machine. Sous Windows du <code>???</code>.</li>
 <li><code>Travaux</code>: Des <em>jobs</em> que vous faites tourner en arrière-plan.</li>
 </ul></li>
@@ -423,7 +423,7 @@ Figure&nbsp;1.1: Interface de RStudio
 <p>Il existe d’autres panneaux que l’on peut rajouter à l’interface au besoin. Vous aurez surtout besoin de la console, de l’environnement, de l’onglet graphique et aide.</p>
 </section>
 </section>
-<section id="les-bases-de-r-pour-le-traitement-de-données" class="level2" data-number="1.2">
+<section id="les-bases-de-r-pour-le-traitement-de-données" class="level2 page-columns page-full" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="les-bases-de-r-pour-le-traitement-de-données"><span class="header-section-number">1.2</span> Les bases de R pour le traitement de données</h2>
 <div class="callout callout-style-default callout-tip callout-titled" title="Organiser son script R">
 <div class="callout-header d-flex align-content-center">
@@ -436,7 +436,7 @@ Organiser son script R
 </div>
 <div class="callout-body-container callout-body">
 <p>Pour ne pas se perdre dans son code et garantir sa reproductibilité, il convient de l’organiser soigneusement.</p>
-<p>Un exemple typique de script en analyse de données et le suivant :</p>
+<p>Un exemple typique de script en analyse de données est le suivant :</p>
 <ol type="1">
 <li>Chargement des packages. C’est toujours la première chose à faire.</li>
 <li>Écriture des constantes (si nécessaire)</li>
@@ -492,29 +492,34 @@ Instruction: variable
 <div class="callout-body-container callout-body">
 <p>Lisez la <a href="../ressources/algorithmique/structure_donnees.html#sec-variables" class="quarto-xref"><span>Section 2.1</span></a>.</p>
 <ol type="1">
-<li>Créez des variables de classe différentes</li>
-<li>Essayez d’effectuer des opérations mathématiques entre des variables de différentes classes. Qu’observez vous ?</li>
+<li>Créez des variables de classe différente</li>
+<li>Essayez d’effectuer des opérations mathématiques entre des variables de différentes classes. Qu’observez-vous ?</li>
 </ol>
 </div>
 </div>
 </section>
 <section id="les-vecteurs" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="les-vecteurs"><span class="header-section-number">1.2.2</span> Les vecteurs</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions: vecteurs">
+<div class="callout callout-style-default callout-note callout-titled" title="Instructions : vecteurs">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions: vecteurs
+Instructions : vecteurs
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Lisez la <a href="../ressources/algorithmique/structure_donnees.html#sec-vector" class="quarto-xref"><span>Section 2.2</span></a>.</p>
 <p><strong>Vecteur numérique :</strong></p>
 <ol type="1">
-<li>Effectuer des opérations entre deux vecteurs numériques : que constatez vous ? Est-ce que vos opérations marchent avec des vecteurs de longueur différente ?</li>
-<li>Effectuer des opérations entre une variable numérique et un vecteur numérique : que constatez vous ?</li>
+<li>Effectuer des opérations entre deux vecteurs numériques : que constatez-vous ? Est-ce que vos opérations marchent avec des vecteurs de longueur différente ?</li>
+<li><dl>
+<dt>Effectuer des opérations entre une variable numérique et un vecteur numérique</dt>
+<dd>
+que constatez-vous ?
+</dd>
+</dl></li>
 <li>Calculer des statistiques élémentaires sur ces vecteurs (<em>cf.</em> <a href="../ressources/stats/stats.html#sec-stat-quanti" class="quarto-xref"><span>Section 5.1.1</span></a>).</li>
 </ol>
 <p><strong>Vecteur de chaîne de caractères :</strong> (aidez vous de la <a href="../ressources/stats/stats.html#sec-stat-quali" class="quarto-xref"><span>Section 5.1.2</span></a>)</p>
@@ -523,41 +528,69 @@ Instructions: vecteurs
 </div>
 <ol type="1">
 <li>Quels sont les modalités du vecteur <code>vector_str</code> ?</li>
-<li>Combien il y a t il de valeurs associées à chacune de ces modalités ?</li>
+<li>Combien il y a-t-il de valeurs associées à chacune de ces modalités ?</li>
 </ol>
 </div>
 </div>
 </section>
-<section id="les-tableaux-de-données-les-data-frames" class="level3" data-number="1.2.3">
+<section id="les-tableaux-de-données-les-data-frames" class="level3 page-columns page-full" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="les-tableaux-de-données-les-data-frames"><span class="header-section-number">1.2.3</span> Les tableaux de données : les Data Frames</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Instruction: création de Data Frame">
+<div class="callout callout-style-default callout-note callout-titled" title="Instruction : création de Data Frame">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instruction: création de Data Frame
+Instruction : création de Data Frame
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Lisez la <a href="../ressources/algorithmique/structure_donnees.html#sec-structure-df" class="quarto-xref"><span>Section 2.3</span></a>.</p>
-<p>Créez un DF de à partir de quatre vecteurs de longueur 5 (2 numériques, 2 de chaîne cararactères).</p>
+<p>Créez un DF de à partir de quatre vecteurs de longueur 5 (2 numériques, 2 de chaîne caractères).</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions: manipulation de Data Frame">
+<div class="callout callout-style-default callout-tip callout-titled" title="Les packages">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions: manipulation de Data Frame
+Les packages
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Vous apprendrez avec un jeu de de données d’entraînement issu du package <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a>.</p>
+<p>Un package est un ensemble de code prêt à l’emploi que vous pouvez charger dans votre session <code>R</code>. Vous pouvez les voir comme des “extensions”.</p>
+<p>La première chose à faire est d’installer le package sur votre machine. Pour cela, on emploie la fonction de base <code>install.packages("&lt;le nom du package&gt;")</code>. Par exemple :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">'palmerpenguins'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pour installer le package palmerpenguins</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"palmerpenguins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Cette opération télécharge le package et l’installe sur votre PC. Une fois le package installé, il faut le charger dans la session <code>R</code> courante. Pour cela, on emploie la fonction <code>library(&lt;nom du package&gt;)</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On charge palmerpenguins</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Il n’est pas nécessaire d’installer le package plusieurs fois, une seule suffit. En revanche, il vous faudra charger le package à chaque nouvelle session <code>R</code> si vous voulez l’utiliser.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Instructions : manipulation de Data Frame">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Instructions : manipulation de Data Frame
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous apprendrez avec un jeu de données d’entraînement issu du package <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<ul>
+<li>Installer et charger le package <code>palmerpenguins</code></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charge un DF nommé penguins dans la session courante</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">"palmerpenguins"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  species    island bill_len bill_dep flipper_len body_mass    sex year
 1  Adelie Torgersen     39.1     18.7         181      3750   male 2007
@@ -573,7 +606,7 @@ Instructions: manipulation de Data Frame
 <li>Nombre d’observations</li>
 <li>Nombre de variables (leur classe)</li>
 </ul>
-<p>Pour les opérations suivantes, appuyez-vous sur la <a href="../ressources/data_process/data_basic.html#sec-manip-df" class="quarto-xref"><span>Section 4.1</span></a>.</p>
+<p>Pour les opérations suivantes, appuyez-vous sur la <a href="../ressources/data_process/data_basic.html#sec-manip-df" class="quarto-xref"><span>Section 4.1</span></a>. Vous vous appuierez sur le package <code>dplyr</code>.</p>
 <ol type="1">
 <li><p><strong>Sélection des variables : <code>select()</code></strong></p>
 <ol type="1">
@@ -601,9 +634,9 @@ Instructions: manipulation de Data Frame
 </ol></li>
 <li><p><strong>Jointure de données :</strong></p>
 <ol type="1">
-<li>Chargez les données : (<em>cf.</em> <a href="../ressources/data_process/data_basic.html#sec-io-df" class="quarto-xref"><span>Section 4.1.1</span></a>)
+<li>Téléchargez et chargez les données : (<em>cf.</em> <a href="../ressources/data_process/data_basic.html#sec-io-df" class="quarto-xref"><span>Section 4.1.1</span></a>)
 <ul>
-<li>Données géographique : <code>iris_29.gpkg</code></li>
+<li>Données géographiques : <code>iris_29.gpkg</code></li>
 <li>Données INSEE : <code>iris_brest.csv</code></li>
 </ul></li>
 <li>Joignez la donnée spatiale aux données INSEE (<em>cf.</em> <a href="../ressources/data_process/data_basic.html#sec-join" class="quarto-xref"><span>Section 4.1.5</span></a>).</li>
@@ -611,7 +644,7 @@ Instructions: manipulation de Data Frame
 </ol>
 </div>
 </div>
-</section>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;Certains packages possèdent des données d’exemple qui sont téléchargées sur votre PC au moment de l’installation du package. On peut les charger dans la session <code>R</code> courant avec la fonction <code>data()</code>.</p></div></div></section>
 <section id="références" class="level3" data-number="1.2.4">
 <h3 data-number="1.2.4" class="anchored" data-anchor-id="références"><span class="header-section-number">1.2.4</span> Références</h3>
 <p>Cheat sheet :</p>

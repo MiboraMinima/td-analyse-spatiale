@@ -10,3 +10,5 @@ logs/
 # Keep all in book
 !docs/**
 
+# Keep those
+!00_intro_r/data
