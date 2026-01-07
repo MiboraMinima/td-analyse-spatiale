@@ -323,11 +323,16 @@ appuierez sur le package `dplyr`.
     3. Calculer la médiane de la longueur du bec par espèce
     3. Calculer la médiane de la longueur du bec par espèce et par sexe.
 
-5. **Jointure de données :** 
+5. **Jointure de données :**
 
     1. Téléchargez et chargez les données : (*cf.* @sec-io-df)
-        - Données géographiques : `iris_29.gpkg`
-        - Données INSEE : `iris_brest.csv`
+        - Données géographiques : `iris_29.gpkg` (cliquez
+        [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/00_intro_r/data/src/iris_29.gpkg)
+        pour télécharger la donnée).
+        - Données INSEE : `iris_brest.csv` (cliquez
+        [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/00_intro_r/data/src/iris_brest.csv)
+        pour télécharger la donnée ; vous verrez le fichier `.csv` brut dans le
+        navigateur. Enregistrez le sur votre PC à l'endroit approprié).
     2. Joignez la donnée spatiale aux données INSEE (*cf.* @sec-join).
 
 :::
