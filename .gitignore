@@ -8,5 +8,5 @@ logs/
 /.quarto/
 
 # Keep all in book
-!_book/**
+!docs/**
 
