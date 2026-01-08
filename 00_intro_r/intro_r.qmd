@@ -195,8 +195,36 @@ Lisez l'introduction du @sec-structure-data.
 Lisez la @sec-variables.
 
 1. Créez des variables de classe différente
+
+```{r}
+#| error: true
+
+# Variables numériques
+a <- 1
+b <- 0.6
+class(a)
+
+# Variable "character"
+c <- "texte"
+d <- "Une autre variable"
+class(c)
+```
+
+
 2. Essayez d'effectuer des opérations mathématiques entre des variables de
    différentes classes. Qu'observez-vous ?
+
+```{r}
+#| error: true
+
+# Opérations
+a / b
+a * b
+
+# On ne peut pas faire d'opérations entre une variable numérique et une chaîne
+# de caractère
+a + c
+```
 
 :::
 
@@ -208,11 +236,47 @@ Lisez la @sec-vector.
 
 **Vecteur numérique :**
 
-1. Effectuer des opérations entre deux vecteurs numériques : que constatez-vous
-   ? Est-ce que vos opérations marchent avec des vecteurs de longueur différente ?
-2. Effectuer des opérations entre une variable numérique et un vecteur numérique
-   : que constatez-vous ?
+1. Effectuer des opérations entre deux vecteurs numériques de même longeur : que
+   constatez-vous ?
+
+```{r}
+# Définition des vecteurs
+a <- c(1, 5, 10, 6)
+b <- c(2, 2, 3, 4)
+
+# Opérations sur les vecteurs
+a / b
+a * b
+
+# Les opérations sont effectuées élément par éléments (par-ex. pour a/b : 1/2,
+# 5/2, etc.)
+```
+
+2. Effectuer des opérations entre une variable numérique et un vecteur
+   numérique: que constatez-vous ?
+
+```{r}
+# Variable numérique
+s <- 2
+
+# Opérations entre la variable et un vecteur
+s * a
+a / s
+s / a
+
+# La variable numérique est appliquée à tous les éléments du vecteur via
+# l'opération choisie (et inversement)
+```
+
 3. Calculer des statistiques élémentaires sur ces vecteurs (*cf.* @sec-stat-quanti).
+
+```{r}
+mean(a)
+median(a)
+sd(a)
+min(a)
+max(a)
+```
 
 **Vecteur de chaîne de caractères :** (aidez vous de la @sec-stat-quali)
 
@@ -221,7 +285,16 @@ vector_str <- c("A", "a", "b", "b", "B", "C", "C")
 ```
 
 1. Quels sont les modalités du vecteur `vector_str` ?
-2. Combien il y a-t-il de valeurs associées à chacune de ces modalités ?
+
+```{r}
+unique(vector_str)
+```
+
+2. Combien y a-t-il de valeurs associées à chacune de ces modalités ?
+
+```{r}
+table(vector_str)
+```
 
 :::
 
@@ -232,8 +305,45 @@ vector_str <- c("A", "a", "b", "b", "B", "C", "C")
 
 Lisez la @sec-structure-df.
 
-Créez un DF de à partir de quatre vecteurs de longueur 5 (2 numériques, 2 de
-chaîne caractères).
+1. Créez un DF de à partir de quatre vecteurs de longueur 5 (2 numériques, 2 de
+   chaîne caractères).
+
+```{r}
+# Définition des vecteurs
+a <- c(2, 5, 8, 9, 10)
+b <- c(0.2, 0.5, 0.8, 0.1, 0.6)
+c <- c("A", "B", "C", "D", "E")
+d <- c("banane", "pomme", "pêche", "framboise", "fraise")
+
+# Définition du data.frame
+df <- data.frame(
+  colonne1 = a,
+  colonne2 = b,
+  colonne3 = c,
+  colonne4 = d
+)
+df
+class(df)
+```
+
+2. Accédez à des colonnes et à des lignes. Récupérez le nombre de lignes et de
+   colonnes
+
+```{r}
+# Accéder à des colonnes
+df$colonne1
+df$colonne3
+
+# Accéder à des lignes
+df[1, ]
+df[2, ]
+
+# Nombre de lignes
+nrow(df)
+
+# Nombre de colonnes
+ncol(df)
+```
 
 :::
 
