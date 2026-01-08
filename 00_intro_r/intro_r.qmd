@@ -197,7 +197,8 @@ Lisez la @sec-variables.
 1. Créez des variables de classe différente
 
 ```{r}
-#| error: true
+#| collapse: true
+#| code-fold: true
 
 # Variables numériques
 a <- 1
@@ -215,6 +216,8 @@ class(c)
    différentes classes. Qu'observez-vous ?
 
 ```{r}
+#| collapse: true
+#| code-fold: true
 #| error: true
 
 # Opérations
@@ -240,6 +243,9 @@ Lisez la @sec-vector.
    constatez-vous ?
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 # Définition des vecteurs
 a <- c(1, 5, 10, 6)
 b <- c(2, 2, 3, 4)
@@ -256,6 +262,9 @@ a * b
    numérique: que constatez-vous ?
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 # Variable numérique
 s <- 2
 
@@ -271,6 +280,9 @@ s / a
 3. Calculer des statistiques élémentaires sur ces vecteurs (*cf.* @sec-stat-quanti).
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 mean(a)
 median(a)
 sd(a)
@@ -287,12 +299,18 @@ vector_str <- c("A", "a", "b", "b", "B", "C", "C")
 1. Quels sont les modalités du vecteur `vector_str` ?
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 unique(vector_str)
 ```
 
 2. Combien y a-t-il de valeurs associées à chacune de ces modalités ?
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 table(vector_str)
 ```
 
@@ -309,6 +327,9 @@ Lisez la @sec-structure-df.
    chaîne caractères).
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 # Définition des vecteurs
 a <- c(2, 5, 8, 9, 10)
 b <- c(0.2, 0.5, 0.8, 0.1, 0.6)
@@ -330,6 +351,9 @@ class(df)
    colonnes
 
 ```{r}
+#| collapse: true
+#| code-fold: true
+
 # Accéder à des colonnes
 df$colonne1
 df$colonne3
