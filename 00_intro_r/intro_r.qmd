@@ -426,7 +426,19 @@ head(penguins)
 Commencez par décrire brièvement le tableau de données :
 
 - Nombre d'observations
-- Nombre de variables (leur classe)
+- Nombre de variables (leur type)
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+# Nombre de lignes et de colonnes
+nrow(penguins)
+ncol(penguins)
+
+# Le type des variables (e.g. Factor, num, int, etc.)
+str(penguins)
+```
 
 Pour les opérations suivantes, appuyez-vous sur la @sec-manip-df. Vous vous
 appuierez sur le package `dplyr`.
@@ -437,12 +449,67 @@ appuierez sur le package `dplyr`.
     2. Sélectionner uniquement les variables numériques
     3. Sélectionner toutes les variables qualitatives sauf `island`
 
+```{r}
+#| collapse: true
+#| code-fold: true
+
+# install.packages("dplyr") # Installer le package si besoin
+# Charge le package dplyr
+library(dplyr)
+
+# Exercice 1 ------------------------------------------------------------------
+sel_1 <- select(penguins, island, bill_len)
+head(sel_1)
+
+# Équivalent à
+sel_1 <- penguins |>
+    select(island, bill_len)
+
+# Exercice 2 ------------------------------------------------------------------
+sel_2 <- select(penguins, where(is.numeric))
+head(sel_2)
+
+# Équivalent à
+sel_2 <- penguins |>
+    select(where(is.numeric))
+
+# Exercice 3 ------------------------------------------------------------------
+sel_3 <- select(penguins, where(is.factor), -island)
+head(sel_3)
+
+# Équivalent à
+sel_3 <- penguins |>
+    select(where(is.factor), -island)
+```
+
 2. **Filtrer les observations : `filter()`**
 
     1. Ne conserver que les pingouins Adélie de l'île de Biscoe qui sont des mâles.
     2. Pour l'année 2007, ne conserver que les pingouins dont la masse est
        supérieure à la moyenne.
     3. Retirez les lignes contenant des valeurs manquantes.
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+# Exercice 1 ------------------------------------------------------------------
+filt_1 <- filter(penguins, species == "Adelie", island == "Biscoe", sex == "male")
+head(filt_1)
+
+# Exercice 2 ------------------------------------------------------------------
+filt_2 <- filter(penguins, year == 2007, body_mass > mean(body_mass, na.rm = TRUE))
+head(filt_2)
+
+# Exercice 3 ------------------------------------------------------------------
+# install.packages("tidyr") # Installer le package si besoin
+library(tidyr)
+filt_3 <- drop_na(penguins)
+head(filt_3)
+
+# Équivalent à (en R base) :
+filt_3 <- na.omit(penguins)
+```
 
 3. **Créer et modifier des variables : `mutate()`**
 
@@ -468,7 +535,6 @@ appuierez sur le package `dplyr`.
         pour télécharger la donnée ; vous verrez le fichier `.csv` brut dans le
         navigateur. Enregistrez le sur votre PC à l'endroit approprié).
     2. Joignez la donnée spatiale aux données INSEE (*cf.* @sec-join).
-
 :::
 
 
