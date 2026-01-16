@@ -446,8 +446,8 @@ appuierez sur le package `dplyr`.
 1. **Sélection des variables : `select()`**
 
     1. Sélectionner les variables `island` et `bill_len`.
-    2. Sélectionner uniquement les variables numériques
-    3. Sélectionner toutes les variables qualitatives sauf `island`
+    2. Sélectionner uniquement les variables numériques.
+    3. Sélectionner toutes les variables qualitatives sauf `island`.
 
 ```{r}
 #| collapse: true
@@ -514,14 +514,14 @@ filt_3 <- na.omit(penguins)
 3. **Créer et modifier des variables : `mutate()`**
 
     1. Convertissez l'unité des nageoires '`flipper_len`' en cm.
-    2. Créer un indicateur correspondant à la longueur du bec (`bill_len`) divisé
+    2. Créer un indicateur correspondant à la longueur du bec (`bill_len`) divisée
        par sa profondeur (`bill_dep`).
 
 4. **Résumé de DF :** `summarise()/group_by()`
 
     1. Calculer la médiane et l'amplitude de `bill_len`.
     2. Calculer la médiane de chaque variable numérique.
-    3. Calculer la médiane de la longueur du bec par espèce
+    3. Calculer la médiane de la longueur du bec par espèce.
     3. Calculer la médiane de la longueur du bec par espèce et par sexe.
 
 5. **Jointure de données :**
@@ -536,7 +536,6 @@ filt_3 <- na.omit(penguins)
         navigateur. Enregistrez le sur votre PC à l'endroit approprié).
     2. Joignez la donnée spatiale aux données INSEE (*cf.* @sec-join).
 :::
-
 
 ### Références
 
