@@ -584,6 +584,33 @@ suma_4
     2. Joignez la donnée spatiale aux données INSEE (*cf.* @sec-join).
 :::
 
+::: {.callout-note title="Instructions bonus" collapse=true}
+
+**Données :** `penguins` du package `palmerpenguins`
+
+1. Calculez la masse moyenne par espèce.
+2. Calculez le nombre de pingouins par île et par an.
+3. Pour les pingouins Adélie, quel sexe est le plus représenté ?
+4. Quelle est la masse moyenne (en kilo) des femelles Adélie de l'île de
+   Torgersen ?
+5. Existe-t-il une différence de la longueur moyenne du bec entre les
+   différentes espèces (attention comparé ce qui est comparable (sexe)).
+
+**Données :**
+[`starwars`](https://dplyr.tidyverse.org/reference/starwars.html?q=starwars#ref-usage)
+du package `dplyr`.
+
+1. Quels sont les personnages de Star-Wars qui ont les cheveux noirs ?
+2. Qui est le personnage le plus grand ?
+3. Qui est le personnage le plus vieux ?
+4. Quel est le genre le plus représenté ?
+5. Quelle est la planète d'origine la plus représentée ?
+6. Quelle est la taille moyenne des personnages originaires de Tatooine (comparé
+    ce qui est comparable : sexe, espèce, etc.). Donnez le résultat en mètre.
+7. Parmi les personnages originaires de Naboo, quelle est la couleur de cheveux
+   la plus représentée.
+:::
+
 ### Références
 
 Cheat sheet :
