@@ -517,12 +517,59 @@ filt_3 <- na.omit(penguins)
     2. Créer un indicateur correspondant à la longueur du bec (`bill_len`) divisée
        par sa profondeur (`bill_dep`).
 
+```{r}
+#| collapse: true
+#| code-fold: true
+
+# Exercice 1 ------------------------------------------------------------------
+mut_1 <- mutate(penguins, flipper_len_cm = flipper_len / 10)
+head(mut_1)
+
+# Exercice 2 ------------------------------------------------------------------
+mut_2 <- mutate(penguins, len_div_dep = bill_len / bill_dep)
+head(mut_2)
+```
+
+
 4. **Résumé de DF :** `summarise()/group_by()`
 
     1. Calculer la médiane et l'amplitude de `bill_len`.
     2. Calculer la médiane de chaque variable numérique.
     3. Calculer la médiane de la longueur du bec par espèce.
     3. Calculer la médiane de la longueur du bec par espèce et par sexe.
+
+```{r}
+#| collapse: true
+#| code-fold: true
+#| warning: false
+
+# Exercice 1 ------------------------------------------------------------------
+# Supprimer les NAs
+penguins <- na.omit(penguins)
+# Calculer la médiane et l'amplitude
+suma_1 <- summarise(
+    penguins,
+    med_bill_len = median(bill_len),
+    range_bill_len = range(bill_len)
+)
+suma_1
+
+# Exercice 2 ------------------------------------------------------------------
+suma_2 <- summarise(penguins, across(where(is.numeric), ~mean(.x)))
+suma_2
+
+# Exercice 3 ------------------------------------------------------------------
+suma_3 <- penguins |>
+    group_by(species) |>
+    summarise(med_bill_len = median(bill_len))
+suma_3
+
+# Exercice 4 ------------------------------------------------------------------
+suma_4 <- penguins |>
+    group_by(species, sex) |>
+    summarise(med_bill_len = median(bill_len))
+suma_4
+```
 
 5. **Jointure de données :**
 
