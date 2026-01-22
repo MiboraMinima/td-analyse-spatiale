@@ -1049,6 +1049,20 @@ Instructions bonus
 <li>Quelle est la taille moyenne des personnages originaires de Tatooine (comparé ce qui est comparable : sexe, espèce, etc.). Donnez le résultat en mètre.</li>
 <li>Parmi les personnages originaires de Naboo, quelle est la couleur de cheveux la plus représentée.</li>
 </ol>
+<p><strong>Exercice jointure :</strong> données issues du package <a href="https://cdalzell.github.io/Lahman"><code>Lahman</code></a>. Regardez le schéma de la base de données dans la description du package. Vous remarquerez que les tables (les tableaux de données) sont associées les unes aux autres par des ID.</p>
+<ol type="1">
+<li>Qui est le joueur qui a joué le plus de matchs dans sa carrière ?
+<ul>
+<li>Vous utiliserez la table <a href="https://cdalzell.github.io/Lahman/reference/People.html"><code>People</code></a> et la table <a href="https://cdalzell.github.io/Lahman/reference/Batting.html"><code>Batting</code></a>. Regardez la documentation du package pour voir quel nom de colonne correspond à quoi.</li>
+<li>Il y a beaucoup de colonnes, pensez à ne sélectionner que celles qui vous intéressent.</li>
+<li>Pour obtenir le résultat final, il faudra agréger ;)</li>
+</ul></li>
+<li>Récupérer le nom des écoles auxquelles chacun des joueurs (table <code>People</code>) a été rattaché au cours de sa carrière.
+<ul>
+<li>Il vous faudra passer par la table <code>CollegePlaying</code> pour récupérer l’ID des écoles. Le nom des écoles est disponible dans la table <code>Schools</code>. Il y a donc deux jointures à faire.</li>
+<li>Il y a beaucoup de colonnes, pensez à ne sélectionner que celles qui vous intéressent.</li>
+</ul></li>
+</ol>
 </div>
 </div>
 </div>

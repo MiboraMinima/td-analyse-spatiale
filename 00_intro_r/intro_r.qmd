@@ -609,6 +609,29 @@ du package `dplyr`.
     ce qui est comparable : sexe, espèce, etc.). Donnez le résultat en mètre.
 7. Parmi les personnages originaires de Naboo, quelle est la couleur de cheveux
    la plus représentée.
+
+**Exercice jointure :** données issues du package
+[`Lahman`](https://cdalzell.github.io/Lahman). Regardez le schéma de la base de
+données dans la description du package. Vous remarquerez que les tables (les
+tableaux de données) sont associées les unes aux autres par des ID.
+
+1. Qui est le joueur qui a joué le plus de matchs dans sa carrière ?
+    + Vous utiliserez la table
+    [`People`](https://cdalzell.github.io/Lahman/reference/People.html) et la
+    table [`Batting`](https://cdalzell.github.io/Lahman/reference/Batting.html).
+    Regardez la documentation du package pour voir quel nom de colonne
+    correspond à quoi.
+    + Il y a beaucoup de colonnes, pensez à ne sélectionner que celles qui vous
+    intéressent.
+    + Pour obtenir le résultat final, il faudra agréger ;)
+2. Récupérer le nom des écoles auxquelles chacun des joueurs (table `People`) a été
+rattaché au cours de sa carrière.
+    + Il vous faudra passer par la table `CollegePlaying` pour récupérer l'ID
+    des écoles. Le nom des écoles est disponible dans la table `Schools`. Il y a
+    donc deux jointures à faire.
+    + Il y a beaucoup de colonnes, pensez à ne sélectionner que celles qui vous
+    intéressent.
+
 :::
 
 ### Références
