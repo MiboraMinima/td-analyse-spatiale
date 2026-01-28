@@ -12,6 +12,7 @@ book:
     - part: "Travaux dirigés"
       chapters:
         - 00_intro_r/intro_r.qmd
+        - 01_points/semi_points.qmd
     - part: "Algorithmique"
       chapters:
       - ressources/algorithmique/structure_donnees.qmd
