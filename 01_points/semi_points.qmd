@@ -103,7 +103,7 @@ reactable::reactable(
 
 :::{.callout-note title="Instructions"}
 Chargez le jeu de données avec la fonction `readr::read_csv()` (*c.f.*
-@sec-io-df). Téléchargez la donnée en cliquant [ici]()
+@sec-io-df). Téléchargez la donnée en cliquant [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/us_population_by_state.csv).
 :::
 
 ```{r}
