@@ -173,6 +173,12 @@ Cliquez
 [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/states.gpkg)
 pour télécharger la donnée. Utisez la fonction `sf::read_sf()` pour charger la
 donnée.
+
+Pour convertir la projection, on utilise la fonction `sf::st_transform()`
+
+```{r}
+states <- st_transform(states, crs = 5070)
+```
 :::
 
 ::: {.callout-warning title="Rappel"}
