@@ -151,8 +151,10 @@ données récupérées, on les projette en NAD83 (le référentiel métrique des
 équivalent de notre lambert93).
 
 ```{r}
+# install.packages("sf")
 # install.packages("rnaturalearth")
 # install.packages("rnaturalearthdata")
+# library(sf)
 # library(rnaturalearth)
 # library(rnaturalearthdata)
 
