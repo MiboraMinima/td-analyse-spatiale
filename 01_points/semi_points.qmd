@@ -63,6 +63,29 @@ questionnement (en lisant la littérature scientifique).
 
 ## Données
 
+```{r}
+#| echo: false
+#| output: false
+
+# Installez pacman avant de pouvoir utiliser la fonction p_load()
+# install.packages("pacman")
+pacman::p_load(
+  # Lire et manipuler les données
+  readr,
+  dplyr,
+  glue,
+  # Données spatiales et manipulation de données spatiales
+  rnaturalearth,
+  rnaturalearthdata,
+  sf,
+  # Visualisation de données
+  patchwork,
+  gganimate,
+  ggplot2,
+  ggforce
+)
+```
+
 Pour répondre au questionnement et au vu de la méthode retenue, il faut trouver
 une donnée qui enregistre la population des États-Unis à une échelle spatiale
 cohérente et sur un pas de temps régulier (pour évaluer la tendance temporelle).
@@ -104,38 +127,16 @@ reactable::reactable(
 :::{.callout-note title="Instructions"}
 Chargez le jeu de données avec la fonction `readr::read_csv()` (*c.f.*
 @sec-io-df). Téléchargez la donnée en cliquant [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/us_population_by_state.csv).
-:::
 
 ```{r}
-#| echo: false
-#| output: false
-
-# Installez pacman avant de pouvoir utiliser la fonction p_load()
-# install.packages("pacman")
-pacman::p_load(
-  # Lire et manipuler les données
-  readr,
-  dplyr,
-  glue,
-  # Données spatiales et manipulation de données spatiales
-  rnaturalearth,
-  rnaturalearthdata,
-  sf,
-  # Visualisation de données
-  patchwork,
-  gganimate,
-  ggplot2,
-  ggforce
-)
-
-# Rentré le chemin de votre dossier figures
-FIG_DIR <- "figures"
-# Rentré le chemin de votre dossier data
-DATA_DIR <- "data"
+#| collapse: true
+#| code-fold: true
 
 # Read pop data
-dt <- read_csv(glue("{DATA_DIR}/src/us_population_by_state.csv"))
+dt <- read_csv("data/src/us_population_by_state.csv")
 ```
+:::
+
 
 À ce stade vous disposez de presque toutes les données nécessaires : l'année,
 l'état et la population. Cependant, l'information spatiale n'est pas
@@ -151,34 +152,42 @@ données récupérées, on les projette en NAD83 (le référentiel métrique des
 équivalent de notre lambert93).
 
 ```{r}
-#| echo: false
-#| output: false
+#| echo: true
 
-# install.packages("sf")
-# install.packages("rnaturalearth")
-# install.packages("rnaturalearthdata")
-# library(sf)
-# library(rnaturalearth)
-# library(rnaturalearthdata)
+# Récupérer les états des USA (1:50m scale)
+states <- ne_states(country = "United States of America", returnclass = "sf")
 
-# Get US states polygons (1:50m scale)
-# Convert to appropriate metric datum :
-# NAD83 / Conus Albers Equal Area Projection
-states <- ne_states(country = "United States of America", returnclass = "sf") |>
-  st_transform(crs = 5070)
+# Pour le détail de la projection
+st_crs(states)
 ```
 
 ::: {.callout-note title="Instructions"}
-Cliquez
-[ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/states.gpkg)
-pour télécharger la donnée. Utisez la fonction `sf::read_sf()` pour charger la
-donnée.
 
-Pour convertir la projection, on utilise la fonction `sf::st_transform()`
+1. Récupérer la donnée avec `rnaturalearth`.
+    - (bis) Dans le cas où `rnaturalearth` ne fonctionnerait pas, vous pouvez
+    télécharger la donnée
+    [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/states.gpkg).
+    Pour lire une donnée spatiale on utilise le package `sf` avec la fonction
+    `read_sf()` qui s'utilise d'une façon similaire à `readr::read_csv()`.
+2. Convertissez la donnée en NAD83 (EPSG:5070).
+
+Pour convertir un objet `sf` dans un autre système de projection, on utilise la
+fonction `sf::st_transform()`.
 
 ```{r}
 states <- st_transform(states, crs = 5070)
 ```
+
+```{r}
+#| collapse: true
+#| code-fold: true
+#| eval: false
+
+# Dans le cas où rnaturalearth ne fonctionnerait pas :
+states <- read_sf("data/src/states.gpkg")
+states <- st_transform(states, crs = 5070)
+```
+
 :::
 
 ::: {.callout-warning title="Rappel"}
@@ -201,19 +210,25 @@ Pourquoi doit-on convertir la donnée spatiale dans un référentiel métrique ?
 
 :::{.callout-note title="Instructions"}
 Supprimer l'Alaska et Hawaii dans les deux jeux de données.
-:::
-:::{.callout-tip title="Question"}
-Pourquoi les supprime-t-on ?
-:::
 
 ```{r}
-#| echo: false
-#| output: false
+#| collapse: true
+#| code-fold: true
 
 to_remove <- c("Hawaii", "Alaska")
 dt <- filter(dt, !state %in% to_remove)
 states <- filter(states, !name %in% to_remove)
+
+# Équivalent à (moins élégant) :
+dt <- filter(dt, state != "Hawaii", state != "Alaska")
+states <- filter(states, name != "Hawaii", name != "Alaska")
 ```
+:::
+
+:::{.callout-tip title="Question"}
+Pourquoi les supprime-t-on ?
+:::
+
 
 ### Calcul des centroïdes des états
 
