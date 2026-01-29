@@ -151,6 +151,9 @@ données récupérées, on les projette en NAD83 (le référentiel métrique des
 équivalent de notre lambert93).
 
 ```{r}
+#| echo: false
+#| output: false
+
 # install.packages("sf")
 # install.packages("rnaturalearth")
 # install.packages("rnaturalearthdata")
@@ -165,7 +168,12 @@ states <- ne_states(country = "United States of America", returnclass = "sf") |>
   st_transform(crs = 5070)
 ```
 
-Cliquez [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/states.gpkg). pour télécharger la donnée.
+::: {.callout-note title="Instructions"}
+Cliquez
+[ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/states.gpkg)
+pour télécharger la donnée. Utisez la fonction `sf::read_sf()` pour charger la
+donnée.
+:::
 
 ::: {.callout-warning title="Rappel"}
 

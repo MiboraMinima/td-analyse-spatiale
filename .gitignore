@@ -12,3 +12,7 @@ logs/
 
 # Keep those
 !00_intro_r/data
+!01_points/data
+
+scratch/
+*.r
