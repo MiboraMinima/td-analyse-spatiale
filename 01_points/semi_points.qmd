@@ -165,6 +165,8 @@ states <- ne_states(country = "United States of America", returnclass = "sf") |>
   st_transform(crs = 5070)
 ```
 
+Cliquez [ici](https://github.com/MiboraMinima/td-analyse-spatiale/raw/refs/heads/main/01_points/data/src/states.gpkg). pour télécharger la donnée.
+
 ::: {.callout-warning title="Rappel"}
 
 À chaque fois que vous voyez un nouveau package vous devez l'installer et le
