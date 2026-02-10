@@ -431,7 +431,7 @@ ggplot(mtcars, aes(x = as.factor(cyl), y = mpg)) +
   )
 ```
 
-### Combiner des graphs
+### Combiner des graphs {#sec-comb-plots}
 
 Il existe de nombreux packages pour combiner des graphs `ggplot` sous `R`, voici
 les plus utilisés :
