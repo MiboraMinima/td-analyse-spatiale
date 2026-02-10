@@ -74,6 +74,7 @@ pacman::p_load(
   readr,
   dplyr,
   glue,
+  plyr,
   # Données spatiales et manipulation de données spatiales
   rnaturalearth,
   rnaturalearthdata,
@@ -229,7 +230,6 @@ states <- filter(states, name != "Hawaii", name != "Alaska")
 Pourquoi les supprime-t-on ?
 :::
 
-
 ### Calcul des centroïdes des états
 
 Le code ci-dessous nécessite les packages `dplyr` et
@@ -322,14 +322,13 @@ Sous `R`, on écrira  : `sqrt(sum(z * ((x - mean(x_pond))^2 + (y - mean(y_pond))
    standard. Utilisez le jeu de données des centroïdes des états
 (`state_centroids`). Le résultat doit être un `data.frame` d'une seule ligne
 avec trois variables : $\bar{x}$, $\bar{y}$ et $\text{SD}$. Vous utiliserez la
-fonction `dplyr::summarise()` (*c.f.* @sec-agg).
+fonction `dplyr::summarise()`.
 2. Calculer le centre de gravité des états pondéré par la population avec sa
    distance standard pour toutes les années depuis 1790. Utilisez le jeu de
 données issu de la jointure entre les centroïdes des états (`state_centroids`)
 et celui issu du filtrage des données. Le résultat doit être un `data.frame`
 avec quatre variables : l'année, $\bar{x}_z$, $\bar{y}_z$ et $\text{SD}_z$. Vous
-utiliserez les fonctions `group_by()` et `summarise()` du package `dplyr`
-(*c.f.* @sec-agg).
+utiliserez les fonctions `group_by()` et `summarise()` du package `dplyr`.
 
 Au final, vous aurez donc deux jeux de données :
 
@@ -361,6 +360,29 @@ center_pondered <- data_joined |>
   )
 ```
 
+::: {.callout-tip title="Les packages pour l'analyse centrographique"
+collapse=true}
+
+Je vous demande d'écrire les formules vous même pour vous entraîner. Sachez
+qu'il existe également des packages qui intègrent des fonctions pour ce genre
+d'analyse :
+
+- [`aspace`](https://cran.r-project.org/web/packages/aspace/index.html)
+    - **Fonctions :** nombreuses fonctions, on peut réaliser l'ensemble de ce
+    qu'il est possible de faire en analyse centrographique.
+    - **Points forts :** bien pour contrôler dans le détail l'analyse.
+    - **Points faible :** moins *user-friendly* que `sfcentral`, pas intégré à
+    `sf`.
+
+- [`sfcentral`](https://gavg712.gitlab.io/sfcentral/) :
+    - **Fonctions :** indicateurs de centralité, distance standard (boîte (2D, 3D),
+    cercle), ellipse de distribution directionnelle.
+    - **Points forts :** récent (donc moderne), adapté au `tidyverse` (*e.g.*
+    `dplyr`)
+    - **Point faible :** récent (donc peu mature)
+
+:::
+
 ### Cartographie des résultats
 
 #### Analyse non-pondérée
@@ -383,7 +405,7 @@ nom des jeux de données et des variables :
 ```{r}
 #| eval: true
 
-ggplot() +
+map_unpondered <- ggplot() +
   # [ Couche des états ]
   geom_sf(data = states) + # Le jeu de données spatiales brute
   # [ La distance standard ]
@@ -427,24 +449,90 @@ ggplot() +
   ) +
   # Theme
   theme_minimal()
+map_unpondered
 ```
 :::
 
 #### Analyse pondérée
 
 :::{.callout-note title="Instructions"}
-Cartoragphiez le centre pondéré de la population des états-Unis depuis 1970 avec
-leur distance standard avec le package `ggplot2`.
+Cartographiez le centre pondéré de la population des États-Unis depuis 1970 et
+sa distance standard avec le package `ggplot2`.
 
-Créez un nouveau une nouvelle sur la base de l'ancienne. Il vous faudra "juste"
-changer certains jeu de données et nom de variables.
+Créez une nouvelle carte sur la base de l'ancienne. Il vous faudra "juste"
+**changer certains jeux de données et nom de variables**.
 
-Vous ajouterez le centre non-pondéré pour comparer.
+Vous conserverez le centre non-pondéré pour comparer.
 
 Interprétez la carte.
 :::
 
+```{r}
+#| eval: true
+#| output: false
+#| echo: false
+
+map_pondered <- ggplot() +
+  # [ Couche des états ]
+  geom_sf(data = states) + # Le jeu de données spatiales brute
+  # [ La distance standard ]
+  ggforce::geom_circle(
+    data = center_pondered, # votre jeu de données non-pondéré
+    aes(
+      x0 = cw_x, # La moyenne des x
+      y0 = cw_y, # La moyenne des y
+      r = cw_sd,  # la distance standard
+      color = year,
+    ),
+    # Symbologie
+    fill = NA, alpha = 0.1, inherit.aes = FALSE
+  ) +
+  # [ Le centroïde des états ]
+  geom_point(
+    data = state_centroids, # Le jeu de données contenant les centroïde
+    aes(
+      x = x, # Les x
+      y = y  # Les y
+    ),
+    # Symbologie
+    color = "grey"
+  ) +
+  # [ Les centres moyens pondérés ]
+  geom_point(
+    data = center_pondered, # Le jeu de données non-pondéré
+    aes(
+      x = cw_x, # La moyenne des x
+      y = cw_y,  # La moyenne des y
+      fill = year
+    ),
+    # Symbologie
+    color = "white", shape = 21, size = 3
+  ) +
+  # [ Le centre moyen pondéré ]
+  geom_point(
+    data = center_unpondered, # Le jeu de données non-pondéré
+    aes(
+      x = c_x, # La moyenne des x
+      y = c_y  # La moyenne des y
+    ),
+    # Symbologie
+    color = "black", shape = 21, fill = "red", size = 3
+  ) +
+  # Titre, labels des axes, sources et réalisation
+  labs(
+    title = "Titre",
+    subtitle = "Sous-titre",
+    x = "",
+    y = "",
+    caption = "Données : .... Réalisation: ..."
+  ) +
+  # Theme
+  theme_minimal()
+map_pondered
+```
+
 :::{.callout-note title="Instructions"}
+
 Les distances standards ainsi représentées sont peu lisibles. Retirez cette
 couche de la carte et créez un graphique en ligne pour montrer l'évolution de la
 distance standard depuis 1970. Utilisez la fonction `geom_line()`.
@@ -478,7 +566,7 @@ pond_sd_line
 ```
 
 Ensuite, combinez la carte et le graph nouvellement créé au moyen de package
-`patchwork`. Utilisez la fonction `wrap_plots()`.
+`patchwork`. Utilisez la fonction `wrap_plots()` (*c.f.* @sec-comb-plots).
 :::
 
 :::{.callout-note title="Instructions (bonus)" collapse="true"}
@@ -488,10 +576,19 @@ Regardez la distribution des années.
 - Quel impact cela a-t-il sur la cartographie ?
 - Comment faire pour pallier ce problème ?
 
-Modifier la variable `year` (utilisez la fonction `plyr::round_any()`). Comme il
-faut modifier une variable, vous utiliserez la fonction `mutate()`. Ensuite, il
-vous faudra aggrégré les données (*c.f.* @sec-agg).
+Modifier la variable `year` (utilisez la fonction `plyr::round_any()`). Ensuite,
+il vous faudra agréger les données.
 :::
+
+```{r}
+#| echo: false
+#| output: false
+
+pond_disc <-
+  mutate(center_pondered, year = as.factor(plyr::round_any(year, 10))) |>
+  group_by(year) |>
+  dplyr::summarise(across(everything(), ~mean(.x)))
+```
 
 #### Cartographie animée
 
@@ -500,12 +597,15 @@ Sous R, on peut facilement animer un graph `ggplot2` en utilisant le package
 centrographique temporelle.
 
 :::{.callout-note title="Instructions"}
+
 Créez une carte avec `ggplot2` les couches suivantes :
 
 - Fond de carte des USA
 - Centres pondérés de la population
+- Distance standard pondérée de la population
 
-Ajoutez les lignes suivantes à votre code `ggplot2` :
+Appuyez-vous sur les cartes précédentes. Ajoutez les lignes suivantes à votre
+code `ggplot2` :
 
 ```{r}
 #| eval: false
@@ -523,10 +623,11 @@ anim <- ggplot() +
     shadow_mark(
         past = TRUE,
         alpha = 0.5,
-        colour = "black",
-        # l'argument exclude_layer vous permet de supprimer une des couches de votre
-        # objet ggplot pour les années passées.
-        # exclude_layer = 3
+        colour = "red",
+        # l'argument exclude_layer vous permet de supprimer des couches de votre
+        # objet ggplot pour les années passées. Le chiffre indiquent l'ordre
+        # d'apparition des couches.
+        # exclude_layer = c(3, 4)
     )
 ```
 
@@ -554,3 +655,56 @@ aboutir à un rendu similaire.
 ![Centre moyen pondéré de la population des États-Unis depuis 1790 (United
 States Census Bureau, 2025)](./figures/weighted_center.gif){#fig-anim}
 
+```{r}
+#| eval: false
+#| echo: false
+
+p <- ggplot() +
+  geom_sf(data = states) +
+  geom_point(data = pond_disc, aes(x = cw_x, y = cw_y), color = "red", size = 4) +
+  geom_text(
+    data = pond_disc,
+    aes(x = cw_x, y = cw_y, label = year),
+    color = "red", vjust = -1, size = 4
+  ) +
+  ggforce::geom_circle(
+    data = pond_disc, # votre jeu de données non-pondéré
+    aes(
+      x0 = cw_x, # La moyenne des x
+      y0 = cw_y, # La moyenne des y
+      r = cw_sd  # la distance standard
+    ),
+    # Symbologie
+    fill = "transparent", color = "black", inherit.aes = FALSE,
+    linewidth = 1
+  ) +
+  labs(
+    title = "Centre moyen pondéré de la population des États-Unis",
+    subtitle = "Le cercle représente la distance standard pondérée. Année : {closest_state}",
+    x = "", y = "",
+    caption = "Données : United States Census Bureau, 2025. Réalisation : Antoine Le Doeuff, 2026"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 18, face = "bold"),
+    plot.subtitle = element_text(size = 14, face = "italic"),
+  ) +
+  transition_states(year) +
+  shadow_mark(
+    past = TRUE,
+    alpha = 0.3,
+    colour = "red",
+    exclude_layer = c(3, 4)
+  )  # leaves fading trail
+
+# Render and store animation
+# anim <- animate(
+#   p,
+#   duration = 10,
+#   fps = 20,
+#   width = 800,
+#   height = 500,
+#   renderer = gifski_renderer(glue::glue("{FIG_DIR}/weighted_center.gif"))
+# )
+
+```

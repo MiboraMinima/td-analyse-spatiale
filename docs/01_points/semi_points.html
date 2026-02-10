@@ -698,14 +698,44 @@ Instructions
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Calculer le centre de gravité non pondéré des états avec sa distance standard. Utilisez le jeu de données des centroïdes des états (<code>state_centroids</code>). Le résultat doit être un <code>data.frame</code> d’une seule ligne avec trois variables : <span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(\bar{y}\)</span> et <span class="math inline">\(\text{SD}\)</span>. Vous utiliserez la fonction <code>dplyr::summarise()</code> (<em>c.f.</em> <a href="../ressources/data_process/data_basic.html#sec-agg" class="quarto-xref"><span>Section 5.1.4</span></a>).</li>
-<li>Calculer le centre de gravité des états pondéré par la population avec sa distance standard pour toutes les années depuis 1790. Utilisez le jeu de données issu de la jointure entre les centroïdes des états (<code>state_centroids</code>) et celui issu du filtrage des données. Le résultat doit être un <code>data.frame</code> avec quatre variables : l’année, <span class="math inline">\(\bar{x}_z\)</span>, <span class="math inline">\(\bar{y}_z\)</span> et <span class="math inline">\(\text{SD}_z\)</span>. Vous utiliserez les fonctions <code>group_by()</code> et <code>summarise()</code> du package <code>dplyr</code> (<em>c.f.</em> <a href="../ressources/data_process/data_basic.html#sec-agg" class="quarto-xref"><span>Section 5.1.4</span></a>).</li>
+<li>Calculer le centre de gravité non pondéré des états avec sa distance standard. Utilisez le jeu de données des centroïdes des états (<code>state_centroids</code>). Le résultat doit être un <code>data.frame</code> d’une seule ligne avec trois variables : <span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(\bar{y}\)</span> et <span class="math inline">\(\text{SD}\)</span>. Vous utiliserez la fonction <code>dplyr::summarise()</code>.</li>
+<li>Calculer le centre de gravité des états pondéré par la population avec sa distance standard pour toutes les années depuis 1790. Utilisez le jeu de données issu de la jointure entre les centroïdes des états (<code>state_centroids</code>) et celui issu du filtrage des données. Le résultat doit être un <code>data.frame</code> avec quatre variables : l’année, <span class="math inline">\(\bar{x}_z\)</span>, <span class="math inline">\(\bar{y}_z\)</span> et <span class="math inline">\(\text{SD}_z\)</span>. Vous utiliserez les fonctions <code>group_by()</code> et <code>summarise()</code> du package <code>dplyr</code>.</li>
 </ol>
 <p>Au final, vous aurez donc deux jeux de données :</p>
 <ul>
 <li>Un d’une seule ligne contenant le centre de gravité non pondéré et sa distance standard.</li>
 <li>Un contenant, pour chaque année, le centre de gravité pondéré par la population et sa distance standard pondérée.</li>
 </ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Les packages pour l'analyse centrographique">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Les packages pour l’analyse centrographique
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Je vous demande d’écrire les formules vous même pour vous entraîner. Sachez qu’il existe également des packages qui intègrent des fonctions pour ce genre d’analyse :</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/aspace/index.html"><code>aspace</code></a>
+<ul>
+<li><strong>Fonctions :</strong> nombreuses fonctions, on peut réaliser l’ensemble de ce qu’il est possible de faire en analyse centrographique.</li>
+<li><strong>Points forts :</strong> bien pour contrôler dans le détail l’analyse.</li>
+<li><strong>Points faible :</strong> moins <em>user-friendly</em> que <code>sfcentral</code>, pas intégré à <code>sf</code>.</li>
+</ul></li>
+<li><a href="https://gavg712.gitlab.io/sfcentral/"><code>sfcentral</code></a> :
+<ul>
+<li><strong>Fonctions :</strong> indicateurs de centralité, distance standard (boîte (2D, 3D), cercle), ellipse de distribution directionnelle.</li>
+<li><strong>Points forts :</strong> récent (donc moderne), adapté au <code>tidyverse</code> (<em>e.g.</em> <code>dplyr</code>)</li>
+<li><strong>Point faible :</strong> récent (donc peu mature)</li>
+</ul></li>
+</ul>
+</div>
 </div>
 </div>
 <section id="cartographie-des-résultats" class="level3 page-columns page-full" data-number="2.4.1">
@@ -722,7 +752,7 @@ Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cartographiez le centre non pondéré des États-Unis avec sa distance standard avec le package <code>ggplot2</code> (<em>c.f.</em> <a href="../ressources/viz/graph.html#sec-ggplot" class="quarto-xref"><span>Section 6.2</span></a> pour les graphs avec <code>ggplot2</code> et <a href="../ressources/viz/map.html#sec-carto-ggplot" class="quarto-xref"><span>Section 7.1</span></a> pour la carto, <strong>Attention nouveau package</strong>).</p>
+<p>Cartographiez le centre non pondéré des États-Unis avec sa distance standard avec le package <code>ggplot2</code> (<em>c.f.</em> <a href="../ressources/viz/graph.html#sec-ggplot" class="quarto-xref"><span>Section 7.2</span></a> pour les graphs avec <code>ggplot2</code> et <a href="../ressources/viz/map.html#sec-carto-ggplot" class="quarto-xref"><span>Section 8.1</span></a> pour la carto, <strong>Attention nouveau package</strong>).</p>
 <p>Vous aurez les couches suivantes :</p>
 <ul>
 <li>Fond de carte : les USA (<code>geom_sf()</code>)</li>
@@ -732,7 +762,7 @@ Instructions
 </ul>
 <p>Vous vous appuierez sur le code ci-dessous. Vous aurez sans-doute à changer le nom des jeux de données et des variables :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>map_unpondered <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Couche des états ]</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span> <span class="co"># Le jeu de données spatiales brute</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ La distance standard ]</span></span>
@@ -775,7 +805,8 @@ Instructions
 <span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Données : .... Réalisation: ..."</span></span>
 <span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Theme</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>map_unpondered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -799,9 +830,9 @@ Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cartoragphiez le centre pondéré de la population des états-Unis depuis 1970 avec leur distance standard avec le package <code>ggplot2</code>.</p>
-<p>Créez un nouveau une nouvelle sur la base de l’ancienne. Il vous faudra “juste” changer certains jeu de données et nom de variables.</p>
-<p>Vous ajouterez le centre non-pondéré pour comparer.</p>
+<p>Cartographiez le centre pondéré de la population des États-Unis depuis 1970 et sa distance standard avec le package <code>ggplot2</code>.</p>
+<p>Créez une nouvelle carte sur la base de l’ancienne. Il vous faudra “juste” <strong>changer certains jeux de données et nom de variables</strong>.</p>
+<p>Vous conserverez le centre non-pondéré pour comparer.</p>
 <p>Interprétez la carte.</p>
 </div>
 </div>
@@ -845,16 +876,16 @@ Instructions
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="semi_points_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="semi_points_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Ensuite, combinez la carte et le graph nouvellement créé au moyen de package <code>patchwork</code>. Utilisez la fonction <code>wrap_plots()</code>.</p>
+<p>Ensuite, combinez la carte et le graph nouvellement créé au moyen de package <code>patchwork</code>. Utilisez la fonction <code>wrap_plots()</code> (<em>c.f.</em> <a href="../ressources/viz/graph.html#sec-comb-plots" class="quarto-xref"><span>Section 7.2.4</span></a>).</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Instructions (bonus)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -863,7 +894,7 @@ Instructions (bonus)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Regardez la distribution des années.</p>
 <ul>
@@ -871,7 +902,7 @@ Instructions (bonus)
 <li>Quel impact cela a-t-il sur la cartographie ?</li>
 <li>Comment faire pour pallier ce problème ?</li>
 </ul>
-<p>Modifier la variable <code>year</code> (utilisez la fonction <code>plyr::round_any()</code>). Comme il faut modifier une variable, vous utiliserez la fonction <code>mutate()</code>. Ensuite, il vous faudra aggrégré les données (<em>c.f.</em> <a href="../ressources/data_process/data_basic.html#sec-agg" class="quarto-xref"><span>Section 5.1.4</span></a>).</p>
+<p>Modifier la variable <code>year</code> (utilisez la fonction <code>plyr::round_any()</code>). Ensuite, il vous faudra agréger les données.</p>
 </div>
 </div>
 </div>
@@ -893,8 +924,9 @@ Instructions
 <ul>
 <li>Fond de carte des USA</li>
 <li>Centres pondérés de la population</li>
+<li>Distance standard pondérée de la population</li>
 </ul>
-<p>Ajoutez les lignes suivantes à votre code <code>ggplot2</code> :</p>
+<p>Appuyez-vous sur les cartes précédentes. Ajoutez les lignes suivantes à votre code <code>ggplot2</code> :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertissez l'année en facteur dans votre tableau des centres pondérés</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_pondered, <span class="at">year =</span> <span class="fu">as.factor</span>(year))</span>
@@ -909,11 +941,12 @@ Instructions
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shadow_mark</span>(</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">past =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> <span class="st">"black"</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># l'argument exclude_layer vous permet de supprimer une des couches de votre</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># objet ggplot pour les années passées.</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># exclude_layer = 3</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> <span class="st">"red"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># l'argument exclude_layer vous permet de supprimer des couches de votre</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># objet ggplot pour les années passées. Le chiffre indiquent l'ordre</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># d'apparition des couches.</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># exclude_layer = c(3, 4)</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Puis rendez l’animation :</p>
 <div class="cell">
