@@ -13,6 +13,9 @@ book:
       chapters:
         - 00_intro_r/intro_r.qmd
         - 01_points/semi_points.qmd
+    - part: "Devoir maison"
+      chapters:
+        - DM01_centro/dm01_centro.qmd
     - part: "Algorithmique"
       chapters:
       - ressources/algorithmique/structure_donnees.qmd

@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Antoine Le Doeuff">
-<meta name="dcterms.date" content="2026-01-07">
 
-<title>TD analyse spatiale</title>
+<title>3&nbsp; DM01 : analyse centrographique – TD analyse spatiale</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,24 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./00_intro_r/intro_r.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c0f8282d1904867bd677e0497fc46e93.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../ressources/algorithmique/structure_donnees.html" rel="next">
+<link href="../01_points/semi_points.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c0f8282d1904867bd677e0497fc46e93.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -74,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -83,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Informations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html">Devoir maison</a></li><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -98,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">TD analyse spatiale</a> 
+      <a href="../">TD analyse spatiale</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -110,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Informations</span></a>
   </div>
 </li>
@@ -125,13 +124,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00_intro_r/intro_r.html" class="sidebar-item-text sidebar-link">
+  <a href="../00_intro_r/intro_r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à R et RStudio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_points/semi_points.html" class="sidebar-item-text sidebar-link">
+  <a href="../01_points/semi_points.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analyse centrographique</span></span></a>
   </div>
 </li>
@@ -148,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DM01_centro/dm01_centro.html" class="sidebar-item-text sidebar-link">
+  <a href="../DM01_centro/dm01_centro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></span></a>
   </div>
 </li>
@@ -165,13 +164,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/algorithmique/structure_donnees.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/algorithmique/structure_donnees.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/algorithmique/structure_controle.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/algorithmique/structure_controle.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
   </div>
 </li>
@@ -188,13 +187,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/data_process/data_basic.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/data_process/data_basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/stats/stats.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/stats/stats.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
   </div>
 </li>
@@ -211,13 +210,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/viz/graph.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/viz/graph.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/viz/map.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/viz/map.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
   </div>
 </li>
@@ -234,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ressources/where_data/where_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../ressources/where_data/where_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
   </div>
 </li>
@@ -245,40 +244,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#informations" id="toc-informations" class="nav-link active" data-scroll-target="#informations">Informations</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html">Devoir maison</a></li><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">TD analyse spatiale</h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Antoine Le Doeuff </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 7, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -288,24 +269,98 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="informations" class="level1 unnumbered">
-<h1 class="unnumbered">Informations</h1>
-<p>En TD :</p>
+<p><strong>Rendu :</strong> lundi 9 mars avant 18h. Depôt sur Moodle.</p>
+<p>À l’échelle de l’unité urbaine Brestoise, vous décrirez et comparerez la distribution spatiale moyenne des populations de trois catégories socio-professionnelles différente (au choix). Vous ne prendrez en compte ni l’âge ni le genre.</p>
+<p>Votre analyse sera réalisée au niveau des IRIS. Vous conduirez une analyse de A à Z, aussi, vous devrez :</p>
+<ol type="1">
+<li>Récupérer les données</li>
+<li>Prétraiter les données</li>
+<li>Analyser les données</li>
+<li>Interpréter les résultats</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled" title="Rendu">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Rendu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Un document pdf structuré et bien mise en page documentant votre travail. Si vous voulez écrire un document markdown ou quarto, c’est également envisageable, à vous de voir. Si cela vous dit, vous me fournirez le fichier <code>.html</code> ou <code>.pdf</code> découlant de la compilation de votre fichier <code>md</code> ou <code>qmd</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.
 <ul>
-<li>TD1 : Introduction à R</li>
-<li>TD2 : Analyse centrographique</li>
-<li>TD3 : Ségrégation spatiale</li>
-<li>TD4 : Réseaux, graphe et accessibilité</li>
-<li>TD5 : Mobilités et flux</li>
-</ul>
-<p>En DM :</p>
+<li><strong>À ne pas faire :</strong>
 <ul>
-<li>DM1 : Analyse centrographique populations, logements, pauvreté</li>
-<li>DM2 : Modèle gravitaire sur flux de pop inter-régions</li>
+<li>Inclure ou commenter du code (l’aspect technique n’est pas évalué dans ce document)</li>
+<li>Inclure un graphique, une carte ou un tableau sans y faire référence dans le texte.</li>
+</ul></li>
+<li><strong>À faire :</strong>
+<ul>
+<li>Toujours définir les concepts que vous employez.</li>
+<li>Adopter une structure claire adaptée à votre travail.</li>
+<li>Mise en page :
+<ul>
+<li>Table des matières</li>
+<li>Titre, noms, etc.</li>
+<li>Pagination</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Votre dossier de travail (scripts, dossiers <code>data</code>, <code>figures</code>, etc.). Votre script <code>R</code> doit être reproductible et doit intégrer l’ensemble de vos traitements.</li>
+</ol>
+</div>
+</div>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Je considère les documents markdown ou quarto comme des documents de mise en forme. Aussi, je ne regarderai pas votre fichier source <code>md</code> ou <code>qmd</code> mais bien votre script <code>R</code> si vous décidez de passer par ce type de document.</p></div></div><div class="callout callout-style-default callout-tip callout-titled" title="Barème /20">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Barème /20
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Partie <code>R</code> (3 pts) :</p>
+<ul>
+<li>Structure du projet, organisation du script, commentaires, etc. (2 pts)</li>
+<li>Reproductibilité du script : quand je ferai tourner le script, il ne doit pas y avoir d’erreur. (1 pts)</li>
 </ul>
+<p>Partie cartographie, graphs (4 pts) :</p>
+<ul>
+<li>Sémiologie graphique. (3 pts)</li>
+<li>Source, Auteur, Date (SAD). Doit apparaître sur toutes les cartes et tous les graphiques. (1 pts)</li>
+</ul>
+<p>Traitements et analyses (13 pts) :</p>
+<ul>
+<li>Pertinence des données employées et des traitements (3 pts)</li>
+<li>Validité et pertinence et des analyses réalisées (5 pts)</li>
+<li>Validité et pertinence des interprétations (5 pts)</li>
+</ul>
+<p>Au regard de ce barème, si vous êtes rigoureux dans l’organisation de votre travail et dans la conception de vos figures, vous avez presque déjà la moyenne.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Exemple de bons travaux">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exemple de bons travaux
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Exemple <a href="docs/audeline_pernot_dm1.pdf">un</a></li>
+<li>Exemple <a href="docs/dm1_chloe_raboin.pdf">deux</a></li>
+</ul>
+<p>Ne copiez pas la structure de ces travaux aveuglement. Contrairement à ces travaux, vous réaliserez des cartes.</p>
+</div>
+</div>
 
 
-</section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -709,10 +764,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../01_points/semi_points.html" class="pagination-link" aria-label="Analyse centrographique">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Analyse centrographique</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_intro_r/intro_r.html" class="pagination-link" aria-label="Introduction à R et RStudio">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction à R et RStudio</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ressources/algorithmique/structure_donnees.html" class="pagination-link" aria-label="Les structures de données">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Les structures de données</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

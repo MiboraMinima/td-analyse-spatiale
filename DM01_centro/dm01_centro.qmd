@@ -1,0 +1,81 @@
+# DM01 : analyse centrographique
+
+**Rendu :** lundi 9 mars avant 18h. Depôt sur Moodle.
+
+À l'échelle de l'unité urbaine Brestoise, vous décrirez et comparerez la
+distribution spatiale moyenne des populations de trois catégories
+socio-professionnelles différente (au choix). Vous ne prendrez en compte ni
+l'âge ni le genre.
+
+Votre analyse sera réalisée au niveau des IRIS. Vous conduirez une analyse
+de A à Z, aussi, vous devrez :
+
+1. Récupérer les données
+2. Prétraiter les données
+3. Analyser les données
+4. Interpréter les résultats
+
+::: {.callout-note title="Rendu"}
+
+1. Un document pdf structuré et bien mise en page documentant votre travail. Si
+   vous voulez écrire un document markdown ou quarto, c'est également
+envisageable, à vous de voir. Si cela vous dit, vous me fournirez le fichier
+`.html` ou `.pdf` découlant de la compilation de votre fichier `md` ou
+`qmd`[^md].
+    - **À ne pas faire :**
+        - Inclure ou commenter du code (l'aspect technique n'est pas évalué dans
+        ce document)
+        - Inclure un graphique, une carte ou un tableau sans y faire référence
+        dans le texte.
+    - **À faire :**
+        - Toujours définir les concepts que vous employez.
+        - Adopter une structure claire adaptée à votre travail.
+        - Mise en page :
+            - Table des matières
+            - Titre, noms, etc.
+            - Pagination
+2. Votre dossier de travail (scripts, dossiers `data`, `figures`, etc.). Votre
+script `R` doit être reproductible et doit intégrer l'ensemble de vos
+traitements.
+
+[^md]: Je considère les documents markdown ou quarto comme des documents de mise
+en forme. Aussi, je ne regarderai pas votre fichier source `md` ou `qmd` mais
+bien votre script `R` si vous décidez de passer par ce type de document.
+
+:::
+
+::: {.callout-tip title="Barème /20"}
+
+Partie `R` (3 pts) :
+
+- Structure du projet, organisation du script, commentaires, etc. (2 pts)
+- Reproductibilité du script : quand je ferai tourner le script, il ne doit pas
+y avoir d'erreur. (1 pts)
+
+Partie cartographie, graphs (4 pts) :
+
+- Sémiologie graphique. (3 pts)
+- Source, Auteur, Date (SAD). Doit apparaître sur toutes les cartes et
+tous les graphiques. (1 pts)
+
+Traitements et analyses (13 pts) :
+
+- Pertinence des données employées et des traitements (3 pts)
+- Validité et pertinence et des analyses réalisées (5 pts)
+- Validité et pertinence des interprétations (5 pts)
+
+Au regard de ce barème, si vous êtes rigoureux dans l'organisation de votre
+travail et dans la conception de vos figures, vous avez presque déjà la moyenne.
+
+:::
+
+::: {.callout-tip title="Exemple de bons travaux"}
+
+- Exemple [un](docs/audeline_pernot_dm1.pdf)
+- Exemple [deux](docs/dm1_chloe_raboin.pdf)
+
+Ne copiez pas la structure de ces travaux aveuglement. Contrairement à ces
+travaux, vous réaliserez des cartes.
+
+:::
+
