@@ -259,7 +259,7 @@ quels sont les attributs de votre couche. Pour cela, on utilise la fonction
 get_wfs_attributes("BDTOPO_V3:commune")
 
 # On récupère guissény
-com <- get_wfs(layer = "BDTOPO_V3:commune", ecql_filter = "code_insee = '29077'")
+com <- get_wfs(layer = "BDTOPO_V3:commune", query = "code_insee = '29077'")
 ```
 
 Un fois que l'on a récupéré la commune, on peut récupérer les batiments qui
@@ -269,7 +269,7 @@ intersectent la commune :
 batiments <- get_wfs(
   x = com,
   layer = "BDTOPO_V3:batiment",
-  spatial_filter = "intersects"
+  predicate = intersects()
 )
 ```
 
