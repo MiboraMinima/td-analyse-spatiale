@@ -259,19 +259,22 @@ Pourquoi calcule-t-on le centroïde des états ?
 
 :::{.callout-note title="Instructions"}
 Joindre les deux jeux de données. Référez-vous à la @sec-join pour les jointures.
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+data_joined <- left_join(dt, state_centroids, by = c("state" = "name"))
+```
+
 :::
 
 :::{.callout-tip title="Question"}
 Pourquoi fait-on cela ?
+
+> On souhaite récupérer les informations spatiales
+
 :::
-
-```{r}
-#| echo: false
-#| output: false
-
-### Calculer les indicateurs de centrographie
-data_joined <- left_join(dt, state_centroids, by = c("state" = "name"))
-```
 
 ## Application de la méthode
 
@@ -383,9 +386,9 @@ d'analyse :
 
 :::
 
-### Cartographie des résultats
+## Cartographie des résultats
 
-#### Analyse non-pondérée
+### Analyse non-pondérée
 
 :::{.callout-note title="Instructions"}
 Cartographiez le centre non pondéré des États-Unis avec sa distance standard
@@ -453,7 +456,7 @@ map_unpondered
 ```
 :::
 
-#### Analyse pondérée
+### Analyse pondérée
 
 :::{.callout-note title="Instructions"}
 Cartographiez le centre pondéré de la population des États-Unis depuis 1970 et
@@ -590,7 +593,7 @@ pond_disc <-
   dplyr::summarise(across(everything(), ~mean(.x)))
 ```
 
-#### Cartographie animée
+### Cartographie animée
 
 Sous R, on peut facilement animer un graph `ggplot2` en utilisant le package
 `gganimate`. Le rendu est particulièrement parlant pour l'analyse
