@@ -74,7 +74,6 @@ pacman::p_load(
   readr,
   dplyr,
   glue,
-  plyr,
   # Données spatiales et manipulation de données spatiales
   rnaturalearth,
   rnaturalearthdata,
@@ -326,6 +325,20 @@ Sous `R`, on écrira  : `sqrt(sum(z * ((x - mean(x_pond))^2 + (y - mean(y_pond))
 (`state_centroids`). Le résultat doit être un `data.frame` d'une seule ligne
 avec trois variables : $\bar{x}$, $\bar{y}$ et $\text{SD}$. Vous utiliserez la
 fonction `dplyr::summarise()`.
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+center_unpondered <- state_centroids |>
+  summarise(
+    c_x = mean(x),
+    c_y = mean(y),
+    c_sd = sqrt(var(x) + var(y)),
+  )
+print(center_unpondered)
+```
+
 2. Calculer le centre de gravité des états pondéré par la population avec sa
    distance standard pour toutes les années depuis 1790. Utilisez le jeu de
 données issu de la jointure entre les centroïdes des états (`state_centroids`)
