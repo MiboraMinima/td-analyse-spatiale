@@ -303,7 +303,7 @@ de récupérer directement ces données sous `R`. Pour une carte du continent
 européen :
 
 ```{r}
-europe <- rnaturalearth::ne_countries(continent = "Europe", scale = "large")
+europe <- rnaturalearth::ne_countries(continent = "Europe", scale = "small")
 
 ggplot() +
   geom_sf(data = europe) +

@@ -1137,7 +1137,7 @@ Niveau d’eau et état de mer
 </div>
 </div>
 <p>On obtient toute les données disponibles. Nous utiliserons les données de la BDTOPO <code>BDTOPO_V3:batiment</code>. L’étape suivant consiste à filtrer la couche pour ne retenir que les informations qui nous intéresse. On peut filtrer par attributs ou par opération spatiale. Le filtre sera réalisé sur les serveurs de l’IGN et vous récupérez le résultat.</p>
-<p>Pour filtrer par attribut, on utilise un filtre ECQL. Il s’agit d’un langage de requête très proche du SQL (ce qui vous utilisez sous QGIS pur filtrer vos données). Pour savoir comment filtrer vos données, il vous faut d’abord savoir quels sont les attributs de votre couche. Pour cela, on utilise la fonction <code>get_wfs_attributes()</code>.</p>
+<p>Pour filtrer par attribut, on utilise un filtre ECQL. Il s’agit d’un langage de requête très proche du SQL (ce qui vous utilisez sous QGIS pour filtrer vos données). Pour savoir comment filtrer vos données, il vous faut d’abord savoir quels sont les attributs de votre couche. Pour cela, on utilise la fonction <code>get_wfs_attributes()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_wfs_attributes</span>(<span class="st">"BDTOPO_V3:commune"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1206,7 +1206,7 @@ Niveau d’eau et état de mer
 <p>Pour des fond de cartes à petites échelles, se tournera vers <a href="https://www.naturalearthdata.com/">Natural Earth</a>. Ce jeu de données enregistre les données élémentaires pour créer des fonds de cartes : frontières des pays, routes, cours d’eau, toponymie, zones urbaines, lacs, etc.</p>
 <p>Le package <a href="https://ropensci.github.io/rnaturalearth/"><code>rnaturalearth</code></a> permet de récupérer directement ces données sous <code>R</code>. Pour une carte du continent européen :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>europe <span class="ot">&lt;-</span> rnaturalearth<span class="sc">::</span><span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Europe"</span>, <span class="at">scale =</span> <span class="st">"large"</span>)</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>europe <span class="ot">&lt;-</span> rnaturalearth<span class="sc">::</span><span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Europe"</span>, <span class="at">scale =</span> <span class="st">"small"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> europe) <span class="sc">+</span></span>
