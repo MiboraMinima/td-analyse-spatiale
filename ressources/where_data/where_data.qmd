@@ -250,7 +250,7 @@ attributs ou par opération spatiale. Le filtre sera réalisé sur les serveurs 
 l'IGN et vous récupérez le résultat.
 
 Pour filtrer par attribut, on utilise un filtre ECQL. Il s'agit d'un langage de
-requête très proche du SQL (ce qui vous utilisez sous QGIS pur filtrer vos
+requête très proche du SQL (ce qui vous utilisez sous QGIS pour filtrer vos
 données). Pour savoir comment filtrer vos données, il vous faut d'abord savoir
 quels sont les attributs de votre couche. Pour cela, on utilise la fonction
 `get_wfs_attributes()`.
