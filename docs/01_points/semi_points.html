@@ -335,6 +335,7 @@ window.Quarto = {
   <li><a href="#analyse-non-pondérée" id="toc-analyse-non-pondérée" class="nav-link" data-scroll-target="#analyse-non-pondérée"><span class="header-section-number">2.5.1</span> Analyse non-pondérée</a></li>
   <li><a href="#analyse-pondérée" id="toc-analyse-pondérée" class="nav-link" data-scroll-target="#analyse-pondérée"><span class="header-section-number">2.5.2</span> Analyse pondérée</a></li>
   <li><a href="#cartographie-animée" id="toc-cartographie-animée" class="nav-link" data-scroll-target="#cartographie-animée"><span class="header-section-number">2.5.3</span> Cartographie animée</a></li>
+  <li><a href="#script-complet" id="toc-script-complet" class="nav-link" data-scroll-target="#script-complet"><span class="header-section-number">2.5.4</span> Script complet</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -741,6 +742,18 @@ Instructions
 <ol start="2" type="1">
 <li>Calculer le centre de gravité des états pondéré par la population avec sa distance standard pour toutes les années depuis 1790. Utilisez le jeu de données issu de la jointure entre les centroïdes des états (<code>state_centroids</code>) et celui issu du filtrage des données. Le résultat doit être un <code>data.frame</code> avec quatre variables : l’année, <span class="math inline">\(\bar{x}_z\)</span>, <span class="math inline">\(\bar{y}_z\)</span> et <span class="math inline">\(\text{SD}_z\)</span>. Vous utiliserez les fonctions <code>group_by()</code> et <code>summarise()</code> du package <code>dplyr</code>.</li>
 </ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span> data_joined <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cw_x =</span> <span class="fu">sum</span>(population <span class="sc">*</span> x) <span class="sc">/</span> <span class="fu">sum</span>(population),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">cw_y =</span> <span class="fu">sum</span>(population <span class="sc">*</span> y) <span class="sc">/</span> <span class="fu">sum</span>(population),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cw_sd =</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(population <span class="sc">*</span> ((x <span class="sc">-</span> <span class="fu">mean</span>(cw_x))<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (y <span class="sc">-</span> <span class="fu">mean</span>(cw_y))<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">/</span> <span class="fu">sum</span>(population))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <p>Au final, vous aurez donc deux jeux de données :</p>
 <ul>
 <li>Un d’une seule ligne contenant le centre de gravité non pondéré et sa distance standard.</li>
@@ -793,7 +806,7 @@ Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cartographiez le centre non pondéré des États-Unis avec sa distance standard avec le package <code>ggplot2</code> (<em>c.f.</em> <a href="../ressources/viz/graph.html#sec-ggplot" class="quarto-xref"><span>Section 8.2</span></a> pour les graphs avec <code>ggplot2</code> et <a href="../ressources/viz/map.html#sec-carto-ggplot" class="quarto-xref"><span>Section 8.1</span></a> pour la carto, <strong>Attention nouveau package</strong>).</p>
+<p>Cartographiez le centre non pondéré des États-Unis avec sa distance standard avec le package <code>ggplot2</code> (<em>c.f.</em> <a href="../ressources/viz/graph.html#sec-ggplot" class="quarto-xref"><span>Section 8.2</span></a> pour les graphs avec <code>ggplot2</code> et <a href="../ressources/viz/map.html#sec-carto-ggplot" class="quarto-xref"><span>Section 9.1</span></a> pour la carto, <strong>Attention nouveau package</strong>).</p>
 <p>Vous aurez les couches suivantes :</p>
 <ul>
 <li>Fond de carte : les USA (<code>geom_sf()</code>)</li>
@@ -803,51 +816,54 @@ Instructions
 </ul>
 <p>Vous vous appuierez sur le code ci-dessous. Vous aurez sans-doute à changer le nom des jeux de données et des variables :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>map_unpondered <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Couche des états ]</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span> <span class="co"># Le jeu de données spatiales brute</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ La distance standard ]</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> center_unpondered, <span class="co"># votre jeu de données non-pondéré</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x0 =</span> c_x, <span class="co"># La moyenne des x</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y0 =</span> c_y, <span class="co"># La moyenne des y</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">r =</span> c_sd  <span class="co"># la distance standard</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Symbologie</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Le centroïde des états ]</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> state_centroids, <span class="co"># Le jeu de données contenant les centroïde</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x, <span class="co"># Les x</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y  <span class="co"># Les y</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Symbologie</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey"</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Le centre moyen pondéré ]</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> center_unpondered, <span class="co"># Le jeu de données non-pondéré</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> c_x, <span class="co"># La moyenne des x</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> c_y  <span class="co"># La moyenne des y</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Symbologie</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Titre, labels des axes, sources et réalisation</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Titre"</span>,</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Sous-titre"</span>,</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Données : .... Réalisation: ..."</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Theme</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>map_unpondered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>map_unpondered <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Couche des états ]</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span> <span class="co"># Le jeu de données spatiales brute</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ La distance standard ]</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> center_unpondered, <span class="co"># votre jeu de données non-pondéré</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x0 =</span> c_x, <span class="co"># La moyenne des x</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y0 =</span> c_y, <span class="co"># La moyenne des y</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">r =</span> c_sd  <span class="co"># la distance standard</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Symbologie</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Le centroïde des états ]</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> state_centroids, <span class="co"># Le jeu de données contenant les centroïde</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> x, <span class="co"># Les x</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> y  <span class="co"># Les y</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Symbologie</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey"</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Le centre moyen pondéré ]</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> center_unpondered, <span class="co"># Le jeu de données non-pondéré</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> c_x, <span class="co"># La moyenne des x</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> c_y  <span class="co"># La moyenne des y</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Symbologie</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Titre, labels des axes, sources et réalisation</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Titre"</span>,</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Sous-titre"</span>,</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Données : .... Réalisation: ..."</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Theme</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>map_unpondered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -873,8 +889,76 @@ Instructions
 <div class="callout-body-container callout-body">
 <p>Cartographiez le centre pondéré de la population des États-Unis depuis 1970 et sa distance standard avec le package <code>ggplot2</code>.</p>
 <p>Créez une nouvelle carte sur la base de l’ancienne. Il vous faudra “juste” <strong>changer certains jeux de données et nom de variables</strong>.</p>
-<p>Vous conserverez le centre non-pondéré pour comparer.</p>
-<p>Interprétez la carte.</p>
+<p>Vous conserverez le centre non-pondéré pour comparer et vous interpréterez la carte.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>map_pondered <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># [ Couche des états ]</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span> <span class="co"># Le jeu de données spatiales brute</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># [ La distance standard ]</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> center_pondered, <span class="co"># votre jeu de données non-pondéré</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">x0 =</span> cw_x, <span class="co"># La moyenne des x</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">y0 =</span> cw_y, <span class="co"># La moyenne des y</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">r =</span> cw_sd,  <span class="co"># la distance standard</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> year,</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Symbologie</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># [ Le centroïde des états ]</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> state_centroids, <span class="co"># Le jeu de données contenant les centroïde</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> x, <span class="co"># Les x</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> y  <span class="co"># Les y</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Symbologie</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"grey"</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># [ Les centres moyens pondérés ]</span></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> center_pondered, <span class="co"># Le jeu de données non-pondéré</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> cw_x, <span class="co"># La moyenne des x</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> cw_y,  <span class="co"># La moyenne des y</span></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill =</span> year</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Symbologie</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># [ Le centre moyen pondéré ]</span></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> center_unpondered, <span class="co"># Le jeu de données non-pondéré</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">x =</span> c_x, <span class="co"># La moyenne des x</span></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>            <span class="at">y =</span> c_y  <span class="co"># La moyenne des y</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Symbologie</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Titre, labels des axes, sources et réalisation</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Titre"</span>,</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">subtitle =</span> <span class="st">"Sous-titre"</span>,</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Données : .... Réalisation: ..."</span></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Theme</span></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>map_pondered</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semi_points_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Instructions">
@@ -887,63 +971,121 @@ Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Les distances standards ainsi représentées sont peu lisibles. Retirez cette couche de la carte et créez un graphique en ligne pour montrer l’évolution de la distance standard depuis 1970. Utilisez la fonction <code>geom_line()</code>.</p>
+<p>La carte est peu lisible à cause :</p>
+<ul>
+<li>De la variation du pas de temps</li>
+<li>Des distances standards</li>
+</ul>
+<ol type="1">
+<li>Utilisez un pas de temps uniforme pour l’ensemble de la période</li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversion en km des distances standards</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_pondered, <span class="at">cw_sd_km =</span> cw_sd<span class="sc">/</span><span class="dv">1000</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>center_unpondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_unpondered, <span class="at">c_sd_km =</span> c_sd<span class="sc">/</span><span class="dv">1000</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>pond_sd_line <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(center_pondered, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> cw_sd_km, <span class="at">color =</span> year)) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Ligne ]</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Points ]</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Ligne horizontale indiquant la distance standard non-pondérée ]</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">yintercept =</span> center_unpondered<span class="sc">$</span>c_sd_km, <span class="at">color =</span> <span class="st">"red"</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [ Label de la ligne ]</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">min</span>(center_pondered<span class="sc">$</span>year) <span class="sc">+</span> <span class="dv">50</span>,</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> center_unpondered<span class="sc">$</span>c_sd_km <span class="sc">+</span> <span class="dv">50</span>,</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Distance standard non-pondérée"</span>,</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Distance Standard (km)"</span>) <span class="sc">+</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>pond_sd_line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Conversion en km des distances standards</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_pondered, <span class="at">cw_sd_km =</span> cw_sd<span class="sc">/</span><span class="dv">1000</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>center_unpondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_unpondered, <span class="at">c_sd_km =</span> c_sd<span class="sc">/</span><span class="dv">1000</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(center_pondered, <span class="at">year =</span> plyr<span class="sc">::</span><span class="fu">round_any</span>(year, <span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">mean</span>(.x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="2" type="1">
+<li>Créez un graphique en ligne pour représentez les distances standards. Utilisez la fonction <code>geom_line()</code></li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pond_sd_line <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(center_pondered, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> cw_sd_km, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">yintercept =</span> center_unpondered<span class="sc">$</span>c_sd_km, <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">min</span>(<span class="fu">as.numeric</span>(center_pondered<span class="sc">$</span>year)) <span class="sc">+</span> <span class="dv">50</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> center_unpondered<span class="sc">$</span>c_sd_km <span class="sc">+</span> <span class="dv">50</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Distance standard non-pondérée"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Distance Standard pondérée (km)"</span>) <span class="sc">+</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>pond_sd_line</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="semi_points_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="semi_points_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Mettez à jour votre carte des centres moyens pondérés.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pond_map_disc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> center_pondered,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">x =</span> cw_x, <span class="at">y =</span> cw_y, <span class="at">fill =</span> year),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> center_unpondered,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>( <span class="at">x =</span> c_x, <span class="at">y =</span> c_y),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colorbar</span>(<span class="at">barwidth =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>( <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">fill =</span> <span class="st">"Années"</span>) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>pond_map_disc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semi_points_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Ensuite, combinez la carte et le graph nouvellement créé au moyen de package <code>patchwork</code>. Utilisez la fonction <code>wrap_plots()</code> (<em>c.f.</em> <a href="../ressources/viz/graph.html#sec-comb-plots" class="quarto-xref"><span>Section 8.2.4</span></a>).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(pond_map_disc, pond_sd_line),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="dv">1</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Dynamique moyenne de la population des USA entre 1790 et 2024"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"**A)** Centres moyens pondérés par la population. Le &lt;span style='color:red;'&gt;**point rouge**&lt;/span&gt; indique le centre moyen non-pondéré.&lt;br&gt;**B)** Distances standards pondérées par la population."</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** United States Census Bureau, 2025. **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag_levels =</span> <span class="st">'A'</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="semi_points_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions (bonus)">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Instructions (bonus)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Regardez la distribution des années.</p>
-<ul>
-<li>Que pouvez-vous dire du pas de temps ?</li>
-<li>Quel impact cela a-t-il sur la cartographie ?</li>
-<li>Comment faire pour pallier ce problème ?</li>
-</ul>
-<p>Modifier la variable <code>year</code> (utilisez la fonction <code>plyr::round_any()</code>). Ensuite, il vous faudra agréger les données.</p>
 </div>
 </div>
 </div>
@@ -969,38 +1111,38 @@ Instructions
 </ul>
 <p>Appuyez-vous sur les cartes précédentes. Ajoutez les lignes suivantes à votre code <code>ggplot2</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertissez l'année en facteur dans votre tableau des centres pondérés</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_pondered, <span class="at">year =</span> <span class="fu">as.factor</span>(year))</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>anim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... votre code</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Centre pondéré de la population : {closest_state}"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transition_states</span>(year) <span class="sc">+</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shadow_mark</span>(</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">past =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> <span class="st">"red"</span>,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># l'argument exclude_layer vous permet de supprimer des couches de votre</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># objet ggplot pour les années passées. Le chiffre indiquent l'ordre</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># d'apparition des couches.</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># exclude_layer = c(3, 4)</span></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertissez l'année en facteur dans votre tableau des centres pondérés</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>center_pondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_pondered, <span class="at">year =</span> <span class="fu">as.factor</span>(year))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>anim <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ... votre code</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Centre pondéré de la population : {closest_state}"</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transition_states</span>(year) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">shadow_mark</span>(</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">past =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">alpha =</span> <span class="fl">0.5</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> <span class="st">"red"</span>,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># l'argument exclude_layer vous permet de supprimer des couches de votre</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># objet ggplot pour les années passées. Le chiffre indiquent l'ordre</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># d'apparition des couches.</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># exclude_layer = c(3, 4)</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Puis rendez l’animation :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">animate</span>(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    anim, <span class="co"># votre object animation</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration =</span> <span class="dv">10</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fps =</span> <span class="dv">20</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">800</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">500</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>(</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"figures/weighted_center.gif"</span> <span class="co"># le nom de votre anim</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">animate</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    anim, <span class="co"># votre object animation</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">duration =</span> <span class="dv">10</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">fps =</span> <span class="dv">20</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">800</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">500</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"figures/weighted_center.gif"</span> <span class="co"># le nom de votre anim</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1015,6 +1157,270 @@ Figure&nbsp;2.1: Centre moyen pondéré de la population des États-Unis depuis 
 </figcaption>
 </figure>
 </div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> pond_disc,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> cw_x, <span class="at">y =</span> cw_y),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> pond_disc,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> cw_x, <span class="at">y =</span> cw_y, <span class="at">label =</span> year),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> pond_disc,</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x0 =</span> cw_x, <span class="at">y0 =</span> cw_y, <span class="at">r =</span> cw_sd),</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Centre moyen pondéré de la population des États-Unis"</span>,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Le cercle représente la distance standard pondérée. Année : {closest_state}"</span>,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Données : United States Census Bureau, 2025. Réalisation : Antoine Le Doeuff, 2026"</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">transition_states</span>(year) <span class="sc">+</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shadow_mark</span>(</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">past =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"red"</span>,</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">exclude_layer =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Rendre l'animation</span></span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>anim <span class="ot">&lt;-</span> <span class="fu">animate</span>(</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>  p,</span>
+<span id="cb21-41"><a href="#cb21-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">duration =</span> <span class="dv">10</span>,</span>
+<span id="cb21-42"><a href="#cb21-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">fps =</span> <span class="dv">20</span>,</span>
+<span id="cb21-43"><a href="#cb21-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">800</span>,</span>
+<span id="cb21-44"><a href="#cb21-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">500</span>,</span>
+<span id="cb21-45"><a href="#cb21-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>(<span class="st">"figures/weighted_center.gif"</span>)</span>
+<span id="cb21-46"><a href="#cb21-46" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="script-complet" class="level3" data-number="2.5.4">
+<h3 data-number="2.5.4" class="anchored" data-anchor-id="script-complet"><span class="header-section-number">2.5.4</span> Script complet</h3>
+<p>Voilà à quoi peut ressembler votre script complet.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="do">################################################################################</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co"># Script Name: centro_usa.r</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co"># Description: Analyse centrographique de la population des USA entre 1790 et 2024</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="co"># Author: Antoine Le Doeuff</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="co"># Date created: 2025-10-28</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a><span class="do">################################################################################</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a></span>
+<span id="cb22-8"><a href="#cb22-8"></a><span class="fu">library</span>(readr)</span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="fu">library</span>(sf)</span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb22-11"><a href="#cb22-11"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb22-12"><a href="#cb22-12"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-14"><a href="#cb22-14"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb22-15"><a href="#cb22-15"></a></span>
+<span id="cb22-16"><a href="#cb22-16"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb22-17"><a href="#cb22-17"></a><span class="co"># Chargement des données -------------------------------------------------------</span></span>
+<span id="cb22-18"><a href="#cb22-18"></a><span class="co"># Données de pop</span></span>
+<span id="cb22-19"><a href="#cb22-19"></a><span class="co"># https://www.kaggle.com/datasets/rolfhendriks/us-population-by-state-comprehensive-data</span></span>
+<span id="cb22-20"><a href="#cb22-20"></a>dt <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"01_points/data/src/us_population_by_state.csv"</span>)</span>
+<span id="cb22-21"><a href="#cb22-21"></a></span>
+<span id="cb22-22"><a href="#cb22-22"></a><span class="co"># Polygones des USA</span></span>
+<span id="cb22-23"><a href="#cb22-23"></a><span class="co"># Convertion en NAD83 / Conus Albers Equal Area Projection</span></span>
+<span id="cb22-24"><a href="#cb22-24"></a>states <span class="ot">&lt;-</span> <span class="fu">ne_states</span>(<span class="at">country =</span> <span class="st">"United States of America"</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb22-25"><a href="#cb22-25"></a>  <span class="fu">st_transform</span>(<span class="at">crs =</span> <span class="dv">5070</span>)</span>
+<span id="cb22-26"><a href="#cb22-26"></a></span>
+<span id="cb22-27"><a href="#cb22-27"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb22-28"><a href="#cb22-28"></a><span class="co"># Prétraitements ----------------------------------------------------------------</span></span>
+<span id="cb22-29"><a href="#cb22-29"></a><span class="co"># Suppression de certains états ................................................</span></span>
+<span id="cb22-30"><a href="#cb22-30"></a>to_remove <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Hawaii"</span>, <span class="st">"Alaska"</span>)</span>
+<span id="cb22-31"><a href="#cb22-31"></a>dt <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt, <span class="sc">!</span>state <span class="sc">%in%</span> to_remove)</span>
+<span id="cb22-32"><a href="#cb22-32"></a>states <span class="ot">&lt;-</span> <span class="fu">filter</span>(states, <span class="sc">!</span>name <span class="sc">%in%</span> to_remove)</span>
+<span id="cb22-33"><a href="#cb22-33"></a></span>
+<span id="cb22-34"><a href="#cb22-34"></a><span class="co"># Calcul des centroïdes ........................................................</span></span>
+<span id="cb22-35"><a href="#cb22-35"></a>state_centroids <span class="ot">&lt;-</span></span>
+<span id="cb22-36"><a href="#cb22-36"></a>  <span class="fu">st_centroid</span>(states) <span class="sc">|&gt;</span></span>
+<span id="cb22-37"><a href="#cb22-37"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb22-38"><a href="#cb22-38"></a>    <span class="at">x =</span> <span class="fu">st_coordinates</span>(geometry)[,<span class="dv">1</span>],</span>
+<span id="cb22-39"><a href="#cb22-39"></a>    <span class="at">y =</span> <span class="fu">st_coordinates</span>(geometry)[,<span class="dv">2</span>]</span>
+<span id="cb22-40"><a href="#cb22-40"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb22-41"><a href="#cb22-41"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-42"><a href="#cb22-42"></a>  <span class="fu">select</span>(name, x, y)</span>
+<span id="cb22-43"><a href="#cb22-43"></a></span>
+<span id="cb22-44"><a href="#cb22-44"></a><span class="co"># Jointure .....................................................................</span></span>
+<span id="cb22-45"><a href="#cb22-45"></a>data_joined <span class="ot">&lt;-</span> <span class="fu">left_join</span>(dt, state_centroids, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"state"</span> <span class="ot">=</span> <span class="st">"name"</span>))</span>
+<span id="cb22-46"><a href="#cb22-46"></a></span>
+<span id="cb22-47"><a href="#cb22-47"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb22-48"><a href="#cb22-48"></a><span class="co"># Analyse centrographique ------------------------------------------------------</span></span>
+<span id="cb22-49"><a href="#cb22-49"></a><span class="co"># Centre non-pondéré ...........................................................</span></span>
+<span id="cb22-50"><a href="#cb22-50"></a>center_unpondered <span class="ot">&lt;-</span> state_centroids <span class="sc">|&gt;</span></span>
+<span id="cb22-51"><a href="#cb22-51"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-52"><a href="#cb22-52"></a>    <span class="at">c_x =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb22-53"><a href="#cb22-53"></a>    <span class="at">c_y =</span> <span class="fu">mean</span>(y),</span>
+<span id="cb22-54"><a href="#cb22-54"></a>    <span class="at">c_sd =</span> <span class="fu">sqrt</span>(<span class="fu">var</span>(x) <span class="sc">+</span> <span class="fu">var</span>(y)),</span>
+<span id="cb22-55"><a href="#cb22-55"></a>  )</span>
+<span id="cb22-56"><a href="#cb22-56"></a></span>
+<span id="cb22-57"><a href="#cb22-57"></a><span class="co"># Centre pondéré pour chaque année .............................................</span></span>
+<span id="cb22-58"><a href="#cb22-58"></a>center_pondered <span class="ot">&lt;-</span> data_joined <span class="sc">|&gt;</span></span>
+<span id="cb22-59"><a href="#cb22-59"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb22-60"><a href="#cb22-60"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-61"><a href="#cb22-61"></a>    <span class="at">cw_x =</span> <span class="fu">sum</span>(population <span class="sc">*</span> x) <span class="sc">/</span> <span class="fu">sum</span>(population),</span>
+<span id="cb22-62"><a href="#cb22-62"></a>    <span class="at">cw_y =</span> <span class="fu">sum</span>(population <span class="sc">*</span> y) <span class="sc">/</span> <span class="fu">sum</span>(population),</span>
+<span id="cb22-63"><a href="#cb22-63"></a>    <span class="at">cw_sd =</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>(population <span class="sc">*</span> ((x <span class="sc">-</span> <span class="fu">mean</span>(cw_x))<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> (y <span class="sc">-</span> <span class="fu">mean</span>(cw_y))<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">/</span> <span class="fu">sum</span>(population))</span>
+<span id="cb22-64"><a href="#cb22-64"></a>  )</span>
+<span id="cb22-65"><a href="#cb22-65"></a></span>
+<span id="cb22-66"><a href="#cb22-66"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb22-67"><a href="#cb22-67"></a><span class="co"># Analyse ----------------------------------------------------------------------</span></span>
+<span id="cb22-68"><a href="#cb22-68"></a><span class="co"># Centre pondéré ...............................................................</span></span>
+<span id="cb22-69"><a href="#cb22-69"></a>map_unpondered <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-70"><a href="#cb22-70"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span></span>
+<span id="cb22-71"><a href="#cb22-71"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
+<span id="cb22-72"><a href="#cb22-72"></a>    <span class="at">data =</span> center_unpondered,</span>
+<span id="cb22-73"><a href="#cb22-73"></a>    <span class="fu">aes</span>(<span class="at">x0 =</span> c_x, <span class="at">y0 =</span> c_y, <span class="at">r =</span> c_sd),</span>
+<span id="cb22-74"><a href="#cb22-74"></a>    <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-75"><a href="#cb22-75"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-76"><a href="#cb22-76"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb22-77"><a href="#cb22-77"></a>    <span class="at">data =</span> state_centroids,</span>
+<span id="cb22-78"><a href="#cb22-78"></a>    <span class="fu">aes</span>( <span class="at">x =</span> x, <span class="at">y =</span> y),</span>
+<span id="cb22-79"><a href="#cb22-79"></a>    <span class="at">color =</span> <span class="st">"grey"</span></span>
+<span id="cb22-80"><a href="#cb22-80"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-81"><a href="#cb22-81"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb22-82"><a href="#cb22-82"></a>    <span class="at">data =</span> center_unpondered,</span>
+<span id="cb22-83"><a href="#cb22-83"></a>    <span class="fu">aes</span>(<span class="at">x =</span> c_x, <span class="at">y =</span> c_y),</span>
+<span id="cb22-84"><a href="#cb22-84"></a>    <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">3</span></span>
+<span id="cb22-85"><a href="#cb22-85"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-86"><a href="#cb22-86"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-87"><a href="#cb22-87"></a>    <span class="at">title =</span> <span class="st">"Titre"</span>,</span>
+<span id="cb22-88"><a href="#cb22-88"></a>    <span class="at">subtitle =</span> <span class="st">"Sous-titre"</span>,</span>
+<span id="cb22-89"><a href="#cb22-89"></a>    <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb22-90"><a href="#cb22-90"></a>    <span class="at">caption =</span> <span class="st">"Données : .... Réalisation: ..."</span></span>
+<span id="cb22-91"><a href="#cb22-91"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-92"><a href="#cb22-92"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb22-93"><a href="#cb22-93"></a>map_unpondered</span>
+<span id="cb22-94"><a href="#cb22-94"></a></span>
+<span id="cb22-95"><a href="#cb22-95"></a><span class="co"># Centre non-pondéré ...........................................................</span></span>
+<span id="cb22-96"><a href="#cb22-96"></a><span class="co"># Conversion en km des distances standards</span></span>
+<span id="cb22-97"><a href="#cb22-97"></a>center_pondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_pondered, <span class="at">cw_sd_km =</span> cw_sd<span class="sc">/</span><span class="dv">1000</span>)</span>
+<span id="cb22-98"><a href="#cb22-98"></a>center_unpondered <span class="ot">&lt;-</span> <span class="fu">mutate</span>(center_unpondered, <span class="at">c_sd_km =</span> c_sd<span class="sc">/</span><span class="dv">1000</span>)</span>
+<span id="cb22-99"><a href="#cb22-99"></a></span>
+<span id="cb22-100"><a href="#cb22-100"></a><span class="co"># Mise à jour du pas de temps</span></span>
+<span id="cb22-101"><a href="#cb22-101"></a>center_pondered <span class="ot">&lt;-</span></span>
+<span id="cb22-102"><a href="#cb22-102"></a>  <span class="fu">mutate</span>(center_pondered, <span class="at">year =</span> plyr<span class="sc">::</span><span class="fu">round_any</span>(year, <span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-103"><a href="#cb22-103"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb22-104"><a href="#cb22-104"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">mean</span>(.x)))</span>
+<span id="cb22-105"><a href="#cb22-105"></a></span>
+<span id="cb22-106"><a href="#cb22-106"></a><span class="co"># Graphique des distances standards</span></span>
+<span id="cb22-107"><a href="#cb22-107"></a>pond_sd_line <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(center_pondered, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> cw_sd_km, <span class="at">color =</span> year)) <span class="sc">+</span></span>
+<span id="cb22-108"><a href="#cb22-108"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb22-109"><a href="#cb22-109"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb22-110"><a href="#cb22-110"></a>  <span class="fu">geom_hline</span>(</span>
+<span id="cb22-111"><a href="#cb22-111"></a>    <span class="at">yintercept =</span> center_unpondered<span class="sc">$</span>c_sd_km, <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb22-112"><a href="#cb22-112"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-113"><a href="#cb22-113"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb22-114"><a href="#cb22-114"></a>    <span class="st">"text"</span>,</span>
+<span id="cb22-115"><a href="#cb22-115"></a>    <span class="at">x =</span> <span class="fu">min</span>(<span class="fu">as.numeric</span>(center_pondered<span class="sc">$</span>year)) <span class="sc">+</span> <span class="dv">50</span>,</span>
+<span id="cb22-116"><a href="#cb22-116"></a>    <span class="at">y =</span> center_unpondered<span class="sc">$</span>c_sd_km <span class="sc">+</span> <span class="dv">50</span>,</span>
+<span id="cb22-117"><a href="#cb22-117"></a>    <span class="at">label =</span> <span class="st">"Distance standard non-pondérée"</span>,</span>
+<span id="cb22-118"><a href="#cb22-118"></a>    <span class="at">color =</span> <span class="st">"red"</span></span>
+<span id="cb22-119"><a href="#cb22-119"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-120"><a href="#cb22-120"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">"Distance Standard pondérée (km)"</span>) <span class="sc">+</span></span>
+<span id="cb22-121"><a href="#cb22-121"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-122"><a href="#cb22-122"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb22-123"><a href="#cb22-123"></a></span>
+<span id="cb22-124"><a href="#cb22-124"></a><span class="co"># Cartographie des centres pondérés</span></span>
+<span id="cb22-125"><a href="#cb22-125"></a>pond_map_disc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-126"><a href="#cb22-126"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span></span>
+<span id="cb22-127"><a href="#cb22-127"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb22-128"><a href="#cb22-128"></a>    <span class="at">data =</span> center_pondered,</span>
+<span id="cb22-129"><a href="#cb22-129"></a>    <span class="fu">aes</span>(<span class="at">x =</span> cw_x, <span class="at">y =</span> cw_y, <span class="at">fill =</span> year),</span>
+<span id="cb22-130"><a href="#cb22-130"></a>    <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb22-131"><a href="#cb22-131"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-132"><a href="#cb22-132"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb22-133"><a href="#cb22-133"></a>    <span class="at">data =</span> center_unpondered,</span>
+<span id="cb22-134"><a href="#cb22-134"></a>    <span class="fu">aes</span>( <span class="at">x =</span> c_x, <span class="at">y =</span> c_y),</span>
+<span id="cb22-135"><a href="#cb22-135"></a>    <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb22-136"><a href="#cb22-136"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-137"><a href="#cb22-137"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_colorbar</span>(<span class="at">barwidth =</span> <span class="dv">15</span>)) <span class="sc">+</span></span>
+<span id="cb22-138"><a href="#cb22-138"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>, <span class="at">fill =</span> <span class="st">"Années"</span>) <span class="sc">+</span></span>
+<span id="cb22-139"><a href="#cb22-139"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-140"><a href="#cb22-140"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb22-141"><a href="#cb22-141"></a></span>
+<span id="cb22-142"><a href="#cb22-142"></a><span class="co"># Jointure du graphique et de la carte</span></span>
+<span id="cb22-143"><a href="#cb22-143"></a><span class="fu">wrap_plots</span>(</span>
+<span id="cb22-144"><a href="#cb22-144"></a>  <span class="fu">list</span>(pond_map_disc, pond_sd_line),</span>
+<span id="cb22-145"><a href="#cb22-145"></a>  <span class="at">ncol =</span> <span class="dv">1</span></span>
+<span id="cb22-146"><a href="#cb22-146"></a>) <span class="sc">+</span></span>
+<span id="cb22-147"><a href="#cb22-147"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb22-148"><a href="#cb22-148"></a>    <span class="at">title =</span> <span class="st">"Dynamique moyenne de la population des USA entre 1790 et 2024"</span>,</span>
+<span id="cb22-149"><a href="#cb22-149"></a>    <span class="at">subtitle =</span> <span class="st">"**A)** Centres moyens pondérés par la population. Le &lt;span style='color:red;'&gt;**point rouge**&lt;/span&gt; indique le centre moyen non-pondéré.&lt;br&gt;**B)** Distances standards pondérées par la population."</span>,</span>
+<span id="cb22-150"><a href="#cb22-150"></a>    <span class="at">caption =</span> <span class="st">"**Données :** United States Census Bureau, 2025. **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb22-151"><a href="#cb22-151"></a>    <span class="at">tag_levels =</span> <span class="st">'A'</span>,</span>
+<span id="cb22-152"><a href="#cb22-152"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
+<span id="cb22-153"><a href="#cb22-153"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-154"><a href="#cb22-154"></a>      <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb22-155"><a href="#cb22-155"></a>      <span class="at">plot.caption =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb22-156"><a href="#cb22-156"></a>    )</span>
+<span id="cb22-157"><a href="#cb22-157"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-158"><a href="#cb22-158"></a>  <span class="fu">plot_layout</span>(</span>
+<span id="cb22-159"><a href="#cb22-159"></a>    <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
+<span id="cb22-160"><a href="#cb22-160"></a>  )</span>
+<span id="cb22-161"><a href="#cb22-161"></a></span>
+<span id="cb22-162"><a href="#cb22-162"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb22-163"><a href="#cb22-163"></a><span class="co"># Animation --------------------------------------------------------------------</span></span>
+<span id="cb22-164"><a href="#cb22-164"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb22-165"><a href="#cb22-165"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> states) <span class="sc">+</span></span>
+<span id="cb22-166"><a href="#cb22-166"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb22-167"><a href="#cb22-167"></a>    <span class="at">data =</span> center_pondered,</span>
+<span id="cb22-168"><a href="#cb22-168"></a>    <span class="fu">aes</span>(<span class="at">x =</span> cw_x, <span class="at">y =</span> cw_y),</span>
+<span id="cb22-169"><a href="#cb22-169"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb22-170"><a href="#cb22-170"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-171"><a href="#cb22-171"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb22-172"><a href="#cb22-172"></a>    <span class="at">data =</span> center_pondered,</span>
+<span id="cb22-173"><a href="#cb22-173"></a>    <span class="fu">aes</span>(<span class="at">x =</span> cw_x, <span class="at">y =</span> cw_y, <span class="at">label =</span> year),</span>
+<span id="cb22-174"><a href="#cb22-174"></a>    <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">size =</span> <span class="dv">4</span></span>
+<span id="cb22-175"><a href="#cb22-175"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-176"><a href="#cb22-176"></a>  ggforce<span class="sc">::</span><span class="fu">geom_circle</span>(</span>
+<span id="cb22-177"><a href="#cb22-177"></a>    <span class="at">data =</span> center_pondered,</span>
+<span id="cb22-178"><a href="#cb22-178"></a>    <span class="fu">aes</span>(<span class="at">x0 =</span> cw_x, <span class="at">y0 =</span> cw_y, <span class="at">r =</span> cw_sd),</span>
+<span id="cb22-179"><a href="#cb22-179"></a>    <span class="at">fill =</span> <span class="st">"transparent"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-180"><a href="#cb22-180"></a>    <span class="at">linewidth =</span> <span class="dv">1</span></span>
+<span id="cb22-181"><a href="#cb22-181"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-182"><a href="#cb22-182"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-183"><a href="#cb22-183"></a>    <span class="at">title =</span> <span class="st">"Centre moyen pondéré de la population des États-Unis"</span>,</span>
+<span id="cb22-184"><a href="#cb22-184"></a>    <span class="at">subtitle =</span> <span class="st">"Le cercle représente la distance standard pondérée. Année : {closest_state}"</span>,</span>
+<span id="cb22-185"><a href="#cb22-185"></a>    <span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb22-186"><a href="#cb22-186"></a>    <span class="at">caption =</span> <span class="st">"Données : United States Census Bureau, 2025. Réalisation : Antoine Le Doeuff, 2026"</span></span>
+<span id="cb22-187"><a href="#cb22-187"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-188"><a href="#cb22-188"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb22-189"><a href="#cb22-189"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-190"><a href="#cb22-190"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">18</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-191"><a href="#cb22-191"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"italic"</span>),</span>
+<span id="cb22-192"><a href="#cb22-192"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-193"><a href="#cb22-193"></a>  <span class="fu">transition_states</span>(year) <span class="sc">+</span></span>
+<span id="cb22-194"><a href="#cb22-194"></a>  <span class="fu">shadow_mark</span>(</span>
+<span id="cb22-195"><a href="#cb22-195"></a>    <span class="at">past =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-196"><a href="#cb22-196"></a>    <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb22-197"><a href="#cb22-197"></a>    <span class="at">colour =</span> <span class="st">"red"</span>,</span>
+<span id="cb22-198"><a href="#cb22-198"></a>    <span class="at">exclude_layer =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb22-199"><a href="#cb22-199"></a>  )</span>
+<span id="cb22-200"><a href="#cb22-200"></a></span>
+<span id="cb22-201"><a href="#cb22-201"></a><span class="co"># Rendre l'animation</span></span>
+<span id="cb22-202"><a href="#cb22-202"></a>anim <span class="ot">&lt;-</span> <span class="fu">animate</span>(</span>
+<span id="cb22-203"><a href="#cb22-203"></a>  p,</span>
+<span id="cb22-204"><a href="#cb22-204"></a>  <span class="at">duration =</span> <span class="dv">10</span>,</span>
+<span id="cb22-205"><a href="#cb22-205"></a>  <span class="at">fps =</span> <span class="dv">20</span>,</span>
+<span id="cb22-206"><a href="#cb22-206"></a>  <span class="at">width =</span> <span class="dv">800</span>,</span>
+<span id="cb22-207"><a href="#cb22-207"></a>  <span class="at">height =</span> <span class="dv">500</span>,</span>
+<span id="cb22-208"><a href="#cb22-208"></a>  <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>(<span class="st">"figures/weighted_center.gif"</span>)</span>
+<span id="cb22-209"><a href="#cb22-209"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
