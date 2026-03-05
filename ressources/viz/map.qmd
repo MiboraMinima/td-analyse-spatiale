@@ -90,12 +90,16 @@ library(ggplot2)
 library(ggspatial)
 
 com_fin <- get_wfs(
-    x = NULL,
-    layer = "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST:commune",
-    ecql_filter = "code_insee LIKE '29%'"
+  x = NULL,
+  layer = "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST:commune",
+  query = "code_insee LIKE '29%'"
 )
 brest <- st_buffer(filter(com_fin, nom_officiel == "Brest"), 30e3)
-ocsol <- get_wfs(brest, layer = "BDCARTO_V5:occupation_du_sol", spatial_filter = "bbox")
+ocsol <- get_wfs(
+  brest,
+  layer = "BDCARTO_V5:occupation_du_sol",
+  predicate = bbox()
+)
 ```
 
 #### Choroplète catégorielle
@@ -153,7 +157,7 @@ faut passer par [`ggspatial`](https://paleolimbot.github.io/ggspatial/)
 com_fin <- get_wfs(
   x = NULL,
   layer = "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST:commune",
-  ecql_filter = "code_insee LIKE '29%'"
+  query = "code_insee LIKE '29%'"
 )
 com_fin <- mutate(com_fin,
   area = as.numeric(st_area(geometry)),
@@ -339,7 +343,7 @@ library(basemapR)
 tsport <- get_wfs(
   x = filter(com_fin, nom_officiel == "Pont-l'Abbé"),
   layer = "BDTOPO_V3:terrain_de_sport",
-  spatial_filter = "within"
+  predicate = within()
 )
 
 ggplot() +
