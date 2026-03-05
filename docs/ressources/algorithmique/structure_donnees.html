@@ -105,35 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -325,7 +296,11 @@ window.Quarto = {
   <li><a href="#les-data-frame-spatiaux" id="toc-les-data-frame-spatiaux" class="nav-link" data-scroll-target="#les-data-frame-spatiaux"><span class="header-section-number">4.3.3</span> Les data frame spatiaux</a></li>
   <li><a href="#données-massives" id="toc-données-massives" class="nav-link" data-scroll-target="#données-massives"><span class="header-section-number">4.3.4</span> Données massives</a></li>
   </ul></li>
-  <li><a href="#les-matrices" id="toc-les-matrices" class="nav-link" data-scroll-target="#les-matrices"><span class="header-section-number">4.4</span> Les matrices</a></li>
+  <li><a href="#sec-struc-mat" id="toc-sec-struc-mat" class="nav-link" data-scroll-target="#sec-struc-mat"><span class="header-section-number">4.4</span> Les matrices</a>
+  <ul>
+  <li><a href="#création-de-matrices" id="toc-création-de-matrices" class="nav-link" data-scroll-target="#création-de-matrices"><span class="header-section-number">4.4.1</span> Création de matrices</a></li>
+  <li><a href="#accès-aux-éléments" id="toc-accès-aux-éléments" class="nav-link" data-scroll-target="#accès-aux-éléments"><span class="header-section-number">4.4.2</span> Accès aux éléments</a></li>
+  </ul></li>
   <li><a href="#les-listes" id="toc-les-listes" class="nav-link" data-scroll-target="#les-listes"><span class="header-section-number">4.5</span> Les listes</a></li>
   </ul>
 </nav>
@@ -674,7 +649,7 @@ Quid des rasters
 </section>
 <section id="données-massives" class="level3" data-number="4.3.4">
 <h3 data-number="4.3.4" class="anchored" data-anchor-id="données-massives"><span class="header-section-number">4.3.4</span> Données massives</h3>
-<p>Dans le cas de <strong>données massives</strong>, on pourra se tourner vers le package <a href="https://r-datatable.com/"><code>data.table</code></a> qui possède sa propre syntaxe. Notez qu’on peut maintenant utilisez la syntaxe <code>dplyr</code> avec <code>data.table</code> en utilisant <a href="https://dtplyr.tidyverse.org/"><code>dtplyr</code></a> ce qui est un très gros poulet.</p>
+<p>Dans le cas de <strong>données massives</strong> (volumineuse), on pourra se tourner vers le package <a href="https://r-datatable.com/"><code>data.table</code></a> qui possède sa propre syntaxe. Notez qu’on peut maintenant utilisez la syntaxe <code>dplyr</code> avec <code>data.table</code> en utilisant <a href="https://dtplyr.tidyverse.org/"><code>dtplyr</code></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dtplyr)</span>
@@ -700,30 +675,71 @@ Call:   `_DT1`[, .(mpg = sum(mpg)), keyby = .(cyl)]
 </div>
 </section>
 </section>
-<section id="les-matrices" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="les-matrices"><span class="header-section-number">4.4</span> Les matrices</h2>
-<p>Les matrices sont notamment utilisées dans les fonctions orientées statistiques. C’est tout naturel car l’algèbre linéaire et les probabilités sont basées sur des tels objets mathématiques.</p>
-<p>Par exemple, dans le cas d’une régression linéaire dont les <span class="math inline">\(\beta\)</span> sont estimés par la méthode des moindres carrés ordinaires (OLS), les données sont stockées dans une matrice :</p>
+<section id="sec-struc-mat" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-struc-mat"><span class="header-section-number">4.4</span> Les matrices</h2>
+<p>Comme un DataFrame, une matrice comporte des lignes et des colonnes. La différence entre ces deux objets réside dans le fait qu’une matrice ne comporte que des valeurs numériques.</p>
+<p>Pour des manipulations plus avancées, rendez-vous à la <a href="../data_process/data_basic.html#sec-manip-mat" class="quarto-xref"><span>Section 6.2</span></a>.</p>
+<section id="création-de-matrices" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="création-de-matrices"><span class="header-section-number">4.4.1</span> Création de matrices</h3>
+<p>On peut créer une matrice avec la fonction <code>matrix()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Génération de y</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(mpg <span class="sc">~</span> ., <span class="at">data =</span> mtcars)</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimations des betas</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>XtX_inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="co"># (X^T X)^(-1)</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>XtY <span class="ot">&lt;-</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y            <span class="co"># (X^T y)</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> XtX_inv <span class="sc">%*%</span> XtY  <span class="co"># beta = (X^T X)^(-1) X^T y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d'une matrice 3x3 remplie par colonnes</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    4    7
+[2,]    2    5    8
+[3,]    3    6    9</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut aussi remplir par lignes</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
+[3,]    7    8    9</code></pre>
+</div>
+</div>
+</section>
+<section id="accès-aux-éléments" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="accès-aux-éléments"><span class="header-section-number">4.4.2</span> Accès aux éléments</h3>
+<p>On peut accéder aux éléments de la matrice de la même façon que dans un <code>dataframe</code> en utilisant l’indice des lignes et des colonnes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># Élément de la 2e ligne, 3e colonne</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">1</span>, ] <span class="co"># 1ère ligne complète</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 4 7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>m1[, <span class="dv">2</span>] <span class="co"># 2e colonne complète</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5 6</code></pre>
+</div>
+</div>
+<p>Si les lignes et/ou les colonnes sont nommées, on peut également utiliser les noms pour retrouver les valeurs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m1) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"c"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(m1) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"r"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>m1[<span class="st">"r1"</span>, <span class="st">"c3"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="les-listes" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="les-listes"><span class="header-section-number">4.5</span> Les listes</h2>
 <p>Voilà une liste imbriquées (<em>nested list</em>) :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>gaziers <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Taylor Swift"</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"argent"</span> <span class="ot">=</span> <span class="dv">30</span>, <span class="st">"niveau_de_poulet"</span><span class="ot">=</span><span class="dv">1</span>),</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bach"</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"argent"</span> <span class="ot">=</span> <span class="dv">5</span>, <span class="st">"niveau_de_poulet"</span><span class="ot">=</span><span class="cn">Inf</span>),</span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Charlie Parker"</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"argent"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"niveau_de_poulet"</span><span class="ot">=</span><span class="fl">1e6</span>)</span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>gaziers <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Taylor Swift"</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"argent"</span> <span class="ot">=</span> <span class="dv">30</span>, <span class="st">"niveau_de_poulet"</span><span class="ot">=</span><span class="dv">1</span>),</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bach"</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"argent"</span> <span class="ot">=</span> <span class="dv">5</span>, <span class="st">"niveau_de_poulet"</span><span class="ot">=</span><span class="cn">Inf</span>),</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Charlie Parker"</span> <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"argent"</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">"niveau_de_poulet"</span><span class="ot">=</span><span class="fl">1e6</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

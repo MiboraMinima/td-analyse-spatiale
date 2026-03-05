@@ -105,6 +105,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -302,15 +331,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#sec-join" id="toc-sec-join" class="nav-link" data-scroll-target="#sec-join"><span class="header-section-number">6.1.5</span> Jointure de données</a></li>
   </ul></li>
-  <li><a href="#manipulation-de-matrice" id="toc-manipulation-de-matrice" class="nav-link" data-scroll-target="#manipulation-de-matrice"><span class="header-section-number">6.2</span> Manipulation de matrice</a>
+  <li><a href="#sec-manip-mat" id="toc-sec-manip-mat" class="nav-link" data-scroll-target="#sec-manip-mat"><span class="header-section-number">6.2</span> Manipulation de matrice</a>
   <ul>
-  <li><a href="#les-bases-des-matrices-sous-r" id="toc-les-bases-des-matrices-sous-r" class="nav-link" data-scroll-target="#les-bases-des-matrices-sous-r"><span class="header-section-number">6.2.1</span> Les bases des matrices sous R</a>
-  <ul class="collapse">
-  <li><a href="#création-de-matrices" id="toc-création-de-matrices" class="nav-link" data-scroll-target="#création-de-matrices"><span class="header-section-number">6.2.1.1</span> Création de matrices</a></li>
-  <li><a href="#accès-aux-éléments" id="toc-accès-aux-éléments" class="nav-link" data-scroll-target="#accès-aux-éléments"><span class="header-section-number">6.2.1.2</span> Accès aux éléments</a></li>
-  <li><a href="#opérations-sur-les-matrices" id="toc-opérations-sur-les-matrices" class="nav-link" data-scroll-target="#opérations-sur-les-matrices"><span class="header-section-number">6.2.1.3</span> Opérations sur les matrices</a></li>
-  <li><a href="#autres-opérations" id="toc-autres-opérations" class="nav-link" data-scroll-target="#autres-opérations"><span class="header-section-number">6.2.1.4</span> Autres opérations</a></li>
-  </ul></li>
+  <li><a href="#opérations-sur-les-matrices" id="toc-opérations-sur-les-matrices" class="nav-link" data-scroll-target="#opérations-sur-les-matrices"><span class="header-section-number">6.2.1</span> Opérations sur les matrices</a></li>
+  <li><a href="#autres-opérations" id="toc-autres-opérations" class="nav-link" data-scroll-target="#autres-opérations"><span class="header-section-number">6.2.2</span> Autres opérations</a></li>
+  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple"><span class="header-section-number">6.2.3</span> Exemple</a></li>
   </ul></li>
   <li><a href="#traitement-de-chaîne-de-caractères" id="toc-traitement-de-chaîne-de-caractères" class="nav-link" data-scroll-target="#traitement-de-chaîne-de-caractères"><span class="header-section-number">6.3</span> Traitement de chaîne de caractères</a>
   <ul>
@@ -1279,207 +1304,167 @@ base R
 </div>
 </section>
 </section>
-<section id="manipulation-de-matrice" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="manipulation-de-matrice"><span class="header-section-number">6.2</span> Manipulation de matrice</h2>
-<p>Bien que les <code>data.frame</code> (et objets associés) soit les objets les plus courants que vous aurez à traiter, il arrive que l’on se retrouve à traiter des matrices (<code>matrix</code>). Ces objets, plus simples dans leur structure que les Dataframe, sont souvent utilisés pour optimiser des traitements.</p>
-<section id="les-bases-des-matrices-sous-r" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="les-bases-des-matrices-sous-r"><span class="header-section-number">6.2.1</span> Les bases des matrices sous R</h3>
-<section id="création-de-matrices" class="level4" data-number="6.2.1.1">
-<h4 data-number="6.2.1.1" class="anchored" data-anchor-id="création-de-matrices"><span class="header-section-number">6.2.1.1</span> Création de matrices</h4>
-<p>On peut créer une matrice avec la fonction <code>matrix()</code> :</p>
+<section id="sec-manip-mat" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="sec-manip-mat"><span class="header-section-number">6.2</span> Manipulation de matrice</h2>
+<p>Bien que les <code>data.frame</code> (et objets associés) soit les objets les plus courants que vous aurez à traiter, il arrive que l’on se retrouve à traiter des matrices (<code>matrix</code>). Ces objets, plus simples dans leur structure que les Dataframe, sont souvent utilisés pour optimiser des traitements. Avant de lire cette section, renseignez-vous sur la structure de ce type d’objet (<em>c.f</em>. <a href="../algorithmique/structure_donnees.html#sec-struc-mat" class="quarto-xref"><span>Section 4.4</span></a>).</p>
+<section id="opérations-sur-les-matrices" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="opérations-sur-les-matrices"><span class="header-section-number">6.2.1</span> Opérations sur les matrices</h3>
+<p>Les opérations arithmétiques sont vectorisées.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Création d'une matrice 3x3 remplie par colonnes</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>m1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">+</span> <span class="dv">10</span> <span class="co"># Ajout d'une constante</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
-[1,]    1    4    7
-[2,]    2    5    8
-[3,]    3    6    9</code></pre>
+[1,]   11   14   17
+[2,]   12   15   18
+[3,]   13   16   19</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On peut aussi remplir par lignes</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>m2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">*</span> <span class="dv">2</span>  <span class="co"># Multiplication élément par élément</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    2    8   14
+[2,]    4   10   16
+[3,]    6   12   18</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">^</span> <span class="dv">2</span>  <span class="co"># Carré de chaque élément</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1   16   49
+[2,]    4   25   64
+[3,]    9   36   81</code></pre>
+</div>
+</div>
+<p>Pour les multiplications matricielles</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">*</span> m2 <span class="co"># produit de hadamard (élément par élément)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    8   21
+[2,]    8   25   48
+[3,]   21   48   81</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">%*%</span> m2 <span class="co"># produit scalaire (dot product)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]   66   78   90
+[2,]   78   93  108
+[3,]   90  108  126</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">1</span>, ] <span class="sc">%o%</span> m1[<span class="dv">2</span>, ] <span class="co"># produit extérieur (outer product)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    2    5    8
+[2,]    8   20   32
+[3,]   14   35   56</code></pre>
+</div>
+</div>
+<p>Il est également possible de calculer des statistiques pour les lignes et les colonnes :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12 15 18</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 5 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  6 15 24</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 5 8</code></pre>
+</div>
+</div>
+</section>
+<section id="autres-opérations" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="autres-opérations"><span class="header-section-number">6.2.2</span> Autres opérations</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(m1) <span class="co"># Transposée</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
 [1,]    1    2    3
 [2,]    4    5    6
 [3,]    7    8    9</code></pre>
 </div>
-</div>
-</section>
-<section id="accès-aux-éléments" class="level4" data-number="6.2.1.2">
-<h4 data-number="6.2.1.2" class="anchored" data-anchor-id="accès-aux-éléments"><span class="header-section-number">6.2.1.2</span> Accès aux éléments</h4>
-<p>On peut accéder aux éléments de la matrice de la même façon que dans un <code>dataframe</code> en utilisant l’indice des lignes et des colonnes.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># Élément de la 2e ligne, 3e colonne</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">1</span>, ] <span class="co"># 1ère ligne complète</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 4 7</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>m1[, <span class="dv">2</span>] <span class="co"># 2e colonne complète</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4 5 6</code></pre>
-</div>
-</div>
-<p>Si les lignes et/ou les colonnes sont nommées, on peut également utiliser les noms pour retrouver les valeurs.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(m1) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"c"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(m1) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"r"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
-<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>m1[<span class="st">"r1"</span>, <span class="st">"c3"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7</code></pre>
-</div>
-</div>
-</section>
-<section id="opérations-sur-les-matrices" class="level4" data-number="6.2.1.3">
-<h4 data-number="6.2.1.3" class="anchored" data-anchor-id="opérations-sur-les-matrices"><span class="header-section-number">6.2.1.3</span> Opérations sur les matrices</h4>
-<p>Les opérations arithmétiques sont vectorisées.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">+</span> <span class="dv">10</span> <span class="co"># Ajout d'une constante</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   c1 c2 c3
-r1 11 14 17
-r2 12 15 18
-r3 13 16 19</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">*</span> <span class="dv">2</span>  <span class="co"># Multiplication élément par élément</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   c1 c2 c3
-r1  2  8 14
-r2  4 10 16
-r3  6 12 18</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">^</span> <span class="dv">2</span>  <span class="co"># Carré de chaque élément</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   c1 c2 c3
-r1  1 16 49
-r2  4 25 64
-r3  9 36 81</code></pre>
-</div>
-</div>
-<p>Pour les multiplications matricielles</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">*</span> m2 <span class="co"># produit de hadamard (élément par élément)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   c1 c2 c3
-r1  1  8 21
-r2  8 25 48
-r3 21 48 81</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>m1 <span class="sc">%*%</span> m2 <span class="co"># produit scalaire (dot product)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   [,1] [,2] [,3]
-r1   66   78   90
-r2   78   93  108
-r3   90  108  126</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>m1[<span class="dv">1</span>, ] <span class="sc">%o%</span> m1[<span class="dv">2</span>, ] <span class="co"># produit extérieur (outer product)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   c1 c2 c3
-c1  2  5  8
-c2  8 20 32
-c3 14 35 56</code></pre>
-</div>
-</div>
-<p>Il est également possible de calculer des statistiques pour les lignes et les colonnes :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>r1 r2 r3 
-12 15 18 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>r1 r2 r3 
- 4  5  6 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>c1 c2 c3 
- 6 15 24 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(m1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>c1 c2 c3 
- 2  5  8 </code></pre>
-</div>
-</div>
-</section>
-<section id="autres-opérations" class="level4" data-number="6.2.1.4">
-<h4 data-number="6.2.1.4" class="anchored" data-anchor-id="autres-opérations"><span class="header-section-number">6.2.1.4</span> Autres opérations</h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t</span>(m1) <span class="co"># Transposée</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   r1 r2 r3
-c1  1  2  3
-c2  4  5  6
-c3  7  8  9</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(m1) <span class="co"># Déterminant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">det</span>(m1) <span class="co"># Déterminant</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(m1) <span class="co"># Diagonale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(m1) <span class="co"># Diagonale</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 5 9</code></pre>
 </div>
 </div>
 </section>
+<section id="exemple" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="exemple"><span class="header-section-number">6.2.3</span> Exemple</h3>
+<p>Les matrices sont notamment utilisées dans les fonctions orientées statistiques. C’est tout naturel car l’algèbre linéaire et les probabilités sont basées sur des tels objets mathématiques.</p>
+<p>Par exemple, dans le cas d’une régression linéaire dont les <span class="math inline">\(\beta\)</span> sont estimés par la méthode des moindres carrés ordinaires (OLS), les données sont stockées dans une matrice :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Génération de y</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> mtcars<span class="sc">$</span>mpg</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(mpg <span class="sc">~</span> ., <span class="at">data =</span> mtcars)</span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimations des betas</span></span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>XtX_inv <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="co"># (X^T X)^(-1)</span></span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>XtY <span class="ot">&lt;-</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y            <span class="co"># (X^T y)</span></span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> XtX_inv <span class="sc">%*%</span> XtY  <span class="co"># beta = (X^T X)^(-1) X^T y</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="traitement-de-chaîne-de-caractères" class="level2 page-columns page-full" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="traitement-de-chaîne-de-caractères"><span class="header-section-number">6.3</span> Traitement de chaîne de caractères</h2>
 <p>Références :</p>
 <ul>
-<li><a href="https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html">Le chapitre</a> les chaînes de caractères de guide-R (Larmarange, 2025)</li>
+<li><a href="https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html">Le chapitre</a> sur les chaînes de caractères de guide-R (Larmarange, 2025)</li>
 </ul>
 <section id="sec-concat" class="level3 page-columns page-full" data-number="6.3.1">
 <h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-concat"><span class="header-section-number">6.3.1</span> Chercher/remplacer</h3>
 <p>Pour chercher remplacer dans une chaîne de caractère (variable ou vecteur), on utiliser la fonction de base <code>gsub()</code> ou la fonction <code>stringr::str_replace()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avec une chaîne de caractère</span></span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"Une phras mal orthographié"</span></span>
-<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"phras"</span>, <span class="st">"phrase"</span>)</span>
-<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"orthographié"</span>, <span class="st">"orthographiée"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avec une chaîne de caractère</span></span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="st">"Une phras mal orthographié"</span></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"phras"</span>, <span class="st">"phrase"</span>)</span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"orthographié"</span>, <span class="st">"orthographiée"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Une phrase mal orthographiée"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avec un vecteur</span></span>
-<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Puie"</span>, <span class="st">"pluie"</span>, <span class="st">"ORag_"</span>, <span class="st">"Orage"</span>)</span>
-<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"Puie"</span>, <span class="st">"pluie"</span>)</span>
-<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"ORag_"</span>, <span class="st">"orage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Avec un vecteur</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Puie"</span>, <span class="st">"pluie"</span>, <span class="st">"oRag_"</span>, <span class="st">"orage"</span>)</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"Puie"</span>, <span class="st">"pluie"</span>)</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"oRag_"</span>, <span class="st">"orage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "pluie" "pluie" "orage" "Orage"</code></pre>
+<pre><code>[1] "pluie" "pluie" "orage" "orage"</code></pre>
 </div>
 </div>
 <p>Tout l’intérêt de passer par un langage de programmation est de pouvoir automatiser au maximum le remplacement des chaînes de caractère. Pour cela, on utilise les <a href="https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re">expressions régulières</a> (on dira plutôt regex). Ces dernières permettent d’identifier efficacement des schémas dans des chaînes de caractères. Imaginons que l’on souhaite supprimer tous les espaces qui sont placés au début d’une chaîne de caractère dans un vecteur :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>, <span class="st">" Michel Legrand"</span>, <span class="st">" Glenn Gould"</span>)</span>
-<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Quatre valeur unique alors qu'on souhaite en avoir 2.</span></span>
-<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>, <span class="st">" Michel Legrand"</span>, <span class="st">" Glenn Gould"</span>)</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Quatre valeur unique alors qu'on souhaite en avoir 2.</span></span>
+<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Michel Legrand"  "Glenn Gould"     " Michel Legrand" " Glenn Gould"   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer les espaces situés au début de la chaîne de caractère</span></span>
-<span id="cb138-2"><a href="#cb138-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"^ "</span>, <span class="st">""</span>)</span>
-<span id="cb138-3"><a href="#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Supprimer les espaces situés au début de la chaîne de caractère</span></span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"^ "</span>, <span class="st">""</span>)</span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Michel Legrand" "Glenn Gould"   </code></pre>
 </div>
 </div>
 <p>On peut également mouvoir des bouts de chaînes en utilisant des groupes. Supposons que l’on veuille passer les noms avant les prénoms :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>, <span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>)</span>
-<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"^(.*(?= )) (.*$)"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">2 </span><span class="sc">\\</span><span class="st">1"</span>, <span class="at">perl =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>, <span class="st">"Michel Legrand"</span>, <span class="st">"Glenn Gould"</span>)</span>
+<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gsub</span>(<span class="at">x =</span> x, <span class="st">"^(.*(?= )) (.*$)"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">2 </span><span class="sc">\\</span><span class="st">1"</span>, <span class="at">perl =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Legrand Michel" "Gould Glenn"    "Legrand Michel" "Gould Glenn"   </code></pre>
 </div>
 </div>
-<p>Les expressions régulières ne sont pas forcément facile à manipuler mais quand on commence à les prendre en main on gagne un temps fou. Vous pouvez vous renseigner ici.</p>
+<p>Les expressions régulières ne sont pas forcément facile à manipuler mais quand on commence à les prendre en main on gagne un temps fou. Vous pouvez vous renseigner <a href="https://egallic.fr/Enseignement/R/Book/regex.html">ici</a>.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
 <p><img src="./figures/regex-meme.jpg" class="img-fluid figure-img"></p>
@@ -1491,26 +1476,26 @@ c3  7  8  9</code></pre>
 <h3 data-number="6.3.2" class="anchored" data-anchor-id="sec-concat"><span class="header-section-number">6.3.2</span> Concaténation</h3>
 <p>Pour concaténer deux chaînes de caractères :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>str1 <span class="ot">&lt;-</span> <span class="st">"un chêne"</span></span>
-<span id="cb142-4"><a href="#cb142-4" aria-hidden="true" tabindex="-1"></a>str2 <span class="ot">&lt;-</span> <span class="st">"vouvre"</span></span>
-<span id="cb142-5"><a href="#cb142-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-6"><a href="#cb142-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 1: paste() et paste0()</span></span>
-<span id="cb142-7"><a href="#cb142-7" aria-hidden="true" tabindex="-1"></a>conc1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(str1, str2) <span class="co"># espace par défaut entre les deux chaînes</span></span>
-<span id="cb142-8"><a href="#cb142-8" aria-hidden="true" tabindex="-1"></a>conc2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(str1, <span class="st">" "</span>, str2)</span>
-<span id="cb142-9"><a href="#cb142-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-10"><a href="#cb142-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 2: sprintf()</span></span>
-<span id="cb142-11"><a href="#cb142-11" aria-hidden="true" tabindex="-1"></a>conc3 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%s %s"</span>, str1, str2)</span>
-<span id="cb142-12"><a href="#cb142-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-13"><a href="#cb142-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 3: glue()</span></span>
-<span id="cb142-14"><a href="#cb142-14" aria-hidden="true" tabindex="-1"></a>conc4 <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">"{str1} {str2}"</span>)</span>
-<span id="cb142-15"><a href="#cb142-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb142-16"><a href="#cb142-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(conc4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>str1 <span class="ot">&lt;-</span> <span class="st">"un chêne"</span></span>
+<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>str2 <span class="ot">&lt;-</span> <span class="st">"vouvre"</span></span>
+<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 1: paste() et paste0()</span></span>
+<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a>conc1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(str1, str2) <span class="co"># espace par défaut entre les deux chaînes</span></span>
+<span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a>conc2 <span class="ot">&lt;-</span> <span class="fu">paste0</span>(str1, <span class="st">" "</span>, str2)</span>
+<span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-10"><a href="#cb131-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 2: sprintf()</span></span>
+<span id="cb131-11"><a href="#cb131-11" aria-hidden="true" tabindex="-1"></a>conc3 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"%s %s"</span>, str1, str2)</span>
+<span id="cb131-12"><a href="#cb131-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-13"><a href="#cb131-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 3: glue()</span></span>
+<span id="cb131-14"><a href="#cb131-14" aria-hidden="true" tabindex="-1"></a>conc4 <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">"{str1} {str2}"</span>)</span>
+<span id="cb131-15"><a href="#cb131-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-16"><a href="#cb131-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(conc4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>un chêne vouvre</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">c</span>(conc1, conc2, conc3) <span class="sc">==</span> conc4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href="#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(<span class="fu">c</span>(conc1, conc2, conc3) <span class="sc">==</span> conc4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -1521,7 +1506,7 @@ c3  7  8  9</code></pre>
 <h3 data-number="6.3.3" class="anchored" data-anchor-id="tableau-de-contingence"><span class="header-section-number">6.3.3</span> Tableau de contingence</h3>
 <p>Pour calculer un tableau de contingence sous <code>R</code>, on utilise la fonction <code>table()</code> avec les deux vecteurs que l’on souhaite analyser.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(penguins<span class="sc">$</span>species, penguins<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href="#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(penguins<span class="sc">$</span>species, penguins<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           
             Biscoe Dream Torgersen
