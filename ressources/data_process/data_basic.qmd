@@ -601,54 +601,41 @@ merge(dt1, dt2, by = "code", all = TRUE) # full join
 ```
 :::
 
-## Manipulation de matrice
+### Format long / large
+
+```{r}
+library(tidyr)
+head(relig_income)
+```
+
+Pour convertir un format large (*wide*) en format long (*long*) on utilise la
+fonction `tidyr::pivot_longer()`.
+
+```{r}
+pivot_longer(
+  relig_income,
+  cols = 2:11,
+  names_to = "income",
+  values_to = "number",
+)
+```
+
+## Manipulation de matrice {#sec-manip-mat}
 
 Bien que les `data.frame` (et objets associés) soit les objets les plus courants
 que vous aurez à traiter, il arrive que l'on se retrouve à traiter des matrices
 (`matrix`). Ces objets, plus simples dans leur structure que les Dataframe, sont
-souvent utilisés pour optimiser des traitements.
+souvent utilisés pour optimiser des traitements. Avant de lire cette section,
+renseignez-vous sur la structure de ce type d'objet (*c.f*. @sec-struc-mat).
 
-### Les bases des matrices sous R
-
-#### Création de matrices
-
-On peut créer une matrice avec la fonction `matrix()` :
-
-```{r}
-# Création d'une matrice 3x3 remplie par colonnes
-m1 <- matrix(1:9, nrow = 3, ncol = 3)
-m1
-
-# On peut aussi remplir par lignes
-m2 <- matrix(1:9, nrow = 3, byrow = TRUE)
-m2
-```
-
-#### Accès aux éléments
-
-On peut accéder aux éléments de la matrice de la même façon que dans un
-`dataframe` en utilisant l'indice des lignes et des colonnes.
-
-```{r}
-m1[2, 3] # Élément de la 2e ligne, 3e colonne
-m1[1, ] # 1ère ligne complète
-m1[, 2] # 2e colonne complète
-```
-
-Si les lignes et/ou les colonnes sont nommées, on peut également utiliser les
-noms pour retrouver les valeurs.
-
-```{r}
-colnames(m1) <- paste0("c", 1:3)
-rownames(m1) <- paste0("r", 1:3)
-m1["r1", "c3"]
-```
-
-#### Opérations sur les matrices
+### Opérations sur les matrices
 
 Les opérations arithmétiques sont vectorisées.
 
 ```{r}
+m1 <- matrix(1:9, nrow = 3, ncol = 3)
+m2 <- matrix(1:9, nrow = 3, byrow = TRUE)
+
 m1 + 10 # Ajout d'une constante
 m1 * 2  # Multiplication élément par élément
 m1 ^ 2  # Carré de chaque élément
@@ -672,8 +659,7 @@ colSums(m1)
 colMeans(m1)
 ```
 
-
-#### Autres opérations
+### Autres opérations
 
 ```{r}
 t(m1) # Transposée
@@ -681,13 +667,37 @@ det(m1) # Déterminant
 diag(m1) # Diagonale
 ```
 
+### Exemple
+
+Les matrices sont notamment utilisées dans les fonctions orientées statistiques.
+C'est tout naturel car l'algèbre linéaire et les probabilités sont basées sur
+des tels objets mathématiques.
+
+Par exemple, dans le cas d'une régression linéaire dont les $\beta$ sont estimés
+par la méthode des moindres carrés ordinaires (OLS), les données sont stockées
+dans une matrice :
+
+```{r}
+# Génération de y
+y <- mtcars$mpg
+X <- model.matrix(mpg ~ ., data = mtcars)
+
+# Estimations des betas
+XtX_inv <- solve(t(X) %*% X) # (X^T X)^(-1)
+XtY <- t(X) %*% y            # (X^T y)
+beta_hat <- XtX_inv %*% XtY  # beta = (X^T X)^(-1) X^T y
+
+```
+
+
+
 ## Traitement de chaîne de caractères
 
 Références :
 
 - [Le
 chapitre](https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html)
-les chaînes de caractères de guide-R (Larmarange, 2025)
+sur les chaînes de caractères de guide-R (Larmarange, 2025)
 
 ### Chercher/remplacer {#sec-concat}
 
@@ -701,9 +711,9 @@ x <- gsub(x = x, "phras", "phrase")
 gsub(x = x, "orthographié", "orthographiée")
 
 # Avec un vecteur
-x <- c("Puie", "pluie", "ORag_", "Orage")
+x <- c("Puie", "pluie", "oRag_", "orage")
 x <- gsub(x = x, "Puie", "pluie")
-gsub(x = x, "ORag_", "orage")
+gsub(x = x, "oRag_", "orage")
 ```
 
 Tout l'intérêt de passer par un langage de programmation est de pouvoir
@@ -735,7 +745,7 @@ gsub(x = x, "^(.*(?= )) (.*$)", "\\2 \\1", perl = TRUE)
 
 Les expressions régulières ne sont pas forcément facile à manipuler mais quand
 on commence à les prendre en main on gagne un temps fou. Vous pouvez vous
-renseigner ici.
+renseigner [ici](https://egallic.fr/Enseignement/R/Book/regex.html).
 
 ![Quand vous commencez à maitriser un peu les regex](./figures/regex-meme.jpg)
 

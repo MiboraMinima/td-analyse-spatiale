@@ -275,10 +275,10 @@ nous n'en utilisons pas dans ce cours, je ne m'étend pas sur le sujet.
 
 ### Données massives
 
-Dans le cas de **données massives**, on pourra se tourner vers le package
-[`data.table`](https://r-datatable.com/) qui possède sa propre syntaxe. Notez
-qu'on peut maintenant utilisez la syntaxe `dplyr` avec `data.table` en utilisant
-[`dtplyr`](https://dtplyr.tidyverse.org/) ce qui est un très gros poulet.
+Dans le cas de **données massives** (volumineuse), on pourra se tourner vers le
+package [`data.table`](https://r-datatable.com/) qui possède sa propre syntaxe.
+Notez qu'on peut maintenant utilisez la syntaxe `dplyr` avec `data.table` en
+utilisant [`dtplyr`](https://dtplyr.tidyverse.org/).
 
 ```{r}
 #| warning: false
@@ -294,26 +294,46 @@ ldt |>
   summarise(mpg = sum(mpg))
 ```
 
-## Les matrices
+## Les matrices {#sec-struc-mat}
 
-Les matrices sont notamment utilisées dans les fonctions orientées statistiques.
-C'est tout naturel car l'algèbre linéaire et les probabilités sont basées sur
-des tels objets mathématiques.
+Comme un DataFrame, une matrice comporte des lignes et des colonnes. La
+différence entre ces deux objets réside dans le fait qu'une matrice ne comporte
+que des valeurs numériques.
 
-Par exemple, dans le cas d'une régression linéaire dont les $\beta$ sont estimés
-par la méthode des moindres carrés ordinaires (OLS), les données sont stockées
-dans une matrice :
+Pour des manipulations plus avancées, rendez-vous à la @sec-manip-mat.
+
+### Création de matrices
+
+On peut créer une matrice avec la fonction `matrix()` :
 
 ```{r}
-# Génération de y
-y <- mtcars$mpg
-X <- model.matrix(mpg ~ ., data = mtcars)
+# Création d'une matrice 3x3 remplie par colonnes
+m1 <- matrix(1:9, nrow = 3, ncol = 3)
+m1
 
-# Estimations des betas
-XtX_inv <- solve(t(X) %*% X) # (X^T X)^(-1)
-XtY <- t(X) %*% y            # (X^T y)
-beta_hat <- XtX_inv %*% XtY  # beta = (X^T X)^(-1) X^T y
+# On peut aussi remplir par lignes
+m2 <- matrix(1:9, nrow = 3, byrow = TRUE)
+m2
+```
 
+### Accès aux éléments
+
+On peut accéder aux éléments de la matrice de la même façon que dans un
+`dataframe` en utilisant l'indice des lignes et des colonnes.
+
+```{r}
+m1[2, 3] # Élément de la 2e ligne, 3e colonne
+m1[1, ] # 1ère ligne complète
+m1[, 2] # 2e colonne complète
+```
+
+Si les lignes et/ou les colonnes sont nommées, on peut également utiliser les
+noms pour retrouver les valeurs.
+
+```{r}
+colnames(m1) <- paste0("c", 1:3)
+rownames(m1) <- paste0("r", 1:3)
+m1["r1", "c3"]
 ```
 
 ## Les listes
@@ -327,5 +347,4 @@ gaziers <- list(
   "Charlie Parker" = list("argent" = 1, "niveau_de_poulet"=1e6)
 )
 ```
-
 
