@@ -1,6 +1,6 @@
 # Les structures de contrôle
 
-## Les alternatives
+## Les alternatives {#sec-alternatives}
 
 Les alternatives permettent d'effectuer une opération uniquement si une
 condition logique est remplie. L'alternative la plus couramment utilisée dans
