@@ -96,6 +96,31 @@ documentation de la fonction directement dans R : `?get_wfs()`. Vous pouvez
 package](https://paul-carteron.github.io/happign/index.html) s'il existe (les
 fonctions du package sont indiquées dans l'onglet `Reference`).
 
+```{r}
+#| collapse: true
+#| code-fold: true
+
+# Charger les données INSEE
+dt_mobi <- read_delim("data/src/base_flux_mobilite_residentielle_2020.csv") |>
+  janitor::clean_names()
+
+# Récupérer les communes sur le serveur de l'IGN
+# Ne télécharger les données que si elles n'existent pas en local
+com_path <- "data/src/com_finistere_bdtopov3_2026.gpkg"
+if (file.exists(com_path)) {
+  cat("Le fichier existe déjà, chargement...")
+  coms <- read_sf(com_path)
+} else {
+  coms <- get_wfs(
+    layer = "BDTOPO_v3:commune",
+    ecql_filter = "code_insee_du_departement = '29%'",
+    interactive = false
+  ) |>
+    st_transform(2154)
+  write_sf(coms, com_path)
+}
+```
+
 :::
 
 :::{.callout-tip collapse="true" title="Le *move* écolo"}
@@ -125,41 +150,29 @@ l'algorithmique. Si vous voulez plus d'informations, référez à la
 
 :::
 
-```{r}
-#| output: false
-#| echo: false
-
-# Load data
-dt_mobi <- read_delim(
-  "data/src/base_flux_mobilite_residentielle_2020.csv"
-) |> janitor::clean_names()
-
-com_path <- "data/src/com_finistere_bdtopov3_2026.gpkg"
-if (file.exists(com_path)) {
-  print("File already exists, loading it...")
-  coms <- read_sf(com_path)
-} else {
-  coms <- get_wfs(
-    layer = "BDTOPO_V3:commune",
-    query = "code_insee LIKE '29%'"
-  ) |>
-    st_transform(2154)
-  write_sf(coms, com_path)
-}
-
-```
 
 :::{.callout-note title="Instructions : prétraitement"}
 
 1. Filtrer les données de mobilités résidentielles pour ne retenir que les
 mobilités qui ont eu lieu en Finistère. Retirer également les mobilités
 intra-communales (`codgeo != dcran`).
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+dt_mobi_fin <- filter(
+  dt_mobi,
+  startsWith(x = codgeo, "29"),
+  startsWith(x = dcran, "29"),
+  codgeo != dcran
+)
+```
+
 2. Convertir le `data.frame` en `matrix` pour obtenir une matrice
 origine/destination (OD) :
 
 ```{r}
-#| eval: false
-
 # Récupérer tous les codes insee
 all_ids <- sort(unique(c(dt_mobi_fin$codgeo, dt_mobi_fin$dcran)))
 
@@ -171,9 +184,10 @@ dt_mobi_fin$j <- factor(dt_mobi_fin$dcran, levels = all_ids)
 m <- Matrix::sparseMatrix(
   i = as.integer(dt_mobi_fin$i),
   j = as.integer(dt_mobi_fin$j),
-  x = flows$nbflux_c20_pop01p,
+  x = dt_mobi_fin$nbflux_c20_pop01p,
   dimnames = list(all_ids, all_ids)
 )
+print(m[1:5, 1:5])
 ```
 
 Notez que l'on utilise une `sparseMatrix` (matrice creuse) et non une `matrix`
@@ -181,38 +195,6 @@ ordinaire (matrice dense). Les `sparseMatrix` sont beaucoup plus efficientes que
 les `matrix` dans la mesure où elles ne stockent que les valeurs non-nulles.
 
 :::
-
-```{r}
-#| echo: false
-#| output: false
-
-# Filter mobi ..................................................................
-dt_mobi_fin <- filter(
-  dt_mobi,
-  startsWith(x = codgeo, "29"),
-  startsWith(x = dcran, "29"),
-  codgeo != dcran
-)
-
-# Conver to OD matrix ..........................................................
-# Récupérer tous les code insee
-all_ids <- sort(unique(c(dt_mobi_fin$codgeo, dt_mobi_fin$dcran)))
-
-# Créer des facteurs avec les mêmes niveaux pour chaque O/D
-dt_mobi_fin$i <- factor(dt_mobi_fin$codgeo, levels = all_ids)
-dt_mobi_fin$j <- factor(dt_mobi_fin$dcran, levels = all_ids)
-
-# Créer la sparse matrix (origin × destination)
-m <- sparseMatrix(
-  i = as.integer(dt_mobi_fin$i),
-  j = as.integer(dt_mobi_fin$j),
-  x = dt_mobi_fin$nbflux_c20_pop01p,
-  dimnames = list(all_ids, all_ids)
-)
-
-print(m[1:5, 1:5])
-```
-
 
 ### Rappels sur les indices
 
@@ -820,8 +802,8 @@ flux :
 #| output: false
 #| warning: false
 
-dpt <- read_sf(glue::glue("{DATA_DIR}/res/dep_ile_de_france.gpkg"))
-flux <- read_csv(glue::glue("{DATA_DIR}/res/flux_ile_de_france.csv"))
+dpt <- read_sf("data/res/dep_ile_de_france.gpkg")
+flux <- read_csv("data/res/flux_ile_de_france.csv")
 ```
 
 ### Modélisation
