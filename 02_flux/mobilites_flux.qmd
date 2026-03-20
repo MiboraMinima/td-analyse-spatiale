@@ -19,23 +19,9 @@ pacman::p_load(
 
 Durant ce TD, vous apprendrez à réaliser une analyse descriptive de flux.
 
-:::{.callout-tip title="Ce que vous apprendrez sur R"}
-
-- Manipulation de données :
-    - Manipuler une matrice
-- Modélisation :
-  - Ajuster et évaluer une régression linéaire
-  - Ajuster et évaluer un modèle par *Pseudo Maximum Likelihood*
-- Visualisation :
-    - Cercles proportionnels
-    - Choroplètes
-    - Carte en oursin
-:::
-
 :::{.callout-note title="Méthode"}
 
-Voilà les étapes de l'analyse. Il s'agit d'une démarche classique de résolution
-d'une question de recherche à visée **descriptive**.
+Voilà les étapes de l'analyse :
 
 1. Formulation de la question et de la méthode
 2. Identification et collecte des données nécessaires
