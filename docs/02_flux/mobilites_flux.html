@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,14 +89,15 @@ div.csl-indent {
 <link href="../01_points/semi_points.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-c0f8282d1904867bd677e0497fc46e93.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-312502324fd5d0c0dc447282f1b6b698.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +140,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -241,6 +242,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../DM02_flux/dm02_flux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -255,13 +262,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/algorithmique/structure_donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/algorithmique/structure_controle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
   </div>
 </li>
       </ul>
@@ -278,13 +285,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/data_process/data_basic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/stats/stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
   </div>
 </li>
       </ul>
@@ -301,13 +308,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/viz/graph.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/viz/map.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
   </div>
 </li>
       </ul>
@@ -324,7 +331,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../ressources/where_data/where_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
   </div>
 </li>
       </ul>
@@ -339,30 +346,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#analyse-descritive-des-flux" id="toc-analyse-descritive-des-flux" class="nav-link active" data-scroll-target="#analyse-descritive-des-flux"><span class="header-section-number">3.1</span> Analyse descritive des flux</a>
+  <li><a href="#données" id="toc-données" class="nav-link active" data-scroll-target="#données"><span class="header-section-number">3.1</span> Données</a></li>
+  <li><a href="#rappels-sur-les-indices" id="toc-rappels-sur-les-indices" class="nav-link" data-scroll-target="#rappels-sur-les-indices"><span class="header-section-number">3.2</span> Rappels sur les indices</a></li>
+  <li><a href="#calcul-des-indices" id="toc-calcul-des-indices" class="nav-link" data-scroll-target="#calcul-des-indices"><span class="header-section-number">3.3</span> Calcul des indices</a></li>
+  <li><a href="#analyse-des-résultats" id="toc-analyse-des-résultats" class="nav-link" data-scroll-target="#analyse-des-résultats"><span class="header-section-number">3.4</span> Analyse des résultats</a>
   <ul>
-  <li><a href="#données" id="toc-données" class="nav-link" data-scroll-target="#données"><span class="header-section-number">3.1.1</span> Données</a></li>
-  <li><a href="#rappels-sur-les-indices" id="toc-rappels-sur-les-indices" class="nav-link" data-scroll-target="#rappels-sur-les-indices"><span class="header-section-number">3.1.2</span> Rappels sur les indices</a></li>
-  <li><a href="#calcul-des-indices" id="toc-calcul-des-indices" class="nav-link" data-scroll-target="#calcul-des-indices"><span class="header-section-number">3.1.3</span> Calcul des indices</a></li>
-  <li><a href="#analyse-des-résultats" id="toc-analyse-des-résultats" class="nav-link" data-scroll-target="#analyse-des-résultats"><span class="header-section-number">3.1.4</span> Analyse des résultats</a>
+  <li><a href="#statistiques-des-indices" id="toc-statistiques-des-indices" class="nav-link" data-scroll-target="#statistiques-des-indices"><span class="header-section-number">3.4.1</span> Statistiques des indices</a></li>
+  <li><a href="#cartographie" id="toc-cartographie" class="nav-link" data-scroll-target="#cartographie"><span class="header-section-number">3.4.2</span> Cartographie</a>
   <ul class="collapse">
-  <li><a href="#statistiques-des-indices" id="toc-statistiques-des-indices" class="nav-link" data-scroll-target="#statistiques-des-indices"><span class="header-section-number">3.1.4.1</span> Statistiques des indices</a></li>
-  <li><a href="#cartographie" id="toc-cartographie" class="nav-link" data-scroll-target="#cartographie"><span class="header-section-number">3.1.4.2</span> Cartographie</a></li>
+  <li><a href="#les-carte-de-flux-sous-r" id="toc-les-carte-de-flux-sous-r" class="nav-link" data-scroll-target="#les-carte-de-flux-sous-r"><span class="header-section-number">3.4.2.1</span> Les carte de flux sous R</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#modélisation-des-flux" id="toc-modélisation-des-flux" class="nav-link" data-scroll-target="#modélisation-des-flux"><span class="header-section-number">3.2</span> Modélisation des flux</a>
-  <ul>
-  <li><a href="#théorie" id="toc-théorie" class="nav-link" data-scroll-target="#théorie"><span class="header-section-number">3.2.1</span> Théorie</a></li>
-  <li><a href="#données-et-prétraitement" id="toc-données-et-prétraitement" class="nav-link" data-scroll-target="#données-et-prétraitement"><span class="header-section-number">3.2.2</span> Données et prétraitement</a></li>
-  <li><a href="#modélisation" id="toc-modélisation" class="nav-link" data-scroll-target="#modélisation"><span class="header-section-number">3.2.3</span> Modélisation</a>
-  <ul class="collapse">
-  <li><a href="#ajustement" id="toc-ajustement" class="nav-link" data-scroll-target="#ajustement"><span class="header-section-number">3.2.3.1</span> Ajustement</a></li>
-  <li><a href="#interprétation" id="toc-interprétation" class="nav-link" data-scroll-target="#interprétation"><span class="header-section-number">3.2.3.2</span> Interprétation</a></li>
-  <li><a href="#comparaison-des-modèles" id="toc-comparaison-des-modèles" class="nav-link" data-scroll-target="#comparaison-des-modèles"><span class="header-section-number">3.2.3.3</span> Comparaison des modèles</a></li>
-  <li><a href="#analyse-des-résidus-préférences-et-barrières" id="toc-analyse-des-résidus-préférences-et-barrières" class="nav-link" data-scroll-target="#analyse-des-résidus-préférences-et-barrières"><span class="header-section-number">3.2.3.4</span> Analyse des résidus : préférences et barrières</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#références-et-ressources" id="toc-références-et-ressources" class="nav-link" data-scroll-target="#références-et-ressources"><span class="header-section-number">3.3</span> Références et ressources</a></li>
+  <li><a href="#références-et-ressources" id="toc-références-et-ressources" class="nav-link" data-scroll-target="#références-et-ressources"><span class="header-section-number">3.5</span> Références et ressources</a></li>
   </ul>
 </nav>
     </div>
@@ -388,14 +383,14 @@ window.Quarto = {
 </header>
 
 
-<p>Durant ce TD, vous apprendrez à réaliser une analyse descriptive de flux ainsi qu’à les modéliser via un modèle gravitaire.</p>
+<p>Durant ce TD, vous apprendrez à réaliser une analyse descriptive de flux.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Ce que vous apprendrez sur R">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Ce que vous apprendrez sur R
+<span class="screen-reader-only">Tip</span>Ce que vous apprendrez sur R
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -418,15 +413,13 @@ Ce que vous apprendrez sur R
 </ul>
 </div>
 </div>
-<section id="analyse-descritive-des-flux" class="level2 page-columns page-full" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="analyse-descritive-des-flux"><span class="header-section-number">3.1</span> Analyse descritive des flux</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Méthode">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Méthode
+<span class="screen-reader-only">Note</span>Méthode
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -444,8 +437,8 @@ Méthode
 </div>
 <p><strong>Question :</strong> Comment sont réparties les migrations résidentielles des finistériens sur le territoire du Finistère et que cela dit-il de ce territoire ?</p>
 <p><strong>Méthode :</strong> analyse descriptive d’une matrice origine/destination (OD)</p>
-<section id="données" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="données"><span class="header-section-number">3.1.1</span> Données</h3>
+<section id="données" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="données"><span class="header-section-number">3.1</span> Données</h2>
 <p><strong>Données nécessaires :</strong></p>
 <ul>
 <li>Une donnée, la plus récente possible, indiquant les flux entre chaque commune du Finistère.</li>
@@ -458,7 +451,7 @@ Méthode
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+<span class="screen-reader-only">Tip</span>Question
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -475,7 +468,7 @@ Question
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions : chargement des données
+<span class="screen-reader-only">Note</span>Instructions : chargement des données
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -487,7 +480,7 @@ Instructions : chargement des données
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les données INSEE</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger les données INSEE</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dt_mobi <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/src/base_flux_mobilite_residentielle_2020.csv"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Rows: 482070 Columns: 5</span></span>
@@ -514,18 +507,18 @@ Instructions : chargement des données
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_transform</span>(<span class="dv">2154</span>)</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_sf</span>(coms, com_path)</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Le fichier existe déjà, chargement...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Le fichier existe déjà, chargement...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Le *move* écolo">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Le <em>move</em> écolo
+<span class="screen-reader-only">Tip</span>Le <em>move</em> écolo
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -533,14 +526,14 @@ Le <em>move</em> écolo
 <div class="callout-body-container callout-body">
 <p>Quand vous téléchargez des données, vous consommez de l’énergie. Si vous refaites tourner votre script de nombreuses fois, vous téléchargerez de nouveau les données autant de fois ; ce n’est pas très écolo. Aussi, une fois que vous avez téléchargé la data, vous pouvez l’enregistrer sur votre machine. Vous pouvez par exemple écrire :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>com_path <span class="ot">&lt;-</span> <span class="st">"data/src/com_finistere_bdtopov3_2026.gpkg"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>com_path <span class="ot">&lt;-</span> <span class="st">"data/src/com_finistere_bdtopov3_2026.gpkg"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(com_path)) {</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"File already exists, loading it..."</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  coms <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(com_path)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># [téléchargez les données avec happign]</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_sf</span>(coms, com_path)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>La syntaxe <code>IF/ELSE</code> (alternative) est une des briques fondamentales de l’algorithmique. Si vous voulez plus d’informations, référez à la <a href="../ressources/algorithmique/structure_controle.html#sec-alternatives" class="quarto-xref"><span>Section 6.1</span></a>.</p>
 </div>
@@ -552,7 +545,7 @@ Le <em>move</em> écolo
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions : prétraitement
+<span class="screen-reader-only">Note</span>Instructions : prétraitement
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -562,19 +555,19 @@ Instructions : prétraitement
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dt_mobi_fin <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dt_mobi_fin <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  dt_mobi,</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">startsWith</span>(<span class="at">x =</span> codgeo, <span class="st">"29"</span>),</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">startsWith</span>(<span class="at">x =</span> dcran, <span class="st">"29"</span>),</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  codgeo <span class="sc">!=</span> dcran</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <ol start="2" type="1">
 <li>Convertir le <code>data.frame</code> en <code>matrix</code> pour obtenir une matrice origine/destination (OD) :</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer tous les codes insee</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer tous les codes insee</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>all_ids <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">c</span>(dt_mobi_fin<span class="sc">$</span>codgeo, dt_mobi_fin<span class="sc">$</span>dcran)))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer des facteurs avec les mêmes niveaux pour chaque O/D</span></span>
@@ -588,7 +581,7 @@ Instructions : prétraitement
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> dt_mobi_fin<span class="sc">$</span>nbflux_c20_pop01p,</span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(all_ids, all_ids)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5 x 5 sparse Matrix of class "dgCMatrix"
       29001    29002 29003    29004    29005
@@ -603,8 +596,8 @@ Instructions : prétraitement
 </div>
 </div>
 </section>
-<section id="rappels-sur-les-indices" class="level3" data-number="3.1.2">
-<h3 data-number="3.1.2" class="anchored" data-anchor-id="rappels-sur-les-indices"><span class="header-section-number">3.1.2</span> Rappels sur les indices</h3>
+<section id="rappels-sur-les-indices" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="rappels-sur-les-indices"><span class="header-section-number">3.2</span> Rappels sur les indices</h2>
 <p>Soit une matrice origine/destination (OD). On admet que les indices <span class="math inline">\(i\)</span> et <span class="math inline">\(j\)</span> identifie les mêmes entités spatiales. Ainsi, le flux <span class="math inline">\(O_i\)</span> est affilié à la même entité spatiale que le flux <span class="math inline">\(D_j\)</span>.</p>
 <p><span class="math display">\[
 \begin{array}{c|cccc|c}
@@ -644,30 +637,69 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 \]</span></p>
 <p>Si <span class="math inline">\(\text{IRP}_{ij} &gt; 1\)</span>, alors les lieux <span class="math inline">\(i\)</span> et <span class="math inline">\(j\)</span> ont une relation préférentielle : le flux observé de <span class="math inline">\(i\)</span> vers <span class="math inline">\(j\)</span> est plus important que celui qu’on attendrait étant donné l’émissivité de <span class="math inline">\(i\)</span> et l’attractivité de <span class="math inline">\(j\)</span>.</p>
 </section>
-<section id="calcul-des-indices" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="calcul-des-indices"><span class="header-section-number">3.1.3</span> Calcul des indices</h3>
+<section id="calcul-des-indices" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="calcul-des-indices"><span class="header-section-number">3.3</span> Calcul des indices</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Instructions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions
+<span class="screen-reader-only">Note</span>Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>À l’aide de la matrice OD, calculez, pour chaque entité spatiale : le total des flux émis, le total des flux reçus, le volume, le solde et le taux d’attractivité. Vous aurez à utiliser les fonctions <code>rowSums()</code> et <code>colSums()</code>.</li>
 <li>Pour chaque entité spatiale, calculer l’indice d’attractivité et d’émissivité.</li>
-<li>Pour chaque combinaison d’origine/destination, calculez l’indice de relation préférentielle. Pour calculer le produit du flux total émis par l’entité <span class="math inline">\(i\)</span> par le flux total reçu par l’entité <span class="math inline">\(j\)</span> pour les combinaisons en une seule fois, vous utiliserez l’opérateur <code>%o%</code> qui symbolise le produit externe. Au final, vous obtiendrez une matrice des relations préférentielles. Remplacez les valeurs de la diagonale par 0 (<code>diag(m_pref) &lt;- 0</code>) et remplacez les <code>Inf</code> par 0 (<code>m_pref[!is.finite(m_pref)] &lt;- 0</code>).</li>
+<li>Pour chaque combinaison d’origine/destination, calculez l’indice de relation préférentielle. Pour calculer le produit du flux total émis par l’entité <span class="math inline">\(i\)</span> par le flux total reçu par l’entité <span class="math inline">\(j\)</span> pour les combinaisons en une seule fois, vous utiliserez l’opérateur <code>%o%</code> qui symbolise le <a href="https://fr.wikipedia.org/wiki/Produit_ext%C3%A9rieur">produit extérieur</a>. Au final, vous obtiendrez une matrice des relations préférentielles. Remplacez les valeurs de la diagonale par 0 (<code>diag(m_pref) &lt;- 0</code>) et remplacez les <code>Inf</code> par 0 (<code>m_pref[!is.finite(m_pref)] &lt;- 0</code>).</li>
 </ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Volume, arrivés, départs ...................................................</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Flux total émis</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sum_dep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(m)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Flux total reçu</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sum_arr <span class="ot">&lt;-</span> <span class="fu">colSums</span>(m)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Volumes</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>volumes <span class="ot">&lt;-</span> sum_dep <span class="sc">+</span> sum_arr</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Soldes</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>soldes <span class="ot">&lt;-</span> sum_arr <span class="sc">-</span> sum_dep</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Taux d'attractivité</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>attrac_ratio <span class="ot">&lt;-</span> soldes <span class="sc">/</span> volumes</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Indices ......................................................................</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>tot <span class="ot">&lt;-</span> <span class="fu">sum</span>(m)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Indice d'attractivité</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ia <span class="ot">&lt;-</span> sum_arr <span class="sc">/</span> tot</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Indice d'émissivité</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ie <span class="ot">&lt;-</span> sum_dep <span class="sc">/</span> tot</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Relations préférentielles .....................................................</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrice des flux attendus</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> (sum_dep <span class="sc">%o%</span> sum_arr) <span class="sc">/</span> tot  <span class="co"># produit extérieur</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcul des relations</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>m_pref <span class="ot">&lt;-</span> m <span class="sc">/</span> expected</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Nettoyage de la matrice</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(m_pref) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>m_pref[<span class="sc">!</span><span class="fu">is.finite</span>(m_pref)] <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </div>
 </div>
 </section>
-<section id="analyse-des-résultats" class="level3 page-columns page-full" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="analyse-des-résultats"><span class="header-section-number">3.1.4</span> Analyse des résultats</h3>
-<section id="statistiques-des-indices" class="level4" data-number="3.1.4.1">
-<h4 data-number="3.1.4.1" class="anchored" data-anchor-id="statistiques-des-indices"><span class="header-section-number">3.1.4.1</span> Statistiques des indices</h4>
+<section id="analyse-des-résultats" class="level2 page-columns page-full" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="analyse-des-résultats"><span class="header-section-number">3.4</span> Analyse des résultats</h2>
+<section id="statistiques-des-indices" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="statistiques-des-indices"><span class="header-section-number">3.4.1</span> Statistiques des indices</h3>
 <p>Les indices ainsi calculé ne sont pas très lisibles. Avant d’analyser les résultats, on les enregistre dans un DataFrame pour faciliter leur analyse.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Instructions : prétraitement des indices">
 <div class="callout-header d-flex align-content-center">
@@ -675,7 +707,7 @@ Instructions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions : prétraitement des indices
+<span class="screen-reader-only">Note</span>Instructions : prétraitement des indices
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -686,8 +718,8 @@ Instructions : prétraitement des indices
 </div>
 </div>
 </section>
-<section id="cartographie" class="level4 page-columns page-full" data-number="3.1.4.2">
-<h4 data-number="3.1.4.2" class="anchored" data-anchor-id="cartographie"><span class="header-section-number">3.1.4.2</span> Cartographie</h4>
+<section id="cartographie" class="level3 page-columns page-full" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="cartographie"><span class="header-section-number">3.4.2</span> Cartographie</h3>
 <p>Le DataFrame des indices n’est pas spatial. Il faut donc effectuer une jointure avec les communes pour pouvoir cartographier les résultats. En fonction de ce que l’on souhaite cartographier, il faudra calculer les centroïdes des communes pour réaliser une carte en cercles proportionnels.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Instructions : cartographie">
 <div class="callout-header d-flex align-content-center">
@@ -695,7 +727,7 @@ Instructions : prétraitement des indices
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions : cartographie
+<span class="screen-reader-only">Note</span>Instructions : cartographie
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -706,37 +738,37 @@ Instructions : cartographie
 </ol>
 <p>Pour cartographier des cercles proportionnels avec <code>ggplot2</code> et un objet <code>sf</code> de géométrie point, on utilise l’argument <code>size</code> dans l’esthétique (<code>aes</code>) de la couche. Pour un rendu plus léché, vous pouvez également doubler l’information en colorisant les cercles proportionnels via l’argument <code>fill</code>. Pour que la coloration fonctionne, il faut utilisant un symbole de point spécial <code>pch = 21</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> centroids,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">size =</span> var, <span class="at">fill =</span> var),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">pch =</span> <span class="dv">21</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    ... <span class="co"># le reste de votre code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> centroids,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">aes</span>(<span class="at">size =</span> var, <span class="at">fill =</span> var),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    ... <span class="co"># le reste de votre code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Pour cartographier des choroplètes, il suffit d’utiliser l’argument <code>fill</code> de l’esthétique de la couche :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> polygons, <span class="fu">aes</span>(<span class="at">fill =</span> var)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    ... <span class="co"># le reste de votre code</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> polygons, <span class="fu">aes</span>(<span class="at">fill =</span> var)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    ... <span class="co"># le reste de votre code</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="2" type="1">
 <li>Pour une commune que vous choisirez, cartographiez ses <strong>relations préférentielles</strong>. Vous devrez d’abord convertir la matrice des relations préférentielles en <code>data.frame</code> :</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>od_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(m_pref)) <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">"origin"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>origin,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"destination"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"flow"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>od_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(m_pref)) <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">"origin"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>origin,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"destination"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"flow"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Vous devrez ensuite rapatrier les géométries des communes dans le <code>data.frame</code> (comme précédemment) pour cartographier.</p>
+<p>Vous devrez ensuite rapatrier la géométrie des communes dans le <code>data.frame</code> (comme précédemment) pour cartographier.</p>
 </div>
 </div>
-<section id="les-carte-de-flux-sous-r" class="level5 page-columns page-full" data-number="3.1.4.2.1">
-<h5 data-number="3.1.4.2.1" class="anchored" data-anchor-id="les-carte-de-flux-sous-r"><span class="header-section-number">3.1.4.2.1</span> Les carte de flux sous R</h5>
+<section id="les-carte-de-flux-sous-r" class="level4 page-columns page-full" data-number="3.4.2.1">
+<h4 data-number="3.4.2.1" class="anchored" data-anchor-id="les-carte-de-flux-sous-r"><span class="header-section-number">3.4.2.1</span> Les carte de flux sous R</h4>
 <p>Les cartes en cercles proportionnels ne sont pas vraiment appropriées quand on veut représenter des flux. On privilégiera des cartes en oursin ou des cartes de flux (<em>Flow map</em>) <em>stricto sensu</em>.</p>
 <div class="quarto-figure quarto-figure-center page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -754,62 +786,62 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 </div>
 <p><code>ggplot2</code> ne possède pas de fonction pour concevoir ce genre de cartes. Rassurez vous, je ne vais pas vous demander d’en produire une ! À la place, on peut s’appuyer sur les packages <code>mapsf</code> et <code>ttt</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mapsf"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cartograflow"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"tributetotobler/ttt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mapsf"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cartograflow"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"tributetotobler/ttt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>On commence par effectuer un petit prétraitement pour pouvoir utiliser les fonctions de <code>mapsf</code> et <code>ttt</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polygons<span class="sc">$</span>code_insee <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(polygons<span class="sc">$</span>code_insee)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>polygons<span class="sc">$</span>id <span class="ot">&lt;-</span> polygons<span class="sc">$</span>code_insee</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>dtp <span class="ot">&lt;-</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dt_mobi_fin, <span class="sc">-</span>i, <span class="sc">-</span>j) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">i =</span> <span class="fu">as.numeric</span>(codgeo), <span class="at">j =</span> <span class="fu">as.numeric</span>(dcran), <span class="at">fij =</span> nbflux_c20_pop01p) <span class="sc">|&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(i, j, fij)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polygons<span class="sc">$</span>code_insee <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(polygons<span class="sc">$</span>code_insee)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>polygons<span class="sc">$</span>id <span class="ot">&lt;-</span> polygons<span class="sc">$</span>code_insee</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dtp <span class="ot">&lt;-</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dt_mobi_fin, <span class="sc">-</span>i, <span class="sc">-</span>j) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">i =</span> <span class="fu">as.numeric</span>(codgeo), <span class="at">j =</span> <span class="fu">as.numeric</span>(dcran), <span class="at">fij =</span> nbflux_c20_pop01p) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(i, j, fij)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Par exemple, on peut cartographier l’ensemble des flux entrant et sortant pour une entité spatiale avec des flèches plus ou moins épaisses en fonction de la quantité échangée.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ttt)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Les flux associées à la commune</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="dv">29195</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer tous les flux entrant et sortant associés à la commune</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, i <span class="sc">==</span> cc <span class="sc">|</span> j <span class="sc">==</span> cc)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Récuperer le nom de la commune concernée</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(dt_mobi_fin, codgeo <span class="sc">==</span> cc), libgeo))</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_shadow</span>(<span class="fu">st_union</span>(polygons))</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  polygons,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#eeedee"</span>,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">0.5</span>,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>flows <span class="ot">&lt;-</span> ttt<span class="sc">::</span><span class="fu">ttt_flowmapper</span>(</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> polygons,</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">xid =</span> <span class="st">"id"</span>,</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> dt_plot,</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfid =</span> <span class="fu">c</span>(<span class="st">"i"</span>, <span class="st">"j"</span>),</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#ffc524"</span>,</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfvar =</span> <span class="st">"fij"</span>,</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>ttt<span class="sc">::</span><span class="fu">ttt_flowmapperlegend</span>(</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> flows,</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Flux inter"</span>,</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">txtcol =</span> <span class="st">"#ffc524"</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">txt =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Flux entrant et sortant de {com}"</span>),</span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#ffc524"</span>, <span class="at">fg =</span> <span class="st">"White"</span>, <span class="at">pos =</span> <span class="st">"left"</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_arrow</span>()</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ttt)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Les flux associées à la commune</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="dv">29195</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer tous les flux entrant et sortant associés à la commune</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, i <span class="sc">==</span> cc <span class="sc">|</span> j <span class="sc">==</span> cc)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Récuperer le nom de la commune concernée</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(dt_mobi_fin, codgeo <span class="sc">==</span> cc), libgeo))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_shadow</span>(<span class="fu">st_union</span>(polygons))</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  polygons,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#eeedee"</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">0.5</span>,</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>flows <span class="ot">&lt;-</span> ttt<span class="sc">::</span><span class="fu">ttt_flowmapper</span>(</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> polygons,</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">xid =</span> <span class="st">"id"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> dt_plot,</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfid =</span> <span class="fu">c</span>(<span class="st">"i"</span>, <span class="st">"j"</span>),</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#ffc524"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfvar =</span> <span class="st">"fij"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>ttt<span class="sc">::</span><span class="fu">ttt_flowmapperlegend</span>(</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> flows,</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Flux inter"</span>,</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">txtcol =</span> <span class="st">"#ffc524"</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">txt =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Flux entrant et sortant de {com}"</span>),</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#ffc524"</span>, <span class="at">fg =</span> <span class="st">"White"</span>, <span class="at">pos =</span> <span class="st">"left"</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_arrow</span>()</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -826,7 +858,7 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Instructions
+<span class="screen-reader-only">Note</span>Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -844,7 +876,7 @@ Instructions
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question
+<span class="screen-reader-only">Tip</span>Question
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -854,247 +886,8 @@ Question
 </section>
 </section>
 </section>
-</section>
-<section id="modélisation-des-flux" class="level2 page-columns page-full" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="modélisation-des-flux"><span class="header-section-number">3.2</span> Modélisation des flux</h2>
-<section id="théorie" class="level3 page-columns page-full" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="théorie"><span class="header-section-number">3.2.1</span> Théorie</h3>
-<p>Le modèle gravitaire est directement inspiré de la loi universelle de gravitation de Newton <a href="#eq-newton" class="quarto-xref">Equation&nbsp;<span>3.1</span></a>.</p>
-<p><span id="eq-newton"><span class="math display">\[
-F_{AB} = F_{BA} = G\frac{M_A M_B}{d_{AB}^2}
-\tag{3.1}\]</span></span></p>
-<p>Les paramètres de cette loi sont, comme son nom l’indique, universelles. De tels paramètres sont appelés des constantes, ici l’exposant de la distance <span class="math inline">\(a = 2\)</span> et <span class="math inline">\(k = G = 6.67430 \times 10^{*11} \text{m}^3.\text{kg}^{-1}.\text{s}^{-2}\)</span>.</p>
-<p>Contrairement à la loi universelle de la gravitation, les paramètres des modèles gravitaires appliqués à des phénonènes sociaux doivent être estimés : il ne s’agit pas de constantes (<a href="#eq-mod" class="quarto-xref">Equation&nbsp;<span>3.2</span></a>).</p>
-<p><span id="eq-mod"><span class="math display">\[
-F_{ij} = k\frac{M_iM_j}{d_{ij}^a}
-\tag{3.2}\]</span></span></p>
-<p>À partir de cette formulation, on dérive <strong>deux façons de modéliser les flux</strong>. <strong>La première se concentre uniquement sur la distance</strong> entre <span class="math inline">\(i\)</span> et <span class="math inline">\(j\)</span> en modélisant <strong>l’intensité du flux plutôt que les flux eux-mêmes</strong>. Cela revient à diviser la <span class="math inline">\(F_{ij}\)</span> par le produit des masses de <span class="math inline">\(i\)</span> et <span class="math inline">\(j\)</span>. De cette façon, on obtient une fonction affine dont les paramètres <span class="math inline">\(a\)</span> (la pente) et <span class="math inline">\(k\)</span> (l’intercepte) peuvent être estimé par la méthode des moindres carrés ordinaires (OLS). Comme le modèle gravitaire est non-linéaire dans ses paramètres, il convient d’utiliser les logs pour satisfaire l’hypothèse de linéarité de la régression linéaire (<a href="#eq-mod-intens" class="quarto-xref">Equation&nbsp;<span>3.3</span></a>).</p>
-<p><span id="eq-mod-intens"><span class="math display">\[
-\ln\frac{F_{ij}}{M_iM_j} = -a \ln d_{ij} + \ln k
-\tag{3.3}\]</span></span></p>
-<p><strong>La deuxième manière s’intéresse aux flux <em>stricto sensu</em></strong>. Dans ce cas, la variable dépendante demeure <span class="math inline">\(F_{ij}\)</span> et les masses sont intégrées dans les variables explicatives avec des paramètres (<span class="math inline">\(\beta_n\)</span>) (<a href="#eq-mod-loglog" class="quarto-xref">Equation&nbsp;<span>3.4</span></a>). Comme pour le modèle d’intensité des flux, les paramètres sont estimés par la méthode des moindres carrés ordinaires.</p>
-<p><span id="eq-mod-loglog"><span class="math display">\[
-\ln F_{ij} = \ln k + \beta_1 \ln M_i + \beta_2 \ln M_j - a \ln d_{ij}
-\tag{3.4}\]</span></span></p>
-<p>Deux objections principales ont été formulées quant à l’utilisation de la méthode des moindres carrés pour estimer les paramètres du modèle gravitaire, les voici :</p>
-<ul>
-<li><strong>Les zéros :</strong> le fait d’utiliser une transformation logorathmique implique l’absence de flux nul, ce qui, en pratique n’est pas toujours le cas.</li>
-<li><strong>L’hétéroscédasticité :</strong> la variance de l’erreur n’est généralement pas homogène dans le cas des modèles gravitaires. La méthode des moindres carrés est alors inadaptée pour estimer les paramètres.</li>
-</ul>
-<p>Pour résoudre ces deux problèmes, <span class="citation" data-cites="silvaLogGravity2006">Silva and Tenreyro (<a href="#ref-silvaLogGravity2006" role="doc-biblioref">2006</a>)</span> proposent d’utiliser une autre méthode d’estimation des paramètres : la PML (<em>Pseudo-Maximum Likelihood</em>).</p>
-<div class="no-row-height column-margin column-container"><div id="ref-silvaLogGravity2006" class="csl-entry" role="listitem">
-Silva, J. M. C. Santos, and Silvana Tenreyro. 2006. <span>“The <span>Log</span> of <span>Gravity</span>.”</span> <em>The Review of Economics and Statistics</em> 88 (4): 641–58. <a href="https://doi.org/10.1162/rest.88.4.641">https://doi.org/10.1162/rest.88.4.641</a>.
-</div></div><p>À partir des prédictions des modèles, on peut identifier <strong>des préférences et des barrières dans les flux</strong>. Il s’agit tout simplement d’une analyse des résidus (de l’erreur de prédiction). Si le résidu est positif, alors il y a un effet barrière : les flux observés sont plus faibles que les flux prédits, donc il y a des facteurs non inclus dans le modèle que les contraigent. À l’inverse, si le résidu est négatif, il existe des effets non inclus dans le modèle accroissent les flux. Un exemple classique d’effet barrière est la présence d’une frontière entre deux pays.</p>
-</section>
-<section id="données-et-prétraitement" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="données-et-prétraitement"><span class="header-section-number">3.2.2</span> Données et prétraitement</h3>
-<p>Nous allons utiliser un exemple très simple : les mobilités résidentielles de l’île de France.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Instructions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Chargez les flux de mobilités résidentielles de l’Île de France et les département assosiés.</p>
-</div>
-</div>
-<p>Les prétraitements suivants ont été appliqués pour générer le jeu de données des flux :</p>
-<ol type="1">
-<li>Récupération des données :
-<ul>
-<li>Récupération des données INSEE de mobilité résidentielle totale</li>
-<li>Récupération des données INSEE de population</li>
-<li>Récupération des départements en format spatiale (IGN)</li>
-</ul></li>
-<li>Prétraitement :
-<ol type="1">
-<li>Calcul des distances entre les départements</li>
-<li>Jointures de l’ensemble des données et filtre des départements.</li>
-</ol></li>
-</ol>
-</section>
-<section id="modélisation" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="modélisation"><span class="header-section-number">3.2.3</span> Modélisation</h3>
-<p>Le package <code>gravity</code> implémente les méthodes modernes d’estimation du modèle gravitaire.</p>
-<section id="ajustement" class="level4" data-number="3.2.3.1">
-<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="ajustement"><span class="header-section-number">3.2.3.1</span> Ajustement</h4>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Instructions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ajustez deux modèles :</p>
-<ul>
-<li>Le premier par OLS.</li>
-<li>Le deuxième par PPML. Appuyez vous sur la documentation du package <code>gravity</code>. Utilisez l’argument <code>robust = TRUE</code>.</li>
-</ul>
-<p>Pour le modèle OLS, utilisez la fonction de base <code>lm()</code>. Il vous faudra écrire une formule. Par exemple, si vous disposez d’un <code>data.frame</code> avec une variable dépendante <code>y</code> et des variables explicatives <code>x1</code> et <code>x2</code>, alors, la fonction <code>lm()</code> s’écrira :</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Données simulées</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> y <span class="sc">*</span> <span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">10</span>, <span class="dv">5</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> y <span class="sc">*</span> <span class="fu">rnorm</span>(<span class="dv">500</span>, <span class="dv">2</span>, <span class="dv">7</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y, <span class="at">x1 =</span> x1, <span class="at">x2 =</span> x2</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustement d'une régression linéaire par OLS</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>res_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Attention, n’oubliez pas que pour le modèle gravitaire il faut utiliser le log des variables (e.g.&nbsp;<code>log(y) ~ log(x1) + log(x2)</code>) quand on utilse une estimation par OLS.</p>
-</div>
-</div>
-<p>Pour récupérer un résumé de l’ajustement du modèle, on utilise la fonction <code>summary()</code>. C’est aussi le cas pour le résultat des modèles du package <code>gravity</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res_lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="interprétation" class="level4" data-number="3.2.3.2">
-<h4 data-number="3.2.3.2" class="anchored" data-anchor-id="interprétation"><span class="header-section-number">3.2.3.2</span> Interprétation</h4>
-<p>La figure décrit le résumé d’un modèle linéaire sous R.</p>
-<p><img src="./figures/interp_model_call.png" class="img-fluid"></p>
-<p>Le résumé d’un modèle ajusté par PPML via le package <code>gravity</code> est légèrement différent. On retrouve les estimations et la p-value des coefficients mais on n’a pas de <span class="math inline">\(R^2\)</span>. Cela vient du fait que l’on n’utilise pas une régression linéaire “classique”. À la place, on a la déviance d’un modèle nulle (<code>Null deviance</code>) et la déviance du modèle ajusté (<code>Residual deviance</code>). Je ne vais rentrer dans les détails statistiques. Retenez simplement que ce qui est retourné par la majorité des résumés (<code>summary()</code>) de modèle (<code>R2</code>, <code>Deviance</code>, <code>Likelihood</code>, etc.) indique <strong>la qualité de l’ajustement des modèles</strong> ce qu’il ne faut pas confondre avec <strong>la performance prédictive du modèle</strong>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Instructions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Interprétez <strong>les coefficients</strong> des deux modèles.</p>
-</div>
-</div>
-</section>
-<section id="comparaison-des-modèles" class="level4" data-number="3.2.3.3">
-<h4 data-number="3.2.3.3" class="anchored" data-anchor-id="comparaison-des-modèles"><span class="header-section-number">3.2.3.3</span> Comparaison des modèles</h4>
-<p>La qualité d’ajustement de modèles différents ne peut pas faire l’objet d’une comparaison directe. Imaginez que vous mesurez la vitesse de deux coureurs qui s’exercent respectivement sur une piste de course et sur une piste ensamblée. Vous ne pouvez pas comparer la performance des deux coureurs car ils ne courent pas dans les mêmes conditions. C’est un peu pareil avec les mesures d’ajustement des modèles, même si vous utilisez le <span class="math inline">\(R^2\)</span> (ce qui corresond à la mesure de la vitesse dans l’analogie) pour évaluer l’ajustement de deux modèles, si ces derniers sont différents, alors la comparaison n’aura pas de sens.</p>
-<p>En revanche, il est tout à fait possible de comparer la <em>capacité prédictive</em> de modèles différents dans la mesure où elle est évaluée seulement à partir des prédictions réalisées par les modèles. Il en existe une kyrielle, que ce soit pour comparer des variables continues (problème de régression) ou catégorielle (problème de classification). On s’intéressera à deux des mesures plus utilisées dans le cadre de problème de régression (c-à-d.&nbsp;<span class="math inline">\(y\)</span> est continue) : le biais (<em>bias</em> en anglais) et le RMSE.</p>
-<p>Le <span class="math inline">\(\text{bias}\)</span> correspond tout simplement à la différence moyenne entre les valeurs observées <span class="math inline">\(y\)</span> et les valeurs prédites <span class="math inline">\(\hat{y}\)</span>. Autrement dit, il s’agit de l’erreur moyenne. Si le biais est positif, alors le modèle à tendance à sous-estimer <span class="math inline">\(y\)</span>, s’il est négatif, il aura tendance à sur-estimer <span class="math inline">\(y\)</span>.</p>
-<p><span class="math display">\[
-\text{BIAS} = \frac{1}{N}\sum_{i=1}^{N}(y_i - \hat{y}_i)
-\]</span></p>
-<p>Le <span class="math inline">\(\text{RMSE}\)</span> correspond quant-à-lui à la racine carrée de la somme de la différence des erreurs au carré divisée par le nombre d’individus (<span class="math inline">\(N\)</span>). Il s’agit de la racine carrée du <span class="math inline">\(\text{MSE}\)</span> (<em>Mean Square Error</em>). Le <span class="math inline">\(\text{RMSE}\)</span> pénalise les larges erreurs en prenant le carré des erreurs.</p>
-<p><span class="math display">\[
-\text{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2}
-\]</span></p>
-<p>Il est également courant de donner une mesure de la corrélation entre <span class="math inline">\(y\)</span> et <span class="math inline">\(\hat{y}\)</span>. Typiquement, on utilisera la corrélation de <em>pearson</em>.</p>
-<p><span class="math display">\[
-r = \frac{\sum_{i=1}^{N}(y_i - \bar{y})(\hat{y}_i - \bar{\hat{y}})}{\sigma_y\sigma_{\hat{y}}}
-\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Instructions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Comparez le biais, le <span class="math inline">\(\text{RMSE}\)</span> et le coefficient de corrélation de pearson des deux modèles.</p>
-<p>Pour extraire les valeurs prédites des modèles, il faut utiliser la propriété <code>fitted</code> des modèles ajustés (<em>e.g.</em> <code>lm_res$fitted</code>). Attention encore une fois, la régression linéaire a été estimé à partir de logs, il faut donc utiliser la fonction exponentielle (<code>exp()</code>) pour retrouver les valeurs dans l’unité de base.</p>
-</div>
-</div>
-</section>
-<section id="analyse-des-résidus-préférences-et-barrières" class="level4" data-number="3.2.3.4">
-<h4 data-number="3.2.3.4" class="anchored" data-anchor-id="analyse-des-résidus-préférences-et-barrières"><span class="header-section-number">3.2.3.4</span> Analyse des résidus : préférences et barrières</h4>
-<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Instructions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Faîtes une cartographie des barrières et des préférences pour le modèle gravitaire ajusté par PPML. Discutez les résultats.</p>
-<p>Pour gagner du temps, je vous ai écrit une fonction qui permet de créer une carte de flux (via <code>ttt</code> et <code>mapsf</code>) des résidus.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Carte de flux des résidus soit positif (barrière) soit négatif (préférence)</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param dt_flows data.frame contenant les identifiants de i (la variable</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' doit-être nommée from) et j (la variable doit-être nommée to)</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param basemap object sf contenant la géométrie des entités spatiales. Une</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' variable code_insee doit être présente.</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param res_var char indiquant le nom de la variable de résidus</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param th num quantile à utiliser pour filtrer les résidus</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param type char cartographier les effets barrière ou les directions</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#' préférentielles</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return une carte mapsf</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>map_resid <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  dt_flows,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  basemap,</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  res_var,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">th =</span> <span class="fl">0.33</span>,</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"barriere"</span>, <span class="st">"pref"</span>)</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>) {</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  dtp <span class="ot">&lt;-</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(dt_flows, <span class="at">i =</span> <span class="fu">as.numeric</span>(from), <span class="at">j =</span> <span class="fu">as.numeric</span>(to)) <span class="sc">|&gt;</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(i, j, .data[[res_var]]) <span class="sc">|&gt;</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">fij =</span> .data[[res_var]])</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Choix du résidu à cartographier</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"pref"</span>) {</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    dtp_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, fij <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">fij =</span> <span class="fu">abs</span>(fij))</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    dtp_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, fij <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  dtp_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp_plot, fij <span class="sc">&gt;</span> <span class="fu">quantile</span>(fij, th))</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Prétraitement dep</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  coms_plot <span class="ot">&lt;-</span> <span class="fu">select</span>(basemap, code_insee) <span class="sc">|&gt;</span></span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">as.numeric</span>(code_insee))</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mf_map</span>(</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    coms_plot,</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"grey"</span>,</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">lwd =</span> <span class="fl">0.5</span>,</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  flows <span class="ot">&lt;-</span> ttt<span class="sc">::</span><span class="fu">ttt_flowmapper</span>(</span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> coms_plot,</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">xid =</span> <span class="st">"id"</span>,</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">df =</span> dtp_plot,</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">dfid =</span> <span class="fu">c</span>(<span class="st">"i"</span>, <span class="st">"j"</span>),</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"#ffc524"</span>,</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">dfvar =</span> <span class="st">"fij"</span>,</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>  ttt<span class="sc">::</span><span class="fu">ttt_flowmapperlegend</span>(</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> flows,</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Flux inter"</span>,</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">txtcol =</span> <span class="st">"#ffc524"</span></span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="co"># par exemple</span></span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="fu">map_resid</span>(df_res_model, departement_sf, <span class="at">res_var =</span> <span class="st">"res_poi"</span>, <span class="at">th =</span> <span class="fl">0.6</span>, <span class="at">type =</span> <span class="st">"pref"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</div>
-</div>
-</section>
-</section>
-</section>
-<section id="références-et-ressources" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="références-et-ressources"><span class="header-section-number">3.3</span> Références et ressources</h2>
+<section id="références-et-ressources" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="références-et-ressources"><span class="header-section-number">3.5</span> Références et ressources</h2>
 <p><strong>Ressources :</strong></p>
 <ul>
 <li><a href="https://transcarto.github.io/rflows/TRANSCARTO_flows.html">Tuto</a> cartes de flux sous R</li>
@@ -1161,13 +954,14 @@ Instructions
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

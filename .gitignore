@@ -16,3 +16,5 @@ logs/
 
 scratch/
 *.r
+
+**/*.quarto_ipynb

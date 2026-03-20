@@ -17,8 +17,7 @@ pacman::p_load(
 )
 ```
 
-Durant ce TD, vous apprendrez à réaliser une analyse descriptive de flux ainsi
-qu'à les modéliser via un modèle gravitaire.
+Durant ce TD, vous apprendrez à réaliser une analyse descriptive de flux.
 
 :::{.callout-tip title="Ce que vous apprendrez sur R"}
 
@@ -32,8 +31,6 @@ qu'à les modéliser via un modèle gravitaire.
     - Choroplètes
     - Carte en oursin
 :::
-
-## Analyse descritive des flux
 
 :::{.callout-note title="Méthode"}
 
@@ -57,7 +54,7 @@ finistériens sur le territoire du Finistère et que cela dit-il de ce territoir
 
 **Méthode :** analyse descriptive d'une matrice origine/destination (OD)
 
-### Données
+## Données
 
 **Données nécessaires :**
 
@@ -196,7 +193,7 @@ les `matrix` dans la mesure où elles ne stockent que les valeurs non-nulles.
 
 :::
 
-### Rappels sur les indices
+## Rappels sur les indices
 
 Soit une matrice origine/destination (OD). On admet que les indices $i$ et $j$
 identifie les mêmes entités spatiales. Ainsi, le flux $O_i$ est affilié à la
@@ -270,7 +267,7 @@ Si $\text{IRP}_{ij} > 1$, alors les lieux $i$ et $j$ ont une relation
 préférentielle : le flux observé de $i$ vers $j$ est plus important que celui
 qu'on attendrait étant donné l'émissivité de $i$ et l'attractivité de $j$.
 
-### Calcul des indices
+## Calcul des indices
 
 :::{.callout-note title="Instructions"}
 
@@ -282,21 +279,21 @@ d'attractivité. Vous aurez à utiliser les fonctions `rowSums()` et `colSums()`
 3. Pour chaque combinaison d'origine/destination, calculez l'indice de relation
    préférentielle. Pour calculer le produit du flux total émis par l'entité $i$
 par le flux total reçu par l'entité $j$ pour les combinaisons en une seule fois,
-vous utiliserez l'opérateur `%o%` qui symbolise le produit externe. Au final,
-vous obtiendrez une matrice des relations préférentielles. Remplacez les valeurs
-de la diagonale par 0 (`diag(m_pref) <- 0`) et remplacez les `Inf` par 0
+vous utiliserez l'opérateur `%o%` qui symbolise le [produit
+extérieur](https://fr.wikipedia.org/wiki/Produit_ext%C3%A9rieur). Au final, vous
+obtiendrez une matrice des relations préférentielles. Remplacez les valeurs de
+la diagonale par 0 (`diag(m_pref) <- 0`) et remplacez les `Inf` par 0
 (`m_pref[!is.finite(m_pref)] <- 0`).
 
-:::
-
 ```{r}
-#| echo: false
+#| collapse: true
+#| code-fold: true
 
-# Volume, arrival, departure ...................................................
-# Departure
+# Volume, arrivés, départs ...................................................
+# Flux total émis
 sum_dep <- rowSums(m)
 
-# Arrival
+# Flux total reçu
 sum_arr <- colSums(m)
 
 # Volumes
@@ -305,34 +302,34 @@ volumes <- sum_dep + sum_arr
 # Soldes
 soldes <- sum_arr - sum_dep
 
-# Attractivity
+# Taux d'attractivité
 attrac_ratio <- soldes / volumes
 
 # Indices ......................................................................
 tot <- sum(m)
 
-# Attractivity indice
+# Indice d'attractivité
 ia <- sum_arr / tot
 
-# emmissivity indice
+# Indice d'émissivité
 ie <- sum_dep / tot
 
-# Preferential relations .......................................................
-# total number of flows
-tot <- sum(m)
-
-# compute expected matrix
-expected <- (sum_dep %o% sum_arr) / tot  # outer product
+# Relations préférentielles .....................................................
+# Matrice des flux attendus
+expected <- (sum_dep %o% sum_arr) / tot  # produit extérieur
+# Calcul des relations
 m_pref <- m / expected
 
-# replace diagonal and NA/Inf with 0
+# Nettoyage de la matrice
 diag(m_pref) <- 0
 m_pref[!is.finite(m_pref)] <- 0
 ```
 
-### Analyse des résultats
+:::
 
-#### Statistiques des indices
+## Analyse des résultats
+
+### Statistiques des indices
 
 Les indices ainsi calculé ne sont pas très lisibles. Avant d'analyser les
 résultats, on les enregistre dans un DataFrame pour faciliter leur analyse.
@@ -370,7 +367,7 @@ polygons <- left_join(select(coms, code_insee), indices, by = "code_insee")
 centroids <- st_centroid(polygons)
 ```
 
-#### Cartographie
+### Cartographie
 
 Le DataFrame des indices n'est pas spatial. Il faut donc effectuer une jointure
 avec les communes pour pouvoir cartographier les résultats. En fonction de ce
@@ -434,7 +431,7 @@ od_df <- as.data.frame(as.matrix(m_pref)) |>
   )
 ```
 
-Vous devrez ensuite rapatrier les géométries des communes dans le `data.frame`
+Vous devrez ensuite rapatrier la géométrie des communes dans le `data.frame`
 (comme précédemment) pour cartographier.
 
 :::
@@ -598,7 +595,7 @@ ggplot() +
   ggtitle(glue::glue("Relations préférentielles de la commune de {com_lab}"))
 ```
 
-##### Les carte de flux sous R
+#### Les carte de flux sous R
 
 Les cartes en cercles proportionnels ne sont pas vraiment appropriées quand on
 veut représenter des flux. On privilégiera des cartes en oursin ou des cartes de
@@ -701,364 +698,6 @@ de moindre importance (par-ex. par quantile).
 
 Au regard des différentes analyses réalisées, que pouvez vous dire des
 migrations résidentielles en Finistère ?
-
-:::
-
-## Modélisation des flux
-
-### Théorie
-
-Le modèle gravitaire est directement inspiré de la loi universelle de
-gravitation de Newton @eq-newton.
-
-$$
-F_{AB} = F_{BA} = G\frac{M_A M_B}{d_{AB}^2}
-$${#eq-newton}
-
-Les paramètres de cette loi sont, comme son nom l'indique, universelles. De tels
-paramètres sont appelés des constantes, ici l'exposant de la distance $a = 2$ et
-$k = G = 6.67430 \times 10^{*11} \text{m}^3.\text{kg}^{-1}.\text{s}^{-2}$.
-
-Contrairement à la loi universelle de la gravitation, les paramètres des modèles
-gravitaires appliqués à des phénonènes sociaux doivent être estimés : il ne
-s'agit pas de constantes (@eq-mod).
-
-$$
-F_{ij} = k\frac{M_iM_j}{d_{ij}^a}
-$${#eq-mod}
-
-À partir de cette formulation, on dérive **deux façons de modéliser les flux**.
-**La première se concentre uniquement sur la distance** entre $i$ et $j$ en
-modélisant **l'intensité du flux plutôt que les flux eux-mêmes**. Cela revient à
-diviser la $F_{ij}$ par le produit des masses de $i$ et $j$. De cette façon, on
-obtient une fonction affine dont les paramètres $a$ (la pente) et $k$
-(l'intercepte) peuvent être estimé par la méthode des moindres carrés ordinaires
-(OLS). Comme le modèle gravitaire est non-linéaire dans ses paramètres, il
-convient d'utiliser les logs pour satisfaire l'hypothèse de linéarité de la
-régression linéaire (@eq-mod-intens).
-
-$$
-\ln\frac{F_{ij}}{M_iM_j} = -a \ln d_{ij} + \ln k
-$${#eq-mod-intens}
-
-**La deuxième manière s'intéresse aux flux *stricto sensu***. Dans ce cas, la
-variable dépendante demeure $F_{ij}$ et les masses sont intégrées dans les
-variables explicatives avec des paramètres ($\beta_n$) (@eq-mod-loglog). Comme
-pour le modèle d'intensité des flux, les paramètres sont estimés par la méthode
-des moindres carrés ordinaires.
-
-$$
-\ln F_{ij} = \ln k + \beta_1 \ln M_i + \beta_2 \ln M_j - a \ln d_{ij}
-$${#eq-mod-loglog}
-
-Deux objections principales ont été formulées quant à l'utilisation de la
-méthode des moindres carrés pour estimer les paramètres du modèle gravitaire,
-les voici :
-
-- **Les zéros :** le fait d'utiliser une transformation logorathmique implique
-l'absence de flux nul, ce qui, en pratique n'est pas toujours le cas.
-- **L'hétéroscédasticité :** la variance de l'erreur n'est généralement pas
-homogène dans le cas des modèles gravitaires. La méthode des moindres carrés est
-alors inadaptée pour estimer les paramètres.
-
-Pour résoudre ces deux problèmes, @silvaLogGravity2006 proposent d'utiliser une
-autre méthode d'estimation des paramètres : la PML (*Pseudo-Maximum
-Likelihood*).
-
-À partir des prédictions des modèles, on peut identifier **des préférences et
-des barrières dans les flux**. Il s'agit tout simplement d'une analyse des
-résidus (de l'erreur de prédiction). Si le résidu est positif, alors il y a un
-effet barrière : les flux observés sont plus faibles que les flux prédits, donc
-il y a des facteurs non inclus dans le modèle que les contraigent. À l'inverse,
-si le résidu est négatif, il existe des effets non inclus dans le modèle
-accroissent les flux. Un exemple classique d'effet barrière est la présence
-d'une frontière entre deux pays.
-
-### Données et prétraitement
-
-Nous allons utiliser un exemple très simple : les mobilités résidentielles de
-l'île de France.
-
-::: {.callout-note title="Instructions"}
-
-Chargez les flux de mobilités résidentielles de l'Île de France et les
-département assosiés.
-
-:::
-
-Les prétraitements suivants ont été appliqués pour générer le jeu de données des
-flux :
-
-1. Récupération des données :
-    - Récupération des données INSEE de mobilité résidentielle totale
-    - Récupération des données INSEE de population
-    - Récupération des départements en format spatiale (IGN)
-2. Prétraitement :
-    1. Calcul des distances entre les départements
-    2. Jointures de l'ensemble des données et filtre des départements.
-
-```{r}
-#| echo: false
-#| output: false
-#| warning: false
-
-dpt <- read_sf("data/res/dep_ile_de_france.gpkg")
-flux <- read_csv("data/res/flux_ile_de_france.csv")
-```
-
-### Modélisation
-
-Le package `gravity` implémente les méthodes modernes d'estimation du modèle
-gravitaire.
-
-#### Ajustement
-
-::: {.callout-note title="Instructions"}
-
-Ajustez deux modèles :
-
-- Le premier par OLS.
-- Le deuxième par PPML. Appuyez vous sur la documentation du package `gravity`.
-Utilisez l'argument `robust = TRUE`.
-
-Pour le modèle OLS, utilisez la fonction de base `lm()`. Il vous faudra écrire
-une formule. Par exemple, si vous disposez d'un `data.frame` avec une variable
-dépendante `y` et des variables explicatives `x1` et `x2`, alors,
-la fonction `lm()` s'écrira :
-
-```{r}
-# Données simulées
-set.seed(123)
-y = rnorm(500, 5, 20)
-x1 = y * rnorm(500, 10, 5)
-x2 = y * rnorm(500, 2, 7)
-df <- data.frame(
-    y = y, x1 = x1, x2 = x2
-)
-
-# Ajustement d'une régression linéaire par OLS
-res_lm <- lm(y ~ x1 + x2, data = df)
-```
-
-Attention, n'oubliez pas que pour le modèle gravitaire il faut utiliser le
-log des variables (e.g. `log(y) ~ log(x1) + log(x2)`) quand on utilse une
-estimation par OLS.
-
-:::
-
-Pour récupérer un résumé de l'ajustement du modèle, on utilise la fonction
-`summary()`. C'est aussi le cas pour le résultat des modèles du package
-`gravity`.
-
-```{r}
-#| output: false
-summary(res_lm)
-```
-
-```{r}
-#| echo: false
-#| output: false
-
-# OLS
-grav_lm <- lm(log(f_ij) ~ log(pop_i) + log(pop_j) + log(dist), data = flux)
-summary(grav_lm)
-flux$hat_f_ij_lm <- exp(grav_lm$fitted)
-
-# PPML
-grav_poi <- ppml(
-  dependent_variable = "f_ij",
-  distance = "dist",
-  additional_regressors = c("pop_i", "pop_j"),
-  robust = TRUE,
-  data = flux
-)
-summary(grav_poi)
-flux$hat_f_ij_poi <- grav_poi$fitted
-```
-
-#### Interprétation
-
-La figure décrit le résumé d'un modèle linéaire sous R.
-
-![](./figures/interp_model_call.png)
-
-Le résumé d'un modèle ajusté par PPML via le package `gravity` est légèrement
-différent. On retrouve les estimations et la p-value des coefficients mais on
-n'a pas de $R^2$. Cela vient du fait que l'on n'utilise pas une régression
-linéaire "classique". À la place, on a la déviance d'un modèle nulle (`Null
-deviance`) et la déviance du modèle ajusté (`Residual deviance`). Je ne vais
-rentrer dans les détails statistiques. Retenez simplement que ce qui est
-retourné par la majorité des résumés (`summary()`) de modèle (`R2`, `Deviance`,
-`Likelihood`, etc.) indique **la qualité de l'ajustement des modèles** ce qu'il
-ne faut pas confondre avec **la performance prédictive du modèle**.
-
-:::{.callout-note title="Instructions"}
-
-Interprétez **les coefficients** des deux modèles.
-
-:::
-
-#### Comparaison des modèles
-
-La qualité d'ajustement de modèles différents ne peut pas faire l'objet d'une
-comparaison directe. Imaginez que vous mesurez la vitesse de deux coureurs qui
-s'exercent respectivement sur une piste de course et sur une piste ensamblée.
-Vous ne pouvez pas comparer la performance des deux coureurs car ils ne courent
-pas dans les mêmes conditions. C'est un peu pareil avec les mesures d'ajustement
-des modèles, même si vous utilisez le $R^2$ (ce qui corresond à la mesure de la
-vitesse dans l'analogie) pour évaluer l'ajustement de deux modèles, si ces
-derniers sont différents, alors la comparaison n'aura pas de sens.
-
-En revanche, il est tout à fait possible de comparer la *capacité prédictive* de
-modèles différents dans la mesure où elle est évaluée seulement à partir des
-prédictions réalisées par les modèles. Il en existe une kyrielle, que ce soit
-pour comparer des variables continues (problème de régression) ou catégorielle
-(problème de classification). On s'intéressera à deux des mesures plus utilisées
-dans le cadre de problème de régression (c-à-d. $y$ est continue) : le biais
-(*bias* en anglais) et le RMSE.
-
-Le $\text{bias}$ correspond tout simplement à la différence moyenne entre les
-valeurs observées $y$ et les valeurs prédites $\hat{y}$. Autrement dit, il
-s'agit de l'erreur moyenne. Si le biais est positif, alors le modèle à tendance
-à sous-estimer $y$, s'il est négatif, il aura tendance à sur-estimer $y$.
-
-$$
-\text{BIAS} = \frac{1}{N}\sum_{i=1}^{N}(y_i - \hat{y}_i)
-$$
-
-Le $\text{RMSE}$ correspond quant-à-lui à la racine carrée de la somme de la
-différence des erreurs au carré divisée par le nombre d'individus ($N$). Il
-s'agit de la racine carrée du $\text{MSE}$ (*Mean Square Error*). Le
-$\text{RMSE}$ pénalise les larges erreurs en prenant le carré des erreurs.
-
-$$
-\text{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - \hat{y}_i)^2}
-$$
-
-Il est également courant de donner une mesure de la corrélation entre $y$ et
-$\hat{y}$. Typiquement, on utilisera la corrélation de *pearson*.
-
-$$
-r = \frac{\sum_{i=1}^{N}(y_i - \bar{y})(\hat{y}_i - \bar{\hat{y}})}{\sigma_y\sigma_{\hat{y}}}
-$$
-
-::: {.callout-note title="Instructions"}
-
-Comparez le biais, le $\text{RMSE}$ et le coefficient de corrélation de pearson
-des deux modèles.
-
-Pour extraire les valeurs prédites des modèles, il faut utiliser la propriété
-`fitted` des modèles ajustés (*e.g.* `lm_res$fitted`). Attention encore une
-fois, la régression linéaire a été estimé à partir de logs, il faut donc utiliser
-la fonction exponentielle (`exp()`) pour retrouver les valeurs dans l'unité de
-base.
-
-:::
-
-```{r}
-#| echo: false
-#| output: false
-
-f_ij <- flux$f_ij
-n <- length(f_ij)
-
-hats <- names(select(flux, starts_with("hat")))
-walk(hats, \(y_hat) {
-  cli_alert_info("{y_hat}")
-
-  # R2
-  r2 <- 1 - (sum((f_ij - flux[[y_hat]])^2) / sum((f_ij - mean(f_ij))^2))
-  # r
-  r <- cor(f_ij, flux[[y_hat]], method = "pearson")
-  # RMSE
-  rmse <- sqrt(sum((f_ij - flux[[y_hat]])^2) / n)
-  # Bias
-  bias <- mean(f_ij - flux[[y_hat]])
-
-  # Resultats
-  cli_text("  - R²    : {round(r2, 3)}")
-  cli_text("  - r     : {round(r, 3)}")
-  cli_text("  - RMSE  : {round(rmse, 3)}")
-  cli_text("  - BIAS  : {round(bias, 3)}")
-})
-```
-
-
-#### Analyse des résidus : préférences et barrières
-
-::: {.callout-note title="Instructions"}
-
-Faîtes une cartographie des barrières et des préférences pour le modèle
-gravitaire ajusté par PPML. Discutez les résultats.
-
-Pour gagner du temps, je vous ai écrit une fonction qui permet de créer une
-carte de flux (via `ttt` et `mapsf`) des résidus.
-
-```{r}
-#| eval: false
-#| code-fold: true
-
-#' Carte de flux des résidus soit positif (barrière) soit négatif (préférence)
-#'
-#' @param dt_flows data.frame contenant les identifiants de i (la variable
-#' doit-être nommée from) et j (la variable doit-être nommée to)
-#' @param basemap object sf contenant la géométrie des entités spatiales. Une
-#' variable code_insee doit être présente.
-#' @param res_var char indiquant le nom de la variable de résidus
-#' @param th num quantile à utiliser pour filtrer les résidus
-#' @param type char cartographier les effets barrière ou les directions
-#' préférentielles
-#'
-#' @return une carte mapsf
-map_resid <- function(
-  dt_flows,
-  basemap,
-  res_var,
-  th = 0.33,
-  type = c("barriere", "pref")
-) {
-  dtp <-
-    mutate(dt_flows, i = as.numeric(from), j = as.numeric(to)) |>
-    select(i, j, .data[[res_var]]) |>
-    rename(fij = .data[[res_var]])
-
-  # Choix du résidu à cartographier
-  if (type == "pref") {
-    dtp_plot <- filter(dtp, fij < 0) |> mutate(fij = abs(fij))
-  } else {
-    dtp_plot <- filter(dtp, fij > 0)
-  }
-  dtp_plot <- filter(dtp_plot, fij > quantile(fij, th))
-
-  # Prétraitement dep
-  coms_plot <- select(basemap, code_insee) |>
-    mutate(id = as.numeric(code_insee))
-
-  mf_map(
-    coms_plot,
-    col = "grey",
-    lwd = 0.5,
-    add = TRUE
-  )
-  flows <- ttt::ttt_flowmapper(
-    x = coms_plot,
-    xid = "id",
-    df = dtp_plot,
-    dfid = c("i", "j"),
-    col = "#ffc524",
-    dfvar = "fij",
-    add = TRUE
-  )
-  ttt::ttt_flowmapperlegend(
-    x = flows,
-    title = "Flux inter",
-    txtcol = "#ffc524"
-  )
-}
-
-# par exemple
-map_resid(df_res_model, departement_sf, res_var = "res_poi", th = 0.6, type = "pref")
-```
 
 :::
 

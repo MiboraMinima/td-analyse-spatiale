@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; DM01 : analyse centrographique – TD analyse spatiale</title>
+<title>5&nbsp; DM02 : analyse descriptive de flux – TD analyse spatiale</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../DM02_flux/dm02_flux.html" rel="next">
-<link href="../02_flux/mobilites_flux.html" rel="prev">
+<link href="../ressources/algorithmique/structure_donnees.html" rel="next">
+<link href="../DM01_centro/dm01_centro.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -74,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html">Devoir maison</a></li><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html">Devoir maison</a></li><li class="breadcrumb-item"><a href="../DM02_flux/dm02_flux.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -154,13 +154,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../DM01_centro/dm01_centro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../DM01_centro/dm01_centro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../DM02_flux/dm02_flux.html" class="sidebar-item-text sidebar-link">
+  <a href="../DM02_flux/dm02_flux.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></span></a>
   </div>
 </li>
@@ -261,11 +261,11 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html">Devoir maison</a></li><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../DM01_centro/dm01_centro.html">Devoir maison</a></li><li class="breadcrumb-item"><a href="../DM02_flux/dm02_flux.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></h1>
 </div>
 
 
@@ -282,15 +282,14 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Rendu :</strong> lundi 9 mars avant 18h. Depôt sur Moodle.</p>
-<p>À l’échelle de l’unité urbaine Brestoise, vous décrirez et comparerez la distribution spatiale moyenne des populations de trois catégories socio-professionnelles différente (au choix). Vous ne prendrez en compte ni l’âge ni le genre.</p>
-<p>Votre analyse sera réalisée au niveau des IRIS. Vous conduirez une analyse de A à Z, aussi, vous devrez :</p>
-<ol type="1">
-<li>Récupérer les données</li>
-<li>Prétraiter les données</li>
-<li>Analyser les données</li>
-<li>Interpréter les résultats</li>
-</ol>
+<p>Vous réaliserez une analyse descriptive de flux sur le sujet de votre choix.</p>
+<p>Comme pour le DM1, vous :</p>
+<ul>
+<li>Récupérerez les données : n’oubliez pas qu’il faut cerner son sujet avec de se jeter à corps perdu dans la recherche de données.</li>
+<li>Prétraiterez les données</li>
+<li>Analyserez les données</li>
+<li>Interpréterez les résultats</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Rendu">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -302,30 +301,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Un document pdf structuré et bien mise en page documentant votre travail. Si vous voulez écrire un document markdown ou quarto, c’est également envisageable, à vous de voir. Si cela vous dit, vous me fournirez le fichier <code>.html</code> ou <code>.pdf</code> découlant de la compilation de votre fichier <code>md</code> ou <code>qmd</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.
-<ul>
-<li><strong>À ne pas faire :</strong>
-<ul>
-<li>Inclure ou commenter du code (l’aspect technique n’est pas évalué dans ce document)</li>
-<li>Inclure un graphique, une carte ou un tableau sans y faire référence dans le texte.</li>
-</ul></li>
-<li><strong>À faire :</strong>
-<ul>
-<li>Toujours définir les concepts que vous employez.</li>
-<li>Adopter une structure claire adaptée à votre travail.</li>
-<li>Mise en page :
-<ul>
-<li>Table des matières</li>
-<li>Titre, noms, etc.</li>
-<li>Pagination</li>
-</ul></li>
-</ul></li>
-</ul></li>
-<li>Votre dossier de travail (scripts, dossiers <code>data</code>, <code>figures</code>, etc.). Votre script <code>R</code> doit être reproductible et doit intégrer l’ensemble de vos traitements.</li>
+<li>Un document pdf structuré et bien mise en page documentant vos analyses.</li>
+<li>Votre projet R (avec tous les dossiers).</li>
 </ol>
 </div>
 </div>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;Je considère les documents markdown ou quarto comme des documents de mise en forme. Aussi, je ne regarderai pas votre fichier source <code>md</code> ou <code>qmd</code> mais bien votre script <code>R</code> si vous décidez de passer par ce type de document.</p></div></div><div class="callout callout-style-default callout-tip callout-titled" title="Barème /20">
+<div class="callout callout-style-default callout-tip callout-titled" title="Barème /20">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -335,43 +316,27 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Partie <code>R</code> (3 pts) :</p>
+<p><strong>Partie <code>R</code></strong> (2 pts) :</p>
 <ul>
-<li>Structure du projet, organisation du script, commentaires, etc. (2 pts)</li>
-<li>Reproductibilité du script : quand je ferai tourner le script, il ne doit pas y avoir d’erreur. (1 pts)</li>
+<li>Structure du projet, organisation du script, commentaires, etc.</li>
+<li>Reproductibilité du script : quand je ferai tourner le script, il ne doit pas il y avoir d’erreur.</li>
 </ul>
-<p>Partie cartographie, graphs (4 pts) :</p>
+<p><em>Référez-vous aux commentaires que je vous ai fait pour le DM01</em></p>
+<p><strong>Partie cartographie, graphs (2 pts) :</strong></p>
 <ul>
-<li>Sémiologie graphique. (3 pts)</li>
-<li>Source, Auteur, Date (SAD). Doit apparaître sur toutes les cartes et tous les graphiques. (1 pts)</li>
+<li>Sémiologie graphique.</li>
+<li>Source, Auteur, Date (SAD). Doit apparaître sur toutes les cartes et graphiques ou dans leur légende.</li>
 </ul>
-<p>Traitements et analyses (13 pts) :</p>
+<p><strong>Dossier (16 pts) :</strong></p>
 <ul>
-<li>Pertinence des données employées et des traitements (3 pts)</li>
-<li>Validité et pertinence et des analyses réalisées (5 pts)</li>
-<li>Validité et pertinence des interprétations (5 pts)</li>
+<li>Présentation du sujet, de la problématique</li>
+<li>Présentation des données et de la méthode</li>
+<li>Présentation des résultats</li>
+<li>Discussion des résultats</li>
+<li>Discussion des limites</li>
 </ul>
-<p>Au regard de ce barème, si vous êtes rigoureux dans l’organisation de votre travail et dans la conception de vos figures, vous avez presque déjà la moyenne.</p>
 </div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Exemple de bons travaux">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Exemple de bons travaux
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>Exemple <a href="docs/audeline_pernot_dm1.pdf">un</a></li>
-<li>Exemple <a href="docs/dm1_chloe_raboin.pdf">deux</a></li>
-</ul>
-<p>Ne copiez pas la structure de ces travaux aveuglement. Contrairement à ces travaux, vous réaliserez des cartes.</p>
-</div>
-</div>
-
 
 
 
@@ -778,13 +743,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../02_flux/mobilites_flux.html" class="pagination-link" aria-label="Mobilités et flux">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mobilités et flux</span></span>
+      <a href="../DM01_centro/dm01_centro.html" class="pagination-link" aria-label="DM01 : analyse centrographique">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../DM02_flux/dm02_flux.html" class="pagination-link" aria-label="DM02 : analyse descriptive de flux">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../ressources/algorithmique/structure_donnees.html" class="pagination-link" aria-label="Les structures de données">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de données</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
