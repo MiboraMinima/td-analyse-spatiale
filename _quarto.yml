@@ -17,6 +17,7 @@ book:
     - part: "Devoir maison"
       chapters:
         - DM01_centro/dm01_centro.qmd
+        - DM02_flux/dm02_flux.qmd
     - part: "Algorithmique"
       chapters:
       - ressources/algorithmique/structure_donnees.qmd

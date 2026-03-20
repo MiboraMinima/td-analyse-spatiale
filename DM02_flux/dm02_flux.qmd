@@ -1,0 +1,45 @@
+# DM02 : analyse descriptive de flux
+
+Vous réaliserez une analyse descriptive de flux sur le sujet de votre choix.
+
+Comme pour le DM1, vous :
+
+- Récupérerez les données : n'oubliez pas qu'il faut cerner son sujet avec de se
+jeter à corps perdu dans la recherche de données.
+- Prétraiterez les données
+- Analyserez les données
+- Interpréterez les résultats
+
+::: {.callout-note title="Rendu"}
+
+1. Un document pdf structuré et bien mise en page documentant vos analyses.
+2. Votre projet R (avec tous les dossiers).
+
+:::
+
+::: {.callout-tip title="Barème /20"}
+
+**Partie `R`** (2 pts) :
+
+- Structure du projet, organisation du script, commentaires, etc.
+- Reproductibilité du script : quand je ferai tourner le script, il ne doit pas
+il y avoir d'erreur.
+
+*Référez-vous aux commentaires que je vous ai fait pour le DM01*
+
+**Partie cartographie, graphs (2 pts) :**
+
+- Sémiologie graphique.
+- Source, Auteur, Date (SAD). Doit apparaître sur toutes les cartes et
+graphiques ou dans leur légende.
+
+**Dossier (16 pts) :**
+
+- Présentation du sujet, de la problématique
+- Présentation des données et de la méthode
+- Présentation des résultats
+- Discussion des résultats
+- Discussion des limites
+
+:::
+
