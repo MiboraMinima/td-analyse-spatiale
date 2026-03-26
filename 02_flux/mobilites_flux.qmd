@@ -328,13 +328,11 @@ commune.
 2. Proposez des statistiques élémentaires pour chaque indices (*c.f.*
    @sec-stat-quanti).
 
-:::
-
 ```{r}
-#| echo: false
-#| output: false
+#| collapse: true
+#| code-fold: true
 
-# Create a dataframe from computed indices
+# Création du tableau des indicateurs
 indices <- data.frame(
   code_insee = names(sum_dep),
   departure = sum_dep,
@@ -346,12 +344,28 @@ indices <- data.frame(
   ie = ie
 )
 
-# Add geom for indices
+# Calcul des statistiques
+# Conversion en format long
+indices_long <- tidyr::pivot_longer(indices, cols = !code_insee)
+
+# Calcul des stats par indice
+group_by(indices_long, name) |>
+  summarise(
+    mean = mean(value),
+    median = median(value),
+    sd = sd(value),
+    min = min(value),
+    max = max(value)
+  )
+
+# Ajout des géométries
 polygons <- left_join(select(coms, code_insee), indices, by = "code_insee")
 
-# Compute centroids
+# Calcul des centroïdes (pour les cartes en cercle proportionnels)
 centroids <- st_centroid(polygons)
 ```
+:::
+
 
 ### Cartographie
 
