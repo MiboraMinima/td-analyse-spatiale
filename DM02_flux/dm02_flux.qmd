@@ -4,7 +4,7 @@ Vous réaliserez une analyse descriptive de flux sur le sujet de votre choix.
 
 Comme pour le DM1, vous :
 
-- Récupérerez les données : n'oubliez pas qu'il faut cerner son sujet avec de se
+- Récupérerez les données : n'oubliez pas qu'il faut cerner son sujet avant de se
 jeter à corps perdu dans la recherche de données.
 - Prétraiterez les données
 - Analyserez les données
