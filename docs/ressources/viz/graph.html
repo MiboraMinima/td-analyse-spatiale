@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Visualisation de données – TD analyse spatiale</title>
+<title>10&nbsp; Visualisation de données – TD analyse spatiale</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,14 +89,15 @@ div.csl-indent {
 <link href="../../ressources/stats/stats.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c0f8282d1904867bd677e0497fc46e93.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-312502324fd5d0c0dc447282f1b6b698.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -137,7 +138,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html">Visualisation</a></li><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualisation de données</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html">Visualisation</a></li><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualisation de données</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -212,6 +213,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../DM02_flux/dm02_flux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -226,13 +233,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/algorithmique/structure_donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/algorithmique/structure_controle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
   </div>
 </li>
       </ul>
@@ -249,13 +256,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/data_process/data_basic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/stats/stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
   </div>
 </li>
       </ul>
@@ -272,13 +279,13 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/viz/graph.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/viz/map.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,7 +302,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/where_data/where_data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,25 +317,25 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#les-graphs-de-base-sous-r" id="toc-les-graphs-de-base-sous-r" class="nav-link active" data-scroll-target="#les-graphs-de-base-sous-r"><span class="header-section-number">9.1</span> Les graphs de base sous R</a></li>
-  <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="header-section-number">9.2</span> Graphiques avec <code>ggplot2</code></a>
+  <li><a href="#les-graphs-de-base-sous-r" id="toc-les-graphs-de-base-sous-r" class="nav-link active" data-scroll-target="#les-graphs-de-base-sous-r"><span class="header-section-number">10.1</span> Les graphs de base sous R</a></li>
+  <li><a href="#sec-ggplot" id="toc-sec-ggplot" class="nav-link" data-scroll-target="#sec-ggplot"><span class="header-section-number">10.2</span> Graphiques avec <code>ggplot2</code></a>
   <ul>
-  <li><a href="#les-geoms-de-bases" id="toc-les-geoms-de-bases" class="nav-link" data-scroll-target="#les-geoms-de-bases"><span class="header-section-number">9.2.1</span> Les geoms de bases</a>
+  <li><a href="#les-geoms-de-bases" id="toc-les-geoms-de-bases" class="nav-link" data-scroll-target="#les-geoms-de-bases"><span class="header-section-number">10.2.1</span> Les geoms de bases</a>
   <ul class="collapse">
-  <li><a href="#les-lignes" id="toc-les-lignes" class="nav-link" data-scroll-target="#les-lignes"><span class="header-section-number">9.2.1.1</span> Les lignes</a></li>
-  <li><a href="#les-nuages-de-points" id="toc-les-nuages-de-points" class="nav-link" data-scroll-target="#les-nuages-de-points"><span class="header-section-number">9.2.1.2</span> Les nuages de points</a></li>
-  <li><a href="#les-graphs-en-baton" id="toc-les-graphs-en-baton" class="nav-link" data-scroll-target="#les-graphs-en-baton"><span class="header-section-number">9.2.1.3</span> Les graphs en baton</a></li>
-  <li><a href="#les-graphiques-statistiques" id="toc-les-graphiques-statistiques" class="nav-link" data-scroll-target="#les-graphiques-statistiques"><span class="header-section-number">9.2.1.4</span> Les graphiques statistiques</a></li>
+  <li><a href="#les-lignes" id="toc-les-lignes" class="nav-link" data-scroll-target="#les-lignes"><span class="header-section-number">10.2.1.1</span> Les lignes</a></li>
+  <li><a href="#les-nuages-de-points" id="toc-les-nuages-de-points" class="nav-link" data-scroll-target="#les-nuages-de-points"><span class="header-section-number">10.2.1.2</span> Les nuages de points</a></li>
+  <li><a href="#les-graphs-en-baton" id="toc-les-graphs-en-baton" class="nav-link" data-scroll-target="#les-graphs-en-baton"><span class="header-section-number">10.2.1.3</span> Les graphs en baton</a></li>
+  <li><a href="#les-graphiques-statistiques" id="toc-les-graphiques-statistiques" class="nav-link" data-scroll-target="#les-graphiques-statistiques"><span class="header-section-number">10.2.1.4</span> Les graphiques statistiques</a></li>
   </ul></li>
-  <li><a href="#faire-des-graphs-par-groupe" id="toc-faire-des-graphs-par-groupe" class="nav-link" data-scroll-target="#faire-des-graphs-par-groupe"><span class="header-section-number">9.2.2</span> Faire des graphs par groupe</a></li>
-  <li><a href="#apparence" id="toc-apparence" class="nav-link" data-scroll-target="#apparence"><span class="header-section-number">9.2.3</span> Apparence</a>
+  <li><a href="#faire-des-graphs-par-groupe" id="toc-faire-des-graphs-par-groupe" class="nav-link" data-scroll-target="#faire-des-graphs-par-groupe"><span class="header-section-number">10.2.2</span> Faire des graphs par groupe</a></li>
+  <li><a href="#apparence" id="toc-apparence" class="nav-link" data-scroll-target="#apparence"><span class="header-section-number">10.2.3</span> Apparence</a>
   <ul class="collapse">
-  <li><a href="#les-thèmes-par-défaut" id="toc-les-thèmes-par-défaut" class="nav-link" data-scroll-target="#les-thèmes-par-défaut"><span class="header-section-number">9.2.3.1</span> Les thèmes par défaut</a></li>
-  <li><a href="#les-couleurs" id="toc-les-couleurs" class="nav-link" data-scroll-target="#les-couleurs"><span class="header-section-number">9.2.3.2</span> Les couleurs</a></li>
-  <li><a href="#textes" id="toc-textes" class="nav-link" data-scroll-target="#textes"><span class="header-section-number">9.2.3.3</span> Textes</a></li>
-  <li><a href="#créer-son-propre-thème" id="toc-créer-son-propre-thème" class="nav-link" data-scroll-target="#créer-son-propre-thème"><span class="header-section-number">9.2.3.4</span> Créer son propre thème</a></li>
+  <li><a href="#les-thèmes-par-défaut" id="toc-les-thèmes-par-défaut" class="nav-link" data-scroll-target="#les-thèmes-par-défaut"><span class="header-section-number">10.2.3.1</span> Les thèmes par défaut</a></li>
+  <li><a href="#les-couleurs" id="toc-les-couleurs" class="nav-link" data-scroll-target="#les-couleurs"><span class="header-section-number">10.2.3.2</span> Les couleurs</a></li>
+  <li><a href="#textes" id="toc-textes" class="nav-link" data-scroll-target="#textes"><span class="header-section-number">10.2.3.3</span> Textes</a></li>
+  <li><a href="#créer-son-propre-thème" id="toc-créer-son-propre-thème" class="nav-link" data-scroll-target="#créer-son-propre-thème"><span class="header-section-number">10.2.3.4</span> Créer son propre thème</a></li>
   </ul></li>
-  <li><a href="#sec-comb-plots" id="toc-sec-comb-plots" class="nav-link" data-scroll-target="#sec-comb-plots"><span class="header-section-number">9.2.4</span> Combiner des graphs</a></li>
+  <li><a href="#sec-comb-plots" id="toc-sec-comb-plots" class="nav-link" data-scroll-target="#sec-comb-plots"><span class="header-section-number">10.2.4</span> Combiner des graphs</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -336,9 +343,9 @@ div.csl-indent {
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html">Visualisation</a></li><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualisation de données</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html">Visualisation</a></li><li class="breadcrumb-item"><a href="../../ressources/viz/graph.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualisation de données</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualisation de données</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualisation de données</span></h1>
 </div>
 
 
@@ -359,7 +366,7 @@ div.csl-indent {
 <div class="no-row-height column-margin column-container"><div id="ref-GrammarGraphics2005" class="csl-entry" role="listitem">
 <em>The <span>Grammar</span> of <span>Graphics</span></em>. 2005. Statistics and <span>Computing</span>. New York: Springer-Verlag. <a href="https://doi.org/10.1007/0-387-28695-0">https://doi.org/10.1007/0-387-28695-0</a>.
 </div></div><div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    palmerpenguins,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dplyr,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    tidyr,</span>
@@ -368,15 +375,15 @@ div.csl-indent {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    patchwork</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(penguins, <span class="at">package =</span> <span class="st">"palmerpenguins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(penguins, <span class="at">package =</span> <span class="st">"palmerpenguins"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="les-graphs-de-base-sous-r" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="les-graphs-de-base-sous-r"><span class="header-section-number">9.1</span> Les graphs de base sous R</h2>
+<section id="les-graphs-de-base-sous-r" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="les-graphs-de-base-sous-r"><span class="header-section-number">10.1</span> Les graphs de base sous R</h2>
 <p><code>R</code> vient avec des fonctions de base pour représenter des données. Ces fonctions sont pratiques dans la mesure où on peut créer un graphique en très peu de ligne de code.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On supprime les valeurs manquantes pour éviter les erreurs</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On supprime les valeurs manquantes pour éviter les erreurs</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(penguins)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Définir la grille 2x2 pour afficher plusieurs graphiques</span></span>
@@ -402,7 +409,7 @@ div.csl-indent {
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(body_mass_g <span class="sc">~</span> species, <span class="at">data =</span> penguins,</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"skyblue"</span>, <span class="st">"orange"</span>, <span class="st">"lightgreen"</span>),</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Masse corporelle par espèce"</span>,</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Masse (g)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Masse (g)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -414,11 +421,11 @@ div.csl-indent {
 </div>
 <p>Les graphiques produits sont difficillement personnalisables et souvent peu au goût des utilisateurs. Dès que l’on souhaite produire des graphiques léchés, on se tourne vers <code>ggplot2</code>.</p>
 </section>
-<section id="sec-ggplot" class="level2 page-columns page-full" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="sec-ggplot"><span class="header-section-number">9.2</span> Graphiques avec <code>ggplot2</code></h2>
+<section id="sec-ggplot" class="level2 page-columns page-full" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-ggplot"><span class="header-section-number">10.2</span> Graphiques avec <code>ggplot2</code></h2>
 <p>Beaucoup d’encre a coulé sur le sujet. Je ne vais pas réinventer l’eau chaude. Vous trouverez tous ce qu’il vous faut dans le chapitre <a href="https://larmarange.github.io/guide-R/analyses/ggplot2.html">Graphiques avec <code>ggplot2</code></a> de Joseph larmarange.</p>
-<section id="les-geoms-de-bases" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="les-geoms-de-bases"><span class="header-section-number">9.2.1</span> Les geoms de bases</h3>
+<section id="les-geoms-de-bases" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="les-geoms-de-bases"><span class="header-section-number">10.2.1</span> Les geoms de bases</h3>
 <table class="table">
 <colgroup>
 <col style="width: 35%">
@@ -473,11 +480,11 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<section id="les-lignes" class="level4" data-number="9.2.1.1">
-<h4 data-number="9.2.1.1" class="anchored" data-anchor-id="les-lignes"><span class="header-section-number">9.2.1.1</span> Les lignes</h4>
+<section id="les-lignes" class="level4" data-number="10.2.1.1">
+<h4 data-number="10.2.1.1" class="anchored" data-anchor-id="les-lignes"><span class="header-section-number">10.2.1.1</span> Les lignes</h4>
 <p>Pour réaliser des nuages de points, on utilise <code>geom_point()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>to_plot_tot <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>to_plot_tot <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">count</span>(year)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>to_plot_species <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">count</span>(year, species)</span>
@@ -492,7 +499,7 @@ div.csl-indent {
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(<span class="fu">list</span>(p1, p2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(<span class="fu">list</span>(p1, p2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -502,11 +509,11 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="les-nuages-de-points" class="level4" data-number="9.2.1.2">
-<h4 data-number="9.2.1.2" class="anchored" data-anchor-id="les-nuages-de-points"><span class="header-section-number">9.2.1.2</span> Les nuages de points</h4>
+<section id="les-nuages-de-points" class="level4" data-number="10.2.1.2">
+<h4 data-number="10.2.1.2" class="anchored" data-anchor-id="les-nuages-de-points"><span class="header-section-number">10.2.1.2</span> Les nuages de points</h4>
 <p>Pour réaliser des nuages de points, on utilise <code>geom_point()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nuage de points</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nuage de points</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> bill_length_mm, <span class="at">y =</span> bill_depth_mm, <span class="at">color =</span> species)) <span class="sc">+</span></span>
@@ -522,7 +529,7 @@ div.csl-indent {
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># All graph in a single one</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2, p3, p4)</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">map</span>(plts, <span class="sc">~</span>.x <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>))</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -532,10 +539,10 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="les-graphs-en-baton" class="level4" data-number="9.2.1.3">
-<h4 data-number="9.2.1.3" class="anchored" data-anchor-id="les-graphs-en-baton"><span class="header-section-number">9.2.1.3</span> Les graphs en baton</h4>
+<section id="les-graphs-en-baton" class="level4" data-number="10.2.1.3">
+<h4 data-number="10.2.1.3" class="anchored" data-anchor-id="les-graphs-en-baton"><span class="header-section-number">10.2.1.3</span> Les graphs en baton</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>to_plot <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(penguins)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>to_plot <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(penguins)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(to_plot, <span class="fu">aes</span>(<span class="at">x =</span> species)) <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span>
@@ -555,7 +562,7 @@ div.csl-indent {
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># All graph in a single one</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2, p3, p4)</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">map</span>(plts, <span class="sc">~</span>.x <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>))</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -565,12 +572,12 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="les-graphiques-statistiques" class="level4" data-number="9.2.1.4">
-<h4 data-number="9.2.1.4" class="anchored" data-anchor-id="les-graphiques-statistiques"><span class="header-section-number">9.2.1.4</span> Les graphiques statistiques</h4>
+<section id="les-graphiques-statistiques" class="level4" data-number="10.2.1.4">
+<h4 data-number="10.2.1.4" class="anchored" data-anchor-id="les-graphiques-statistiques"><span class="header-section-number">10.2.1.4</span> Les graphiques statistiques</h4>
 <p>Pour rappel, les graphiques statistiques servent à comprendre la distribution des variables.</p>
 <p><strong>Boîte à moustache (et associés) :</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> bill_length_mm)) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
@@ -584,7 +591,7 @@ div.csl-indent {
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2, p3, p4)</span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">map</span>(plts, <span class="sc">~</span>.x <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>))</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -595,7 +602,7 @@ div.csl-indent {
 </div>
 <p><strong>Histogrames :</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">80</span>)</span>
@@ -608,7 +615,7 @@ div.csl-indent {
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2, p3, p4)</span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">map</span>(plts, <span class="sc">~</span>.x <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>))</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -619,7 +626,7 @@ div.csl-indent {
 </div>
 <p><strong>Courbe de fréquence cumulée (Empirical Cumulative Distribution Function) :</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">"step"</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> body_mass_g, <span class="at">color =</span> species)) <span class="sc">+</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">"step"</span>) <span class="sc">+</span></span>
@@ -627,7 +634,7 @@ div.csl-indent {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">list</span>(p1, p2)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plts <span class="ot">&lt;-</span> <span class="fu">map</span>(plts, <span class="sc">~</span>.x <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">wrap_plots</span>(plts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -638,13 +645,13 @@ div.csl-indent {
 </div>
 </section>
 </section>
-<section id="faire-des-graphs-par-groupe" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="faire-des-graphs-par-groupe"><span class="header-section-number">9.2.2</span> Faire des graphs par groupe</h3>
+<section id="faire-des-graphs-par-groupe" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="faire-des-graphs-par-groupe"><span class="header-section-number">10.2.2</span> Faire des graphs par groupe</h3>
 <p>Avec <code>ggplot2</code>, il est possible de générer des graphs par groupes. Par exemple, on peut vouloir comparer la longueur et la profondeur du bec des pingouins par espèce dans des graphs séparés. Plutôt que d’écrire manuellement trois graphs ou d’écrire une boucle, on peut utiliser la fonction <code>facet_wraps()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(bill_length_mm, bill_depth_mm)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(bill_length_mm, bill_depth_mm)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(species))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -655,10 +662,10 @@ div.csl-indent {
 </div>
 <p>On peut aussi garder l’ensemble du nuage sur chaque plot pour faciliter la comparaison :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(bill_length_mm, bill_depth_mm)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(bill_length_mm, bill_depth_mm)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">data =</span> <span class="fu">transform</span>(penguins, <span class="at">species =</span> <span class="cn">NULL</span>), <span class="at">colour =</span> <span class="st">"grey85"</span>) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(species))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(species))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -668,24 +675,24 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="apparence" class="level3 page-columns page-full" data-number="9.2.3">
-<h3 data-number="9.2.3" class="anchored" data-anchor-id="apparence"><span class="header-section-number">9.2.3</span> Apparence</h3>
-<p>Pour modifier l’apparence du graphique, on utilise la fonction <code>theme()</code>. Vous pouvez tout modifier, le texte, la grille, les axes, etc. (<em>cf.</em> <a href="#fig-theme" class="quarto-xref">Figure&nbsp;<span>9.1</span></a>).</p>
+<section id="apparence" class="level3 page-columns page-full" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="apparence"><span class="header-section-number">10.2.3</span> Apparence</h3>
+<p>Pour modifier l’apparence du graphique, on utilise la fonction <code>theme()</code>. Vous pouvez tout modifier, le texte, la grille, les axes, etc. (<em>cf.</em> <a href="#fig-theme" class="quarto-xref">Figure&nbsp;<span>10.1</span></a>).</p>
 <div id="fig-theme" class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="./figures/ggplot2_theme_fig_isabella-b.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-theme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9.1: Fiche de référence du thème ggplot2 par Isabella Benabaye (<a href="https://isabella-b.com/blog/ggplot2-theme-elements-reference/">source</a>)
+Figure&nbsp;10.1: Fiche de référence du thème ggplot2 par Isabella Benabaye (<a href="https://isabella-b.com/blog/ggplot2-theme-elements-reference/">source</a>)
 </figcaption>
 </figure>
 </div>
-<section id="les-thèmes-par-défaut" class="level4 page-columns page-full" data-number="9.2.3.1">
-<h4 data-number="9.2.3.1" class="anchored" data-anchor-id="les-thèmes-par-défaut"><span class="header-section-number">9.2.3.1</span> Les thèmes par défaut</h4>
+<section id="les-thèmes-par-défaut" class="level4 page-columns page-full" data-number="10.2.3.1">
+<h4 data-number="10.2.3.1" class="anchored" data-anchor-id="les-thèmes-par-défaut"><span class="header-section-number">10.2.3.1</span> Les thèmes par défaut</h4>
 <p>Il existe de <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">nombreux thèmes</a> par défaut que vous pouvez essayez. Par exemple :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fuel Efficiency vs Weight"</span>,</span>
@@ -696,7 +703,7 @@ Figure&nbsp;9.1: Fiche de référence du thème ggplot2 par Isabella Benabaye (<
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">theme_classic</span>()</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="fu">list</span>(p1, p2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(<span class="fu">list</span>(p1, p2))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -713,8 +720,8 @@ Figure&nbsp;9.1: Fiche de référence du thème ggplot2 par Isabella Benabaye (<
 </figure>
 </div>
 </section>
-<section id="les-couleurs" class="level4" data-number="9.2.3.2">
-<h4 data-number="9.2.3.2" class="anchored" data-anchor-id="les-couleurs"><span class="header-section-number">9.2.3.2</span> Les couleurs</h4>
+<section id="les-couleurs" class="level4" data-number="10.2.3.2">
+<h4 data-number="10.2.3.2" class="anchored" data-anchor-id="les-couleurs"><span class="header-section-number">10.2.3.2</span> Les couleurs</h4>
 <p>Pour modifier les couleurs des couches, on utilise les fonctions <code>scale_color_*()</code> ou <code>scale_fill_*()</code> en fonction de l’esthétique que vous aurez spécifié dans votre votre couche.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Pensez aux daltonien⋅nes">
 <div class="callout-header d-flex align-content-center">
@@ -722,18 +729,18 @@ Figure&nbsp;9.1: Fiche de référence du thème ggplot2 par Isabella Benabaye (<
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Pensez aux daltonien⋅nes
+<span class="screen-reader-only">Important</span>Pensez aux daltonien⋅nes
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Utilisez des palettes discernables par les daltonien⋅nes (<em>color-blind friendly</em>).</p>
 <p>Vous pouvez avoir un aperçu de comment votre plot sera perçu pour un⋅e daltonien⋅ne avec la fonction <code>colorblindr::cvd_grid()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_bl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">as.factor</span>(carb))) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p_bl <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg, <span class="at">color =</span> <span class="fu">as.factor</span>(carb))) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>colorblindr<span class="sc">::</span><span class="fu">cvd_grid</span>(p_bl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>colorblindr<span class="sc">::</span><span class="fu">cvd_grid</span>(p_bl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -755,11 +762,11 @@ Pensez aux daltonien⋅nes
 <li><a href="https://github.com/thomasp85/scico">scico</a>: Très bien pour les palettes de couleurs continues.</li>
 </ul>
 </section>
-<section id="textes" class="level4" data-number="9.2.3.3">
-<h4 data-number="9.2.3.3" class="anchored" data-anchor-id="textes"><span class="header-section-number">9.2.3.3</span> Textes</h4>
+<section id="textes" class="level4" data-number="10.2.3.3">
+<h4 data-number="10.2.3.3" class="anchored" data-anchor-id="textes"><span class="header-section-number">10.2.3.3</span> Textes</h4>
 <p>Pour modifier la police de caractère, on peut par exemple employer la fonction <code>font_add_google()</code> du package <code>sysfont</code>. Cela vous permet d’importer une famille typographique depuis <a href="https://fonts.google.com/">google font</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger la font</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Charger la font</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Roboto"</span>, <span class="at">family =</span> <span class="st">"roboto"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span></span>
@@ -768,7 +775,7 @@ Pensez aux daltonien⋅nes
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">8</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -779,7 +786,7 @@ Pensez aux daltonien⋅nes
 </div>
 <p>Pour plus de controle sur le rendu texte, vous pouvez utiliser le package <a href="https://wilkelab.org/ggtext/"><code>ggtext</code></a>. Celui-ci vous permet notamment d’écrire vos labels en <a href="https://www.markdownguide.org/basic-syntax/">markdown</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -794,7 +801,7 @@ Pensez aux daltonien⋅nes
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">lineheight =</span> <span class="fl">1.5</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -804,12 +811,12 @@ Pensez aux daltonien⋅nes
 </div>
 </div>
 </section>
-<section id="créer-son-propre-thème" class="level4" data-number="9.2.3.4">
-<h4 data-number="9.2.3.4" class="anchored" data-anchor-id="créer-son-propre-thème"><span class="header-section-number">9.2.3.4</span> Créer son propre thème</h4>
+<section id="créer-son-propre-thème" class="level4" data-number="10.2.3.4">
+<h4 data-number="10.2.3.4" class="anchored" data-anchor-id="créer-son-propre-thème"><span class="header-section-number">10.2.3.4</span> Créer son propre thème</h4>
 <p>Quant on rédige un document, on s’appuie sur une identité visuelle basée en partie sur une charte graphique. En un mot : il faut se tenir à des règles graphiques valables pour l’ensemble de figures. <code>ggplot2</code> permet de mettre en œuvre cette règle simplement par la création d’un thème que l’on pourra appliquer à tout objet <code>ggplot2</code> (cartes comprises).</p>
 <p>Prenons un exemple, construisons un thème basé sur le thème <code>ggplot2</code> par défaut <code>theme_minimal()</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Roboto"</span>, <span class="at">family =</span> <span class="st">"roboto"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Roboto"</span>, <span class="at">family =</span> <span class="st">"roboto"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>my_theme <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">11</span>, <span class="at">base_family =</span> <span class="st">"roboto"</span>, <span class="at">theme_color =</span> <span class="st">"#00976f"</span>) {</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_minimal</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
@@ -831,10 +838,10 @@ Pensez aux daltonien⋅nes
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Marges</span></span>
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.margin =</span> ggplot2<span class="sc">::</span><span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> wt, <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Efficacité énergétique vs Poids"</span>,</span>
@@ -842,7 +849,7 @@ Pensez aux daltonien⋅nes
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Miles per Gallon"</span>,</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** mtcars (dplyr), 2025.&lt;br&gt;**Réalisation :** Antoine Le Doeuff, 2025"</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_theme</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">my_theme</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -853,7 +860,7 @@ Pensez aux daltonien⋅nes
 </div>
 <p>On peut faire d’un thème le thème par défaut pour la session <code>R</code> courante.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">my_theme</span>())</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">my_theme</span>())</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.factor</span>(cyl), <span class="at">y =</span> mpg)) <span class="sc">+</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -862,7 +869,7 @@ Pensez aux daltonien⋅nes
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Nombre de cylindres"</span>,</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Miles per Gallon"</span>,</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** mtcars (dplyr), 2025.&lt;br&gt;**Réalisation :** Antoine Le Doeuff, 2025"</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -873,8 +880,8 @@ Pensez aux daltonien⋅nes
 </div>
 </section>
 </section>
-<section id="sec-comb-plots" class="level3" data-number="9.2.4">
-<h3 data-number="9.2.4" class="anchored" data-anchor-id="sec-comb-plots"><span class="header-section-number">9.2.4</span> Combiner des graphs</h3>
+<section id="sec-comb-plots" class="level3" data-number="10.2.4">
+<h3 data-number="10.2.4" class="anchored" data-anchor-id="sec-comb-plots"><span class="header-section-number">10.2.4</span> Combiner des graphs</h3>
 <p>Il existe de nombreux packages pour combiner des graphs <code>ggplot</code> sous <code>R</code>, voici les plus utilisés :</p>
 <ul>
 <li><a href="https://patchwork.data-imaginist.com/"><code>pacthwork</code></a> : Le plus utilisé aujourd’hui, il est très intuitif.</li>
@@ -883,12 +890,12 @@ Pensez aux daltonien⋅nes
 </ul>
 <p>Je vous conseil d’utiliser <code>patchwork</code>. Pour combiner deux graphs horizontalement, on utilise le <code>+</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(bill_depth_mm, bill_length_mm))</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(species, body_mass_g))</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -896,14 +903,14 @@ Pensez aux daltonien⋅nes
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce qui revient au même que wrap_plots(list(p1, p2), nrow = 1, ncol = 2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce qui revient au même que wrap_plots(list(p1, p2), nrow = 1, ncol = 2)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Pour combiner deux graphs verticalement, le <code>/</code> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="fu">aes</span>(body_mass_g), <span class="at">geom =</span> <span class="st">"step"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="fu">aes</span>(body_mass_g), <span class="at">geom =</span> <span class="st">"step"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(penguins) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(species))</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>p3 <span class="sc">/</span> p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>p3 <span class="sc">/</span> p4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -911,21 +918,21 @@ Pensez aux daltonien⋅nes
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce qui revient au même que wrap_plots(list(p1, p2), nrow = 2, ncol = 1)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ce qui revient au même que wrap_plots(list(p1, p2), nrow = 2, ncol = 1)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>On peut combiner les opérateurs pour obtenir un rendu complexe :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p_all <span class="ot">&lt;-</span> (p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span> p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p_all <span class="ot">&lt;-</span> (p1 <span class="sc">|</span> p2 <span class="sc">|</span> p3) <span class="sc">/</span> p4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Vous pouvez bien sûr ajouter des <a href="https://patchwork.data-imaginist.com/articles/guides/annotation.html">annotations aux graphs</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p_all <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>p_all <span class="sc">+</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Graphiques combinés"</span>,</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Données : palmerpenguins, 2025. Réalisation : Antoine Le Doeuff, 2025"</span>,</span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ajouter des tags</span></span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tag_levels =</span> <span class="st">'A'</span>,</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -993,13 +1000,14 @@ Pensez aux daltonien⋅nes
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1344,12 +1352,12 @@ Pensez aux daltonien⋅nes
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../ressources/stats/stats.html" class="pagination-link" aria-label="Statistiques">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistiques</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistiques</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../ressources/viz/map.html" class="pagination-link" aria-label="Cartographie">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cartographie</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cartographie</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

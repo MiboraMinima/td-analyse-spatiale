@@ -5,15 +5,16 @@
 #| echo: false
 
 pacman::p_load(
-    readr,
-    happign,
-    sf,
-    dplyr,
-    stringi,
-    purrr,
-    Matrix,
-    patchwork,
-    gravity
+  readr,
+  happign,
+  sf,
+  dplyr,
+  stringi,
+  purrr,
+  Matrix,
+  patchwork,
+  ggplot2,
+  ggspatial
 )
 ```
 
@@ -160,8 +161,8 @@ origine/destination (OD) :
 all_ids <- sort(unique(c(dt_mobi_fin$codgeo, dt_mobi_fin$dcran)))
 
 # Créer des facteurs avec les mêmes niveaux pour chaque O/D
-dt_mobi_fin$i <- factor(dt_mobi_fin$codgeo, levels = all_ids)
-dt_mobi_fin$j <- factor(dt_mobi_fin$dcran, levels = all_ids)
+dt_mobi_fin$i <- factor(dt_mobi_fin$dcran, levels = all_ids)
+dt_mobi_fin$j <- factor(dt_mobi_fin$codgeo, levels = all_ids)
 
 # Créer la sparse matrix (origin × destination)
 m <- Matrix::sparseMatrix(
@@ -274,7 +275,6 @@ la diagonale par 0 (`diag(m_pref) <- 0`) et remplacez les `Inf` par 0
 ```{r}
 #| collapse: true
 #| code-fold: true
-
 # Volume, arrivés, départs ...................................................
 # Flux total émis
 sum_dep <- rowSums(m)
@@ -357,12 +357,6 @@ group_by(indices_long, name) |>
     min = min(value),
     max = max(value)
   )
-
-# Ajout des géométries
-polygons <- left_join(select(coms, code_insee), indices, by = "code_insee")
-
-# Calcul des centroïdes (pour les cartes en cercle proportionnels)
-centroids <- st_centroid(polygons)
 ```
 :::
 
@@ -378,10 +372,26 @@ pour réaliser une carte en cercles proportionnels.
 
 1. Joignez le dataframe des indices que vous venez de créer aux données
    spatiales des communes.
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+polygons <- left_join(select(coms, code_insee), indices, by = "code_insee")
+```
+
 2. Si on souhaite cartographier des stocks, on utilisera des cercles
    proportionnels. Dans ce cadre, il faut d'abord transformer les polygones en
 points. Pour cela, vous créerez un nouveau `data.frame` spatial de géométrie
 points avec la fonction `sf::st_centroids()`.
+
+```{r}
+#| collapse: true
+#| code-fold: true
+
+centroids <- st_centroid(polygons)
+```
+
 3. Cartographier l'**ensemble des indices**. Attention à la sémiologie graphique, il
     n'y a pas que des stocks...
 
@@ -393,26 +403,251 @@ coloration fonctionne, il faut utilisant un symbole de point spécial `pch =
 21`.
 
 ```{r}
-#| eval: false
+#| fig-width: 10
+#| fig-height: 10
+#| collapse: true
+#| code-fold: true
+#| warning: false
+
+# Je crée un thème que j'appliquerai à toutes les cartes
+my_theme <-
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    plot.title   = ggtext::element_markdown(family = "roboto", size = 16, face = "bold"),
+    plot.subtitle = ggtext::element_markdown(family = "roboto", size = 12, lineheight = 1.2),
+    axis.title.x = ggtext::element_markdown(family = "roboto", size = 12),
+    axis.title.y = ggtext::element_markdown(family = "roboto", size = 12),
+    plot.caption = ggtext::element_markdown(family = "roboto", size = 8, lineheight = 1.5)
+  )
+
+# On défini le nom complet de le la variable avec un named vector
+selected_vars <- c(
+  "Flux total reçus" = "arrival",
+  "Flux total émis"  = "departure",
+  "Volume"           = "volumes"
+)
+
+# On définit une liste vide (réceptacle qui va recevoir les cartes)
+maps <- list()
+
+# On itère sur les noms
+for (name in names(selected_vars)) {
+  # On récupère le nom présent dans le tableau à partir du nom complet
+  short_name <-  selected_vars[name]
+
+  # Créée la carte
+  m <- ggplot() +
+    geom_sf(data = coms) +
+    geom_sf(
+      data = centroids,
+      aes(size = .data[[short_name]]),
+      pch = 21, fill = "steelblue", color = "white"
+    ) +
+    scale_size(
+      name = name,
+      range = c(1, 9),
+      breaks = scales::pretty_breaks(n = 5)
+    ) +
+    ggtitle(name) +
+    # Échelle
+    ggspatial::annotation_scale(
+      location = "bl", height = unit(0.15, "cm"), width = unit(0.15, "cm")
+    ) +
+    # Nord
+    ggspatial::annotation_north_arrow(
+        location = "tl", which_north = "true",
+        height = unit(1, "cm"), width = unit(1, "cm"),
+        style = north_arrow_fancy_orienteering
+    ) +
+    guides(
+      size = guide_legend(
+        direction = "horizontal",
+        nrow = 1,
+        label.position = "bottom"
+      )
+    ) +
+    my_theme
+
+  maps[[name]] <- m
+}
+patchwork::wrap_plots(maps, ncol = 2) +
+  plot_annotation(
+    title = "Volumes et flux total émis et reçus des communes finistériennes",
+    subtitle = "Les flux analysés correspondent aux données de migrations résidentielles entre<br>le lieu de résidence en 2020 et le lieu de résidence précédent",
+    caption = "**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026",
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 18),
+      plot.subtitle = ggtext::element_markdown(size = 14, lineheight = 1.2),
+      plot.caption = ggtext::element_markdown(size = 11)
+    )
+  )
+```
+
+La cartographie par cercles proportionnels bicolores permet de représenter
+simultanément deux dimensions d'une variable : son **intensité** (encodée par la
+taille du cercle, proportionnelle à la valeur absolue) et son **signe** (encodée
+par la couleur, ici un dégradé bleu–blanc–rouge).
+
+La construction de la légende nécessite ici une intervention manuelle, car les
+deux aesthetics (`aes`) mobilisées — `size` et `fill` — reposent sur des transformations
+**incompatibles** : `size` est mappé sur `abs(soldes)` (valeurs positives
+uniquement), tandis que `fill` est mappé sur `soldes` (valeurs négatives et
+positives). `ggplot2` ne peut fusionner automatiquement deux légendes que si elles
+partagent exactement les mêmes `breaks` et la même échelle ; ce n'est pas le cas
+ici puisque les breaks de taille sont symétriques autour de 0 alors que les
+breaks de couleur couvrent les deux signes.
+
+```{r}
+#| fig-width: 8
+#| fig-height: 8
+#| collapse: true
+#| code-fold: true
+#| warning: false
+
+# Création de la taille des cercles à la main
+fill_breaks <- c(-750, -500, -250, 0, 250, 500)
+max_val <- max(abs(centroids$soldes), na.rm = TRUE)
+legend_sizes <- scales::rescale(abs(fill_breaks), to = c(1, 9), from = c(0, max_val))
 
 ggplot() +
-    geom_sf(
-        data = centroids,
-        aes(size = var, fill = var),
-        pch = 21
-    ) +
-    ... # le reste de votre code
+  geom_sf(data = coms) +
+  geom_sf(
+    data = centroids,
+    aes(size = abs(soldes), fill = soldes),
+    pch = 21, color = "white"
+  ) +
+  # Cacher la taille dans la légende
+  scale_size(range = c(1, 9), guide = "none") +
+  scale_fill_gradient2(
+    name = "Solde",
+    low = "#4575B4",
+    mid = "white",
+    high = "#D73027",
+    midpoint = 0,
+    space = "Lab",
+    breaks = fill_breaks,
+    limits = c(-750, 500),
+    guide = "legend"
+  ) +
+  guides(
+    fill = guide_legend(
+      direction = "horizontal",
+      nrow = 1,
+      label.position = "bottom",
+      # Mettre la taille directement ici
+      override.aes = list(size = legend_sizes)
+    )
+  ) +
+  labs(
+    title = "Solde des communes finistériennes",
+    subtitle = "Les flux analysés correspondent aux données de migrations résidentielles entre<br>le lieu de résidence en 2020 et le lieu de résidence précédent",
+    caption = "**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"
+  ) +
+  ggspatial::annotation_scale(
+    location = "bl", height = unit(0.15, "cm"), width = unit(0.15, "cm")
+  ) +
+  ggspatial::annotation_north_arrow(
+      location = "tl", which_north = "true",
+      height = unit(1, "cm"), width = unit(1, "cm"),
+      style = north_arrow_fancy_orienteering
+  ) +
+  my_theme
 ```
 
 Pour cartographier des choroplètes, il suffit d'utiliser l'argument `fill` de
 l'esthétique de la couche :
 
 ```{r}
-#| eval: false
+#| fig-width: 8
+#| fig-height: 8
+#| collapse: true
+#| code-fold: true
+#| warning: false
 
 ggplot() +
-    geom_sf(data = polygons, aes(fill = var)) +
-    ... # le reste de votre code
+  geom_sf(
+    data = polygons,
+    aes(fill = attrac_ratio),
+    pch = 21
+  ) +
+  scale_fill_gradient2(
+    name = "Ratio d'attractivité",
+    low = "#4575B4",
+    mid = "white",
+    high = "#D73027",
+    midpoint = 0,
+    space = "Lab"
+  ) +
+  labs(
+    title = "Taux d'attractivité des communes finistériennes",
+    subtitle = "Les flux analysés correspondent aux données de migrations résidentielles entre<br>le lieu de résidence en 2020 et le lieu de résidence précédent",
+    caption = "**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"
+  ) +
+  ggspatial::annotation_scale(
+    location = "bl", height = unit(0.15, "cm"), width = unit(0.15, "cm")
+  ) +
+  ggspatial::annotation_north_arrow(
+      location = "tl", which_north = "true",
+      height = unit(1, "cm"), width = unit(1, "cm"),
+      style = north_arrow_fancy_orienteering
+  ) +
+  my_theme
+```
+
+```{r}
+#| fig-width: 10
+#| fig-height: 6
+#| collapse: true
+#| code-fold: true
+#| warning: false
+
+to_plot_vars <- c("Indice d'emmissivité" = "ie", "Indice d'attractivité" = "ia")
+maps <- list()
+for (name in names(to_plot_vars)) {
+  short_name <- to_plot_vars[name]
+  m <- ggplot() +
+    geom_sf(
+      data = polygons,
+      aes(fill = .data[[short_name]]),
+      color = "white",
+      pch = 21
+    ) +
+    scale_fill_gradientn(
+      name = name,
+      colors = MexBrewer::mex.brewer("Frida"),
+    ) +
+    labs(title = name) +
+    ggspatial::annotation_scale(
+      location = "bl", height = unit(0.15, "cm")
+    ) +
+    ggspatial::annotation_north_arrow(
+        location = "tl", which_north = "true",
+        height = unit(1, "cm"), width = unit(1, "cm"),
+        style = north_arrow_fancy_orienteering
+    ) +
+    theme_minimal() +
+    theme(
+      legend.position = "bottom",
+      plot.title   = ggtext::element_markdown(family = "roboto", size = 16, face = "bold"),
+      plot.subtitle = ggtext::element_markdown(family = "roboto", size = 12, lineheight = 1.2),
+      axis.title.x = ggtext::element_markdown(family = "roboto", size = 12),
+      axis.title.y = ggtext::element_markdown(family = "roboto", size = 12),
+      plot.caption = ggtext::element_markdown(family = "roboto", size = 8, lineheight = 1.5)
+    )
+  maps[[short_name]] <- m
+}
+patchwork::wrap_plots(maps) +
+  plot_annotation(
+    title = "Indice d'émmissivité et d'attractivité des communes finistériennes",
+    subtitle = "Les flux analysés correspondent aux données de migrations résidentielles entre<br>le lieu de résidence en 2020 et le lieu de résidence précédent",
+    caption = "**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026",
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 18),
+      plot.subtitle = ggtext::element_markdown(size = 14, lineheight = 1.2),
+      plot.caption = ggtext::element_markdown(size = 11)
+    )
+  )
 ```
 
 2. Pour une commune que vous choisirez, cartographiez ses **relations

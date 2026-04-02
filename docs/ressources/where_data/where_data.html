@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>11&nbsp; Où trouver des données – TD analyse spatiale</title>
+<title>12&nbsp; Où trouver des données – TD analyse spatiale</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,14 +68,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../ressources/viz/map.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c0f8282d1904867bd677e0497fc46e93.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-312502324fd5d0c0dc447282f1b6b698.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -118,7 +119,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -145,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html">Sources de données</a></li><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Où trouver des données</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html">Sources de données</a></li><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Où trouver des données</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -220,6 +221,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">DM01 : analyse centrographique</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../DM02_flux/dm02_flux.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">DM02 : analyse descriptive de flux</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -234,13 +241,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/algorithmique/structure_donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/algorithmique/structure_controle.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Les structures de contrôle</span></span></a>
   </div>
 </li>
       </ul>
@@ -257,13 +264,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/data_process/data_basic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Traitement de données sous R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/stats/stats.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistiques</span></span></a>
   </div>
 </li>
       </ul>
@@ -280,13 +287,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/viz/graph.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Visualisation de données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/viz/map.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cartographie</span></span></a>
   </div>
 </li>
       </ul>
@@ -303,7 +310,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ressources/where_data/where_data.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Où trouver des données</span></span></a>
   </div>
 </li>
       </ul>
@@ -318,11 +325,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sources-de-données-par-thématique" id="toc-sources-de-données-par-thématique" class="nav-link active" data-scroll-target="#sources-de-données-par-thématique"><span class="header-section-number">11.1</span> Sources de données par thématique</a></li>
-  <li><a href="#fond-de-cartes" id="toc-fond-de-cartes" class="nav-link" data-scroll-target="#fond-de-cartes"><span class="header-section-number">11.2</span> Fond de cartes</a>
+  <li><a href="#sources-de-données-par-thématique" id="toc-sources-de-données-par-thématique" class="nav-link active" data-scroll-target="#sources-de-données-par-thématique"><span class="header-section-number">12.1</span> Sources de données par thématique</a></li>
+  <li><a href="#fond-de-cartes" id="toc-fond-de-cartes" class="nav-link" data-scroll-target="#fond-de-cartes"><span class="header-section-number">12.2</span> Fond de cartes</a>
   <ul>
-  <li><a href="#france" id="toc-france" class="nav-link" data-scroll-target="#france"><span class="header-section-number">11.2.1</span> France</a></li>
-  <li><a href="#fond-de-cartes-à-petite-faible" id="toc-fond-de-cartes-à-petite-faible" class="nav-link" data-scroll-target="#fond-de-cartes-à-petite-faible"><span class="header-section-number">11.2.2</span> Fond de cartes à petite faible</a></li>
+  <li><a href="#france" id="toc-france" class="nav-link" data-scroll-target="#france"><span class="header-section-number">12.2.1</span> France</a></li>
+  <li><a href="#fond-de-cartes-à-petite-faible" id="toc-fond-de-cartes-à-petite-faible" class="nav-link" data-scroll-target="#fond-de-cartes-à-petite-faible"><span class="header-section-number">12.2.2</span> Fond de cartes à petite faible</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -330,9 +337,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html">Sources de données</a></li><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Où trouver des données</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html">Sources de données</a></li><li class="breadcrumb-item"><a href="../../ressources/where_data/where_data.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Où trouver des données</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Où trouver des données</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Où trouver des données</span></h1>
 </div>
 
 
@@ -354,15 +361,15 @@ window.Quarto = {
 <li><a href="https://freegisdata.rtwilson.com">Free GIS Data</a> : liste de données spatiales</li>
 <li><a href="https://github.com/awesomedata/awesome-public-datasets">Awesome Public Datasets</a> : liste très conséquentes de données publiques (pas que spatiales)</li>
 </ul>
-<section id="sources-de-données-par-thématique" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="sources-de-données-par-thématique"><span class="header-section-number">11.1</span> Sources de données par thématique</h2>
+<section id="sources-de-données-par-thématique" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="sources-de-données-par-thématique"><span class="header-section-number">12.1</span> Sources de données par thématique</h2>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Démographie et population">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Démographie et population
+<span class="screen-reader-only">None</span>Démographie et population
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -406,12 +413,12 @@ Démographie et population
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Transports">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Transports
+<span class="screen-reader-only">None</span>Transports
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -448,12 +455,12 @@ Transports
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Agriculture et alimentation">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Agriculture et alimentation
+<span class="screen-reader-only">None</span>Agriculture et alimentation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -497,12 +504,12 @@ Agriculture et alimentation
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Santé">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Santé
+<span class="screen-reader-only">None</span>Santé
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -542,12 +549,12 @@ Santé
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Urbanisme, habitat et aménagement">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Urbanisme, habitat et aménagement
+<span class="screen-reader-only">None</span>Urbanisme, habitat et aménagement
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -591,12 +598,12 @@ Urbanisme, habitat et aménagement
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Économie, emploi et inégalités">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Économie, emploi et inégalités
+<span class="screen-reader-only">None</span>Économie, emploi et inégalités
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -640,12 +647,12 @@ Urbanisme, habitat et aménagement
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Éducation">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Éducation
+<span class="screen-reader-only">None</span>Éducation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -685,12 +692,12 @@ Urbanisme, habitat et aménagement
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Migrations et mobilités humaines">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Migrations et mobilités humaines
+<span class="screen-reader-only">None</span>Migrations et mobilités humaines
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -730,12 +737,12 @@ Migrations et mobilités humaines
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Politique et conflits">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Politique et conflits
+<span class="screen-reader-only">None</span>Politique et conflits
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -771,12 +778,12 @@ Politique et conflits
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Occupation/utilisation du sol">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Occupation/utilisation du sol
+<span class="screen-reader-only">None</span>Occupation/utilisation du sol
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -812,12 +819,12 @@ Occupation/utilisation du sol
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Élévation">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Élévation
+<span class="screen-reader-only">None</span>Élévation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -863,12 +870,12 @@ Occupation/utilisation du sol
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Climat et météo">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Climat et météo
+<span class="screen-reader-only">None</span>Climat et météo
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -909,12 +916,12 @@ Climat et météo
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Hydrologie">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hydrologie
+<span class="screen-reader-only">None</span>Hydrologie
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -942,12 +949,12 @@ Hydrologie
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Niveau d'eau et état de mer">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Niveau d’eau et état de mer
+<span class="screen-reader-only">None</span>Niveau d’eau et état de mer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1011,12 +1018,12 @@ Niveau d’eau et état de mer
 </div>
 </div>
 <div class="callout callout-style-simple callout-none no-icon callout-titled" title="Écologie, biologie">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Écologie, biologie
+<span class="screen-reader-only">None</span>Écologie, biologie
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1062,10 +1069,10 @@ Niveau d’eau et état de mer
 </div>
 </div>
 </section>
-<section id="fond-de-cartes" class="level2 page-columns page-full" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="fond-de-cartes"><span class="header-section-number">11.2</span> Fond de cartes</h2>
-<section id="france" class="level3 page-columns page-full" data-number="11.2.1">
-<h3 data-number="11.2.1" class="anchored" data-anchor-id="france"><span class="header-section-number">11.2.1</span> France</h3>
+<section id="fond-de-cartes" class="level2 page-columns page-full" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="fond-de-cartes"><span class="header-section-number">12.2</span> Fond de cartes</h2>
+<section id="france" class="level3 page-columns page-full" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="france"><span class="header-section-number">12.2.1</span> France</h3>
 <p>Pour obtenir des fonds de cartes du territoire français, on se tournera vers l’IGN. Tout ce que vous voyez sur une carte topographique IGN, vous pouvez le récupérer. L’IGN organise ses données par base, vous trouverez ci-dessous une description des bases les plus courrament utilisées :</p>
 <table class="table">
 <thead>
@@ -1112,7 +1119,7 @@ Niveau d’eau et état de mer
 <p>Pou récupérer ces données, vous pouvez vous rendre sur le site de l’IGN et les télécharger. Il est également possible de les télécharger directement sur <code>R</code> avec le package <a href="https://paul-carteron.github.io/happign/"><code>happign</code></a>. En utilisant ce package vous vous assurez de ne télécharger que les données dont vous avez besoin<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;En effet, sur le site de l’IGN vous ne pouvez que télécharger les bases par départements sans possibilité de choisir les données que vous souhaitez en particulier ; pas très écolo cette affaire.</p></div></div><p>Mettons que l’on souhaite récupérer les bâtiments de Guissény (29) ainsi que l’emprise administrative de la commune. Si l’on a aucune idée d’où l’on peut trouver les bâtiments, on peut chercher dans les métadonnées des couches vectorielles.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(happign)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(happign)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération des métadonnées</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>meta <span class="ot">&lt;-</span> <span class="fu">get_layers_metadata</span>(<span class="at">data_type =</span> <span class="st">"wfs"</span>)</span>
@@ -1122,7 +1129,7 @@ Niveau d’eau et état de mer
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># On cherche les couches qui contiennent la chaîne de caractère "bati"</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>com_name <span class="ot">&lt;-</span> name[<span class="fu">grep</span>(<span class="at">x =</span> name, <span class="st">"commune"</span>)]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(com_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(com_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST:chef_lieu_de_commune"                     
 [2] "LIMITES_ADMINISTRATIVES_EXPRESS.LATEST:chef_lieu_de_commune_associee_ou_deleguee"
@@ -1131,8 +1138,8 @@ Niveau d’eau et état de mer
 [5] "ADMINEXPRESS-COG.2017:commune"                                                   
 [6] "ADMINEXPRESS-COG.2018:commune"                                                   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bati <span class="ot">&lt;-</span> name[<span class="fu">grep</span>(<span class="at">x =</span> name, <span class="st">"bati"</span>)]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bati)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bati <span class="ot">&lt;-</span> name[<span class="fu">grep</span>(<span class="at">x =</span> name, <span class="st">"bati"</span>)]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bati)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "BAN-PLUS:lien_adresse_bati"                                 
 [2] "BAN-PLUS:lien_bati_parcelle"                                
@@ -1145,7 +1152,7 @@ Niveau d’eau et état de mer
 <p>On obtient toute les données disponibles. Nous utiliserons les données de la BDTOPO <code>BDTOPO_V3:batiment</code>. L’étape suivant consiste à filtrer la couche pour ne retenir que les informations qui nous intéresse. On peut filtrer par attributs ou par opération spatiale. Le filtre sera réalisé sur les serveurs de l’IGN et vous récupérez le résultat.</p>
 <p>Pour filtrer par attribut, on utilise un filtre ECQL. Il s’agit d’un langage de requête très proche du SQL (ce qui vous utilisez sous QGIS pour filtrer vos données). Pour savoir comment filtrer vos données, il vous faut d’abord savoir quels sont les attributs de votre couche. Pour cela, on utilise la fonction <code>get_wfs_attributes()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_wfs_attributes</span>(<span class="st">"BDTOPO_V3:commune"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_wfs_attributes</span>(<span class="st">"BDTOPO_V3:commune"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "cleabs"                             "code_insee"                        
  [3] "code_insee_du_canton"               "code_insee_de_l_arrondissement"    
@@ -1161,16 +1168,16 @@ Niveau d’eau et état de mer
 [23] "code_siren"                         "codes_siren_des_epci"              
 [25] "lien_vers_chef_lieu"                "liens_vers_autorite_administrative"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On récupère guissény</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">get_wfs</span>(<span class="at">layer =</span> <span class="st">"BDTOPO_V3:commune"</span>, <span class="at">query =</span> <span class="st">"code_insee = '29077'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On récupère guissény</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">get_wfs</span>(<span class="at">layer =</span> <span class="st">"BDTOPO_V3:commune"</span>, <span class="at">query =</span> <span class="st">"code_insee = '29077'"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Un fois que l’on a récupéré la commune, on peut récupérer les batiments qui intersectent la commune :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>batiments <span class="ot">&lt;-</span> <span class="fu">get_wfs</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>batiments <span class="ot">&lt;-</span> <span class="fu">get_wfs</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> com,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">layer =</span> <span class="st">"BDTOPO_V3:batiment"</span>,</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">predicate =</span> <span class="fu">intersects</span>()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>iterating ■■■■■■■■■■■                       33% | ETA:  3s</code></pre>
 </div>
@@ -1184,7 +1191,7 @@ Niveau d’eau et état de mer
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggspatial)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1196,7 +1203,7 @@ Niveau d’eau et état de mer
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">location =</span> <span class="st">"tr"</span>, <span class="at">which_north =</span> <span class="st">"true"</span>,</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">style =</span> north_arrow_fancy_orienteering</span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1207,16 +1214,16 @@ Niveau d’eau et état de mer
 </div>
 </div>
 </section>
-<section id="fond-de-cartes-à-petite-faible" class="level3" data-number="11.2.2">
-<h3 data-number="11.2.2" class="anchored" data-anchor-id="fond-de-cartes-à-petite-faible"><span class="header-section-number">11.2.2</span> Fond de cartes à petite faible</h3>
+<section id="fond-de-cartes-à-petite-faible" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="fond-de-cartes-à-petite-faible"><span class="header-section-number">12.2.2</span> Fond de cartes à petite faible</h3>
 <p>Pour des fond de cartes à petites échelles, se tournera vers <a href="https://www.naturalearthdata.com/">Natural Earth</a>. Ce jeu de données enregistre les données élémentaires pour créer des fonds de cartes : frontières des pays, routes, cours d’eau, toponymie, zones urbaines, lacs, etc.</p>
 <p>Le package <a href="https://ropensci.github.io/rnaturalearth/"><code>rnaturalearth</code></a> permet de récupérer directement ces données sous <code>R</code>. Pour une carte du continent européen :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>europe <span class="ot">&lt;-</span> rnaturalearth<span class="sc">::</span><span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Europe"</span>, <span class="at">scale =</span> <span class="st">"small"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>europe <span class="ot">&lt;-</span> rnaturalearth<span class="sc">::</span><span class="fu">ne_countries</span>(<span class="at">continent =</span> <span class="st">"Europe"</span>, <span class="at">scale =</span> <span class="st">"small"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> europe) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1283,13 +1290,14 @@ Niveau d’eau et état de mer
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1634,7 +1642,7 @@ Niveau d’eau et état de mer
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../ressources/viz/map.html" class="pagination-link" aria-label="Cartographie">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Cartographie</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Cartographie</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
