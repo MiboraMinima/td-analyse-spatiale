@@ -978,9 +978,9 @@ dtp <-
   select(i, j, fij)
 ```
 
-Par exemple, on peut cartographier l'ensemble des flux entrant et sortant pour
-une entité spatiale avec des flèches plus ou moins épaisses en fonction de la
-quantité échangée.
+Par exemple, on peut cartographier l'ensemble les sortants pour une entité
+spatiale avec des flèches plus ou moins épaisses en fonction de la quantité
+échangée.
 
 ```{r}
 #| code-fold: true
