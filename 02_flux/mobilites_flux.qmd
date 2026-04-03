@@ -14,7 +14,8 @@ pacman::p_load(
   Matrix,
   patchwork,
   ggplot2,
-  ggspatial
+  ggspatial,
+  ggnewscale
 )
 ```
 
@@ -418,7 +419,8 @@ my_theme <-
     plot.subtitle = ggtext::element_markdown(family = "roboto", size = 12, lineheight = 1.2),
     axis.title.x = ggtext::element_markdown(family = "roboto", size = 12),
     axis.title.y = ggtext::element_markdown(family = "roboto", size = 12),
-    plot.caption = ggtext::element_markdown(family = "roboto", size = 8, lineheight = 1.5)
+    plot.caption = ggtext::element_markdown(family = "roboto", size = 8, lineheight = 1.5),
+    legend.title = ggtext::element_markdown(family = "roboto", size = 8),
   )
 
 # On défini le nom complet de le la variable avec un named vector
@@ -452,7 +454,7 @@ for (name in names(selected_vars)) {
     ggtitle(name) +
     # Échelle
     ggspatial::annotation_scale(
-      location = "bl", height = unit(0.15, "cm"), width = unit(0.15, "cm")
+      location = "bl", height = unit(0.15, "cm")
     ) +
     # Nord
     ggspatial::annotation_north_arrow(
@@ -545,7 +547,7 @@ ggplot() +
     caption = "**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"
   ) +
   ggspatial::annotation_scale(
-    location = "bl", height = unit(0.15, "cm"), width = unit(0.15, "cm")
+    location = "bl", height = unit(0.15, "cm")
   ) +
   ggspatial::annotation_north_arrow(
       location = "tl", which_north = "true",
@@ -655,19 +657,117 @@ patchwork::wrap_plots(maps) +
 préférentielles en `data.frame` :
 
 ```{r}
-#| eval: false
+#| fig-width: 12
+#| fig-height: 12
+#| collapse: true
+#| code-fold: true
+#| warning: false
 
-od_df <- as.data.frame(as.matrix(m_pref)) |>
+od_tidy <- as.data.frame(as.matrix(m_pref)) |>
   tibble::rownames_to_column("origin") |>
   tidyr::pivot_longer(
     cols = -origin,
     names_to = "destination",
-    values_to = "flow"
+    values_to = "rel_pref"
+  )
+
+# Les communes que je souhaites cartographier
+coms_to_plot <- c(
+  "Brest"      = "29019",
+  "Quimper"    = "29232",
+  "Morlaix"    = "29151",
+  "Landerneau" = "29041"
+)
+# Seuil de définition d'un relation préférentielle. Les relations inférieure à
+# ce seuil ne seront pas cartographiées.
+th <- 1
+
+# Filtre du df des rel. pref. pour ne garder que les communes sélectionnées
+# Ne garder que les communes sélectionnées
+to_plot <- filter(od_tidy, origin %in% coms_to_plot)
+# On récupère les géométries
+to_plot <- left_join(polygons, to_plot, by = c("code_insee" = "destination"))
+
+maps <- list()
+for (com_name in names(coms_to_plot)) {
+  ci <- coms_to_plot[com_name]
+  data_current_com <-
+    filter(to_plot, origin == ci) |>
+    select(origin, rel_pref)
+
+  # discrétisation quantile
+  breaks <- quantile(
+    pull(filter(data_current_com, rel_pref > th), rel_pref),
+    probs = seq(0, 1, by = 0.2),
+    na.rm = TRUE
+  )
+  # Ajouter la légende pour les valeurs < th (on round pour la légende)
+  breaks <- round(c(0, 1, breaks), 1)
+  # Créer une variable avec le seuil des quantiles
+  data_current_com <- data_current_com |>
+    mutate(
+      rel_pref_q = cut(
+        round(rel_pref, 1), # Il faut round ici aussi
+        breaks = unique(breaks),
+        include.lowest = TRUE,
+        dig.lab = 3
+      )
+    )
+
+  m <- ggplot() +
+    geom_sf(data = data_current_com, aes(fill = rel_pref_q)) +
+    scale_fill_manual(
+      name     = "**Intensité de la relation** (disc. quantile)",
+      # Mettre une couleur partiuclière pour les valeurs < 1 (th)
+      values   = c("ivory", RColorBrewer::brewer.pal(6, "Reds")),
+      na.value = "grey90",
+      guide = guide_legend(
+        position       = "bottom",
+        direction      = "horizontal",
+        title.position = "top",
+        nrow           = 2
+      )
+    ) +
+    new_scale_fill() +
+    geom_sf(
+      data = filter(coms, nom_officiel == com_name),
+      aes(fill = "Commune d'origine")
+    ) +
+    scale_fill_manual(
+      name   = NULL,
+      values = c("Commune d'origine" = "mediumturquoise"),
+      guide  = guide_legend(position = "inside")
+    ) +
+    labs(title = com_name) +
+    ggspatial::annotation_scale(location = "bl", height = unit(0.15, "cm")) +
+    ggspatial::annotation_north_arrow(
+      location = "tl", which_north = "true",
+      height = unit(1, "cm"), width = unit(1, "cm"),
+      style = north_arrow_fancy_orienteering
+    ) +
+    my_theme +
+    theme(
+      legend.position.inside      = c(0, 0.15),
+      legend.justification.inside = c(0, 0),
+      legend.key.size             = unit(0.4, "cm"),
+      legend.text                 = element_text(family = "roboto", size = 8),
+      legend.background           = element_rect(fill = NA, color = NA)
+    )
+
+  maps[[com_name]] <- m
+}
+patchwork::wrap_plots(maps, ncol = 2) +
+  plot_annotation(
+    title = "Relations préférentielles des principaux pôles urbains finistériens",
+    subtitle = "Les flux analysés correspondent aux données de migrations résidentielles entre le lieu<br>de résidence en 2020 et le lieu de résidence précédent",
+    caption = "**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026",
+    theme = theme(
+      plot.title = element_text(face = "bold", size = 18),
+      plot.subtitle = ggtext::element_markdown(size = 14, lineheight = 1.2),
+      plot.caption = ggtext::element_markdown(size = 11)
+    )
   )
 ```
-
-Vous devrez ensuite rapatrier la géométrie des communes dans le `data.frame`
-(comme précédemment) pour cartographier.
 
 :::
 
