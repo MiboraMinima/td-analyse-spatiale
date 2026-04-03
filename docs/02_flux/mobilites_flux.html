@@ -357,7 +357,8 @@ window.Quarto = {
   <li><a href="#les-carte-de-flux-sous-r" id="toc-les-carte-de-flux-sous-r" class="nav-link" data-scroll-target="#les-carte-de-flux-sous-r"><span class="header-section-number">3.4.2.1</span> Les carte de flux sous R</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#références-et-ressources" id="toc-références-et-ressources" class="nav-link" data-scroll-target="#références-et-ressources"><span class="header-section-number">3.5</span> Références et ressources</a></li>
+  <li><a href="#scripts-complets" id="toc-scripts-complets" class="nav-link" data-scroll-target="#scripts-complets"><span class="header-section-number">3.5</span> Scripts complets</a></li>
+  <li><a href="#références-et-ressources" id="toc-références-et-ressources" class="nav-link" data-scroll-target="#références-et-ressources"><span class="header-section-number">3.6</span> Références et ressources</a></li>
   </ul>
 </nav>
     </div>
@@ -764,6 +765,19 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 <ol start="3" type="1">
 <li>Cartographier l’<strong>ensemble des indices</strong>. Attention à la sémiologie graphique, il n’y a pas que des stocks…</li>
 </ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les cartes que je vous donne sont assez élaborées et donc le code R peut paraître complexe. L’idée est que vous trouviez le maximum d’informations pour que vous puissiez vous approprier les différentes façon de configurer vos cartes.</p>
+</div>
+</div>
 <p>Pour cartographier des cercles proportionnels avec <code>ggplot2</code> et un objet <code>sf</code> de géométrie point, on utilise l’argument <code>size</code> dans l’esthétique (<code>aes</code>) de la couche. Pour un rendu plus léché, vous pouvez également doubler l’information en colorisant les cercles proportionnels via l’argument <code>fill</code>. Pour que la coloration fonctionne, il faut utilisant un symbole de point spécial <code>pch = 21</code>.</p>
 <div class="cell">
 <details class="code-fold">
@@ -835,7 +849,7 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 <span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
 <span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Volumes et flux total émis et reçus des communes finistériennes"</span>,</span>
 <span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
 <span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
 <span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">18</span>),</span>
 <span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>),</span>
@@ -893,7 +907,7 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 <span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Solde des communes finistériennes"</span>,</span>
 <span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span></span>
 <span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(</span>
 <span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)</span>
@@ -934,7 +948,7 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Taux d'attractivité des communes finistériennes"</span>,</span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span></span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(</span>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)</span>
@@ -996,7 +1010,7 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
 <span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Indice d'émmissivité et d'attractivité des communes finistériennes"</span>,</span>
 <span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
 <span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
 <span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">18</span>),</span>
 <span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>),</span>
@@ -1115,7 +1129,7 @@ n_{ij} \large/ \frac{\sum_{k=1}^{N} n_{ik} \cdot \sum_{k=1}^{N} n_{kj}}{\sum_{k=
 <span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
 <span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relations préférentielles des principaux pôles urbains finistériens"</span>,</span>
 <span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre le lieu&lt;br&gt;de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
 <span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme =</span> <span class="fu">theme</span>(</span>
 <span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">18</span>),</span>
 <span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>),</span>
@@ -1154,10 +1168,10 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"mapsf"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cartograflow"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"tributetotobler/ttt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"MiboraMinima/ttt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>On commence par effectuer un petit prétraitement pour pouvoir utiliser les fonctions de <code>mapsf</code> et <code>ttt</code>.</p>
-<div class="cell">
+<p>On commence par effectuer un petit prétraitement pour pouvoir utiliser les fonctions de <code>mapsf</code> et <code>ttt</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;la version que vous téléchargez est une version différente de la version originale du package. J’ai modifié la fonction qui génère la légende.</p></div></div><div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>polygons<span class="sc">$</span>code_insee <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(polygons<span class="sc">$</span>code_insee)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>polygons<span class="sc">$</span>id <span class="ot">&lt;-</span> polygons<span class="sc">$</span>code_insee</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>dtp <span class="ot">&lt;-</span></span>
@@ -1169,45 +1183,94 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapsf)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ttt)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Les flux associées à la commune</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>cc <span class="ot">&lt;-</span> <span class="dv">29195</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer tous les flux entrant et sortant associés à la commune</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, i <span class="sc">==</span> cc <span class="sc">|</span> j <span class="sc">==</span> cc)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Récuperer le nom de la commune concernée</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>com <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(dt_mobi_fin, codgeo <span class="sc">==</span> cc), libgeo))</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_shadow</span>(<span class="fu">st_union</span>(polygons))</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  polygons,</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#eeedee"</span>,</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">0.5</span>,</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>flows <span class="ot">&lt;-</span> ttt<span class="sc">::</span><span class="fu">ttt_flowmapper</span>(</span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> polygons,</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">xid =</span> <span class="st">"id"</span>,</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> dt_plot,</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfid =</span> <span class="fu">c</span>(<span class="st">"i"</span>, <span class="st">"j"</span>),</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"#ffc524"</span>,</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfvar =</span> <span class="st">"fij"</span>,</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>ttt<span class="sc">::</span><span class="fu">ttt_flowmapperlegend</span>(</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> flows,</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Flux inter"</span>,</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">txtcol =</span> <span class="st">"#ffc524"</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(</span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">txt =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Flux entrant et sortant de {com}"</span>),</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#ffc524"</span>, <span class="at">fg =</span> <span class="st">"White"</span>, <span class="at">pos =</span> <span class="st">"left"</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_arrow</span>()</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paramètres ...................................................................</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Les flux associées à la commune</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>com_name <span class="ot">&lt;-</span> <span class="st">"Brest"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Le type de flux que l'on souhaite cartographier</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>type <span class="ot">&lt;-</span> <span class="st">"sortant"</span> <span class="co"># "entrant"</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération du code INSEE associé à la commune</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(coms, nom_officiel <span class="sc">==</span> com_name), code_insee))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Seuil pour cartographier les flux</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>th <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Couleur des lignes</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>col <span class="ot">&lt;-</span> <span class="st">"steelblue"</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Couleur du fond de carte</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>col_back <span class="ot">&lt;-</span> <span class="st">"#E0E0E0"</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Carto ......................................................................</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupérer tous les flux entrants ou sortants associés à la commune</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co"># et filrer les flux &lt; au seuil.</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"entrant"</span>) {</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, j <span class="sc">==</span> <span class="fu">as.numeric</span>(ci), fij <span class="sc">&gt;</span> th)</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, i <span class="sc">==</span> <span class="fu">as.numeric</span>(ci), fij <span class="sc">&gt;</span> th)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Créer un df avec les communes qui échange des flux</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>polygons_f <span class="ot">&lt;-</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(polygons, id <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">c</span>(dt_plot<span class="sc">$</span>i, dt_plot<span class="sc">$</span>j))) <span class="sc">|&gt;</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_map</span>(</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  coms,</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> col_back,</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">border =</span> <span class="st">"black"</span>,</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="fl">0.5</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>flows <span class="ot">&lt;-</span> <span class="fu">ttt_flowmapper</span>(</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> polygons_f,</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> dt_plot,</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfid =</span> <span class="fu">c</span>(<span class="st">"i"</span>, <span class="st">"j"</span>),</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">dfvar =</span> <span class="st">"fij"</span>,</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">xid =</span> <span class="st">"id"</span>,</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="st">"thickness"</span>,</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"arrows"</span>,</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">decreasing =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Configuration des lignes</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> col,        <span class="co"># couleur des arcs</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">border =</span> <span class="st">"white"</span>, <span class="co"># couleur du contour</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,          <span class="co"># épaisseur du contour</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="dv">15</span>,           <span class="co"># augmenter ou diminuer l'épaisseur des arcs</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Configuration des cercles</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">col2 =</span> <span class="st">"white"</span>, <span class="co"># couleur du cercle</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">border2 =</span> col,  <span class="co"># couleur du contour</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd2 =</span> <span class="fl">0.7</span>,     <span class="co"># épaisseur du contour</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">k2 =</span> <span class="fl">1e3</span>L,      <span class="co"># augmenter ou diminuer la taille des cercles</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajouter la valeur du flux sur les arcs</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="co"># Si vous voulez les enlevez, commentez le code.</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>flows_txt <span class="ot">&lt;-</span> <span class="fu">mutate</span>(flows<span class="sc">$</span>flows, <span class="at">fij =</span> <span class="fu">round</span>(fij, <span class="dv">0</span>)) <span class="sc">|&gt;</span> <span class="fu">distinct</span>()</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_label</span>(</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  flows_txt,</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="st">"fij"</span>,</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">halo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>,</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"white"</span>,</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="fl">0.1</span>,</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">overlap =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  <span class="at">lines =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="co"># La légende</span></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="fu">ttt_flowmapperlegend</span>(</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> flows,</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Flux"</span>,</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> col,</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">txtcol =</span> <span class="st">'black'</span>,</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">title.cex =</span> <span class="fl">0.6</span>, <span class="co"># Taille du titre de la légende</span></span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>  <span class="at">hshift =</span> <span class="fl">3e3</span>     <span class="co"># Espace entre le titre et légende</span></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_title</span>(</span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">txt =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Flux {type} de {com_name}"</span>),</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#d7d7d7"</span>, <span class="at">fg =</span> <span class="st">"black"</span>, <span class="at">pos =</span> <span class="st">"center"</span></span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_credits</span>(</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>  <span class="at">txt =</span> <span class="st">"Données : Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). Réalisation : Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">pos =</span> <span class="st">"bottomright"</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_arrow</span>(<span class="at">col=</span><span class="st">"black"</span>)</span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a><span class="fu">mf_scale</span>(<span class="at">col=</span><span class="st">"black"</span>, <span class="at">pos=</span><span class="st">"bottomright"</span>, <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1217,7 +1280,8 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 </div>
 </div>
 </div>
-<p>Comme vous avez pu le constater, avec <code>mapsf</code> il existe des fonctions qui permettent de créer directement une flèche d’orientation (<code>mf_arrow()</code>) ou une échelle (<code>mf_scale</code>).</p>
+<p>Comme vous avez pu le constater, avec <code>mapsf</code> il existe des fonctions qui permettent de créer directement une flèche d’orientation (<code>mf_arrow()</code>) ou une échelle (<code>mf_scale()</code>).</p>
+<p>Il s’agit d’un exemple. Vous pouvez bien sûr réaliser d’autres cartes qui prendraient en compte à la fois les flux entrants et sortants. Vous pourriez aussi cartographier les flux intra-communaux. À vous de modifier le code pour obtenir de telles cartes ! Référez vous à ce <a href="https://transcarto.github.io/rflows/TRANSCARTO_flows.html">tuto</a> pour voir comment procéder.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Instructions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1252,8 +1316,722 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 </section>
 </section>
 </section>
-<section id="références-et-ressources" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="références-et-ressources"><span class="header-section-number">3.5</span> Références et ressources</h2>
+<section id="scripts-complets" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="scripts-complets"><span class="header-section-number">3.5</span> Scripts complets</h2>
+<p>Le nombre de cartes pouvant être assez conséquent, je vous encourage à utiliser deux scripts pour organiser votre travail de manière optimale. Le premier est dédié au chargement et au prétraitement des données puis au calcul des indices. Les jeux de données générés dans ce premier script sont enregistrés dans le dossier <code>data/res</code> et chargés dans le deuxième script qui n’est dédié qu’à la cartographie. Vous pouvez bien sûr trouver une autre organisation ; il faut juste qu’elle soit cohérente.</p>
+<p><code>scripts/process.R</code> :</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="do">################################################################################</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># Script Name: process.r</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co"># Description: Analyse descriptive des mobilités résidentielles en finistère</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#              entre 2020 et l'années de résidence prédédent. Données de l'INSEE.</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">#              Ce script est dédié au chargement, au pré-traitement et au</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">#              calcul d'indices de flux.</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co"># Author: Antoine Le Doeuff</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="do">################################################################################</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="fu">library</span>(readr)</span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="fu">library</span>(happign)</span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="fu">library</span>(sf)</span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="fu">library</span>(stringi)</span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="fu">library</span>(Matrix)</span>
+<span id="cb18-16"><a href="#cb18-16"></a></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co"># Constante --------------------------------------------------------------------</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="co"># Où sont enregistré les données (vous, ce sera juste `data`)</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a>DATA_DIR <span class="ot">&lt;-</span> <span class="st">"02_flux/data"</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a></span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-23"><a href="#cb18-23"></a><span class="co"># Charger les données ----------------------------------------------------------</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a><span class="co"># Migrations résidentielles ....................................................</span></span>
+<span id="cb18-25"><a href="#cb18-25"></a>dt_mobi <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(</span>
+<span id="cb18-26"><a href="#cb18-26"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/src/base_flux_mobilite_residentielle_2020.csv"</span>)</span>
+<span id="cb18-27"><a href="#cb18-27"></a>) <span class="sc">|&gt;</span> janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb18-28"><a href="#cb18-28"></a></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="co"># Communes .....................................................................</span></span>
+<span id="cb18-30"><a href="#cb18-30"></a>com_path <span class="ot">&lt;-</span> <span class="st">"02_flux/data/src/com_finistere_bdtopov3_2026.gpkg"</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a><span class="cf">if</span> (<span class="fu">file.exists</span>(com_path)) {</span>
+<span id="cb18-32"><a href="#cb18-32"></a>  <span class="fu">cli_alert_info</span>(<span class="st">"Le fichier existe déjà, chargement..."</span>)</span>
+<span id="cb18-33"><a href="#cb18-33"></a>  coms <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(com_path)</span>
+<span id="cb18-34"><a href="#cb18-34"></a>} <span class="cf">else</span> {</span>
+<span id="cb18-35"><a href="#cb18-35"></a>  coms <span class="ot">&lt;-</span> <span class="fu">get_wfs</span>(</span>
+<span id="cb18-36"><a href="#cb18-36"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb18-37"><a href="#cb18-37"></a>    <span class="at">layer =</span> <span class="st">"BDTOPO_V3:commune"</span>,</span>
+<span id="cb18-38"><a href="#cb18-38"></a>    <span class="at">query =</span> <span class="st">"code_insee LIKE '29%'"</span></span>
+<span id="cb18-39"><a href="#cb18-39"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb18-40"><a href="#cb18-40"></a>    <span class="fu">st_transform</span>(<span class="dv">2154</span>)</span>
+<span id="cb18-41"><a href="#cb18-41"></a>  <span class="fu">write_sf</span>(coms, com_path)</span>
+<span id="cb18-42"><a href="#cb18-42"></a>}</span>
+<span id="cb18-43"><a href="#cb18-43"></a></span>
+<span id="cb18-44"><a href="#cb18-44"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-45"><a href="#cb18-45"></a><span class="co"># Prétraitements ---------------------------------------------------------------</span></span>
+<span id="cb18-46"><a href="#cb18-46"></a><span class="co"># Filtrer les communes .........................................................</span></span>
+<span id="cb18-47"><a href="#cb18-47"></a>dt_mobi_pb <span class="ot">&lt;-</span> <span class="fu">filter</span>(</span>
+<span id="cb18-48"><a href="#cb18-48"></a>  dt_mobi,</span>
+<span id="cb18-49"><a href="#cb18-49"></a>  <span class="fu">startsWith</span>(codgeo, <span class="st">"29"</span>),</span>
+<span id="cb18-50"><a href="#cb18-50"></a>  <span class="fu">startsWith</span>(dcran, <span class="st">"29"</span>),</span>
+<span id="cb18-51"><a href="#cb18-51"></a>  codgeo <span class="sc">!=</span> dcran</span>
+<span id="cb18-52"><a href="#cb18-52"></a>)</span>
+<span id="cb18-53"><a href="#cb18-53"></a></span>
+<span id="cb18-54"><a href="#cb18-54"></a><span class="co"># Conversion en matrice OD .....................................................</span></span>
+<span id="cb18-55"><a href="#cb18-55"></a><span class="co"># Récupérer tous les code insee</span></span>
+<span id="cb18-56"><a href="#cb18-56"></a>all_ids <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(<span class="fu">c</span>(dt_mobi_pb<span class="sc">$</span>codgeo, dt_mobi_pb<span class="sc">$</span>dcran)))</span>
+<span id="cb18-57"><a href="#cb18-57"></a></span>
+<span id="cb18-58"><a href="#cb18-58"></a><span class="co"># Créer des facteurs avec les mêmes niveaux pour chaque O/D</span></span>
+<span id="cb18-59"><a href="#cb18-59"></a>dt_mobi_pb<span class="sc">$</span>i <span class="ot">&lt;-</span> <span class="fu">factor</span>(dt_mobi_pb<span class="sc">$</span>dcran, <span class="at">levels =</span> all_ids)</span>
+<span id="cb18-60"><a href="#cb18-60"></a>dt_mobi_pb<span class="sc">$</span>j <span class="ot">&lt;-</span> <span class="fu">factor</span>(dt_mobi_pb<span class="sc">$</span>codgeo, <span class="at">levels =</span> all_ids)</span>
+<span id="cb18-61"><a href="#cb18-61"></a></span>
+<span id="cb18-62"><a href="#cb18-62"></a><span class="co"># Créer la sparse matrix (origin × destination)</span></span>
+<span id="cb18-63"><a href="#cb18-63"></a>M <span class="ot">&lt;-</span> <span class="fu">sparseMatrix</span>(</span>
+<span id="cb18-64"><a href="#cb18-64"></a>  <span class="at">i =</span> <span class="fu">as.integer</span>(dt_mobi_pb<span class="sc">$</span>i),</span>
+<span id="cb18-65"><a href="#cb18-65"></a>  <span class="at">j =</span> <span class="fu">as.integer</span>(dt_mobi_pb<span class="sc">$</span>j),</span>
+<span id="cb18-66"><a href="#cb18-66"></a>  <span class="at">x =</span> dt_mobi_pb<span class="sc">$</span>nbflux_c20_pop01p,</span>
+<span id="cb18-67"><a href="#cb18-67"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(all_ids, all_ids)</span>
+<span id="cb18-68"><a href="#cb18-68"></a>)</span>
+<span id="cb18-69"><a href="#cb18-69"></a><span class="fu">print</span>(<span class="fu">dim</span>(M))</span>
+<span id="cb18-70"><a href="#cb18-70"></a></span>
+<span id="cb18-71"><a href="#cb18-71"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-72"><a href="#cb18-72"></a><span class="co"># Analyse des marges -----------------------------------------------------------</span></span>
+<span id="cb18-73"><a href="#cb18-73"></a><span class="co"># Volume, arrival, departure ...................................................</span></span>
+<span id="cb18-74"><a href="#cb18-74"></a><span class="co"># Flux total émis</span></span>
+<span id="cb18-75"><a href="#cb18-75"></a>sum_dep <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(M)</span>
+<span id="cb18-76"><a href="#cb18-76"></a></span>
+<span id="cb18-77"><a href="#cb18-77"></a><span class="co"># Flux total reçus</span></span>
+<span id="cb18-78"><a href="#cb18-78"></a>sum_arr <span class="ot">&lt;-</span> <span class="fu">colSums</span>(M)</span>
+<span id="cb18-79"><a href="#cb18-79"></a></span>
+<span id="cb18-80"><a href="#cb18-80"></a><span class="co"># Volumes</span></span>
+<span id="cb18-81"><a href="#cb18-81"></a>volumes <span class="ot">&lt;-</span> sum_dep <span class="sc">+</span> sum_arr</span>
+<span id="cb18-82"><a href="#cb18-82"></a></span>
+<span id="cb18-83"><a href="#cb18-83"></a><span class="co"># Soldes</span></span>
+<span id="cb18-84"><a href="#cb18-84"></a>soldes <span class="ot">&lt;-</span> sum_arr <span class="sc">-</span> sum_dep</span>
+<span id="cb18-85"><a href="#cb18-85"></a></span>
+<span id="cb18-86"><a href="#cb18-86"></a><span class="co"># Ratio d'attractivité</span></span>
+<span id="cb18-87"><a href="#cb18-87"></a>attrac_ratio <span class="ot">&lt;-</span> soldes <span class="sc">/</span> volumes</span>
+<span id="cb18-88"><a href="#cb18-88"></a></span>
+<span id="cb18-89"><a href="#cb18-89"></a><span class="co"># Indices ......................................................................</span></span>
+<span id="cb18-90"><a href="#cb18-90"></a>tot <span class="ot">&lt;-</span> <span class="fu">sum</span>(M)</span>
+<span id="cb18-91"><a href="#cb18-91"></a></span>
+<span id="cb18-92"><a href="#cb18-92"></a><span class="co"># Indice d'attractivité</span></span>
+<span id="cb18-93"><a href="#cb18-93"></a>ia <span class="ot">&lt;-</span> sum_arr <span class="sc">/</span> tot</span>
+<span id="cb18-94"><a href="#cb18-94"></a></span>
+<span id="cb18-95"><a href="#cb18-95"></a><span class="co"># Indice d'emmissivité</span></span>
+<span id="cb18-96"><a href="#cb18-96"></a>ie <span class="ot">&lt;-</span> sum_dep <span class="sc">/</span> tot</span>
+<span id="cb18-97"><a href="#cb18-97"></a></span>
+<span id="cb18-98"><a href="#cb18-98"></a><span class="co"># Relations préférentielles ....................................................</span></span>
+<span id="cb18-99"><a href="#cb18-99"></a><span class="co"># Flux totaux</span></span>
+<span id="cb18-100"><a href="#cb18-100"></a>tot <span class="ot">&lt;-</span> <span class="fu">sum</span>(M)</span>
+<span id="cb18-101"><a href="#cb18-101"></a></span>
+<span id="cb18-102"><a href="#cb18-102"></a><span class="co"># Calcul du flux attendu</span></span>
+<span id="cb18-103"><a href="#cb18-103"></a>expected <span class="ot">&lt;-</span> (sum_dep <span class="sc">%o%</span> sum_arr) <span class="sc">/</span> tot</span>
+<span id="cb18-104"><a href="#cb18-104"></a><span class="co"># Comparaison des flux observés au flux attendus</span></span>
+<span id="cb18-105"><a href="#cb18-105"></a>m_pref <span class="ot">&lt;-</span> M <span class="sc">/</span> expected</span>
+<span id="cb18-106"><a href="#cb18-106"></a></span>
+<span id="cb18-107"><a href="#cb18-107"></a><span class="co"># Remplacer la diagonale avec 0</span></span>
+<span id="cb18-108"><a href="#cb18-108"></a><span class="fu">diag</span>(m_pref) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-109"><a href="#cb18-109"></a>m_pref[<span class="sc">!</span><span class="fu">is.finite</span>(m_pref)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-110"><a href="#cb18-110"></a></span>
+<span id="cb18-111"><a href="#cb18-111"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-112"><a href="#cb18-112"></a><span class="co"># Mise en forme de la donnée ---------------------------------------------------</span></span>
+<span id="cb18-113"><a href="#cb18-113"></a><span class="co"># Créez un dataframe avec les indices</span></span>
+<span id="cb18-114"><a href="#cb18-114"></a>indices <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-115"><a href="#cb18-115"></a>  <span class="at">code_insee =</span> <span class="fu">names</span>(sum_dep),</span>
+<span id="cb18-116"><a href="#cb18-116"></a>  <span class="at">departure =</span> sum_dep,</span>
+<span id="cb18-117"><a href="#cb18-117"></a>  <span class="at">arrival =</span> sum_arr,</span>
+<span id="cb18-118"><a href="#cb18-118"></a>  <span class="at">volumes =</span> volumes,</span>
+<span id="cb18-119"><a href="#cb18-119"></a>  <span class="at">soldes =</span> soldes,</span>
+<span id="cb18-120"><a href="#cb18-120"></a>  <span class="at">attrac_ratio =</span> attrac_ratio,</span>
+<span id="cb18-121"><a href="#cb18-121"></a>  <span class="at">ia =</span> ia,</span>
+<span id="cb18-122"><a href="#cb18-122"></a>  <span class="at">ie =</span> ie</span>
+<span id="cb18-123"><a href="#cb18-123"></a>)</span>
+<span id="cb18-124"><a href="#cb18-124"></a></span>
+<span id="cb18-125"><a href="#cb18-125"></a><span class="co"># Ajouter la géométries des communes</span></span>
+<span id="cb18-126"><a href="#cb18-126"></a>indices_spa <span class="ot">&lt;-</span> <span class="fu">left_join</span>(<span class="fu">select</span>(coms, code_insee), indices, <span class="at">by =</span> <span class="st">"code_insee"</span>)</span>
+<span id="cb18-127"><a href="#cb18-127"></a></span>
+<span id="cb18-128"><a href="#cb18-128"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-129"><a href="#cb18-129"></a><span class="co"># Statistiques -----------------------------------------------------------------</span></span>
+<span id="cb18-130"><a href="#cb18-130"></a><span class="co"># On calcul les statiques élémentaires des indices</span></span>
+<span id="cb18-131"><a href="#cb18-131"></a>indices_long <span class="ot">&lt;-</span></span>
+<span id="cb18-132"><a href="#cb18-132"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb18-133"><a href="#cb18-133"></a>    indices,</span>
+<span id="cb18-134"><a href="#cb18-134"></a>    <span class="at">cols =</span> <span class="sc">!</span>code_insee,</span>
+<span id="cb18-135"><a href="#cb18-135"></a>    <span class="at">names_to =</span> <span class="st">"indices"</span>,</span>
+<span id="cb18-136"><a href="#cb18-136"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb18-137"><a href="#cb18-137"></a>  )</span>
+<span id="cb18-138"><a href="#cb18-138"></a></span>
+<span id="cb18-139"><a href="#cb18-139"></a>stat <span class="ot">&lt;-</span> <span class="fu">group_by</span>(indices_long, indices) <span class="sc">|&gt;</span></span>
+<span id="cb18-140"><a href="#cb18-140"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-141"><a href="#cb18-141"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(value),</span>
+<span id="cb18-142"><a href="#cb18-142"></a>    <span class="at">median =</span> <span class="fu">median</span>(value),</span>
+<span id="cb18-143"><a href="#cb18-143"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(value),</span>
+<span id="cb18-144"><a href="#cb18-144"></a>    <span class="at">min =</span> <span class="fu">min</span>(value),</span>
+<span id="cb18-145"><a href="#cb18-145"></a>    <span class="at">max =</span> <span class="fu">max</span>(value)</span>
+<span id="cb18-146"><a href="#cb18-146"></a>  )</span>
+<span id="cb18-147"><a href="#cb18-147"></a></span>
+<span id="cb18-148"><a href="#cb18-148"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb18-149"><a href="#cb18-149"></a><span class="co"># Écriture des données ---------------------------------------------------------</span></span>
+<span id="cb18-150"><a href="#cb18-150"></a><span class="co"># Le tableau des mobilités résidentielles filtées</span></span>
+<span id="cb18-151"><a href="#cb18-151"></a><span class="fu">write_csv</span>(dt_mobi_pb, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/res/mobi_res_29.csv"</span>))</span>
+<span id="cb18-152"><a href="#cb18-152"></a></span>
+<span id="cb18-153"><a href="#cb18-153"></a><span class="co"># Les indices avec la géométrie</span></span>
+<span id="cb18-154"><a href="#cb18-154"></a><span class="fu">write_sf</span>(indices_spa, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/res/indices_spa_29.gpkg"</span>))</span>
+<span id="cb18-155"><a href="#cb18-155"></a></span>
+<span id="cb18-156"><a href="#cb18-156"></a><span class="co"># La matrice des relations préférentielles</span></span>
+<span id="cb18-157"><a href="#cb18-157"></a><span class="co"># Le format RDS permet de sauvegarder n'importe quel objet R qui est dans</span></span>
+<span id="cb18-158"><a href="#cb18-158"></a><span class="co"># l'environnement. C'est un format exclusif à R.</span></span>
+<span id="cb18-159"><a href="#cb18-159"></a><span class="fu">saveRDS</span>(m_pref, glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/res/rel_pref.rds"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p><code>scripts/maps.R</code> :</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="do">################################################################################</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co"># Script Name: process.r</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># Description: Analyse descriptive des mobilités résidentielles en finistère</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co">#              entre 2020 et l'années de résidence prédédent. Données de l'INSEE.</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="co">#              Ce script est dédié à la cartograpie des indices calculés dans le</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a><span class="co">#              script `scripts/process.r`</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a><span class="co"># Author: Antoine Le Doeuff</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="do">################################################################################</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a><span class="fu">library</span>(readr)</span>
+<span id="cb19-11"><a href="#cb19-11"></a><span class="fu">library</span>(sf)</span>
+<span id="cb19-12"><a href="#cb19-12"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb19-13"><a href="#cb19-13"></a><span class="fu">library</span>(Matrix)</span>
+<span id="cb19-14"><a href="#cb19-14"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb19-15"><a href="#cb19-15"></a><span class="fu">library</span>(ggspatial)</span>
+<span id="cb19-16"><a href="#cb19-16"></a><span class="fu">library</span>(ggnewscale)</span>
+<span id="cb19-17"><a href="#cb19-17"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb19-18"><a href="#cb19-18"></a><span class="fu">library</span>(ttt) <span class="co"># remotes::install_github("MiboraMinima/ttt")</span></span>
+<span id="cb19-19"><a href="#cb19-19"></a><span class="fu">library</span>(mapsf)</span>
+<span id="cb19-20"><a href="#cb19-20"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb19-21"><a href="#cb19-21"></a></span>
+<span id="cb19-22"><a href="#cb19-22"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb19-23"><a href="#cb19-23"></a><span class="co"># Constantes -------------------------------------------------------------------</span></span>
+<span id="cb19-24"><a href="#cb19-24"></a><span class="co"># Où sont enregistré les données (vous, ce sera juste `data`)</span></span>
+<span id="cb19-25"><a href="#cb19-25"></a>DATA_DIR <span class="ot">&lt;-</span> <span class="st">"02_flux/data"</span></span>
+<span id="cb19-26"><a href="#cb19-26"></a></span>
+<span id="cb19-27"><a href="#cb19-27"></a><span class="co"># Où seront enregistrées vos cartes (vous, ce sera juste `figures`)</span></span>
+<span id="cb19-28"><a href="#cb19-28"></a>FIGURES_DIR <span class="ot">&lt;-</span> <span class="st">"02_flux/figures"</span></span>
+<span id="cb19-29"><a href="#cb19-29"></a></span>
+<span id="cb19-30"><a href="#cb19-30"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb19-31"><a href="#cb19-31"></a><span class="co"># Chargement des données -------------------------------------------------------</span></span>
+<span id="cb19-32"><a href="#cb19-32"></a><span class="co"># Le tableau des mobilités résidentielles filtées</span></span>
+<span id="cb19-33"><a href="#cb19-33"></a>dt_mobi_fin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/res/mobi_res_29.csv"</span>))</span>
+<span id="cb19-34"><a href="#cb19-34"></a></span>
+<span id="cb19-35"><a href="#cb19-35"></a><span class="co"># Table des indices spatiaux</span></span>
+<span id="cb19-36"><a href="#cb19-36"></a>indices_spa <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/res/indices_spa_29.gpkg"</span>))</span>
+<span id="cb19-37"><a href="#cb19-37"></a></span>
+<span id="cb19-38"><a href="#cb19-38"></a><span class="co"># Communes du finistères</span></span>
+<span id="cb19-39"><a href="#cb19-39"></a>coms <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/src/com_finistere_bdtopov3_2026.gpkg"</span>))</span>
+<span id="cb19-40"><a href="#cb19-40"></a></span>
+<span id="cb19-41"><a href="#cb19-41"></a><span class="co"># Matrice des relations préférentielles</span></span>
+<span id="cb19-42"><a href="#cb19-42"></a>m_pref <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{DATA_DIR}/res/rel_pref.rds"</span>))</span>
+<span id="cb19-43"><a href="#cb19-43"></a></span>
+<span id="cb19-44"><a href="#cb19-44"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb19-45"><a href="#cb19-45"></a><span class="co"># Prétraitements ---------------------------------------------------------------</span></span>
+<span id="cb19-46"><a href="#cb19-46"></a><span class="co"># Calcul des centroïdes (pour les cartes en cercles proportionnelles)</span></span>
+<span id="cb19-47"><a href="#cb19-47"></a>centroids <span class="ot">&lt;-</span> <span class="fu">st_centroid</span>(indices_spa)</span>
+<span id="cb19-48"><a href="#cb19-48"></a></span>
+<span id="cb19-49"><a href="#cb19-49"></a><span class="co"># //////////////////////////////////////////////////////////////////////////////</span></span>
+<span id="cb19-50"><a href="#cb19-50"></a><span class="co"># Cartographie -----------------------------------------------------------------</span></span>
+<span id="cb19-51"><a href="#cb19-51"></a><span class="co"># Themes .......................................................................</span></span>
+<span id="cb19-52"><a href="#cb19-52"></a><span class="co"># Je crée un thème que j'appliquerai à toutes les cartes</span></span>
+<span id="cb19-53"><a href="#cb19-53"></a>sysfonts<span class="sc">::</span><span class="fu">font_add_google</span>(<span class="at">name =</span> <span class="st">"Roboto"</span>, <span class="at">family =</span> <span class="st">"roboto"</span>)</span>
+<span id="cb19-54"><a href="#cb19-54"></a>theme_ggplot <span class="ot">&lt;-</span></span>
+<span id="cb19-55"><a href="#cb19-55"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-56"><a href="#cb19-56"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-57"><a href="#cb19-57"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb19-58"><a href="#cb19-58"></a>    <span class="co"># La font chargé dans `text` est automatiquement appliquée à tous les</span></span>
+<span id="cb19-59"><a href="#cb19-59"></a>    <span class="co"># autres texts de l'objet ggplot. Vous pouvez la changer manuellement</span></span>
+<span id="cb19-60"><a href="#cb19-60"></a>    <span class="co"># pour un paramètre en particulier si vous le shouaitez.</span></span>
+<span id="cb19-61"><a href="#cb19-61"></a>    <span class="at">text            =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>),</span>
+<span id="cb19-62"><a href="#cb19-62"></a>    <span class="at">plot.title      =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb19-63"><a href="#cb19-63"></a>    <span class="at">plot.subtitle   =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>),</span>
+<span id="cb19-64"><a href="#cb19-64"></a>    <span class="at">axis.title.x    =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb19-65"><a href="#cb19-65"></a>    <span class="at">axis.title.y    =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb19-66"><a href="#cb19-66"></a>    <span class="at">plot.caption    =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">8</span>, <span class="at">lineheight =</span> <span class="fl">1.5</span>),</span>
+<span id="cb19-67"><a href="#cb19-67"></a>    <span class="at">legend.title    =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">8</span>)</span>
+<span id="cb19-68"><a href="#cb19-68"></a>  )</span>
+<span id="cb19-69"><a href="#cb19-69"></a><span class="co"># Theme pour patchwork</span></span>
+<span id="cb19-70"><a href="#cb19-70"></a>theme_patch <span class="ot">&lt;-</span></span>
+<span id="cb19-71"><a href="#cb19-71"></a>  <span class="fu">theme</span>(</span>
+<span id="cb19-72"><a href="#cb19-72"></a>    <span class="at">text          =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>),</span>
+<span id="cb19-73"><a href="#cb19-73"></a>    <span class="at">plot.title    =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">18</span>),</span>
+<span id="cb19-74"><a href="#cb19-74"></a>    <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>),</span>
+<span id="cb19-75"><a href="#cb19-75"></a>    <span class="at">plot.caption  =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">11</span>)</span>
+<span id="cb19-76"><a href="#cb19-76"></a>  )</span>
+<span id="cb19-77"><a href="#cb19-77"></a></span>
+<span id="cb19-78"><a href="#cb19-78"></a><span class="co"># Plot departure, arrival, volumes .............................................</span></span>
+<span id="cb19-79"><a href="#cb19-79"></a><span class="co"># On défini le nom complet de le la variable avec un named vector</span></span>
+<span id="cb19-80"><a href="#cb19-80"></a>selected_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb19-81"><a href="#cb19-81"></a>  <span class="st">"Flux total reçus"</span> <span class="ot">=</span> <span class="st">"arrival"</span>,</span>
+<span id="cb19-82"><a href="#cb19-82"></a>  <span class="st">"Flux total émis"</span>  <span class="ot">=</span> <span class="st">"departure"</span>,</span>
+<span id="cb19-83"><a href="#cb19-83"></a>  <span class="st">"Volume"</span>           <span class="ot">=</span> <span class="st">"volumes"</span></span>
+<span id="cb19-84"><a href="#cb19-84"></a>)</span>
+<span id="cb19-85"><a href="#cb19-85"></a></span>
+<span id="cb19-86"><a href="#cb19-86"></a><span class="co"># On définit une liste vide (réceptacle qui va recevoir les cartes)</span></span>
+<span id="cb19-87"><a href="#cb19-87"></a>maps <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb19-88"><a href="#cb19-88"></a></span>
+<span id="cb19-89"><a href="#cb19-89"></a><span class="co"># On itère sur les noms</span></span>
+<span id="cb19-90"><a href="#cb19-90"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(selected_vars)) {</span>
+<span id="cb19-91"><a href="#cb19-91"></a>  <span class="co"># On récupère le nom présent dans le tableau à partir du nom complet</span></span>
+<span id="cb19-92"><a href="#cb19-92"></a>  short_name <span class="ot">&lt;-</span>  selected_vars[name]</span>
+<span id="cb19-93"><a href="#cb19-93"></a></span>
+<span id="cb19-94"><a href="#cb19-94"></a>  <span class="co"># Créée la carte</span></span>
+<span id="cb19-95"><a href="#cb19-95"></a>  m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-96"><a href="#cb19-96"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> coms) <span class="sc">+</span></span>
+<span id="cb19-97"><a href="#cb19-97"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb19-98"><a href="#cb19-98"></a>      <span class="at">data =</span> centroids,</span>
+<span id="cb19-99"><a href="#cb19-99"></a>      <span class="fu">aes</span>(<span class="at">size =</span> .data[[short_name]]),</span>
+<span id="cb19-100"><a href="#cb19-100"></a>      <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span></span>
+<span id="cb19-101"><a href="#cb19-101"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-102"><a href="#cb19-102"></a>    <span class="fu">scale_size</span>(</span>
+<span id="cb19-103"><a href="#cb19-103"></a>      <span class="at">name =</span> name,</span>
+<span id="cb19-104"><a href="#cb19-104"></a>      <span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">9</span>),</span>
+<span id="cb19-105"><a href="#cb19-105"></a>      <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">pretty_breaks</span>(<span class="at">n =</span> <span class="dv">5</span>)</span>
+<span id="cb19-106"><a href="#cb19-106"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-107"><a href="#cb19-107"></a>    <span class="fu">ggtitle</span>(name) <span class="sc">+</span></span>
+<span id="cb19-108"><a href="#cb19-108"></a>    ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(</span>
+<span id="cb19-109"><a href="#cb19-109"></a>      <span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)</span>
+<span id="cb19-110"><a href="#cb19-110"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-111"><a href="#cb19-111"></a>    ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(</span>
+<span id="cb19-112"><a href="#cb19-112"></a>        <span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">which_north =</span> <span class="st">"true"</span>,</span>
+<span id="cb19-113"><a href="#cb19-113"></a>        <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb19-114"><a href="#cb19-114"></a>        <span class="at">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb19-115"><a href="#cb19-115"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-116"><a href="#cb19-116"></a>    <span class="fu">guides</span>(</span>
+<span id="cb19-117"><a href="#cb19-117"></a>      <span class="at">size =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb19-118"><a href="#cb19-118"></a>        <span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb19-119"><a href="#cb19-119"></a>        <span class="at">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb19-120"><a href="#cb19-120"></a>        <span class="at">label.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb19-121"><a href="#cb19-121"></a>      )</span>
+<span id="cb19-122"><a href="#cb19-122"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-123"><a href="#cb19-123"></a>    theme_ggplot</span>
+<span id="cb19-124"><a href="#cb19-124"></a></span>
+<span id="cb19-125"><a href="#cb19-125"></a>  maps[[name]] <span class="ot">&lt;-</span> m</span>
+<span id="cb19-126"><a href="#cb19-126"></a>}</span>
+<span id="cb19-127"><a href="#cb19-127"></a><span class="co"># Je combine les graphs et je fais la mise en page de la carte finale</span></span>
+<span id="cb19-128"><a href="#cb19-128"></a>map_volumes_emis_recus <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(maps, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb19-129"><a href="#cb19-129"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb19-130"><a href="#cb19-130"></a>    <span class="at">title =</span> <span class="st">"Volumes et flux total émis et reçus des communes finistériennes"</span>,</span>
+<span id="cb19-131"><a href="#cb19-131"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
+<span id="cb19-132"><a href="#cb19-132"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb19-133"><a href="#cb19-133"></a>    <span class="at">theme =</span> theme_patch</span>
+<span id="cb19-134"><a href="#cb19-134"></a>  )</span>
+<span id="cb19-135"><a href="#cb19-135"></a><span class="co"># J'enregistre la carte</span></span>
+<span id="cb19-136"><a href="#cb19-136"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-137"><a href="#cb19-137"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_volumes_emis_recus.png"</span>),</span>
+<span id="cb19-138"><a href="#cb19-138"></a>  map_volumes_emis_recus,</span>
+<span id="cb19-139"><a href="#cb19-139"></a>  <span class="at">width =</span> <span class="dv">21</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># Largeur en cm (A4 moins 1 cm pour la marge)</span></span>
+<span id="cb19-140"><a href="#cb19-140"></a>  <span class="at">height =</span> <span class="dv">27</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-141"><a href="#cb19-141"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb19-142"><a href="#cb19-142"></a>)</span>
+<span id="cb19-143"><a href="#cb19-143"></a><span class="co"># J'enregistre la carte en .eps ou svg ou pdf (pour pouvoir la modifier avec</span></span>
+<span id="cb19-144"><a href="#cb19-144"></a><span class="co"># logiciel de DAO a prosteriori)</span></span>
+<span id="cb19-145"><a href="#cb19-145"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-146"><a href="#cb19-146"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_volumes_emis_recus.eps"</span>),</span>
+<span id="cb19-147"><a href="#cb19-147"></a>  map_volumes_emis_recus,</span>
+<span id="cb19-148"><a href="#cb19-148"></a>  <span class="at">width =</span> <span class="dv">21</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># Largeur en cm (A4 moins 1 cm pour la marge)</span></span>
+<span id="cb19-149"><a href="#cb19-149"></a>  <span class="at">height =</span> <span class="dv">27</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-150"><a href="#cb19-150"></a>  <span class="at">units =</span> <span class="st">"cm"</span></span>
+<span id="cb19-151"><a href="#cb19-151"></a>)</span>
+<span id="cb19-152"><a href="#cb19-152"></a></span>
+<span id="cb19-153"><a href="#cb19-153"></a><span class="co"># Solde ........................................................................</span></span>
+<span id="cb19-154"><a href="#cb19-154"></a><span class="co"># Création de la taille des cercles à la main</span></span>
+<span id="cb19-155"><a href="#cb19-155"></a>fill_breaks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">750</span>, <span class="sc">-</span><span class="dv">500</span>, <span class="sc">-</span><span class="dv">250</span>, <span class="dv">0</span>, <span class="dv">250</span>, <span class="dv">500</span>)</span>
+<span id="cb19-156"><a href="#cb19-156"></a>max_val <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(centroids<span class="sc">$</span>soldes), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-157"><a href="#cb19-157"></a>legend_sizes <span class="ot">&lt;-</span> scales<span class="sc">::</span><span class="fu">rescale</span>(<span class="fu">abs</span>(fill_breaks), <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">9</span>), <span class="at">from =</span> <span class="fu">c</span>(<span class="dv">0</span>, max_val))</span>
+<span id="cb19-158"><a href="#cb19-158"></a></span>
+<span id="cb19-159"><a href="#cb19-159"></a>map_solde <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-160"><a href="#cb19-160"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> coms) <span class="sc">+</span></span>
+<span id="cb19-161"><a href="#cb19-161"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-162"><a href="#cb19-162"></a>    <span class="at">data =</span> centroids,</span>
+<span id="cb19-163"><a href="#cb19-163"></a>    <span class="fu">aes</span>(<span class="at">size =</span> <span class="fu">abs</span>(soldes), <span class="at">fill =</span> soldes),</span>
+<span id="cb19-164"><a href="#cb19-164"></a>    <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"white"</span></span>
+<span id="cb19-165"><a href="#cb19-165"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-166"><a href="#cb19-166"></a>  <span class="co"># Cacher la taille dans la légende</span></span>
+<span id="cb19-167"><a href="#cb19-167"></a>  <span class="fu">scale_size</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">9</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb19-168"><a href="#cb19-168"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb19-169"><a href="#cb19-169"></a>    <span class="at">name =</span> <span class="st">"Solde"</span>,</span>
+<span id="cb19-170"><a href="#cb19-170"></a>    <span class="at">low =</span> <span class="st">"#4575B4"</span>,</span>
+<span id="cb19-171"><a href="#cb19-171"></a>    <span class="at">mid =</span> <span class="st">"white"</span>,</span>
+<span id="cb19-172"><a href="#cb19-172"></a>    <span class="at">high =</span> <span class="st">"#D73027"</span>,</span>
+<span id="cb19-173"><a href="#cb19-173"></a>    <span class="at">midpoint =</span> <span class="dv">0</span>,</span>
+<span id="cb19-174"><a href="#cb19-174"></a>    <span class="at">space =</span> <span class="st">"Lab"</span>,</span>
+<span id="cb19-175"><a href="#cb19-175"></a>    <span class="at">breaks =</span> fill_breaks,</span>
+<span id="cb19-176"><a href="#cb19-176"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">750</span>, <span class="dv">500</span>),</span>
+<span id="cb19-177"><a href="#cb19-177"></a>    <span class="at">guide =</span> <span class="st">"legend"</span></span>
+<span id="cb19-178"><a href="#cb19-178"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-179"><a href="#cb19-179"></a>  <span class="fu">guides</span>(</span>
+<span id="cb19-180"><a href="#cb19-180"></a>    <span class="at">fill =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb19-181"><a href="#cb19-181"></a>      <span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb19-182"><a href="#cb19-182"></a>      <span class="at">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb19-183"><a href="#cb19-183"></a>      <span class="at">label.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb19-184"><a href="#cb19-184"></a>      <span class="co"># Mettre la taille directement ici</span></span>
+<span id="cb19-185"><a href="#cb19-185"></a>      <span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">size =</span> legend_sizes)</span>
+<span id="cb19-186"><a href="#cb19-186"></a>    )</span>
+<span id="cb19-187"><a href="#cb19-187"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-188"><a href="#cb19-188"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-189"><a href="#cb19-189"></a>    <span class="at">title =</span> <span class="st">"Solde des communes finistériennes"</span>,</span>
+<span id="cb19-190"><a href="#cb19-190"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
+<span id="cb19-191"><a href="#cb19-191"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span></span>
+<span id="cb19-192"><a href="#cb19-192"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-193"><a href="#cb19-193"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(</span>
+<span id="cb19-194"><a href="#cb19-194"></a>    <span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)</span>
+<span id="cb19-195"><a href="#cb19-195"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-196"><a href="#cb19-196"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(</span>
+<span id="cb19-197"><a href="#cb19-197"></a>      <span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">which_north =</span> <span class="st">"true"</span>,</span>
+<span id="cb19-198"><a href="#cb19-198"></a>      <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb19-199"><a href="#cb19-199"></a>      <span class="at">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb19-200"><a href="#cb19-200"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-201"><a href="#cb19-201"></a>  theme_ggplot</span>
+<span id="cb19-202"><a href="#cb19-202"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-203"><a href="#cb19-203"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_solde.png"</span>),</span>
+<span id="cb19-204"><a href="#cb19-204"></a>  map_solde,</span>
+<span id="cb19-205"><a href="#cb19-205"></a>  <span class="at">width =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-206"><a href="#cb19-206"></a>  <span class="at">height =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-207"><a href="#cb19-207"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb19-208"><a href="#cb19-208"></a>)</span>
+<span id="cb19-209"><a href="#cb19-209"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-210"><a href="#cb19-210"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_solde.pdf"</span>),</span>
+<span id="cb19-211"><a href="#cb19-211"></a>  map_solde,</span>
+<span id="cb19-212"><a href="#cb19-212"></a>  <span class="at">width =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-213"><a href="#cb19-213"></a>  <span class="at">height =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-214"><a href="#cb19-214"></a>  <span class="at">units =</span> <span class="st">"cm"</span></span>
+<span id="cb19-215"><a href="#cb19-215"></a>)</span>
+<span id="cb19-216"><a href="#cb19-216"></a></span>
+<span id="cb19-217"><a href="#cb19-217"></a><span class="co"># Attractivity .................................................................</span></span>
+<span id="cb19-218"><a href="#cb19-218"></a>map_attrac_ratio <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-219"><a href="#cb19-219"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb19-220"><a href="#cb19-220"></a>    <span class="at">data =</span> indices_spa,</span>
+<span id="cb19-221"><a href="#cb19-221"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> attrac_ratio),  <span class="co"># use transformed color</span></span>
+<span id="cb19-222"><a href="#cb19-222"></a>    <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb19-223"><a href="#cb19-223"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-224"><a href="#cb19-224"></a>  <span class="fu">scale_fill_gradient2</span>(</span>
+<span id="cb19-225"><a href="#cb19-225"></a>    <span class="at">name =</span> <span class="st">"Ratio d'attractivité"</span>,</span>
+<span id="cb19-226"><a href="#cb19-226"></a>    <span class="at">low =</span> <span class="st">"#4575B4"</span>,   <span class="co"># blue for negatives</span></span>
+<span id="cb19-227"><a href="#cb19-227"></a>    <span class="at">mid =</span> <span class="st">"white"</span>,</span>
+<span id="cb19-228"><a href="#cb19-228"></a>    <span class="at">high =</span> <span class="st">"#D73027"</span>,  <span class="co"># red for positives</span></span>
+<span id="cb19-229"><a href="#cb19-229"></a>    <span class="at">midpoint =</span> <span class="dv">0</span>,      <span class="co"># ensures 0 stays white</span></span>
+<span id="cb19-230"><a href="#cb19-230"></a>    <span class="at">space =</span> <span class="st">"Lab"</span></span>
+<span id="cb19-231"><a href="#cb19-231"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-232"><a href="#cb19-232"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-233"><a href="#cb19-233"></a>    <span class="at">title =</span> <span class="st">"Taux d'attractivité des communes finistériennes"</span>,</span>
+<span id="cb19-234"><a href="#cb19-234"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
+<span id="cb19-235"><a href="#cb19-235"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span></span>
+<span id="cb19-236"><a href="#cb19-236"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-237"><a href="#cb19-237"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(</span>
+<span id="cb19-238"><a href="#cb19-238"></a>    <span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)</span>
+<span id="cb19-239"><a href="#cb19-239"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-240"><a href="#cb19-240"></a>  ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(</span>
+<span id="cb19-241"><a href="#cb19-241"></a>      <span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">which_north =</span> <span class="st">"true"</span>,</span>
+<span id="cb19-242"><a href="#cb19-242"></a>      <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb19-243"><a href="#cb19-243"></a>      <span class="at">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb19-244"><a href="#cb19-244"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-245"><a href="#cb19-245"></a>  theme_ggplot</span>
+<span id="cb19-246"><a href="#cb19-246"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-247"><a href="#cb19-247"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_attrac_ratio.png"</span>),</span>
+<span id="cb19-248"><a href="#cb19-248"></a>  map_attrac_ratio,</span>
+<span id="cb19-249"><a href="#cb19-249"></a>  <span class="at">width =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-250"><a href="#cb19-250"></a>  <span class="at">height =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-251"><a href="#cb19-251"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb19-252"><a href="#cb19-252"></a>)</span>
+<span id="cb19-253"><a href="#cb19-253"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-254"><a href="#cb19-254"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_attrac_ratio.eps"</span>),</span>
+<span id="cb19-255"><a href="#cb19-255"></a>  map_attrac_ratio,</span>
+<span id="cb19-256"><a href="#cb19-256"></a>  <span class="at">width =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-257"><a href="#cb19-257"></a>  <span class="at">height =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-258"><a href="#cb19-258"></a>  <span class="at">units =</span> <span class="st">"cm"</span></span>
+<span id="cb19-259"><a href="#cb19-259"></a>)</span>
+<span id="cb19-260"><a href="#cb19-260"></a></span>
+<span id="cb19-261"><a href="#cb19-261"></a><span class="co"># Indices d'emmissivité et d'attractivité ......................................</span></span>
+<span id="cb19-262"><a href="#cb19-262"></a>to_plot_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Indice d'emmissivité"</span> <span class="ot">=</span> <span class="st">"ie"</span>, <span class="st">"Indice d'attractivité"</span> <span class="ot">=</span> <span class="st">"ia"</span>)</span>
+<span id="cb19-263"><a href="#cb19-263"></a>maps <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb19-264"><a href="#cb19-264"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(to_plot_vars)) {</span>
+<span id="cb19-265"><a href="#cb19-265"></a>  short_name <span class="ot">&lt;-</span> to_plot_vars[name]</span>
+<span id="cb19-266"><a href="#cb19-266"></a>  m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-267"><a href="#cb19-267"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb19-268"><a href="#cb19-268"></a>      <span class="at">data =</span> indices_spa,</span>
+<span id="cb19-269"><a href="#cb19-269"></a>      <span class="fu">aes</span>(<span class="at">fill =</span> .data[[short_name]]),</span>
+<span id="cb19-270"><a href="#cb19-270"></a>      <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb19-271"><a href="#cb19-271"></a>      <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb19-272"><a href="#cb19-272"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-273"><a href="#cb19-273"></a>    <span class="fu">scale_fill_gradientn</span>(</span>
+<span id="cb19-274"><a href="#cb19-274"></a>      <span class="at">name =</span> name,</span>
+<span id="cb19-275"><a href="#cb19-275"></a>      <span class="at">colors =</span> MexBrewer<span class="sc">::</span><span class="fu">mex.brewer</span>(<span class="st">"Frida"</span>),</span>
+<span id="cb19-276"><a href="#cb19-276"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-277"><a href="#cb19-277"></a>    <span class="fu">labs</span>(<span class="at">title =</span> name) <span class="sc">+</span></span>
+<span id="cb19-278"><a href="#cb19-278"></a>    ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(</span>
+<span id="cb19-279"><a href="#cb19-279"></a>      <span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)</span>
+<span id="cb19-280"><a href="#cb19-280"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-281"><a href="#cb19-281"></a>    ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(</span>
+<span id="cb19-282"><a href="#cb19-282"></a>        <span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">which_north =</span> <span class="st">"true"</span>,</span>
+<span id="cb19-283"><a href="#cb19-283"></a>        <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb19-284"><a href="#cb19-284"></a>        <span class="at">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb19-285"><a href="#cb19-285"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-286"><a href="#cb19-286"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-287"><a href="#cb19-287"></a>    <span class="fu">theme</span>(</span>
+<span id="cb19-288"><a href="#cb19-288"></a>      <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb19-289"><a href="#cb19-289"></a>      <span class="at">plot.title   =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb19-290"><a href="#cb19-290"></a>      <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>),</span>
+<span id="cb19-291"><a href="#cb19-291"></a>      <span class="at">axis.title.x =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb19-292"><a href="#cb19-292"></a>      <span class="at">axis.title.y =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb19-293"><a href="#cb19-293"></a>      <span class="at">plot.caption =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">lineheight =</span> <span class="fl">1.5</span>)</span>
+<span id="cb19-294"><a href="#cb19-294"></a>    )</span>
+<span id="cb19-295"><a href="#cb19-295"></a>  maps[[short_name]] <span class="ot">&lt;-</span> m</span>
+<span id="cb19-296"><a href="#cb19-296"></a>}</span>
+<span id="cb19-297"><a href="#cb19-297"></a>map_ia_ie <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(maps) <span class="sc">+</span></span>
+<span id="cb19-298"><a href="#cb19-298"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb19-299"><a href="#cb19-299"></a>    <span class="at">title =</span> <span class="st">"Indice d'émmissivité et d'attractivité des communes finistériennes"</span>,</span>
+<span id="cb19-300"><a href="#cb19-300"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre&lt;br&gt;le lieu de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
+<span id="cb19-301"><a href="#cb19-301"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb19-302"><a href="#cb19-302"></a>    <span class="at">theme =</span> theme_patch</span>
+<span id="cb19-303"><a href="#cb19-303"></a>  )</span>
+<span id="cb19-304"><a href="#cb19-304"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-305"><a href="#cb19-305"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_ia_ie.png"</span>),</span>
+<span id="cb19-306"><a href="#cb19-306"></a>  map_ia_ie,</span>
+<span id="cb19-307"><a href="#cb19-307"></a>  <span class="at">width =</span> <span class="dv">21</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># Largeur en cm (A4 moins 1 cm pour la marge)</span></span>
+<span id="cb19-308"><a href="#cb19-308"></a>  <span class="at">height =</span> <span class="dv">27</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-309"><a href="#cb19-309"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb19-310"><a href="#cb19-310"></a>)</span>
+<span id="cb19-311"><a href="#cb19-311"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-312"><a href="#cb19-312"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_ia_ie.eps"</span>),</span>
+<span id="cb19-313"><a href="#cb19-313"></a>  map_ia_ie,</span>
+<span id="cb19-314"><a href="#cb19-314"></a>  <span class="at">width =</span> <span class="dv">21</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="co"># Largeur en cm (A4 moins 1 cm pour la marge)</span></span>
+<span id="cb19-315"><a href="#cb19-315"></a>  <span class="at">height =</span> <span class="dv">27</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-316"><a href="#cb19-316"></a>  <span class="at">units =</span> <span class="st">"cm"</span></span>
+<span id="cb19-317"><a href="#cb19-317"></a>)</span>
+<span id="cb19-318"><a href="#cb19-318"></a></span>
+<span id="cb19-319"><a href="#cb19-319"></a><span class="co"># Relations préférentielles ....................................................</span></span>
+<span id="cb19-320"><a href="#cb19-320"></a><span class="co"># Conversion de la matrice des relations préférentielles en data.frame</span></span>
+<span id="cb19-321"><a href="#cb19-321"></a>od_tidy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(m_pref)) <span class="sc">|&gt;</span></span>
+<span id="cb19-322"><a href="#cb19-322"></a>  tibble<span class="sc">::</span><span class="fu">rownames_to_column</span>(<span class="st">"origin"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-323"><a href="#cb19-323"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb19-324"><a href="#cb19-324"></a>    <span class="at">cols =</span> <span class="sc">-</span>origin,</span>
+<span id="cb19-325"><a href="#cb19-325"></a>    <span class="at">names_to =</span> <span class="st">"destination"</span>,</span>
+<span id="cb19-326"><a href="#cb19-326"></a>    <span class="at">values_to =</span> <span class="st">"rel_pref"</span></span>
+<span id="cb19-327"><a href="#cb19-327"></a>  )</span>
+<span id="cb19-328"><a href="#cb19-328"></a></span>
+<span id="cb19-329"><a href="#cb19-329"></a><span class="co"># Les communes que je souhaites cartographier</span></span>
+<span id="cb19-330"><a href="#cb19-330"></a>coms_to_plot <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb19-331"><a href="#cb19-331"></a>  <span class="st">"Brest"</span>      <span class="ot">=</span> <span class="st">"29019"</span>,</span>
+<span id="cb19-332"><a href="#cb19-332"></a>  <span class="st">"Quimper"</span>    <span class="ot">=</span> <span class="st">"29232"</span>,</span>
+<span id="cb19-333"><a href="#cb19-333"></a>  <span class="st">"Morlaix"</span>    <span class="ot">=</span> <span class="st">"29151"</span>,</span>
+<span id="cb19-334"><a href="#cb19-334"></a>  <span class="st">"Landerneau"</span> <span class="ot">=</span> <span class="st">"29041"</span></span>
+<span id="cb19-335"><a href="#cb19-335"></a>)</span>
+<span id="cb19-336"><a href="#cb19-336"></a><span class="co"># Seuil de définition d'un relation préférentielle. Les relations inférieure à</span></span>
+<span id="cb19-337"><a href="#cb19-337"></a><span class="co"># ce seuil ne seront pas cartographiées.</span></span>
+<span id="cb19-338"><a href="#cb19-338"></a>th <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb19-339"><a href="#cb19-339"></a></span>
+<span id="cb19-340"><a href="#cb19-340"></a><span class="co"># Filtre du df des rel. pref. pour ne garder que les communes sélectionnées</span></span>
+<span id="cb19-341"><a href="#cb19-341"></a><span class="co"># Ne garder que les communes sélectionnées</span></span>
+<span id="cb19-342"><a href="#cb19-342"></a>to_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(od_tidy, origin <span class="sc">%in%</span> coms_to_plot)</span>
+<span id="cb19-343"><a href="#cb19-343"></a><span class="co"># On récupère les géométries</span></span>
+<span id="cb19-344"><a href="#cb19-344"></a>to_plot <span class="ot">&lt;-</span> <span class="fu">left_join</span>(indices_spa, to_plot, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"code_insee"</span> <span class="ot">=</span> <span class="st">"destination"</span>))</span>
+<span id="cb19-345"><a href="#cb19-345"></a></span>
+<span id="cb19-346"><a href="#cb19-346"></a>maps <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb19-347"><a href="#cb19-347"></a><span class="cf">for</span> (com_name <span class="cf">in</span> <span class="fu">names</span>(coms_to_plot)) {</span>
+<span id="cb19-348"><a href="#cb19-348"></a>  ci <span class="ot">&lt;-</span> coms_to_plot[com_name]</span>
+<span id="cb19-349"><a href="#cb19-349"></a>  data_current_com <span class="ot">&lt;-</span></span>
+<span id="cb19-350"><a href="#cb19-350"></a>    <span class="fu">filter</span>(to_plot, origin <span class="sc">==</span> ci) <span class="sc">|&gt;</span></span>
+<span id="cb19-351"><a href="#cb19-351"></a>    <span class="fu">select</span>(origin, rel_pref)</span>
+<span id="cb19-352"><a href="#cb19-352"></a></span>
+<span id="cb19-353"><a href="#cb19-353"></a>  <span class="co"># discrétisation quantile</span></span>
+<span id="cb19-354"><a href="#cb19-354"></a>  breaks <span class="ot">&lt;-</span> <span class="fu">quantile</span>(</span>
+<span id="cb19-355"><a href="#cb19-355"></a>    <span class="fu">pull</span>(<span class="fu">filter</span>(data_current_com, rel_pref <span class="sc">&gt;</span> th), rel_pref),</span>
+<span id="cb19-356"><a href="#cb19-356"></a>    <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.2</span>),</span>
+<span id="cb19-357"><a href="#cb19-357"></a>    <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-358"><a href="#cb19-358"></a>  )</span>
+<span id="cb19-359"><a href="#cb19-359"></a>  <span class="co"># Ajouter la légende pour les valeurs &lt; th (on round pour la légende)</span></span>
+<span id="cb19-360"><a href="#cb19-360"></a>  breaks <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, breaks), <span class="dv">1</span>)</span>
+<span id="cb19-361"><a href="#cb19-361"></a>  <span class="co"># Créer une variable avec le seuil des quantiles</span></span>
+<span id="cb19-362"><a href="#cb19-362"></a>  data_current_com <span class="ot">&lt;-</span> data_current_com <span class="sc">|&gt;</span></span>
+<span id="cb19-363"><a href="#cb19-363"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb19-364"><a href="#cb19-364"></a>      <span class="at">rel_pref_q =</span> <span class="fu">cut</span>(</span>
+<span id="cb19-365"><a href="#cb19-365"></a>        <span class="fu">round</span>(rel_pref, <span class="dv">1</span>), <span class="co"># Il faut round ici aussi</span></span>
+<span id="cb19-366"><a href="#cb19-366"></a>        <span class="at">breaks =</span> <span class="fu">unique</span>(breaks),</span>
+<span id="cb19-367"><a href="#cb19-367"></a>        <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-368"><a href="#cb19-368"></a>        <span class="at">dig.lab =</span> <span class="dv">3</span></span>
+<span id="cb19-369"><a href="#cb19-369"></a>      )</span>
+<span id="cb19-370"><a href="#cb19-370"></a>    )</span>
+<span id="cb19-371"><a href="#cb19-371"></a></span>
+<span id="cb19-372"><a href="#cb19-372"></a>  m <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-373"><a href="#cb19-373"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> data_current_com, <span class="fu">aes</span>(<span class="at">fill =</span> rel_pref_q)) <span class="sc">+</span></span>
+<span id="cb19-374"><a href="#cb19-374"></a>    <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb19-375"><a href="#cb19-375"></a>      <span class="at">name     =</span> <span class="st">"**Intensité de la relation** (disc. quantile)"</span>,</span>
+<span id="cb19-376"><a href="#cb19-376"></a>      <span class="co"># Mettre une couleur partiuclière pour les valeurs &lt; 1 (th)</span></span>
+<span id="cb19-377"><a href="#cb19-377"></a>      <span class="at">values   =</span> <span class="fu">c</span>(<span class="st">"ivory"</span>, RColorBrewer<span class="sc">::</span><span class="fu">brewer.pal</span>(<span class="dv">6</span>, <span class="st">"Reds"</span>)),</span>
+<span id="cb19-378"><a href="#cb19-378"></a>      <span class="at">na.value =</span> <span class="st">"grey90"</span>,</span>
+<span id="cb19-379"><a href="#cb19-379"></a>      <span class="at">guide =</span> <span class="fu">guide_legend</span>(</span>
+<span id="cb19-380"><a href="#cb19-380"></a>        <span class="at">position       =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb19-381"><a href="#cb19-381"></a>        <span class="at">direction      =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb19-382"><a href="#cb19-382"></a>        <span class="at">title.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb19-383"><a href="#cb19-383"></a>        <span class="at">nrow           =</span> <span class="dv">2</span></span>
+<span id="cb19-384"><a href="#cb19-384"></a>      )</span>
+<span id="cb19-385"><a href="#cb19-385"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-386"><a href="#cb19-386"></a>    <span class="fu">new_scale_fill</span>() <span class="sc">+</span></span>
+<span id="cb19-387"><a href="#cb19-387"></a>    <span class="fu">geom_sf</span>(</span>
+<span id="cb19-388"><a href="#cb19-388"></a>      <span class="at">data =</span> <span class="fu">filter</span>(coms, nom_officiel <span class="sc">==</span> com_name),</span>
+<span id="cb19-389"><a href="#cb19-389"></a>      <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">"Commune d'origine"</span>)</span>
+<span id="cb19-390"><a href="#cb19-390"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-391"><a href="#cb19-391"></a>    <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb19-392"><a href="#cb19-392"></a>      <span class="at">name   =</span> <span class="cn">NULL</span>,</span>
+<span id="cb19-393"><a href="#cb19-393"></a>      <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Commune d'origine"</span> <span class="ot">=</span> <span class="st">"mediumturquoise"</span>),</span>
+<span id="cb19-394"><a href="#cb19-394"></a>      <span class="at">guide  =</span> <span class="fu">guide_legend</span>(<span class="at">position =</span> <span class="st">"inside"</span>)</span>
+<span id="cb19-395"><a href="#cb19-395"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-396"><a href="#cb19-396"></a>    <span class="fu">labs</span>(<span class="at">title =</span> com_name) <span class="sc">+</span></span>
+<span id="cb19-397"><a href="#cb19-397"></a>    ggspatial<span class="sc">::</span><span class="fu">annotation_scale</span>(<span class="at">location =</span> <span class="st">"bl"</span>, <span class="at">height =</span> <span class="fu">unit</span>(<span class="fl">0.15</span>, <span class="st">"cm"</span>)) <span class="sc">+</span></span>
+<span id="cb19-398"><a href="#cb19-398"></a>    ggspatial<span class="sc">::</span><span class="fu">annotation_north_arrow</span>(</span>
+<span id="cb19-399"><a href="#cb19-399"></a>      <span class="at">location =</span> <span class="st">"tl"</span>, <span class="at">which_north =</span> <span class="st">"true"</span>,</span>
+<span id="cb19-400"><a href="#cb19-400"></a>      <span class="at">height =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>), <span class="at">width =</span> <span class="fu">unit</span>(<span class="dv">1</span>, <span class="st">"cm"</span>),</span>
+<span id="cb19-401"><a href="#cb19-401"></a>      <span class="at">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb19-402"><a href="#cb19-402"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-403"><a href="#cb19-403"></a>    theme_ggplot <span class="sc">+</span></span>
+<span id="cb19-404"><a href="#cb19-404"></a>    <span class="fu">theme</span>(</span>
+<span id="cb19-405"><a href="#cb19-405"></a>      <span class="at">legend.position.inside      =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.15</span>),</span>
+<span id="cb19-406"><a href="#cb19-406"></a>      <span class="at">legend.justification.inside =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb19-407"><a href="#cb19-407"></a>      <span class="at">legend.key.size             =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>),</span>
+<span id="cb19-408"><a href="#cb19-408"></a>      <span class="at">legend.text                 =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"roboto"</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb19-409"><a href="#cb19-409"></a>      <span class="at">legend.background           =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="cn">NA</span>)</span>
+<span id="cb19-410"><a href="#cb19-410"></a>    )</span>
+<span id="cb19-411"><a href="#cb19-411"></a></span>
+<span id="cb19-412"><a href="#cb19-412"></a>  maps[[com_name]] <span class="ot">&lt;-</span> m</span>
+<span id="cb19-413"><a href="#cb19-413"></a>}</span>
+<span id="cb19-414"><a href="#cb19-414"></a>map_rel_pref <span class="ot">&lt;-</span> patchwork<span class="sc">::</span><span class="fu">wrap_plots</span>(maps, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb19-415"><a href="#cb19-415"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb19-416"><a href="#cb19-416"></a>    <span class="at">title =</span> <span class="st">"Relations préférentielles des principaux pôles urbains finistériens"</span>,</span>
+<span id="cb19-417"><a href="#cb19-417"></a>    <span class="at">subtitle =</span> <span class="st">"Les flux analysés correspondent aux données de migrations résidentielles entre le lieu&lt;br&gt;de résidence en 2020 et le lieu de résidence précédent"</span>,</span>
+<span id="cb19-418"><a href="#cb19-418"></a>    <span class="at">caption =</span> <span class="st">"**Données :** Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). BDTOPO V3 (IGN, 2026). **Réalisation :** Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb19-419"><a href="#cb19-419"></a>    <span class="at">theme =</span> theme_patch</span>
+<span id="cb19-420"><a href="#cb19-420"></a>  )</span>
+<span id="cb19-421"><a href="#cb19-421"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-422"><a href="#cb19-422"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_rel_pref.png"</span>),</span>
+<span id="cb19-423"><a href="#cb19-423"></a>  map_rel_pref,</span>
+<span id="cb19-424"><a href="#cb19-424"></a>  <span class="at">width =</span> <span class="dv">21</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-425"><a href="#cb19-425"></a>  <span class="at">height =</span> <span class="dv">27</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-426"><a href="#cb19-426"></a>  <span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb19-427"><a href="#cb19-427"></a>)</span>
+<span id="cb19-428"><a href="#cb19-428"></a><span class="fu">ggsave</span>(</span>
+<span id="cb19-429"><a href="#cb19-429"></a>  glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_rel_pref.eps"</span>),</span>
+<span id="cb19-430"><a href="#cb19-430"></a>  map_rel_pref,</span>
+<span id="cb19-431"><a href="#cb19-431"></a>  <span class="at">width =</span> <span class="dv">21</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-432"><a href="#cb19-432"></a>  <span class="at">height =</span> <span class="dv">27</span> <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb19-433"><a href="#cb19-433"></a>  <span class="at">units =</span> <span class="st">"cm"</span></span>
+<span id="cb19-434"><a href="#cb19-434"></a>)</span>
+<span id="cb19-435"><a href="#cb19-435"></a></span>
+<span id="cb19-436"><a href="#cb19-436"></a><span class="co"># Flux map .....................................................................</span></span>
+<span id="cb19-437"><a href="#cb19-437"></a><span class="co"># [Prétraitements]</span></span>
+<span id="cb19-438"><a href="#cb19-438"></a>indices_spa<span class="sc">$</span>code_insee <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(indices_spa<span class="sc">$</span>code_insee)</span>
+<span id="cb19-439"><a href="#cb19-439"></a>indices_spa<span class="sc">$</span>id <span class="ot">&lt;-</span> indices_spa<span class="sc">$</span>code_insee</span>
+<span id="cb19-440"><a href="#cb19-440"></a>dtp <span class="ot">&lt;-</span></span>
+<span id="cb19-441"><a href="#cb19-441"></a>  <span class="fu">select</span>(dt_mobi_fin, <span class="sc">-</span>i, <span class="sc">-</span>j) <span class="sc">|&gt;</span></span>
+<span id="cb19-442"><a href="#cb19-442"></a>  <span class="fu">mutate</span>(<span class="at">i =</span> <span class="fu">as.numeric</span>(codgeo), <span class="at">j =</span> <span class="fu">as.numeric</span>(dcran), <span class="at">fij =</span> nbflux_c20_pop01p) <span class="sc">|&gt;</span></span>
+<span id="cb19-443"><a href="#cb19-443"></a>  <span class="fu">select</span>(i, j, fij)</span>
+<span id="cb19-444"><a href="#cb19-444"></a></span>
+<span id="cb19-445"><a href="#cb19-445"></a><span class="co"># [Paramètres]</span></span>
+<span id="cb19-446"><a href="#cb19-446"></a><span class="co"># Les flux associées à la commune</span></span>
+<span id="cb19-447"><a href="#cb19-447"></a>com_name <span class="ot">&lt;-</span> <span class="st">"Brest"</span></span>
+<span id="cb19-448"><a href="#cb19-448"></a><span class="co"># Le type de flux que l'on souhaite cartographier</span></span>
+<span id="cb19-449"><a href="#cb19-449"></a>type <span class="ot">&lt;-</span> <span class="st">"sortant"</span> <span class="co"># "entrant"</span></span>
+<span id="cb19-450"><a href="#cb19-450"></a><span class="co"># Récupération du code INSEE associé à la commune</span></span>
+<span id="cb19-451"><a href="#cb19-451"></a>ci <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">pull</span>(<span class="fu">filter</span>(coms, nom_officiel <span class="sc">==</span> com_name), code_insee))</span>
+<span id="cb19-452"><a href="#cb19-452"></a><span class="co"># Seuil pour cartographier les flux</span></span>
+<span id="cb19-453"><a href="#cb19-453"></a>th <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb19-454"><a href="#cb19-454"></a><span class="co"># Couleur des lignes</span></span>
+<span id="cb19-455"><a href="#cb19-455"></a>col <span class="ot">&lt;-</span> <span class="st">"steelblue"</span></span>
+<span id="cb19-456"><a href="#cb19-456"></a><span class="co"># Couleur du fond de carte</span></span>
+<span id="cb19-457"><a href="#cb19-457"></a>col_back <span class="ot">&lt;-</span> <span class="st">"#E0E0E0"</span></span>
+<span id="cb19-458"><a href="#cb19-458"></a></span>
+<span id="cb19-459"><a href="#cb19-459"></a><span class="co"># [Carto]</span></span>
+<span id="cb19-460"><a href="#cb19-460"></a><span class="co"># Récupérer tous les flux entrants ou sortants associés à la commune</span></span>
+<span id="cb19-461"><a href="#cb19-461"></a><span class="co"># et filrer les flux &lt; au seuil.</span></span>
+<span id="cb19-462"><a href="#cb19-462"></a><span class="cf">if</span> (type <span class="sc">==</span> <span class="st">"entrant"</span>) {</span>
+<span id="cb19-463"><a href="#cb19-463"></a>  dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, j <span class="sc">==</span> <span class="fu">as.numeric</span>(ci), fij <span class="sc">&gt;</span> th)</span>
+<span id="cb19-464"><a href="#cb19-464"></a>} <span class="cf">else</span> {</span>
+<span id="cb19-465"><a href="#cb19-465"></a>  dt_plot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dtp, i <span class="sc">==</span> <span class="fu">as.numeric</span>(ci), fij <span class="sc">&gt;</span> th)</span>
+<span id="cb19-466"><a href="#cb19-466"></a>}</span>
+<span id="cb19-467"><a href="#cb19-467"></a></span>
+<span id="cb19-468"><a href="#cb19-468"></a><span class="co"># Créer un df avec les communes qui échange des flux</span></span>
+<span id="cb19-469"><a href="#cb19-469"></a>indices_spa_f <span class="ot">&lt;-</span></span>
+<span id="cb19-470"><a href="#cb19-470"></a>  <span class="fu">filter</span>(indices_spa, id <span class="sc">%in%</span> <span class="fu">unique</span>(<span class="fu">c</span>(dt_plot<span class="sc">$</span>i, dt_plot<span class="sc">$</span>j))) <span class="sc">|&gt;</span></span>
+<span id="cb19-471"><a href="#cb19-471"></a>  <span class="fu">select</span>(id)</span>
+<span id="cb19-472"><a href="#cb19-472"></a></span>
+<span id="cb19-473"><a href="#cb19-473"></a><span class="co"># On enregistre ici l'endroit où va être sauvegardé la carte</span></span>
+<span id="cb19-474"><a href="#cb19-474"></a><span class="fu">mf_png</span>(</span>
+<span id="cb19-475"><a href="#cb19-475"></a>  <span class="at">x =</span> coms,</span>
+<span id="cb19-476"><a href="#cb19-476"></a>  <span class="at">filename =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"{FIGURES_DIR}/map_oursin_{type}_{com_name}.png"</span>),</span>
+<span id="cb19-477"><a href="#cb19-477"></a>  <span class="at">width =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">height =</span> <span class="dv">20</span> <span class="sc">-</span> <span class="dv">1</span>, <span class="at">unit=</span><span class="st">"cm"</span></span>
+<span id="cb19-478"><a href="#cb19-478"></a>)</span>
+<span id="cb19-479"><a href="#cb19-479"></a><span class="fu">mf_map</span>(</span>
+<span id="cb19-480"><a href="#cb19-480"></a>  coms,</span>
+<span id="cb19-481"><a href="#cb19-481"></a>  <span class="at">col =</span> col_back,</span>
+<span id="cb19-482"><a href="#cb19-482"></a>  <span class="at">border =</span> <span class="st">"black"</span>,</span>
+<span id="cb19-483"><a href="#cb19-483"></a>  <span class="at">lwd =</span> <span class="fl">0.5</span></span>
+<span id="cb19-484"><a href="#cb19-484"></a>)</span>
+<span id="cb19-485"><a href="#cb19-485"></a>flows <span class="ot">&lt;-</span> <span class="fu">ttt_flowmapper</span>(</span>
+<span id="cb19-486"><a href="#cb19-486"></a>  <span class="at">x =</span> indices_spa_f,</span>
+<span id="cb19-487"><a href="#cb19-487"></a>  <span class="at">df =</span> dt_plot,</span>
+<span id="cb19-488"><a href="#cb19-488"></a>  <span class="at">dfid =</span> <span class="fu">c</span>(<span class="st">"i"</span>, <span class="st">"j"</span>),</span>
+<span id="cb19-489"><a href="#cb19-489"></a>  <span class="at">dfvar =</span> <span class="st">"fij"</span>,</span>
+<span id="cb19-490"><a href="#cb19-490"></a>  <span class="at">xid =</span> <span class="st">"id"</span>,</span>
+<span id="cb19-491"><a href="#cb19-491"></a>  <span class="at">size =</span> <span class="st">"thickness"</span>,</span>
+<span id="cb19-492"><a href="#cb19-492"></a>  <span class="at">type =</span> <span class="st">"arrows"</span>,</span>
+<span id="cb19-493"><a href="#cb19-493"></a>  <span class="at">decreasing =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-494"><a href="#cb19-494"></a>  <span class="co"># Configuration des lignes</span></span>
+<span id="cb19-495"><a href="#cb19-495"></a>  <span class="at">col =</span> col,        <span class="co"># couleur des arcs</span></span>
+<span id="cb19-496"><a href="#cb19-496"></a>  <span class="at">border =</span> <span class="st">"white"</span>, <span class="co"># couleur du contour</span></span>
+<span id="cb19-497"><a href="#cb19-497"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,          <span class="co"># épaisseur du contour</span></span>
+<span id="cb19-498"><a href="#cb19-498"></a>  <span class="at">k =</span> <span class="dv">15</span>,           <span class="co"># augmenter ou diminuer l'épaisseur des arcs</span></span>
+<span id="cb19-499"><a href="#cb19-499"></a>  <span class="co"># Configuration des cercles</span></span>
+<span id="cb19-500"><a href="#cb19-500"></a>  <span class="at">col2 =</span> <span class="st">"white"</span>, <span class="co"># couleur du cercle</span></span>
+<span id="cb19-501"><a href="#cb19-501"></a>  <span class="at">border2 =</span> col,  <span class="co"># couleur du contour</span></span>
+<span id="cb19-502"><a href="#cb19-502"></a>  <span class="at">lwd2 =</span> <span class="fl">0.7</span>,     <span class="co"># épaisseur du contour</span></span>
+<span id="cb19-503"><a href="#cb19-503"></a>  <span class="at">k2 =</span> <span class="fl">1e3</span>L,      <span class="co"># augmenter ou diminuer la taille des cercles</span></span>
+<span id="cb19-504"><a href="#cb19-504"></a>  <span class="at">add =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-505"><a href="#cb19-505"></a>)</span>
+<span id="cb19-506"><a href="#cb19-506"></a><span class="co"># Ajouter la valeur du flux sur les arcs</span></span>
+<span id="cb19-507"><a href="#cb19-507"></a><span class="co"># Si vous voulez les enlevez, commentez le code.</span></span>
+<span id="cb19-508"><a href="#cb19-508"></a>flows_txt <span class="ot">&lt;-</span> <span class="fu">mutate</span>(flows<span class="sc">$</span>flows, <span class="at">fij =</span> <span class="fu">round</span>(fij, <span class="dv">0</span>)) <span class="sc">|&gt;</span> <span class="fu">distinct</span>()</span>
+<span id="cb19-509"><a href="#cb19-509"></a><span class="fu">mf_label</span>(</span>
+<span id="cb19-510"><a href="#cb19-510"></a>  flows_txt,</span>
+<span id="cb19-511"><a href="#cb19-511"></a>  <span class="at">var =</span> <span class="st">"fij"</span>,</span>
+<span id="cb19-512"><a href="#cb19-512"></a>  <span class="at">halo =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-513"><a href="#cb19-513"></a>  <span class="at">cex =</span> <span class="fl">0.7</span>,</span>
+<span id="cb19-514"><a href="#cb19-514"></a>  <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb19-515"><a href="#cb19-515"></a>  <span class="at">bg =</span> <span class="st">"white"</span>,</span>
+<span id="cb19-516"><a href="#cb19-516"></a>  <span class="at">r =</span> <span class="fl">0.1</span>,</span>
+<span id="cb19-517"><a href="#cb19-517"></a>  <span class="at">overlap =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-518"><a href="#cb19-518"></a>  <span class="at">lines =</span> <span class="cn">FALSE</span></span>
+<span id="cb19-519"><a href="#cb19-519"></a>)</span>
+<span id="cb19-520"><a href="#cb19-520"></a><span class="co"># La légende</span></span>
+<span id="cb19-521"><a href="#cb19-521"></a><span class="fu">ttt_flowmapperlegend</span>(</span>
+<span id="cb19-522"><a href="#cb19-522"></a>  <span class="at">x =</span> flows,</span>
+<span id="cb19-523"><a href="#cb19-523"></a>  <span class="at">title =</span> <span class="st">"Flux"</span>,</span>
+<span id="cb19-524"><a href="#cb19-524"></a>  <span class="at">col =</span> col,</span>
+<span id="cb19-525"><a href="#cb19-525"></a>  <span class="at">txtcol =</span> <span class="st">'black'</span>,</span>
+<span id="cb19-526"><a href="#cb19-526"></a>  <span class="at">title.cex =</span> <span class="fl">0.6</span>, <span class="co"># Taille du titre de la légende</span></span>
+<span id="cb19-527"><a href="#cb19-527"></a>  <span class="at">hshift =</span> <span class="fl">3e3</span>     <span class="co"># Espace entre le titre et légende</span></span>
+<span id="cb19-528"><a href="#cb19-528"></a>)</span>
+<span id="cb19-529"><a href="#cb19-529"></a><span class="fu">mf_title</span>(</span>
+<span id="cb19-530"><a href="#cb19-530"></a>  <span class="at">txt =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Flux {type} de {com_name}"</span>),</span>
+<span id="cb19-531"><a href="#cb19-531"></a>  <span class="at">bg =</span> <span class="st">"#d7d7d7"</span>, <span class="at">fg =</span> <span class="st">"black"</span>, <span class="at">pos =</span> <span class="st">"center"</span></span>
+<span id="cb19-532"><a href="#cb19-532"></a>)</span>
+<span id="cb19-533"><a href="#cb19-533"></a><span class="fu">mf_credits</span>(</span>
+<span id="cb19-534"><a href="#cb19-534"></a>  <span class="at">txt =</span> <span class="st">"Données : Base flux de mobilité (INSEE, 2023); BDTOPO V3 (IGN, 2026). BDTOPO V3 (IGN, 2026). Réalisation : Antoine Le Doeuff, 2026"</span>,</span>
+<span id="cb19-535"><a href="#cb19-535"></a>  <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">pos =</span> <span class="st">"bottomright"</span></span>
+<span id="cb19-536"><a href="#cb19-536"></a>)</span>
+<span id="cb19-537"><a href="#cb19-537"></a><span class="fu">mf_arrow</span>(<span class="at">col=</span><span class="st">"black"</span>)</span>
+<span id="cb19-538"><a href="#cb19-538"></a><span class="fu">mf_scale</span>(<span class="at">col=</span><span class="st">"black"</span>, <span class="at">pos=</span><span class="st">"bottomright"</span>, <span class="at">adj =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>))</span>
+<span id="cb19-539"><a href="#cb19-539"></a><span class="fu">dev.off</span>() <span class="co"># Indique l'enregistrement de la carte avec les paramètres indiqués dans mf_png()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="références-et-ressources" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="références-et-ressources"><span class="header-section-number">3.6</span> Références et ressources</h2>
 <p><strong>Ressources :</strong></p>
 <ul>
 <li><a href="https://transcarto.github.io/rflows/TRANSCARTO_flows.html">Tuto</a> cartes de flux sous R</li>
@@ -1267,6 +2045,7 @@ Di Méo, Guy, and Franck Guérit, eds. 1992. <span>“<span>Chapitre II. Étude 
 
 
 </section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

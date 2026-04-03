@@ -1,5 +1,7 @@
 # DM02 : analyse descriptive de flux
 
+**Rendu :** mercredi 29 avril avant 12h. Depôt sur Moodle.
+
 Vous réaliserez une analyse descriptive de flux sur le sujet de votre choix.
 
 Comme pour le DM1, vous :
