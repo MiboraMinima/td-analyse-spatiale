@@ -1,12 +1,12 @@
 # Informations {.unnumbered}
 
-En TD :
+**Les TD :**
 
 - TD1 : Introduction à R
 - TD2 : Analyse centrographique
 - TD3 : Mobilités et flux
 
-En DM :
+**Les DM :**
 
 - DM1 : Analyse centrographique populations, logements, pauvreté
-
+- DM2 : Analyse descriptive de flux sur le sujet de votre choix
