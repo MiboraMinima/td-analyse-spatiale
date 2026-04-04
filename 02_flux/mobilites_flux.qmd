@@ -172,6 +172,7 @@ m <- Matrix::sparseMatrix(
   i = as.integer(dt_mobi_fin$i),
   j = as.integer(dt_mobi_fin$j),
   x = dt_mobi_fin$nbflux_c20_pop01p,
+  dims = c(length(all_ids), length(all_ids)), # Passer les dimensions explicitement
   dimnames = list(all_ids, all_ids)
 )
 print(m[1:5, 1:5])
@@ -1187,6 +1188,7 @@ M <- sparseMatrix(
   i = as.integer(dt_mobi_pb$i),
   j = as.integer(dt_mobi_pb$j),
   x = dt_mobi_pb$nbflux_c20_pop01p,
+  dims = c(length(all_ids), length(all_ids)), # Passer les dimensions explicitement
   dimnames = list(all_ids, all_ids)
 )
 print(dim(M))
