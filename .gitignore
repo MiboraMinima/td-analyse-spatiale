@@ -15,6 +15,5 @@ logs/
 !01_points/data
 
 scratch/
-*.r
 
 **/*.quarto_ipynb
