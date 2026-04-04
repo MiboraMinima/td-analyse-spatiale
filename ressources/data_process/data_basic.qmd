@@ -274,8 +274,8 @@ filtered <- filter(penguins, year > 2007, species == "Adelie")
 head(filtered)
 ```
 
-Souvent, on faire sélectionner des données dans une gamme de valeurs, il suffit
-de faire :
+Souvent, on souhaite sélectionner des données dans une gamme de valeurs, il
+suffit de faire :
 
 ```{r}
 filtered <- filter(penguins, bill_len > 35, bill_len < 40)
@@ -313,8 +313,17 @@ head(filtered)
 ```
 :::
 
+```{=html}
+<style>
+.small-table table {
+  font-size: 0.8em;
+}
+</style>
+```
+
 Tableau récapitulatif
 
+::: {.small-table}
 | Catégorie                                      | Fonction / opérateur                  | Description                                 | Exemple                                                  |
 | ---------------------------------------------- | ------------------------------------- | ------------------------------------------- | -------------------------------------------------------- |
 | **Comparaison numérique**                      | `==`, `!=`                            | Égal / différent                            | `filter(Species == "setosa")`                            |
@@ -328,8 +337,8 @@ Tableau récapitulatif
 |                                                | `!is.na(x)`                           | N’est pas manquant                          | `filter(!is.na(Sepal.Length))`                           |
 | **Intervalles**                                | `between(x, a, b)`                    | Valeur comprise entre `a` et `b` (inclusif) | `filter(between(Sepal.Length, 5, 6))`                    |
 | **Conditions complexes**                       | `if_else()` ou logique combinée       | Choix conditionnels                         | `filter(if_else(Sepal.Width > 3, TRUE, FALSE))`          |
-
 : {.striped .hover .responsive}
+:::
 
 #### Modifier des données
 
@@ -671,7 +680,7 @@ diag(m1) # Diagonale
 
 Les matrices sont notamment utilisées dans les fonctions orientées statistiques.
 C'est tout naturel car l'algèbre linéaire et les probabilités sont basées sur
-des tels objets mathématiques.
+de tels objets mathématiques.
 
 Par exemple, dans le cas d'une régression linéaire dont les $\beta$ sont estimés
 par la méthode des moindres carrés ordinaires (OLS), les données sont stockées

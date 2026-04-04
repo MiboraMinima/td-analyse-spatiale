@@ -769,7 +769,7 @@ dbl (111): IRIS, Région, Département, Unité urbaine, Commune ou ARM, Grand q.
 6  Adelie Biscoe     41.4     18.6         191      3700   male 2008</code></pre>
 </div>
 </div>
-<p>Souvent, on faire sélectionner des données dans une gamme de valeurs, il suffit de faire :</p>
+<p>Souvent, on souhaite sélectionner des données dans une gamme de valeurs, il suffit de faire :</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(penguins, bill_len <span class="sc">&gt;</span> <span class="dv">35</span>, bill_len <span class="sc">&lt;</span> <span class="dv">40</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(filtered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -846,7 +846,13 @@ dbl (111): IRIS, Région, Département, Unité urbaine, Commune ou ARM, Grand q.
 </div>
 </div>
 </div>
+<style>
+.small-table table {
+  font-size: 0.8em;
+}
+</style>
 <p>Tableau récapitulatif</p>
+<div class="small-table">
 <div class="table-responsive">
 <table class="table-striped table-hover table">
 <colgroup>
@@ -932,6 +938,7 @@ dbl (111): IRIS, Région, Département, Unité urbaine, Commune ou ARM, Grand q.
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 </section>
 <section id="modifier-des-données" class="level4" data-number="8.1.3.3">
@@ -1461,7 +1468,7 @@ dbl (111): IRIS, Région, Département, Unité urbaine, Commune ou ARM, Grand q.
 </section>
 <section id="exemple" class="level3" data-number="8.2.3">
 <h3 data-number="8.2.3" class="anchored" data-anchor-id="exemple"><span class="header-section-number">8.2.3</span> Exemple</h3>
-<p>Les matrices sont notamment utilisées dans les fonctions orientées statistiques. C’est tout naturel car l’algèbre linéaire et les probabilités sont basées sur des tels objets mathématiques.</p>
+<p>Les matrices sont notamment utilisées dans les fonctions orientées statistiques. C’est tout naturel car l’algèbre linéaire et les probabilités sont basées sur de tels objets mathématiques.</p>
 <p>Par exemple, dans le cas d’une régression linéaire dont les <span class="math inline">\(\beta\)</span> sont estimés par la méthode des moindres carrés ordinaires (OLS), les données sont stockées dans une matrice :</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Génération de y</span></span>
